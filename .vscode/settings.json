@@ -1,0 +1,66 @@
+{
+  "cSpell.words": ["trivago"]
+{
+ 
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.semi": false,
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 2,
+  "prettier.arrowParens": "avoid",
+
+ 
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html"
+  ],
+  "eslint.format.enable": true,
+
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+ 
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": true
+  },
+
+
+  "cSpell.words": [
+    "nextjs",
+    "trivago",
+    "utils",
+    "config",
+    "middleware",
+    "typescript",
+    "tailwindcss",
+    "zustand",
+    "axios"
+  ],
+
+ 
+  "jest.autoRun": "off",
+  "testing.openTesting": "neverOpen",
+
+ 
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.fontSize": 14,
+
+  "importSorter.generalConfiguration.sortOnBeforeSave": true
+
+}
+
+}

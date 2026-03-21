@@ -1,0 +1,311 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "analytics": "Analytics",
+    "userRoles": "User Roles",
+    "plans": "Plans",
+    "subscription": "Subscription",
+    "enrollmentForm": "Enrollment Form",
+    "apiKeys": "API Keys",
+    "settings": "Settings",
+    "memberRole": "Member",
+    "myAccount": "My Account",
+    "logout": "Log out"
+  },
+  "navbar": {
+    "welcome": "Welcome"
+  },
+  "common": {
+    "search": "Search",
+    "filter": "Filter",
+    "add": "Add",
+    "create": "Create",
+    "edit": "Edit",
+    "delete": "Delete",
+    "view": "View",
+    "cancel": "Cancel",
+    "save": "Save",
+    "close": "Close",
+    "copy": "Make a copy",
+    "favorite": "Favorite",
+    "selectAll": "Select all",
+    "selectRow": "Select row",
+    "active": "Active",
+    "inactive": "Inactive",
+    "desktop": "Desktop",
+    "mobile": "Mobile",
+    "allStatuses": "All Statuses",
+    "trial": "Trial"
+  },
+
+  "tables": {
+    "columns": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "industry": "Industry",
+      "status": "Status",
+      "role": "Role",
+      "actions": "Actions",
+      "users": "Users",
+      "startDate": "Start Date",
+      "lastActive": "Last Active",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "submittedOn": "Submitted On",
+      "price": "Price",
+      "includes": "Includes",
+      "plan": "Plan",
+      "header": "Header",
+      "sectionType": "Section Type",
+      "process": "Process",
+      "progress": "Progress",
+      "target": "Target",
+      "limit": "Limit",
+      "owner": "Owner",
+      "reviewer": "Reviewer"
+    },
+    "pagination": {
+      "rowsSelected": "row(s) selected of",
+      "rowsPerPage": "Rows per page",
+      "page": "Page",
+      "of": "of",
+      "goToFirst": "Go to first page",
+      "goToPrev": "Go to previous page",
+      "goToNext": "Go to next page",
+      "goToLast": "Go to last page"
+    },
+    "noResults": "No results.",
+    "loadError": "Unable to load data. Please try again later.",
+    "openMenu": "Open menu",
+    "selectView": "Select a view",
+    "customizeColumns": "Customize Columns",
+    "columnsLabel": "Columns"
+  },
+  "placeholders": {
+    "searchByNameEmailSector": "Search by name, email or sector...",
+    "searchByNameEmailPlan": "Search by name, email or plan...",
+    "searchByPlanName": "Search by plan name...",
+    "enterClientName": "Enter client name",
+    "enterEmail": "Enter your email",
+    "enterPassword": "Enter your password",
+    "enterPhone": "Enter your phone",
+    "enterAddress": "Enter address",
+    "enterWebsite": "website url",
+    "selectIndustry": "Select industry",
+    "selectPlan": "Select Plan",
+    "selectSize": "Select size",
+    "enterCommercialRegister": "CR-123456",
+    "enterTaxId": "TAX-123-456",
+    "enterDescription": "Brief about client",
+    "enterFullName": "Enter your full name",
+    "selectRole": "Select Role",
+    "enterPlanName": "Enter your plan name",
+    "enterPrice": "Enter your price",
+    "select": "Select",
+    "enterPoint": "Enter point"
+  },
+  "actions": {
+    "addClient": "Add Client",
+    "createClient": "Create Client",
+    "filterClients": "Filter clients",
+    "addNewUser": "Add New User",
+    "createUser": "Create User",
+    "addNewPlan": "Add New Plan",
+    "createPlan": "Create Plan",
+    "assignReviewer": "Assign reviewer",
+    "addSection": "Add Section"
+  },
+  "dialogs": {
+    "createClient": {
+      "title": "Create New Client",
+      "fields": {
+        "clientName": "Client Name",
+        "email": "Email",
+        "password": "Password",
+        "phone": "Phone",
+        "address": "Address",
+        "website": "Website",
+        "industry": "Industry",
+        "plan": "Plan",
+        "companySize": "Company Size",
+        "commercialRegister": "Commercial Register",
+        "taxId": "Tax ID",
+        "description": "Description"
+      },
+      "industryOptions": {
+        "tech": "Technology",
+        "finance": "Finance",
+        "healthcare": "Healthcare",
+        "education": "Education"
+      },
+
+      "planOptions": {
+        "basic": "Basic",
+        "pro": "Pro",
+        "enterprise": "Enterprise"
+      },
+      "sizeOptions": {
+        "small": "1-10",
+        "medium": "11-50",
+        "large": "51+"
+      },
+      "success": "Client created successfully",
+      "error": "Failed to create client"
+    },
+
+    "createUser": {
+      "title": "Create New User",
+      "fields": {
+        "fullName": "Full Name",
+        "email": "Email",
+        "role": "Roles",
+        "password": "Password"
+      }
+    },
+    "createPlan": {
+      "title": "Create New Plan",
+      "fields": {
+        "planName": "Plan Name",
+        "description": "Description",
+        "price": "Price",
+        "subscription": "Plan Type",
+        "includes": "Included Features"
+      },
+      "placeholders": {
+        "planName": "Enter plan name",
+        "description": "Enter plan description",
+        "price": "Enter price",
+        "subscription": "Select plan type",
+        "includes": "Feature name"
+      },
+      "success": "Plan created successfully",
+      "error": "Failed to create plan"
+    },
+    "updatePlan": {
+      "title": "Update Plan",
+      "success": "Plan updated successfully",
+      "error": "Failed to update plan"
+    }
+  },
+  "states": {
+    "empty": {
+      "noResults": "No results.",
+      "noPlans": "Get started by creating a new subscription plan."
+    },
+    "error": {
+      "generic": "An error occurred. Please try again."
+    },
+    "loading": {
+      "saving": "Saving {{name}}"
+    },
+    "status": {
+      "in_process": "In process",
+      "done": "Done",
+      "error": "Error"
+    }
+  },
+  "clients": {
+  "title": "Clients",
+  "clientUsage": "Client Usage",
+  "emptyTitle": "No clients yet",
+  "emptyDescription": "Get started by creating your first client."
+  },
+  "plans": {
+    "title": "Plans",
+    "monthly": "Monthly",
+    "yearly": "Yearly"
+  },
+  "subscriptions": {
+    "title": "Subscriptions"
+  },
+  "userRoles": {
+    "title": "User Roles",
+    "emptyTitle": "No users yet",
+    "emptyDescription": "Get started by creating your first user.",
+    "deleteTitle": "Delete user",
+    "deleteConfirm": "Are you sure you want to delete this user?",
+    "deleting": "Deleting..."
+  },
+  "enrollmentForms": {
+    "title": "Enrollment Forms",
+    "subTitle": "Manage company enrollment applications and their status",
+    "filterByStatus": "Filter by status",
+    "statusAll": "All Statuses",
+    "statusPending": "Pending",
+    "statusApproved": "Approved",
+    "statusRejected": "Rejected",
+    "deleteTitle": "Delete enrollment",
+    "deleteConfirm": "Are you sure you want to delete this enrollment?",
+    "deleting": "Deleting..."
+  },
+  "analytics": {
+    "title": "Analytics",
+    "callsOverTime": {
+      "title": "Calls Over Time"
+    },
+    "ticketVolume": {
+      "title": "Ticket Volume Analytics"
+    },
+    "top5ActiveClients": {
+      "title": "Top 5 Active Clients",
+      "clientName": "Client Name",
+      "calls": "Calls"
+    },
+    "totalVisitors": {
+      "title": "Area Chart - Interactive",
+      "description": "Showing total visitors for the last 3 months",
+      "last3Months": "Last 3 months",
+      "last30Days": "Last 30 days",
+      "last7Days": "Last 7 days",
+      "visitors": "Visitors"
+    }
+  },
+  "overview": {
+    "outline": "Outline",
+    "pastPerformance": "Past Performance",
+    "keyPersonnel": "Key Personnel",
+    "focusDocuments": "Focus Documents"
+  },
+  "settings": {
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "description": "Choose your preferred theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "description": "Manage your notification preferences",
+      "email": "Enable email notifications",
+      "sms": "Enable SMS notifications",
+      "browser": "Enable browser notifications"
+    }
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "subtitle": "You have permission to view and manage all API keys in this project",
+    "createNew": "Create New Secret Key",
+    "viewUsage": "View usage per API key on",
+    "usagePage": "Usage Page",
+    "table": {
+      "name": "Name",
+      "secretKey": "Secret Key",
+      "createdOn": "Created On",
+      "createdBy": "Created By",
+      "lastUsed": "Last Used",
+      "permission": "Permission",
+      "action": "Action"
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalidEmail": "Invalid email address",
+    "minLength": "Must be at least {min} characters",
+    "invalidUrl": "Invalid URL"
+  }
+}

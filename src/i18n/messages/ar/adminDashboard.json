@@ -1,0 +1,311 @@
+{
+  "sidebar": {
+    "dashboard": "لوحة التحكم",
+    "clients": "العملاء",
+    "analytics": "التحليلات",
+    "userRoles": "صلاحيات المستخدمين",
+    "plans": "الخطط",
+    "subscription": "الاشتراك",
+    "enrollmentForm": "نموذج التسجيل",
+    "apiKeys": "مفاتيح API",
+    "settings": "الإعدادات",
+    "memberRole": "عضو",
+    "myAccount": "حسابي",
+    "logout": "تسجيل الخروج"
+  },
+  "navbar": {
+    "welcome": "مرحبًا"
+  },
+  "common": {
+    "search": "بحث",
+    "filter": "تصفية",
+    "add": "إضافة",
+    "create": "إنشاء",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "view": "عرض",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "close": "إغلاق",
+    "copy": "نسخ",
+    "favorite": "مفضلة",
+    "selectAll": "تحديد الكل",
+    "selectRow": "تحديد الصف",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "desktop": "سطح المكتب",
+    "mobile": "الجوال",
+    "allStatuses": "كل الحالات",
+    "trial": "تجريبي"
+  },
+
+  "tables": {
+    "columns": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "company": "الشركة",
+      "industry": "المجال",
+      "status": "الحالة",
+      "role": "الدور",
+      "actions": "الإجراءات",
+      "users": "عدد المستخدمين",
+      "startDate": "تاريخ البدء",
+      "lastActive": "آخر نشاط",
+      "createdAt": "تاريخ الإنشاء",
+      "updatedAt": "تاريخ التحديث",
+      "submittedOn": "تاريخ الإرسال",
+      "price": "السعر",
+      "includes": "يحتوي على",
+      "plan": "الخطة",
+      "header": "العنوان",
+      "sectionType": "نوع القسم",
+      "process": "العملية",
+      "progress": "التقدّم",
+      "target": "الهدف",
+      "limit": "الحد",
+      "owner": "المالك",
+      "reviewer": "المراجع"
+    },
+    "pagination": {
+      "rowsSelected": "تم تحديد",
+      "rowsPerPage": "صفوف لكل صفحة",
+      "page": "صفحة",
+      "of": "من",
+      "goToFirst": "الذهاب إلى الصفحة الأولى",
+      "goToPrev": "الذهاب إلى الصفحة السابقة",
+      "goToNext": "الذهاب إلى الصفحة التالية",
+      "goToLast": "الذهاب إلى الصفحة الأخيرة"
+    },
+    "noResults": "لا توجد نتائج.",
+    "loadError": "تعذر تحميل البيانات. يرجى المحاولة لاحقاً.",
+    "openMenu": "فتح القائمة",
+    "selectView": "اختر العرض",
+    "customizeColumns": "تخصيص الأعمدة",
+    "columnsLabel": "الأعمدة"
+  },
+  "placeholders": {
+    "searchByNameEmailSector": "ابحث بالاسم أو البريد الإلكتروني أو القطاع...",
+    "searchByNameEmailPlan": "البحث حسب الاسم أو البريد الإلكتروني أو الخطة...",
+    "searchByPlanName": "البحث حسب اسم الخطة...",
+    "enterClientName": "أدخل اسم العميل",
+    "enterEmail": "أدخل البريد الإلكتروني",
+    "enterPassword": "أدخل كلمة المرور",
+    "enterPhone": "أدخل رقم الهاتف",
+    "enterAddress": "أدخل العنوان",
+    "enterWebsite": "رابط الموقع",
+    "selectIndustry": "اختر المجال",
+    "selectPlan": "اختر الخطة",
+    "selectSize": "اختر الحجم",
+    "enterCommercialRegister": "CR-123456",
+    "enterTaxId": "TAX-123-456",
+    "enterDescription": "نبذة عن العميل",
+    "enterFullName": "أدخل اسمك الكامل",
+    "selectRole": "اختر الدور",
+    "enterPlanName": "أدخل اسم الخطة",
+    "enterPrice": "أدخل السعر",
+    "select": "اختر",
+    "enterPoint": "أدخل نقطة"
+  },
+  "actions": {
+    "addClient": "إضافة عميل",
+    "createClient": "إنشاء العميل",
+    "filterClients": "تصفية العملاء",
+    "addNewUser": "إضافة مستخدم جديد",
+    "createUser": "إنشاء مستخدم",
+    "addNewPlan": "إضافة خطة جديدة",
+    "createPlan": "إنشاء الخطة",
+    "assignReviewer": "تعيين مراجع",
+    "addSection": "إضافة قسم"
+  },
+  "dialogs": {
+    "createClient": {
+      "title": "إنشاء عميل جديد",
+      "fields": {
+        "clientName": "اسم العميل",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "phone": "رقم الهاتف",
+        "address": "العنوان",
+        "website": "الموقع الإلكتروني",
+        "industry": "المجال",
+        "plan": "الخطة",
+        "companySize": "حجم الشركة",
+        "commercialRegister": "السجل التجاري",
+        "taxId": "الرقم الضريبي",
+        "description": "الوصف"
+      },
+      "industryOptions": {
+        "tech": "تكنولوجيا",
+        "finance": "مالية",
+        "healthcare": "رعاية صحية",
+        "education": "تعليم"
+      },
+
+      "planOptions": {
+        "basic": "أساسي",
+        "pro": "برو",
+        "enterprise": "مؤسسات"
+      },
+      "sizeOptions": {
+        "small": "1-10",
+        "medium": "11-50",
+        "large": "51+"
+      },
+      "success": "تم إنشاء العميل بنجاح",
+      "error": "فشل إنشاء العميل"
+    },
+
+    "createUser": {
+      "title": "إنشاء مستخدم جديد",
+      "fields": {
+        "fullName": "الاسم الكامل",
+        "email": "البريد الإلكتروني",
+        "role": "الأدوار",
+        "password": "كلمة المرور"
+      }
+    },
+    "createPlan": {
+      "title": "إنشاء خطة جديدة",
+      "fields": {
+        "planName": "اسم الخطة",
+        "description": "الوصف",
+        "price": "السعر",
+        "subscription": "نوع الخطة",
+        "includes": "المميزات المتضمنة"
+      },
+      "placeholders": {
+        "planName": "أدخل اسم الخطة",
+        "description": "أدخل وصف الخطة",
+        "price": "أدخل السعر",
+        "subscription": "اختر نوع الخطة",
+        "includes": "اسم الميزة"
+      },
+      "success": "تم إنشاء الخطة بنجاح",
+      "error": "فشل إنشاء الخطة"
+    },
+    "updatePlan": {
+      "title": "تعديل الخطة",
+      "success": "تم تعديل الخطة بنجاح",
+      "error": "فشل تعديل الخطة"
+    }
+  },
+  "states": {
+    "empty": {
+      "noResults": "لا توجد نتائج.",
+      "noPlans": "ابدأ بإنشاء خطة اشتراك جديدة."
+    },
+    "error": {
+      "generic": "حدث خطأ. يرجى المحاولة مرة أخرى."
+    },
+    "loading": {
+      "saving": "جارٍ حفظ {{name}}"
+    },
+    "status": {
+      "in_process": "جارٍ العمل",
+      "done": "تم",
+      "error": "خطأ"
+    }
+  },
+  "clients": {
+  "title": "العملاء",
+  "clientUsage": "استخدام العميل",
+  "emptyTitle": "لا يوجد عملاء بعد",
+  "emptyDescription": "ابدأ بإضافة أول عميل لك."
+  },
+  "plans": {
+    "title": "الخطط",
+    "monthly": "شهري",
+    "yearly": "سنوي"
+  },
+  "subscriptions": {
+    "title": "الاشتراكات"
+  },
+  "userRoles": {
+    "title": "صلاحيات المستخدمين",
+    "emptyTitle": "لا يوجد مستخدمون بعد",
+    "emptyDescription": "ابدأ بإضافة أول مستخدم.",
+    "deleteTitle": "حذف المستخدم",
+    "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا المستخدم؟",
+    "deleting": "جاري الحذف..."
+  },
+  "enrollmentForms": {
+    "title": "نماذج التسجيل",
+    "subTitle": "إدارة طلبات تسجيل الشركات وحالتها",
+    "filterByStatus": "تصفية حسب الحالة",
+    "statusAll": "جميع الحالات",
+    "statusPending": "قيد الانتظار",
+    "statusApproved": "موافق عليه",
+    "statusRejected": "مرفوض",
+    "deleteTitle": "حذف التسجيل",
+    "deleteConfirm": "هل أنت متأكد أنك تريد حذف هذا التسجيل؟",
+    "deleting": "جاري الحذف..."
+  },
+  "analytics": {
+    "title": "التحليلات",
+    "callsOverTime": {
+      "title": "المكالمات عبر الوقت"
+    },
+    "ticketVolume": {
+      "title": "حجم التذاكر"
+    },
+    "top5ActiveClients": {
+      "title": "أكثر 5 عملاء نشاطًا",
+      "clientName": "اسم العميل",
+      "calls": "عدد المكالمات"
+    },
+    "totalVisitors": {
+      "title": "الرسم البياني - تفاعلي",
+      "description": "عرض إجمالي الزوار خلال آخر 3 أشهر",
+      "last3Months": "آخر 3 أشهر",
+      "last30Days": "آخر 30 يومًا",
+      "last7Days": "آخر 7 أيام",
+      "visitors": "الزوار"
+    }
+  },
+  "overview": {
+    "outline": "الملخص",
+    "pastPerformance": "الأداء السابق",
+    "keyPersonnel": "الأفراد الرئيسيون",
+    "focusDocuments": "الوثائق الأساسية"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "theme": {
+      "title": "السمة",
+      "description": "اختر السمة المفضلة لديك",
+      "light": "فاتح",
+      "dark": "داكن",
+      "system": "النظام"
+    },
+    "notifications": {
+      "title": "الإشعارات",
+      "description": "إدارة تفضيلات الإشعارات الخاصة بك",
+      "email": "تفعيل إشعارات البريد الإلكتروني",
+      "sms": "تفعيل إشعارات الرسائل النصية",
+      "browser": "تفعيل إشعارات المتصفح"
+    }
+  },
+  "apiKeys": {
+    "title": "مفاتيح API",
+    "subtitle": "لديك إذن لعرض وإدارة جميع مفاتيح API في هذا المشروع",
+    "createNew": "إنشاء مفتاح سري جديد",
+    "viewUsage": "عرض الاستخدام لكل مفتاح API في",
+    "usagePage": "صفحة الاستخدام",
+    "table": {
+      "name": "الاسم",
+      "secretKey": "المفتاح السري",
+      "createdOn": "تاريخ الإنشاء",
+      "createdBy": "أنشأ بواسطة",
+      "lastUsed": "آخر استخدام",
+      "permission": "الصلاحية",
+      "action": "الإجراء"
+    }
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "invalidEmail": "عنوان بريد إلكتروني غير صالح",
+    "minLength": "يجب أن يتكون من {min} أحرف على الأقل",
+    "invalidUrl": "عنوان URL غير صالح"
+  }
+}

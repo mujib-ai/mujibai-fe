@@ -1,0 +1,158 @@
+{
+  "landingPage": {
+    "logoutDialog": {
+      "title": "Log Out",
+      "message": "Are you sure you want to log out?",
+      "confirm": "Log Out",
+      "cancel": "Cancel"
+    },
+
+    "header": {
+      "dashboard": "Dashboard",
+      "enroll": "Enroll",
+      "getStarted": "Get Started",
+      "logout": "Log Out",
+      "features": "Features",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "whyUs": "Why",
+      "targetSector": "Sectors",
+      "about": "About"
+    },
+
+    "hero": {
+      "title": "“Mujeeb AI”… Smartly serving your customers",
+      "subTitle": "Instantly!",
+      "description": "With a deep understanding of your business and fluent Saudi dialect, “Mujeeb AI” comes as your advanced cloud-based voice assistant. Fully developed using the latest AI technologies, it helps you communicate professionally with your customers in the Saudi dialect. It understands call context, responds instantly, creates tickets, and provides accurate reports—empowering you to make the right decisions quickly and confidently.",
+      "button1": "Get Started",
+      "button2": "Try “Mujeeb AI” for Free"
+    },
+
+    "features": {
+      "title": "“Mujeeb AI” features… bringing you closer to your customers!",
+      "description": "“Mujeeb AI” offers powerful features that make it your ideal choice for customer communication",
+      "featureOne": {
+        "title": "Instant voice responses in the Saudi dialect",
+        "description": "Natural, accurate, and aligned with your brand identity"
+      },
+      "featureTwo": {
+        "title": "Call analysis and summarization",
+        "description": "Highlighting the issue and customer satisfaction level"
+      },
+      "featureThree": {
+        "title": "Automatic ticket creation",
+        "description": "To forward them directly to your support team"
+      },
+      "featureFour": {
+        "title": "Comprehensive dashboard",
+        "description": "Allowing you to monitor calls, performance, and customer satisfaction"
+      },
+      "featureFive": {
+        "title": "Integration with leading applications",
+        "description": "Such as: Google Sheets, Slack, WhatsApp, Salla, Zid, and more."
+      },
+      "featureSix": {
+        "title": "Fully cloud-based",
+        "description": "No on-premise installation or additional hardware required"
+      }
+    },
+
+    "targetedSectors": {
+      "title": "Who benefits from “Mujeeb AI”?",
+      "subTitle": "“Mujeeb AI” can adapt to meet the needs of organizations across various sectors such as",
+      "sectorOne": {
+        "title": "Healthcare Sector",
+        "description": ""
+      },
+      "sectorTwo": {
+        "title": "Education Sector",
+        "description": ""
+      },
+      "sectorThree": {
+        "title": "Non-Profit Sector",
+        "description": ""
+      },
+      "sectorFour": {
+        "title": "Tourism Sector",
+        "description": ""
+      },
+      "sectorFive": {
+        "title": "E-commerce stores on Salla and Zid platforms",
+        "description": ""
+      }
+    },
+
+    "whyChooseUs": {
+      "title": "Why do the smart choose “Mujeeb AI”?",
+      "getStarted": "Get Started",
+      "propsOne": {
+        "title": "Wise in responses",
+        "description": "Thanks to its deep understanding of customer needs in the Saudi market and its ability to speak naturally in the Saudi dialect."
+      },
+      "propsTwo": {
+        "title": "Precise in analysis",
+        "description": "“Mujeeb AI” is built entirely in-house without relying on external tools, ensuring high-quality customer service and exceptional accuracy in analyzing customer feedback on your services or products."
+      },
+      "propsThree": {
+        "title": "A trusted decision-making partner",
+        "description": "By providing clear summaries that turn calls into actionable data, guiding you toward the right decisions."
+      },
+      "propsFour": {
+        "title": "Supportive in quality improvement",
+        "description": "By reducing pressure on your team through 24/7 call handling, without compromising customer commitments or requiring additional human resources."
+      },
+      "propsFive": {
+        "title": "Efficient in use",
+        "description": "Highly flexible and customizable to match your industry, delivering responses and tone aligned with your brand identity."
+      }
+    },
+
+    "aboutUs": {
+      "title": "About “Mujeeb AI”",
+      "subTitle": "A Saudi-built AI assistant—by design and by voice—serving Saudi organizations professionally",
+      "description": "“Mujeeb AI” is an intelligent voice system fully developed in the Kingdom of Saudi Arabia. It aims to empower small and medium-sized enterprises to deliver professional, fast, and efficient customer service by leveraging AI to understand the Saudi dialect and its context in line with the local market. This provides Saudi organizations with advanced technical capabilities that enhance competitiveness and contribute to the digital transformation goals of Saudi Vision 2030.",
+      "ourStory": "Our Story"
+    },
+    "contactUs": {
+      "title": "Contact",
+      "description": "We are here to help you. Reach out to us for any inquiries.",
+      "radio": {
+        "hi": "Say Hi",
+        "quote": "Get a Quote"
+      },
+      "form": {
+        "name": "Name",
+        "nameRequired": "Name is required",
+        "email": "Email",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email",
+        "message": "Message",
+        "messageRequired": "Message is required",
+        "subjectRequired": "Please select an option",
+        "submit": "Send Message"
+      }
+    },
+    "footer": {
+      "description": "Provide a professional patient experience by automatically responding to booking appointments.",
+      "followUs": "Follow Us",
+      "quickLinks": {
+        "title": "Quick Links",
+        "aboutUs": "About Us",
+        "features": "Features",
+        "whyUs": "Why Us",
+        "contactUs": "Contact US",
+        "industries": "Industries We Serve",
+        "pricing": "Pricing"
+      },
+      "contact": {
+        "title": "Contact",
+        "phone": "+91 72 7602 0908",
+        "email": "info@lorem.com",
+        "address": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      },
+      "copyright": "© Copyright Mujib 2025. All Right Reserved.",
+      "termsOfUse": "Terms of use",
+      "privacyPolicy": "Privacy policy"
+    }
+  }
+}

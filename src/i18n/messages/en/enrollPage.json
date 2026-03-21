@@ -1,0 +1,43 @@
+{
+  "enrollPage": {
+    "title": "Enrollment Form Instructions",
+    "description": "Please carefully read the following conditions and tips before submitting your enrollment form.",
+    "instructions": {
+      "inst1": "All form fields must be filled accurately and completely.",
+      "inst2": "Provide official company name as registered legally.",
+      "inst3": "Provide complete physical business address (no P.O. boxes).",
+      "inst4": "Commercial register and tax ID must be valid and up-to-date.",
+      "inst5": "Ensure your email and phone number are correct to receive status updates.",
+      "inst6": "Clearly explain your business needs and expectations.",
+      "inst7": "Be prepared to provide additional documents if requested.",
+      "inst8": "Typically takes 3-5 business days for review and approval.",
+      "inst9": "support@example.com for any questions about the enrollment process.",
+      "inst10": "+1234567890 (9AM–5PM, Sunday–Thursday)"
+    },
+    "enrollForm": {
+      "title": "Company Enrollment Form",
+      "name": "Full Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "Your email",
+      "company": "Company Name",
+      "companyNamePlaceholder": "Your company name",
+      "phone": "Phone",
+      "phonePlaceholder": "Your phone",
+      "address": "Address",
+      "addressPlaceholder": "Your address",
+      "website": "Company Website",
+      "companyWebsitePlaceholder": "Your company website URL",
+      "commercialRegister": "Commercial Register",
+      "commercialRegisterPlaceholder": "Your commercial register",
+      "industry": "Industry",
+      "industryPlaceholder": "Your industry",
+      "taxId": "Tax ID",
+      "taxIdPlaceholder": "# Your tax ID start with",
+      "message": "Message",
+      "messagePlaceholder": "Your message",
+      "submit": "Submit",
+      "submitting": "Submitting..."
+    }
+  }
+}

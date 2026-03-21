@@ -1,0 +1,17 @@
+{
+  "title": "Settings",
+  "theme": {
+    "title": "Theme",
+    "description": "Choose your preferred theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "description": "Manage your notification preferences",
+    "email": "Email Notifications",
+    "sms": "SMS Notifications",
+    "browser": "Browser Notifications"
+  }
+}
