@@ -1,10 +1,12 @@
+'use client';
+
 import { useLocale, useTranslations } from 'next-intl';
 
 import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
 
+import VoiceScriptHint from '../atoms/VoiceScriptHint';
 import CallGreetingVoice from '../organisms/CallGreetingVoice';
 import MainConversationScript from '../organisms/MainConversationScript';
-import VoiceScriptHint from '../atoms/VoiceScriptHint';
 
 export default function VoiceScriptPage() {
   const t = useTranslations('VoiceScripts');
