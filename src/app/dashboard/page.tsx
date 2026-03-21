@@ -6,18 +6,21 @@ import { AxiosAPI } from '@/shared/utils/axiosInstance';
 
 async function getUserFromServer() {
   try {
-    const cookieHeader = (await cookies()).toString();
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore.toString();
+    const accessToken = cookieStore.get('access_token')?.value;
+
+    const authHeaders: Record<string, string> = { Cookie: cookieHeader };
+    if (accessToken) {
+      authHeaders.Authorization = `Bearer ${accessToken}`;
+    }
 
     const res = await AxiosAPI.get('/auth/check-auth', {
-      headers: {
-        Cookie: cookieHeader,
-      },
+      headers: authHeaders,
     });
 
     const client = await AxiosAPI.get(`/clients/${res.data?.data.id}`, {
-      headers: {
-        Cookie: cookieHeader,
-      },
+      headers: authHeaders,
     });
 
     return client.data?.data;

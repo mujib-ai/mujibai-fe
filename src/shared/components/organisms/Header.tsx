@@ -11,7 +11,7 @@ import MobileView from '../molecules/landing/MobileView';
 import Navbar from '../molecules/landing/Navbar';
 import ActionsButtons from './ActionsButtons';
 
-export default function Header() {
+export default function Header({ hasToken = false }: { hasToken?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuth();
   return (
@@ -22,7 +22,7 @@ export default function Header() {
 
       <Navbar />
 
-      <ActionsButtons user={user as User} />
+      <ActionsButtons user={user as User} hasToken={hasToken} />
 
       <div className="flex xl:hidden">
         <Button
@@ -40,6 +40,7 @@ export default function Header() {
 
       <MobileView
         user={user as User}
+        hasToken={hasToken}
         onClose={() => setIsMenuOpen(false)}
         open={isMenuOpen}
       />

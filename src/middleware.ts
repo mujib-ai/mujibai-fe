@@ -2,7 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const PROTECTED_PREFIXES = ['/dashboard', '/admin-dashboard'] as const;
 
-const DEFAULT_AUTH_COOKIE_NAMES = ['token', 'refresh_token', 'app_session'];
+const DEFAULT_AUTH_COOKIE_NAMES = [
+  'access_token',
+  'token',
+  'refresh_token',
+  'app_session',
+];
 
 const AUTH_COOKIE_NAMES = [
   ...(process.env.AUTH_COOKIE_NAME ? [process.env.AUTH_COOKIE_NAME] : []),

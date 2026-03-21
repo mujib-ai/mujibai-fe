@@ -2,10 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-/**
- * Parse a Set-Cookie header value into name=value and mirror it for the app domain.
- * Strips Domain so the cookie is set for the current host (e.g. localhost:3000).
- */
 function mirrorCookieForAppDomain(setCookieValue: string): string {
   const parts = setCookieValue.split(';').map(p => p.trim());
   const nameValue = parts[0];
@@ -78,31 +74,52 @@ export async function POST(request: NextRequest) {
   const setCookieValues = getSetCookie(backendRes.headers);
   const isSuccess = status >= 200 && status < 300;
 
-  if (isSuccess && setCookieValues.length === 0) {
-    nextRes.cookies.set('app_session', 'authenticated', {
-      path: '/',
-      maxAge: 60 * 60 * 24,
-      sameSite: 'lax',
-      httpOnly: true,
-    });
-  } else if (isSuccess && setCookieValues.length > 0) {
-    for (const raw of setCookieValues) {
-      const mirrored = mirrorCookieForAppDomain(raw);
-      if (mirrored) {
-        const [nameValue] = mirrored.split(';');
-        const eq = nameValue.indexOf('=');
-        const name = nameValue.slice(0, eq).trim();
-        const value = nameValue.slice(eq + 1).trim();
-        nextRes.cookies.set(name, value, {
-          path: '/',
-          sameSite: 'lax',
-          httpOnly: true,
-          maxAge: 60 * 60 * 24 * 7,
-        });
-      }
+  if (isSuccess) {
+    const data = responseData?.data;
+    if (data?.accessToken) {
+      nextRes.cookies.set('access_token', data.accessToken, {
+        path: '/',
+        maxAge: 60 * 60 * 24,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+      });
     }
-    for (const raw of setCookieValues) {
-      nextRes.headers.append('Set-Cookie', raw);
+    if (data?.refreshToken) {
+      nextRes.cookies.set('refresh_token', data.refreshToken, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7,
+        sameSite: 'lax',
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+      });
+    }
+    if (setCookieValues.length === 0 && !data?.accessToken) {
+      nextRes.cookies.set('app_session', 'authenticated', {
+        path: '/',
+        maxAge: 60 * 60 * 24,
+        sameSite: 'lax',
+        httpOnly: true,
+      });
+    }
+    if (setCookieValues.length > 0) {
+      for (const raw of setCookieValues) {
+        const mirrored = mirrorCookieForAppDomain(raw);
+        if (mirrored) {
+          const [nameValue] = mirrored.split(';');
+          const eq = nameValue.indexOf('=');
+          const name = nameValue.slice(0, eq).trim();
+          const value = nameValue.slice(eq + 1).trim();
+          nextRes.cookies.set(name, value, {
+            path: '/',
+            sameSite: 'lax',
+            httpOnly: true,
+            maxAge: 60 * 60 * 24 * 7,
+          });
+        }
+      }
+      for (const raw of setCookieValues) {
+        nextRes.headers.append('Set-Cookie', raw);
+      }
     }
   }
 

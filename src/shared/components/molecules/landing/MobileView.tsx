@@ -10,9 +10,9 @@ import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
 import { ThemeSwitcher } from '@/shared/components/atoms/ThemeSwitcher';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
-  Sheet,
-  SheetClose,
-  SheetContent,
+    Sheet,
+    SheetClose,
+    SheetContent,
 } from '@/shared/components/atoms/ui/sheet';
 import { User } from '@/shared/types';
 import { motion } from 'framer-motion';
@@ -23,14 +23,17 @@ export default function MobileView({
   open,
   onClose,
   user,
+  hasToken = false,
 }: {
   open: boolean;
   onClose: () => void;
   user: User;
+  hasToken?: boolean;
 }) {
   const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
   const t = useTranslations('landingPage');
   const { handleLogout, logoutLoading } = useAuth();
+  const isAuthenticated = user || hasToken;
   const links = [
     { name: t('header.features'), href: '#features' },
     { name: t('header.whyUs'), href: '#why-us' },
@@ -64,7 +67,7 @@ export default function MobileView({
                 </li>
               ))}
 
-              {user ? (
+              {isAuthenticated ? (
                 <>
                   <li>
                     <SheetClose asChild>
@@ -74,7 +77,7 @@ export default function MobileView({
                       >
                         <Link
                           href={
-                            user.role === 'ADMIN'
+                            user?.role === 'ADMIN'
                               ? '/admin-dashboard'
                               : '/dashboard'
                           }

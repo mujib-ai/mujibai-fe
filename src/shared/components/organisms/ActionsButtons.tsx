@@ -11,11 +11,18 @@ import LanguageSwitcher from '../atoms/LanguageSwitcher';
 import { ThemeSwitcher } from '../atoms/ThemeSwitcher';
 import LogoutDailog from '../molecules/landing/dialogs/LogoutDailog';
 
-export default function ActionsButtons({ user }: { user: User }) {
+export default function ActionsButtons({
+  user,
+  hasToken = false,
+}: {
+  user: User;
+  hasToken?: boolean;
+}) {
   const { handleLogout, logoutLoading } = useAuth();
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false);
   const t = useTranslations('landingPage');
 
+  const isAuthenticated = user || hasToken;
   const isClientOrAdmin = user?.role === 'CLIENT' || user?.role === 'ADMIN';
   const dashboardHref =
     user?.role === 'ADMIN' ? '/admin-dashboard' : '/dashboard';
@@ -24,8 +31,7 @@ export default function ActionsButtons({ user }: { user: User }) {
     <div className="hidden items-center justify-center gap-1.5 xl:flex xl:gap-2.5">
       <ThemeSwitcher />
       <LanguageSwitcher />
-
-      {!user && (
+      {!isAuthenticated && (
         <div className="flex gap-1.5 lg:gap-2 xl:gap-2.5">
           <Button
             className="h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base dark:text-white"
@@ -52,7 +58,7 @@ export default function ActionsButtons({ user }: { user: User }) {
         </div>
       )}
 
-      {isClientOrAdmin && (
+      {isAuthenticated && (isClientOrAdmin || !user) && (
         <div className="flex gap-1.5 lg:gap-2 xl:gap-2.5">
           <Button
             className="h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base dark:text-white"

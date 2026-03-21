@@ -1,4 +1,5 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -6,14 +7,14 @@ import { Button } from '@/shared/components/atoms/ui/button';
 
 import Header from '../../organisms/Header';
 
-export default function HeroSection() {
+export default function HeroSection({ hasToken = false }: { hasToken?: boolean }) {
   const t = useTranslations('landingPage.hero');
   return (
     <section className="relative min-h-screen w-full overflow-hidden">
       <div className="from-primary/40 dark:from-primary/20 absolute bottom-0 -z-10 h-[60%] w-full bg-gradient-to-t from-[40%] to-transparent"></div>
 
       <div className="relative z-50">
-        <Header />
+        <Header hasToken={hasToken} />
       </div>
 
       <div className="flex h-full items-center justify-center px-6">

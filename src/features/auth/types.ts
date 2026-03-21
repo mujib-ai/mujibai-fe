@@ -3,8 +3,12 @@ import type { User } from '@/shared/types';
 export type { User };
 
 export interface AuthResponse {
-  data: User;
+  data: User & {
+    accessToken?: string;
+    refreshToken?: string;
+  };
   message?: string;
+  statusCode?: number;
 }
 
 export interface LoginCredentials {
