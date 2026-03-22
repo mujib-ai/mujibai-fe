@@ -1,25 +1,18 @@
 {
-  "cSpell.words": ["trivago"]
-{
- 
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.organizeImports": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-
-  
   "prettier.singleQuote": true,
   "prettier.trailingComma": "all",
   "prettier.semi": false,
   "prettier.printWidth": 100,
   "prettier.tabWidth": 2,
   "prettier.arrowParens": "avoid",
-
- 
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -28,17 +21,12 @@
     "html"
   ],
   "eslint.format.enable": true,
-
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-
- 
   "files.exclude": {
     "**/.next": true,
     "**/node_modules": true
   },
-
-
   "cSpell.words": [
     "nextjs",
     "trivago",
@@ -50,17 +38,10 @@
     "zustand",
     "axios"
   ],
-
- 
   "jest.autoRun": "off",
   "testing.openTesting": "neverOpen",
-
- 
   "terminal.integrated.defaultProfile.windows": "Git Bash",
-  "terminal.integrated.fontSize": 14,
-
-  "importSorter.generalConfiguration.sortOnBeforeSave": true
-
-}
-
+  "terminal.integrated.fontSize": 18,
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "testing.automaticallyOpenTestResults": "neverOpen"
 }

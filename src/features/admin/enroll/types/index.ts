@@ -1,10 +1,14 @@
 export interface EnrollmentFormValues {
   name: string;
   email: string;
-  phone?: string;
-  company?: string;
-  address?: string;
-  planId: string;
+  phone: string;
+  company: string;
+  website: string;
+  address: string;
+  industry: string;
+  commercialRegister: string;
+  taxId: string;
+  message: string;
 }
 
 export interface EnrollResponse {
@@ -34,7 +38,12 @@ export interface Enroll {
   company: string;
   email: string;
   phone: string;
+  website: string;
+  address: string;
   industry: string;
+  commercialRegister: string;
+  taxId: string;
+  message: string;
   status: EnrollStatus;
   submittedOn?: string;
   createdAt?: string;
