@@ -28,7 +28,12 @@ function mapEnroll(item: Record<string, unknown>): Enroll {
     company: String(item.company ?? ''),
     email: String(item.email ?? ''),
     phone: String(item.phone ?? ''),
+    website: String(item.website ?? ''),
+    address: String(item.address ?? ''),
     industry: String(item.industry ?? ''),
+    commercialRegister: String(item.commercialRegister ?? ''),
+    taxId: String(item.taxId ?? ''),
+    message: String(item.message ?? ''),
     status,
     submittedOn,
   };
@@ -44,7 +49,7 @@ export const EnrollService = {
 
   getById: async (id: string | number): Promise<Enroll> => {
     const { data } = await AxiosAPI.get<{ data?: Record<string, unknown> }>(
-      `/enroll/${id}`
+      `/api/v1/enroll/${id}`
     );
     const raw = (data as Record<string, unknown>)?.data ?? data ?? {};
     return mapEnroll(raw as Record<string, unknown>);
@@ -53,7 +58,7 @@ export const EnrollService = {
   getEnrollments: async (
     params?: EnrollmentsListParams
   ): Promise<EnrollmentsListResponse> => {
-    const { data } = await AxiosAPI.get<EnrollmentsListResponse>('/enroll', {
+    const { data } = await AxiosAPI.get<EnrollmentsListResponse>('/api/v1/enroll', {
       params,
     });
     if (data?.data?.data) {
@@ -65,17 +70,17 @@ export const EnrollService = {
   },
 
   approve: async (id: string | number): Promise<EnrollResponse> => {
-    const { data } = await AxiosAPI.patch<EnrollResponse>(`/enroll/${id}/approve`);
+    const { data } = await AxiosAPI.patch<EnrollResponse>(`/api/v1/enroll/${id}/approve`);
     return data;
   },
 
   reject: async (id: string | number): Promise<EnrollResponse> => {
-    const { data } = await AxiosAPI.patch<EnrollResponse>(`/enroll/${id}/reject`);
+    const { data } = await AxiosAPI.patch<EnrollResponse>(`/api/v1/enroll/${id}/reject`);
     return data;
   },
 
   delete: async (id: string | number): Promise<EnrollResponse> => {
-    const { data } = await AxiosAPI.delete<EnrollResponse>(`/enroll/${id}`);
+    const { data } = await AxiosAPI.delete<EnrollResponse>(`/api/v1/enroll/${id}`);
     return data;
   },
 };

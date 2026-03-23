@@ -32,14 +32,7 @@ export function useEnrollmentForm() {
   const { handleSubmit, formState: { errors, touchedFields }, reset } = form;
 
   const onSubmit = async (data: EnrollmentFormData) => {
-    const res = await handleEnroll({
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      company: data.company,
-      address: data.address,
-      planId: (data as EnrollmentFormData & { planId?: string }).planId ?? '',
-    });
+    const res = await handleEnroll(data);
 
     if (res) {
       toast.success('Enrollment successful');
