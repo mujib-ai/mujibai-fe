@@ -24,7 +24,7 @@ export default function HeroSection({ hasToken = false }: { hasToken?: boolean }
             <span className="text-primary">{t('subTitle')}</span>
           </h1>
 
-          <p className="text-base text-gray-600 sm:text-lg md:text-xl dark:text-gray-300">
+          <p className="text-base mx-12 text-gray-600 sm:text-lg md:text-xl dark:text-gray-300">
             {t('description')}
           </p>
 

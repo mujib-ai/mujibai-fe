@@ -10,6 +10,7 @@ interface TextareaFormFieldProps {
   register: UseFormRegister<any>;
   error?: FieldError;
   className?: string;
+  inputClassName?: string;
 }
 
 export function TextareaFormField({
@@ -19,6 +20,7 @@ export function TextareaFormField({
   register,
   error,
   className,
+  inputClassName,
 }: TextareaFormFieldProps) {
   return (
     <FormField
@@ -27,7 +29,12 @@ export function TextareaFormField({
       error={error?.message}
       className={className}
     >
-      <Textarea id={name} placeholder={placeholder} {...register(name)} />
+      <Textarea
+        id={name}
+        className={inputClassName}
+        placeholder={placeholder}
+        {...register(name)}
+      />
     </FormField>
   );
 }

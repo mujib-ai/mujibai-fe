@@ -11,6 +11,7 @@ interface TextFormFieldProps {
   register: UseFormRegister<any>;
   error?: FieldError;
   className?: string;
+  inputClassName?: string;
 }
 
 export function TextFormField({
@@ -21,6 +22,7 @@ export function TextFormField({
   register,
   error,
   className,
+  inputClassName,
 }: TextFormFieldProps) {
   return (
     <FormField
@@ -34,6 +36,7 @@ export function TextFormField({
         type={type}
         placeholder={placeholder}
         {...register(name)}
+        className={inputClassName}
       />
     </FormField>
   );

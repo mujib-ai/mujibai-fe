@@ -1,39 +1,21 @@
 export interface ApiKey {
   id: string;
   name: string;
-  key: string;
-  permissions: string[];
+  keyPrefix: string;
   isActive: boolean;
-  lastUsed?: Date;
-  expiresAt?: Date;
-  createdBy: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-
-export interface ApiKey {
-  id: string;
-  name: string;
-  key: string;
-  permissions: string[];
-  isActive: boolean;
-  lastUsed?: Date;
-  expiresAt?: Date;
-  createdBy: string;
-  createdAt: Date;
-  updatedAt: Date;
+  lastUsedAt?: string | null;
+  revokedAt?: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CreateApiKeyDto {
   name: string;
-  permissions: string[];
   expiresAt?: Date;
 }
 
 export interface UpdateApiKeyDto {
   name?: string;
-  permissions?: string[];
   isActive?: boolean;
   expiresAt?: Date;
 }
