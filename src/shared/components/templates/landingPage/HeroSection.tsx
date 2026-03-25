@@ -23,11 +23,9 @@ export default function HeroSection({ hasToken = false }: { hasToken?: boolean }
             {t('title')}
             <span className="text-primary">{t('subTitle')}</span>
           </h1>
-
           <p className="text-base mx-12 text-gray-600 sm:text-lg md:text-xl dark:text-gray-300">
             {t('description')}
           </p>
-
           <div className="mt-4 flex h-auto flex-col justify-center gap-4 sm:h-[70px] sm:flex-row">
             <Button className="bg-primary hover:bg-primary/90 rounded-full py-6 text-base font-medium text-white shadow-md transition sm:text-lg">
               <Link href={'/login'} className="px-10 py-6 sm:px-14">

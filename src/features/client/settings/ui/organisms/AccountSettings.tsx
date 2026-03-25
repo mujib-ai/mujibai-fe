@@ -2,8 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 
-import PasswordInput from '@/shared/components/atoms/PasswordInput';
-import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Card,
   CardContent,
@@ -11,77 +9,29 @@ import {
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
 
-import SettingsFormField from '../atoms/SettingsFormField';
+import ChangeEmailForm from './ChangeEmailForm';
+import PasswordSettingsForm from './PasswordSettingsForm';
+import ProfileSettingsForm from './ProfileSettingsForm';
 
 export function AccountSettings() {
   const t = useTranslations('settings.accountSettings');
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-8">
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">{t('title')}</CardTitle>
         </CardHeader>
         <CardContent className="rounded-2xl bg-[#FFFFFFBF] p-6 dark:bg-[#00143473]">
-          <div className="mb-6 flex flex-col gap-2">
-            <h1 className="text-lg font-semibold">{t('profileInformation')}</h1>
-            <p className="text-sm text-gray-400">{t('subTitle')}</p>
-          </div>
-          <form className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <SettingsFormField
-              id="firstName"
-              label={t('firstName')}
-              placeholder={t('firstNamePlaceholder')}
-            />
-            <SettingsFormField
-              id="lastName"
-              label={t('lastName')}
-              placeholder={t('lastNamePlaceholder')}
-            />
-            <SettingsFormField
-              id="email"
-              label={t('email')}
-              type="email"
-              placeholder={t('emailPlaceholder')}
-            />
-            <SettingsFormField
-              id="phone"
-              label={t('phone')}
-              placeholder={t('phonePlaceholder')}
-            />
-            <SettingsFormField
-              id="location"
-              label={t('location')}
-              placeholder={t('locationPlaceholder')}
-            />
-            <SettingsFormField
-              id="bio"
-              label={t('bio')}
-              placeholder={t('bioPlaceholder')}
-            />
-            <div className="col-span-full mt-8 flex flex-col gap-2">
-              <h1 className="text-lg font-semibold">
-                {t('passwordManagement')}
-              </h1>
-              <p className="text-sm text-gray-400">
-                {t('passwordManagementDescription')}
-              </p>
-            </div>
-            <SettingsFormField id="currentPassword" label={t('currentPassword')}>
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <SettingsFormField id="newPassword" label={t('newPassword')}>
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <SettingsFormField id="confirmPassword" label={t('confirmPassword')}>
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <div className="col-span-full mt-6 flex justify-end">
-              <Button className="rounded-full px-8 py-2 font-semibold" type="button">
-                {t('saveChanges')}
-              </Button>
-            </div>
-          </form>
+          <ProfileSettingsForm />
+
+          <div className="my-10 h-px w-full bg-gray-200/20" />
+
+          <ChangeEmailForm />
+
+          <div className="my-10 h-px w-full bg-gray-200/20" />
+
+          <PasswordSettingsForm />
         </CardContent>
       </Card>
     </div>
