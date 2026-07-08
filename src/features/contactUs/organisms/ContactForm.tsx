@@ -3,13 +3,12 @@
 import type { ChangeEvent, FormEvent } from 'react';
 
 import { useTranslations } from 'next-intl';
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
+import { ArrowLeft } from 'lucide-react';
 
 import { FieldLabel } from '../atoms/FieldLabel';
 import { useContactForm } from '../hooks/useContactForm';
@@ -21,10 +20,8 @@ const MESSAGE_MAX = 600;
 export function ContactForm() {
   const t = useTranslations('contact.form');
   const form = useContactForm();
-  const { resolvedTheme } = useTheme();
-  const theme = resolvedTheme === 'dark' ? 'dark' : 'light';
   return (
-    <div className="rounded-4xl bg-(--paper) p-8 shadow-[0_30px_60px_-30px_rgba(23,21,31,0.22)]">
+    <div className="w-full rounded-2xl bg-[#FFFFFFCC] p-8 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 dark:bg-[#06B6D40F]">
       {form.ticket ? (
         <ContactSuccess
           name={form.name}
@@ -126,15 +123,7 @@ export function ContactForm() {
           >
             {t('submit')}
             <span className="inline-grid size-4 place-items-center" aria-hidden>
-              <Image
-                src={`/icons/arrow-right-${theme}.svg`}
-                alt=""
-                width={16}
-                height={16}
-                loading="eager"
-                className="rtl:rotate-180"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
+              <ArrowLeft className="size-5" />
             </span>
           </Button>
 

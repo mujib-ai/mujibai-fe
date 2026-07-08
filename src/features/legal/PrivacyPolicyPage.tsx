@@ -16,15 +16,6 @@ export function PrivacyPolicyPage() {
           {t('eyebrow')}
         </span>
         <h1 className="mt-2 text-3xl font-bold md:text-4xl">{t('title')}</h1>
-        <p className="text-muted-foreground mt-2 text-sm">
-          {t('lastUpdatedLabel')} {t('lastUpdated')}
-        </p>
-        <p className="text-muted-foreground mt-4 max-w-2xl text-base md:text-lg">
-          {t('intro')}
-        </p>
-        <p className="text-muted-foreground mt-2 max-w-2xl text-sm italic">
-          {t('disclaimer')}
-        </p>
 
         <LegalRichSections namespace="legal.privacy" />
       </Container>

@@ -11,6 +11,7 @@ export default function Loading() {
         height={80}
         className="h-20 w-20 drop-shadow-lg"
         priority
+        loading="eager"
       />
     </div>
   );

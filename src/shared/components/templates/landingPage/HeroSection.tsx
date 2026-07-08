@@ -16,15 +16,15 @@ export default function HeroSection({
   const t = useTranslations('landingPage.hero');
   const router = useRouter();
   return (
-    <section className="relative min-h-screen w-full overflow-hidden">
+    <section className="relative flex min-h-[70vh] w-full flex-col overflow-hidden sm:min-h-screen">
       <div className="from-primary/40 dark:from-primary/20 absolute bottom-0 -z-10 h-[60%] w-full bg-linear-to-t from-40% to-transparent"></div>
 
       <div className="relative z-50">
         <Header hasToken={hasToken} />
       </div>
 
-      <div className="flex h-full items-center justify-center">
-        <Container className="mt-32 flex flex-col items-center gap-8 text-center sm:mt-24 md:mt-20">
+      <div className="flex flex-1 items-center justify-center px-6">
+        <Container className="flex flex-col items-center gap-8 text-center">
           <h1 className="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
             {t('title')} <span className="text-primary">{t('subTitle')}</span>
           </h1>
