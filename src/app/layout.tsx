@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
-import { Cairo, Poppins } from 'next/font/google';
+import localFont from 'next/font/local';
 
 import { Providers } from '@/providers/Providers';
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
@@ -88,16 +88,19 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const cairo = Cairo({
-  subsets: ['arabic'],
-  variable: '--font-cairo',
-  weight: ['400', '500', '700', '800'],
-});
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  weight: ['400', '500', '600', '700'],
+const vazirmatn = localFont({
+  variable: '--font-vazirmatn',
+  src: [
+    { path: '../../public/font/Vazirmatn-Thin.ttf', weight: '100' },
+    { path: '../../public/font/Vazirmatn-ExtraLight.ttf', weight: '200' },
+    { path: '../../public/font/Vazirmatn-Light.ttf', weight: '300' },
+    { path: '../../public/font/Vazirmatn-Regular.ttf', weight: '400' },
+    { path: '../../public/font/Vazirmatn-Medium.ttf', weight: '500' },
+    { path: '../../public/font/Vazirmatn-SemiBold.ttf', weight: '600' },
+    { path: '../../public/font/Vazirmatn-Bold.ttf', weight: '700' },
+    { path: '../../public/font/Vazirmatn-ExtraBold.ttf', weight: '800' },
+    { path: '../../public/font/Vazirmatn-Black.ttf', weight: '900' },
+  ],
 });
 
 export default async function RootLayout({
@@ -110,7 +113,7 @@ export default async function RootLayout({
 
   return (
     <html
-      className={`${poppins.variable} ${cairo.variable}`}
+      className={vazirmatn.variable}
       suppressHydrationWarning
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
@@ -121,8 +124,7 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         style={{
-          fontFamily:
-            locale === 'ar' ? 'var(--font-cairo)' : 'var(--font-poppins)',
+          fontFamily: locale === 'ar' ? 'var(--font-vazirmatn)' : undefined,
         }}
       >
         <Providers locale={locale} messages={messages}>
