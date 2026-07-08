@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { motion } from 'framer-motion';
 import {
   Facebook,
   Instagram,
@@ -50,155 +49,69 @@ const Footer = ({ theme }: { theme: string }) => {
           <div className="pt-[39px] pb-[35px] md:pt-[78px] md:pb-[70px]">
             <div className="mb-8 flex flex-col items-start justify-between gap-8 lg:mb-16 lg:flex-row lg:gap-0">
               {/* Left Section - Logo & Social */}
-              <motion.div
-                className="flex w-full flex-col gap-6 sm:w-[30%]"
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.7, ease: 'easeOut' }}
-              >
+              <div className="flex w-full flex-col gap-6 sm:w-[30%]">
                 <div className="flex flex-col gap-3">
-                  <motion.div
-                    className="flex items-center gap-[6px]"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                  >
+                  <div className="flex items-center gap-[6px]">
                     <Logo />
-                  </motion.div>
-                  <motion.p
-                    className="text-text-light text-left text-sm leading-[20px] font-normal md:text-lg md:leading-[27px]"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
+                  </div>
+                  <p className="text-text-light text-left text-sm leading-[20px] font-normal md:text-lg md:leading-[27px]">
                     {t('description')}
-                  </motion.p>
+                  </p>
                 </div>
 
                 {/* Social Media Section */}
-                <motion.div
-                  className="flex flex-col gap-4"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
+                <div className="flex flex-col gap-4">
                   <h3 className="text-text-light text-left text-lg leading-[22px] font-semibold md:text-xl md:leading-[25px]">
                     {t('followUs')}
                   </h3>
                   <div className="flex items-center gap-[10px]">
                     <ul className="flex items-center justify-center gap-1">
-                      {socialIcons.map(({ Icon, label }, index) => (
-                        <motion.li
+                      {socialIcons.map(({ Icon, label }) => (
+                        <li
                           key={label}
                           className="cursor-pointer rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40"
-                          initial={{ opacity: 0, scale: 0 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{
-                            duration: 0.4,
-                            delay: 0.5 + index * 0.1,
-                            type: 'spring',
-                            stiffness: 260,
-                            damping: 20,
-                          }}
-                          whileHover={{ scale: 1.15, rotate: 5 }}
-                          whileTap={{ scale: 0.9 }}
                         >
                           <Icon className="size-5 text-[#3B82F6] dark:text-white" />
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
                   </div>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
 
               {/* Center Section - Quick Links */}
-              <motion.div
-                className="flex w-full flex-col gap-[14px] lg:w-[20%] lg:self-center"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
-              >
-                <motion.h3
-                  className="text-text-light text-left text-lg leading-[22px] font-semibold md:text-xl md:leading-[25px]"
-                  initial={{ opacity: 0, y: -10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                >
+              <div className="flex w-full flex-col gap-[14px] lg:w-[20%] lg:self-center">
+                <h3 className="text-text-light text-left text-lg leading-[22px] font-semibold md:text-xl md:leading-[25px]">
                   {t('quickLinks.title')}
-                </motion.h3>
+                </h3>
                 <ul className="flex flex-col gap-[6px]">
-                  {quickLinks.map((link, index) => (
-                    <motion.li
-                      key={link.href}
-                      initial={{ opacity: 0, x: -15 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.4 + index * 0.05 }}
-                    >
-                      <motion.div
-                        whileHover={{ x: 4 }}
-                        transition={{ duration: 0.2 }}
+                  {quickLinks.map(link => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-text-light-muted hover:text-text-light text-left text-sm leading-normal font-medium transition-colors md:text-base"
                       >
-                        <Link
-                          href={link.href}
-                          className="text-text-light-muted hover:text-text-light text-left text-sm leading-normal font-medium transition-colors md:text-base"
-                        >
-                          {link.label}
-                        </Link>
-                      </motion.div>
-                    </motion.li>
+                        {link.label}
+                      </Link>
+                    </li>
                   ))}
                 </ul>
-              </motion.div>
+              </div>
 
               {/* Right Section - Contact */}
-              <motion.div
-                className="flex w-full flex-col items-start gap-4 sm:w-[30%] lg:flex-row lg:items-center"
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
-              >
+              <div className="flex w-full flex-col items-start gap-4 sm:w-[30%] lg:flex-row lg:items-center">
                 <div className="flex flex-col gap-3">
-                  <motion.h3
-                    className="text-xl font-bold"
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                  >
-                    {t('contact.title')}
-                  </motion.h3>
+                  <h3 className="text-xl font-bold">{t('contact.title')}</h3>
 
                   <div className="flex flex-col gap-3">
                     {contactItems.map((item, index) => (
-                      <motion.div
+                      <div
                         key={index}
                         className={`flex ${index === 2 ? 'items-start' : 'items-center'} gap-3`}
-                        initial={{ opacity: 0, x: 20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
                       >
-                        <motion.div
-                          className="cursor-pointer rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40"
-                          whileHover={{ scale: 1.15, rotate: 10 }}
-                          whileTap={{ scale: 0.9 }}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 400,
-                            damping: 17,
-                          }}
-                        >
+                        <div className="cursor-pointer rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40">
                           <item.Icon className="size-5 text-[#3B82F6] dark:text-white" />
-                        </motion.div>
+                        </div>
                         {index === 2 ? (
                           <p className="w-[50%]">{item.text}</p>
                         ) : (
@@ -206,71 +119,37 @@ const Footer = ({ theme }: { theme: string }) => {
                             {item.text}
                           </span>
                         )}
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Bottom Section - Copyright */}
-            <motion.div
-              className="border-text-light border-opacity-20 flex flex-col items-center justify-between gap-4 border-t pt-4 sm:flex-row"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <motion.p
-                className="text-text-light-muted text-left text-xs leading-tight font-medium md:text-xs"
-                initial={{ opacity: 0, x: -15 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
+            <div className="border-text-light border-opacity-20 flex flex-col items-center justify-between gap-4 border-t pt-4 sm:flex-row">
+              <p className="text-text-light-muted text-left text-xs leading-tight font-medium md:text-xs">
                 {t('copyright')}
-              </motion.p>
+              </p>
 
-              <motion.div
-                className="flex items-center gap-8"
-                initial={{ opacity: 0, x: 15 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <motion.span
-                  className="text-text-light-muted hover:text-text-light cursor-pointer text-left text-xs leading-tight font-medium transition-colors md:text-xs"
-                  whileHover={{ x: 3 }}
-                >
+              <div className="flex items-center gap-8">
+                <span className="text-text-light-muted hover:text-text-light cursor-pointer text-left text-xs leading-tight font-medium transition-colors md:text-xs">
                   {t('termsOfUse')}
-                </motion.span>
-                <motion.a
+                </span>
+                <a
                   href="#privacy"
                   className="text-text-light-muted hover:text-text-light text-left text-xs leading-tight font-medium transition-colors md:text-xs"
-                  whileHover={{ x: 3 }}
                 >
                   {t('privacyPolicy')}
-                </motion.a>
-              </motion.div>
-            </motion.div>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Floating Flag Image */}
-      <motion.div
-        className="absolute top-[10%] right-10 h-[200px] w-[200px]"
-        initial={{ opacity: 0, scale: 0.5, y: -30 }}
-        whileInView={{ opacity: 1, scale: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
-        animate={{
-          y: [0, -12, 0],
-        }}
-        style={{
-          transition: 'all 4s ease-in-out infinite',
-        }}
-      >
+      <div className="absolute top-[10%] right-10 h-[200px] w-[200px]">
         <Image
           src={
             theme === 'dark'
@@ -286,7 +165,7 @@ const Footer = ({ theme }: { theme: string }) => {
           loading="lazy"
           suppressHydrationWarning
         />
-      </motion.div>
+      </div>
     </footer>
   );
 };
