@@ -76,11 +76,7 @@ export default function MobileView({
                         className="w-full rounded-3xl px-9 py-6"
                       >
                         <Link
-                          href={
-                            user?.role === 'ADMIN'
-                              ? '/admin-dashboard'
-                              : '/dashboard'
-                          }
+                          href="/dashboard"
                           onClick={onClose}
                           className="w-full"
                         >

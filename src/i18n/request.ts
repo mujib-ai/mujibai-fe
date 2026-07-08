@@ -20,14 +20,8 @@ export default getRequestConfig(async () => {
   const passwordResetRequested = (
     await import(`./messages/${locale}/passwordResetRequested.json`)
   ).default;
-  const adminDashboard = (
-    await import(`./messages/${locale}/adminDashboard.json`)
-  ).default;
   const landingPage = (await import(`./messages/${locale}/landingPage.json`))
     .default;
-  const adminSettings = (
-    await import(`./messages/${locale}/admin/settings.json`)
-  ).default;
 
   return {
     locale,
@@ -39,17 +33,7 @@ export default getRequestConfig(async () => {
       ...forgetPasswordPage,
       ...resetPasswordPage,
       ...passwordResetRequested,
-      ...adminDashboard,
       ...landingPage,
-      sidebar: {
-        ...dashboard.sidebar,
-        ...adminDashboard.sidebar,
-      },
-      settings: {
-        ...dashboard.settings,
-        ...adminDashboard.settings,
-      },
-      adminSettings,
     },
   };
 });

@@ -1,6 +1,6 @@
 'use client';
 
-import type { PlanDisplay } from '@/features/admin/plans';
+import type { PlanDisplay } from '@/shared/types';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { CheckCircle, X } from 'lucide-react';
 

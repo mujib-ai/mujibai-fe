@@ -1,4 +1,4 @@
-import type { PlanDisplay } from '@/features/admin/plans';
+import type { PlanDisplay } from '@/shared/types';
 import PricingCard from '@/shared/components/molecules/PricingCard';
 
 /**

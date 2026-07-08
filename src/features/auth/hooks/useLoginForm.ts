@@ -9,7 +9,7 @@ import * as z from 'zod';
 
 import useAuth from './useAuth';
 
-const ALLOWED_REDIRECT_PREFIXES = ['/dashboard', '/admin-dashboard'];
+const ALLOWED_REDIRECT_PREFIXES = ['/dashboard'];
 
 function getAllowedRedirectFrom(from: string | null): string | null {
   if (!from || typeof from !== 'string') return null;

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import type { PlanDisplay } from '@/features/admin/plans';
+import type { PlanDisplay } from '@/shared/types';
 import {
   Tabs,
   TabsContent,

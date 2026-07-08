@@ -24,8 +24,7 @@ export default function ActionsButtons({
 
   const isAuthenticated = user || hasToken;
   const isClientOrAdmin = user?.role === 'CLIENT' || user?.role === 'ADMIN';
-  const dashboardHref =
-    user?.role === 'ADMIN' ? '/admin-dashboard' : '/dashboard';
+  const dashboardHref = '/dashboard';
 
   return (
     <div className="hidden items-center justify-center gap-1.5 xl:flex xl:gap-2.5">
