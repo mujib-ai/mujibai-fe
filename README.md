@@ -1,5 +1,3 @@
-cat > README.md << 'EOF'
-
 # 🚀 Next.js Multilingual Starter
 
 This project is a **complete starter template** for building a production-ready Next.js application.
