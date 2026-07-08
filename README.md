@@ -9,7 +9,6 @@ It includes multilingual support, testing setup, modern UI components, and a cle
 
 - Multilingual support (i18n)
 - Jest + React Testing Library setup
-- Playwright E2E testing
 - TailwindCSS + shadcn/ui
 - lucide-react icons
 - React Query + Zustand + Axios
