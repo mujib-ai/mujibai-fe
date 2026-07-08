@@ -2,9 +2,7 @@
 
 import ApiKeysHeader from '../molecules/ApiKeysHeader';
 import ApiKeysTable from './ApiKeysTable';
-import NoApiKeysCard from '../molecules/NoApiKeysCard';
 import type { ApiKey } from '../../types';
-import { useTranslations } from 'next-intl';
 
 interface ApiKeysContentProps {
   apiKeys: ApiKey[];
@@ -13,7 +11,6 @@ interface ApiKeysContentProps {
   onCreateNewKey: () => void;
   onEditKey: (apiKey: ApiKey) => void;
   onDeleteKey: (apiKey: ApiKey) => void;
-  onRevokeKey: (id: string) => void;
   locale: string;
   translations: {
     viewUsage: string;
@@ -22,11 +19,10 @@ interface ApiKeysContentProps {
     name: string;
     secretKey: string;
     createdOn: string;
+    createdBy: string;
     lastUsed: string;
+    permission: string;
     actions: string;
-    status: string;
-    noApiKeysAvailable: string;
-    startByAddingYourFirstApiKey: string;
   };
 }
 
@@ -37,12 +33,9 @@ export default function ApiKeysContent({
   onCreateNewKey,
   onEditKey,
   onDeleteKey,
-  onRevokeKey,
   locale,
   translations,
 }: ApiKeysContentProps) {
-  const t = useTranslations('APIKeys');
-
   if (error) {
     return (
       <div className="flex h-64 items-center justify-center">
@@ -67,30 +60,21 @@ export default function ApiKeysContent({
         usagePageText={translations.usagePage}
         createNewSecretKeyText={translations.createNewSecretKey}
       />
-      {apiKeys.length > 0 ? (
-        <ApiKeysTable
-          apiKeys={apiKeys}
-          onEdit={onEditKey}
-          onDelete={onDeleteKey}
-          onRevoke={onRevokeKey}
-          locale={locale}
-          headers={{
-            name: translations.name,
-            secretKey: translations.secretKey,
-            createdOn: translations.createdOn,
-            lastUsed: translations.lastUsed,
-            status: translations.status,
-            actions: translations.actions,
-          }}
-        />
-      ) : (
-        <NoApiKeysCard
-          title={t('title')}
-          heading={translations.noApiKeysAvailable}
-          description={translations.startByAddingYourFirstApiKey}
-          locale={locale}
-        />
-      )}
+      <ApiKeysTable
+        apiKeys={apiKeys}
+        onEdit={onEditKey}
+        onDelete={onDeleteKey}
+        locale={locale}
+        headers={{
+          name: translations.name,
+          secretKey: translations.secretKey,
+          createdOn: translations.createdOn,
+          createdBy: translations.createdBy,
+          lastUsed: translations.lastUsed,
+          permission: translations.permission,
+          actions: translations.actions,
+        }}
+      />
     </div>
   );
 }

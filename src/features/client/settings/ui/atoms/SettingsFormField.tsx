@@ -3,10 +3,11 @@
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Label } from '@/shared/components/atoms/ui/label';
 
-interface SettingsFormFieldProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface SettingsFormFieldProps {
   id: string;
   label: string;
+  type?: string;
+  placeholder?: string;
   children?: React.ReactNode;
 }
 
@@ -16,8 +17,6 @@ export default function SettingsFormField({
   type = 'text',
   placeholder,
   children,
-  className,
-  ...props
 }: SettingsFormFieldProps) {
   return (
     <div className="flex flex-col gap-2">
@@ -29,8 +28,7 @@ export default function SettingsFormField({
           id={id}
           type={type}
           placeholder={placeholder}
-          className={`focus-visible:ring-primary border-none bg-[#06B6D40F] text-white placeholder:text-gray-400 focus-visible:ring-1 dark:bg-[#FFFFFF0F] ${className}`}
-          {...props}
+          className="focus-visible:ring-primary border-none bg-[#06B6D40F] text-white placeholder:text-gray-400 focus-visible:ring-1 dark:bg-[#FFFFFF0F]"
         />
       )}
     </div>

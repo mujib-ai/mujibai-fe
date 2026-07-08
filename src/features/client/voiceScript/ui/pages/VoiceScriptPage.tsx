@@ -17,7 +17,7 @@ export default function VoiceScriptPage() {
       <DashboardHeader title={t('title')} subtitle={t('subTitle')} />
       <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
         <CallGreetingVoice t={t} locale={locale} />
-        {/* <VoiceScriptHint text={t('selectLanguageVoice')} /> */}
+        <VoiceScriptHint text={t('selectLanguageVoice')} />
         <MainConversationScript t={t} locale={locale} />
       </div>
     </div>
