@@ -21,16 +21,16 @@
     },
 
     "hero": {
-      "title": "“Mujeeb AI”… Smartly serving your customers",
+      "title": "“Mujibai”… Smartly serving your customers",
       "subTitle": "Instantly!",
-      "description": "With a deep understanding of your business and fluent Saudi dialect, “Mujeeb AI” comes as your advanced cloud-based voice assistant. Fully developed using the latest AI technologies, it helps you communicate professionally with your customers in the Saudi dialect. It understands call context, responds instantly, creates tickets, and provides accurate reports—empowering you to make the right decisions quickly and confidently.",
+      "description": "With a deep understanding of your business and fluent Saudi dialect, “Mujibai” comes as your advanced cloud-based voice assistant. Fully developed using the latest AI technologies, it helps you communicate professionally with your customers in the Saudi dialect. It understands call context, responds instantly, creates tickets, and provides accurate reports—empowering you to make the right decisions quickly and confidently.",
       "button1": "Get Started",
-      "button2": "Try “Mujeeb AI” for Free"
+      "button2": "Try “Mujibai” for Free"
     },
 
     "features": {
-      "title": "“Mujeeb AI” features… bringing you closer to your customers!",
-      "description": "“Mujeeb AI” offers powerful features that make it your ideal choice for customer communication",
+      "title": "“Mujibai” features… bringing you closer to your customers!",
+      "description": "“Mujibai” offers powerful features that make it your ideal choice for customer communication",
       "featureOne": {
         "title": "Instant voice responses in the Saudi dialect",
         "description": "Natural, accurate, and aligned with your brand identity"
@@ -58,8 +58,8 @@
     },
 
     "targetedSectors": {
-      "title": "Who benefits from “Mujeeb AI”?",
-      "subTitle": "“Mujeeb AI” can adapt to meet the needs of organizations across various sectors such as",
+      "title": "Who benefits from “Mujibai”?",
+      "subTitle": "“Mujibai” can adapt to meet the needs of organizations across various sectors such as",
       "sectorOne": {
         "title": "Healthcare Sector",
         "description": ""
@@ -83,7 +83,7 @@
     },
 
     "whyChooseUs": {
-      "title": "Why do the smart choose “Mujeeb AI”?",
+      "title": "Why do the smart choose “Mujibai”?",
       "getStarted": "Get Started",
       "propsOne": {
         "title": "Wise in responses",
@@ -91,7 +91,7 @@
       },
       "propsTwo": {
         "title": "Precise in analysis",
-        "description": "“Mujeeb AI” is built entirely in-house without relying on external tools, ensuring high-quality customer service and exceptional accuracy in analyzing customer feedback on your services or products."
+        "description": "“Mujibai” is built entirely in-house without relying on external tools, ensuring high-quality customer service and exceptional accuracy in analyzing customer feedback on your services or products."
       },
       "propsThree": {
         "title": "A trusted decision-making partner",
@@ -108,9 +108,9 @@
     },
 
     "aboutUs": {
-      "title": "About “Mujeeb AI”",
+      "title": "About “Mujibai”",
       "subTitle": "A Saudi-built AI assistant—by design and by voice—serving Saudi organizations professionally",
-      "description": "“Mujeeb AI” is an intelligent voice system fully developed in the Kingdom of Saudi Arabia. It aims to empower small and medium-sized enterprises to deliver professional, fast, and efficient customer service by leveraging AI to understand the Saudi dialect and its context in line with the local market. This provides Saudi organizations with advanced technical capabilities that enhance competitiveness and contribute to the digital transformation goals of Saudi Vision 2030.",
+      "description": "“Mujibai” is an intelligent voice system fully developed in the Kingdom of Saudi Arabia. It aims to empower small and medium-sized enterprises to deliver professional, fast, and efficient customer service by leveraging AI to understand the Saudi dialect and its context in line with the local market. This provides Saudi organizations with advanced technical capabilities that enhance competitiveness and contribute to the digital transformation goals of Saudi Vision 2030.",
       "ourStory": "Our Story"
     },
     "contactUs": {
