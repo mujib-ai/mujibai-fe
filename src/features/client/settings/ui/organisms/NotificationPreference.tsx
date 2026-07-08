@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import {
@@ -55,7 +56,7 @@ export function NotificationPreference() {
         </CardContent>
       </Card>
 
-      <Card className="shadow-none border-none bg-transparent">
+      <Card className="border-none bg-transparent shadow-none">
         <CardHeader>
           <CardTitle className="text-lg font-semibold">
             {t('inAppNotifications.title')}
@@ -115,7 +116,7 @@ export function NotificationPreference() {
               </Label>
 
               <div className="grid grid-cols-2 gap-4">
-                {options.map((option) => (
+                {options.map(option => (
                   <label
                     key={option}
                     className={`flex h-20 cursor-pointer items-center gap-4 rounded-2xl px-5 transition-all duration-200 ${

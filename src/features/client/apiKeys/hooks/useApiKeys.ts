@@ -57,33 +57,38 @@ export default function useApiKeys() {
     } catch (error) {
       setState(prev => ({
         ...prev,
-        error: error instanceof Error ? error.message : 'Failed to create API key',
+        error:
+          error instanceof Error ? error.message : 'Failed to create API key',
         isLoading: false,
       }));
     }
   }, []);
 
-  const updateApiKey = React.useCallback(async (id: string, data: Partial<ApiKey>) => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    try {
-      await new Promise(resolve =>
-        setTimeout(resolve, API_KEYS_CONSTANTS.UPDATE_DELAY_MS)
-      );
-      setState(prev => ({
-        ...prev,
-        apiKeys: prev.apiKeys.map(key =>
-          key.id === id ? { ...key, ...data } : key
-        ),
-        isLoading: false,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error: error instanceof Error ? error.message : 'Failed to update API key',
-        isLoading: false,
-      }));
-    }
-  }, []);
+  const updateApiKey = React.useCallback(
+    async (id: string, data: Partial<ApiKey>) => {
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      try {
+        await new Promise(resolve =>
+          setTimeout(resolve, API_KEYS_CONSTANTS.UPDATE_DELAY_MS)
+        );
+        setState(prev => ({
+          ...prev,
+          apiKeys: prev.apiKeys.map(key =>
+            key.id === id ? { ...key, ...data } : key
+          ),
+          isLoading: false,
+        }));
+      } catch (error) {
+        setState(prev => ({
+          ...prev,
+          error:
+            error instanceof Error ? error.message : 'Failed to update API key',
+          isLoading: false,
+        }));
+      }
+    },
+    []
+  );
 
   const deleteApiKey = React.useCallback(async (id: string) => {
     setState(prev => ({ ...prev, isLoading: true, error: null }));
@@ -99,7 +104,8 @@ export default function useApiKeys() {
     } catch (error) {
       setState(prev => ({
         ...prev,
-        error: error instanceof Error ? error.message : 'Failed to delete API key',
+        error:
+          error instanceof Error ? error.message : 'Failed to delete API key',
         isLoading: false,
       }));
     }

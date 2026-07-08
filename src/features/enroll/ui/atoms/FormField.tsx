@@ -1,12 +1,13 @@
-import { Label } from '@/shared/components/atoms/ui/label';
 import { Input } from '@/shared/components/atoms/ui/input';
+import { Label } from '@/shared/components/atoms/ui/label';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface FormFieldProps {
   label: string;
   placeholder: string;
   required?: boolean;
   name: string;
-  register: any;
+  register: UseFormRegisterReturn;
   error?: string;
 }
 

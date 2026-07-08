@@ -1,10 +1,12 @@
 'use client';
 
+import { useResetPasswordForm } from '@/features/auth';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { PasswordField } from '@/shared/components/molecules/PasswordField';
-import { ResetPasswordAlert, ResetPasswordHeader } from '@/shared/components/molecules/ResetPasswordComponents';
-
-import { useResetPasswordForm } from '@/features/auth';
+import {
+  ResetPasswordAlert,
+  ResetPasswordHeader,
+} from '@/shared/components/molecules/ResetPasswordComponents';
 
 export default function ResetPasswordPage({
   userId,
@@ -23,7 +25,14 @@ export default function ResetPasswordPage({
     getTranslations,
   } = useResetPasswordForm({ userId, token });
 
-  const { title, newPassword, confirmPassword, placeholder, submit, submitting } = getTranslations();
+  const {
+    title,
+    newPassword,
+    confirmPassword,
+    placeholder,
+    submit,
+    submitting,
+  } = getTranslations();
 
   return (
     <div className="relative flex h-screen w-full items-center justify-center">
@@ -34,7 +43,7 @@ export default function ResetPasswordPage({
 
         <div className="rounded-2xl border-t border-b border-white bg-[#FFFFFF80] p-10 sm:w-[100%] md:w-[80%] lg:w-[60%] dark:bg-[#06B6D40F]">
           <ResetPasswordAlert alert={alert} />
-          
+
           <h1 className="text-2xl font-semibold">{title}</h1>
 
           <form

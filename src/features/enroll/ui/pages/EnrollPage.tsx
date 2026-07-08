@@ -1,8 +1,7 @@
 import { useTranslations } from 'next-intl';
 
-import { CheckCircle } from 'lucide-react';
-
 import Logo from '@/shared/components/atoms/Logo';
+import { CheckCircle } from 'lucide-react';
 
 import { EnrollmentForm } from '../organisms';
 

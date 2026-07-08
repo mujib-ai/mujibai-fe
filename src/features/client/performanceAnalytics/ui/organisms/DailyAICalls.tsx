@@ -1,7 +1,5 @@
 'use client';
 
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
-
 import {
   Card,
   CardContent,
@@ -14,6 +12,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/shared/components/atoms/ui/chart';
+import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
 
 const chartData = [
   { month: 'January', desktop: 186, mobile: 80 },
@@ -24,11 +23,7 @@ const chartData = [
   { month: 'June', desktop: 214, mobile: 140 },
 ];
 
-export default function DailyAICalls({
-  t,
-}: {
-  t: (key: string) => string;
-}) {
+export default function DailyAICalls({ t }: { t: (key: string) => string }) {
   const chartConfig = {
     desktop: {
       label: t('duration'),

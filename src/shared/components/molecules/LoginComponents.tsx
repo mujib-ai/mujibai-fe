@@ -26,11 +26,7 @@ export function LoginAlert({ alert }: LoginAlertProps) {
       variant={alert.type === 'error' ? 'destructive' : 'default'}
       className={`${alert.type === 'error' ? 'border-red-200 bg-red-50/20' : 'border-green-200 bg-green-50/20'}`}
     >
-      {alert.type === 'success' ? (
-        <CheckCircle2Icon />
-      ) : (
-        <AlertCircleIcon />
-      )}
+      {alert.type === 'success' ? <CheckCircle2Icon /> : <AlertCircleIcon />}
       <AlertTitle>{alert.title}</AlertTitle>
       <AlertDescription>{alert.description}</AlertDescription>
     </Alert>
@@ -51,7 +47,11 @@ interface ForgotPasswordLinkProps {
   disabled?: boolean;
 }
 
-export function ForgotPasswordLink({ href, label, disabled = false }: ForgotPasswordLinkProps) {
+export function ForgotPasswordLink({
+  href,
+  label,
+  disabled = false,
+}: ForgotPasswordLinkProps) {
   return (
     <div className="flex w-full items-center justify-end">
       <Link

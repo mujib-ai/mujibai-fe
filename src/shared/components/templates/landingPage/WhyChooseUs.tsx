@@ -1,6 +1,7 @@
 'use client';
 import { useTranslations } from 'next-intl';
 
+import { Container } from '@/shared/components/atoms/Container';
 import { Button } from '@/shared/components/atoms/ui/button';
 
 export default function WhyChooseUsSection() {
@@ -47,9 +48,9 @@ export default function WhyChooseUsSection() {
 
       <div className="absolute top-1/2 left-2/2 z-20 h-[45%] w-[45%] -translate-x-2/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-80 blur-[100px]" />
 
-      <div className="relative z-50 mx-auto w-full max-w-[1440px] px-4 py-[16px] sm:px-6 md:py-[32px] lg:px-8">
-        <div className="mx-auto flex w-full max-w-[1322px] flex-col items-center justify-start gap-[16px] md:gap-[32px]">
-          <div className="flex w-full max-w-[90%] flex-col items-center justify-start gap-3 px-5">
+      <Container className="relative z-50 py-[16px] md:py-[32px]">
+        <div className="mx-auto flex w-full flex-col items-center justify-start gap-[16px] md:gap-[32px]">
+          <div className="flex w-full flex-col items-center justify-start gap-3">
             <h2 className="text-center text-4xl leading-[50px] font-bold">
               {t('title')}
             </h2>
@@ -57,7 +58,7 @@ export default function WhyChooseUsSection() {
 
           <div className="flex w-full flex-col items-start justify-start gap-[20px] md:gap-[40px]">
             <div className="mr-[5px] flex w-full flex-col items-start justify-start gap-[13px] md:mr-[10px] md:gap-[26px]">
-              {reasons.map((reason) => (
+              {reasons.map(reason => (
                 <div
                   key={reason.id}
                   className="dark:border-primary flex w-full flex-col items-start justify-start gap-3 border-l-2 border-[#3B82F6] bg-[#06B6D426] px-[24px] py-[24px] dark:bg-[#ffffff1e]"
@@ -85,7 +86,7 @@ export default function WhyChooseUsSection() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

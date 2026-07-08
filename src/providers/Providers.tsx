@@ -3,7 +3,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
-
 import { ErrorMessageProvider } from '@/shared/hooks/useErrorMessage';
 
 import ReactQueryProvider from './ReactQueryProvider';

@@ -13,18 +13,26 @@ import {
   Twitter,
 } from 'lucide-react';
 
+import { Container } from '../atoms/Container';
 import Logo from '../atoms/Logo';
 
-const Footer = ({ theme }: { theme: string }) => {
+const Footer = ({ theme }: { theme?: string }) => {
   const t = useTranslations('landingPage.footer');
 
   const quickLinks = [
     { href: '#about', label: t('quickLinks.aboutUs') },
     { href: '#features', label: t('quickLinks.features') },
     { href: '#why-us', label: t('quickLinks.whyUs') },
-    { href: '#contact', label: t('quickLinks.contactUs') },
+    { href: '/contact-us', label: t('quickLinks.contactUs') },
     { href: '#industries', label: t('quickLinks.industries') },
     { href: '#pricing', label: t('quickLinks.pricing') },
+    { href: '/help-center', label: t('quickLinks.helpCenter') },
+  ];
+
+  const legalLinks = [
+    { href: '/terms-of-services', label: t('termsOfUse') },
+    { href: '/privacy-policy', label: t('privacyPolicy') },
+    { href: '/cancellation-policy', label: t('cancellationPolicy') },
   ];
 
   const socialIcons = [
@@ -34,8 +42,8 @@ const Footer = ({ theme }: { theme: string }) => {
   ];
 
   const contactItems = [
-    { Icon: Phone, text: t('contact.phone') },
-    { Icon: Mail, text: t('contact.email') },
+    { Icon: Phone, text: t('contact.phone'), dir: 'ltr' as const },
+    { Icon: Mail, text: t('contact.email'), dir: 'ltr' as const },
     {
       Icon: MapPin,
       text: t('contact.address'),
@@ -45,7 +53,7 @@ const Footer = ({ theme }: { theme: string }) => {
   return (
     <footer className="bg-footer-background from-primary/40 dark:from-primary/40 via-primary/30 dark:via-primary/10 relative mt-[-4px] w-full bg-gradient-to-tl to-transparent/20">
       <div className="relative w-full">
-        <div className="relative mx-auto w-full px-10">
+        <Container>
           <div className="pt-[39px] pb-[35px] md:pt-[78px] md:pb-[70px]">
             <div className="mb-8 flex flex-col items-start justify-between gap-8 lg:mb-16 lg:flex-row lg:gap-0">
               {/* Left Section - Logo & Social */}
@@ -115,7 +123,10 @@ const Footer = ({ theme }: { theme: string }) => {
                         {index === 2 ? (
                           <p className="w-[50%]">{item.text}</p>
                         ) : (
-                          <span className="text-text-light-muted text-left text-sm leading-tight font-normal md:text-sm">
+                          <span
+                            dir={item.dir}
+                            className="text-text-light-muted text-left text-sm leading-tight font-normal md:text-sm"
+                          >
                             {item.text}
                           </span>
                         )}
@@ -133,19 +144,19 @@ const Footer = ({ theme }: { theme: string }) => {
               </p>
 
               <div className="flex items-center gap-8">
-                <span className="text-text-light-muted hover:text-text-light cursor-pointer text-left text-xs leading-tight font-medium transition-colors md:text-xs">
-                  {t('termsOfUse')}
-                </span>
-                <a
-                  href="#privacy"
-                  className="text-text-light-muted hover:text-text-light text-left text-xs leading-tight font-medium transition-colors md:text-xs"
-                >
-                  {t('privacyPolicy')}
-                </a>
+                {legalLinks.map(link => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-text-light-muted hover:text-text-light text-left text-xs leading-tight font-medium transition-colors md:text-xs"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
 
       {/* Floating Flag Image */}

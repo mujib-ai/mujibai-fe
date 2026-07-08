@@ -8,7 +8,7 @@ export const AUTH_CONSTANTS = {
     NO_ACCOUNT_LABEL: "Don't have an account?",
     SIGN_UP_LINK: 'Sign up',
   },
-  
+
   REGISTRATION_FORM: {
     FIRST_NAME_PLACEHOLDER: 'First name',
     LAST_NAME_PLACEHOLDER: 'Last name',
@@ -19,7 +19,7 @@ export const AUTH_CONSTANTS = {
     HAVE_ACCOUNT_LABEL: 'Already have an account?',
     SIGN_IN_LINK: 'Sign in',
   },
-  
+
   VALIDATION: {
     EMAIL_REQUIRED: 'Email is required',
     EMAIL_INVALID: 'Please enter a valid email',
@@ -29,7 +29,7 @@ export const AUTH_CONSTANTS = {
     FIRST_NAME_REQUIRED: 'First name is required',
     LAST_NAME_REQUIRED: 'Last name is required',
   },
-  
+
   API: {
     LOGIN_ENDPOINT: '/auth/login',
     REGISTER_ENDPOINT: '/auth/register',

@@ -9,17 +9,16 @@ export default function FeatureCard({
   description,
   image,
   imageDark,
-  index = 0,
 }: {
   title: string;
   description: string;
   image: string | StaticImageData;
   imageDark: string | StaticImageData;
-  index?: number;
 }) {
   const { theme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
@@ -27,9 +26,7 @@ export default function FeatureCard({
   const currentImage = currentTheme === 'dark' ? image : imageDark;
 
   return (
-    <div
-      className="relative rounded-lg border-1 border-gray-200 bg-[#06B6D40F] p-6 shadow-md dark:border-gray-700 dark:bg-transparent"
-    >
+    <div className="relative rounded-lg border-1 border-gray-200 bg-[#06B6D40F] p-6 shadow-md dark:border-gray-700 dark:bg-transparent">
       <div className="z-50 flex h-full w-full flex-col items-center gap-4">
         <div className="rounded-xl bg-[#06B6D40F] p-5 dark:bg-white/5">
           <Image
@@ -44,9 +41,7 @@ export default function FeatureCard({
         <hr className="w-full border-gray-300 dark:border-gray-700" />
 
         <div className="flex w-full flex-col text-start">
-          <h2 className="text-xl font-bold">
-            {title}
-          </h2>
+          <h2 className="text-xl font-bold">{title}</h2>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             {description}
           </p>

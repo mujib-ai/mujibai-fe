@@ -1,8 +1,7 @@
 'use client';
 
-import { Filter } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Filter } from 'lucide-react';
 
 export default function FilterButton() {
   return (

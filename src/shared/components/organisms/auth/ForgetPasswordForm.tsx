@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 
-import { AlertCircleIcon, CheckCircle2Icon } from 'lucide-react';
-import { UseFormReturn } from 'react-hook-form';
-
+import type { ForgetPasswordFormData } from '@/features/auth';
 import {
   Alert,
   AlertDescription,
@@ -13,8 +11,8 @@ import {
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Label } from '@/shared/components/atoms/ui/label';
-
-import type { ForgetPasswordFormData } from '@/features/auth';
+import { AlertCircleIcon, CheckCircle2Icon } from 'lucide-react';
+import { UseFormReturn } from 'react-hook-form';
 
 interface ForgetPasswordFormProps {
   form: UseFormReturn<ForgetPasswordFormData>;

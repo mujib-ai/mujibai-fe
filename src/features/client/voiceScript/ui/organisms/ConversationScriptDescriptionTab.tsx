@@ -1,7 +1,7 @@
 'use client';
 
-import EmptyScriptCard from '../molecules/EmptyScriptCard';
 import EditDescriptionButton from '../molecules/EditDescriptionButton';
+import EmptyScriptCard from '../molecules/EmptyScriptCard';
 
 export default function ConversationScriptDescriptionTab({
   t,

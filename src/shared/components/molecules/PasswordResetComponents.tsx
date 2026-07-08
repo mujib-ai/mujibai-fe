@@ -1,17 +1,14 @@
-import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Loader2 } from 'lucide-react';
 
 const logoImage = '/logo.svg';
 
 export function PasswordResetHeader() {
   return (
-    <Link
-      href={'/'}
-      className="transition-all duration-300 hover:scale-110"
-    >
+    <Link href={'/'} className="transition-all duration-300 hover:scale-110">
       <Image src={logoImage} alt="Logo" width={200} height={50} />
     </Link>
   );
@@ -45,9 +42,7 @@ export function PasswordResetContent({
           className="h-40 w-40"
         />
         <h1 className="text-2xl font-semibold">{title}</h1>
-        <p className="m-auto w-full text-sm sm:w-[80%]">
-          {description}
-        </p>
+        <p className="m-auto w-full text-sm sm:w-[80%]">{description}</p>
       </div>
       <Button
         className="text-foreground w-full rounded-full py-5 capitalize"

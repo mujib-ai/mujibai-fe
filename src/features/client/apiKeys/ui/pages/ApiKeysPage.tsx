@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import { useLocale, useTranslations } from 'next-intl';
 
 import { useApiKeys } from '../../hooks';
@@ -10,13 +11,8 @@ import ApiKeysPageTemplate from '../templates/ApiKeysPageTemplate';
 export default function ApiKeysPage() {
   const t = useTranslations('APIKeys');
   const locale = useLocale();
-  const {
-    apiKeys,
-    isLoading,
-    error,
-    createApiKey,
-    deleteApiKey,
-  } = useApiKeys();
+  const { apiKeys, isLoading, error, createApiKey, deleteApiKey } =
+    useApiKeys();
 
   const handleCreateNewKey = React.useCallback(() => {
     createApiKey({ name: 'New API Key', permissions: ['All'] });

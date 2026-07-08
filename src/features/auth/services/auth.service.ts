@@ -21,12 +21,18 @@ export class AuthService {
   static async login(credentials: LoginCredentials): Promise<AuthResponse> {
     const origin = getAppOrigin();
     if (!origin) {
-      const { data } = await AxiosAPI.post<AuthResponse>('/auth/login', credentials);
+      const { data } = await AxiosAPI.post<AuthResponse>(
+        '/auth/login',
+        credentials
+      );
       return data;
     }
     const res = await fetch(`${origin}/api/auth/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
       body: JSON.stringify(credentials),
       credentials: 'include',
     });
@@ -40,7 +46,10 @@ export class AuthService {
     const origin = getAppOrigin();
     if (origin) {
       try {
-        await fetch(`${origin}/api/auth/logout`, { method: 'POST', credentials: 'include' });
+        await fetch(`${origin}/api/auth/logout`, {
+          method: 'POST',
+          credentials: 'include',
+        });
       } catch {
         // ignore
       }

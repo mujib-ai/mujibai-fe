@@ -5,8 +5,6 @@ import { useTransition } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import { ChevronDown } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   DropdownMenu,
@@ -14,8 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/shared/components/atoms/ui/dropdown-menu';
-
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
+import { ChevronDown } from 'lucide-react';
 
 export default function LanguageSwitcher() {
   const router = useRouter();

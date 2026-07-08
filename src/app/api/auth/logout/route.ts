@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 
-const COOKIES_TO_CLEAR = ['app_session', 'token', 'refresh_token', 'access_token', 'session'];
+const COOKIES_TO_CLEAR = [
+  'app_session',
+  'token',
+  'refresh_token',
+  'access_token',
+  'session',
+];
 
 export async function POST() {
   const res = NextResponse.json({ message: 'Logged out' });

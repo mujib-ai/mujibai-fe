@@ -40,20 +40,19 @@ export default function useEnroll() {
     }
   };
 
-
   function formatDate(dateStr?: string) {
-  if (!dateStr) return '—';
-  try {
-    const d = new Date(dateStr);
-    return isNaN(d.getTime()) ? dateStr : d.toLocaleDateString();
-  } catch {
-    return dateStr;
+    if (!dateStr) return '—';
+    try {
+      const d = new Date(dateStr);
+      return isNaN(d.getTime()) ? dateStr : d.toLocaleDateString();
+    } catch {
+      return dateStr;
+    }
   }
-}
 
   return {
     handleEnroll,
     isEnrollLoading: enrollMutation.isPending,
-    formatDate
+    formatDate,
   };
 }

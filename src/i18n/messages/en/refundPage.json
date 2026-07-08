@@ -1,0 +1,47 @@
+{
+  "refundPage": {
+    "badge": "Legal Policies",
+    "title": "Refund Policy",
+    "lastUpdated": "Last updated: July 1, 2026",
+    "description": "This policy clarifies the cases in which a refund can be requested, the mechanism for reviewing requests, and the instances that are not covered by refunds.",
+    "sections": {
+      "eligibility": {
+        "title": "Refund Eligibility",
+        "content": "Refunds can only be requested within 14 days of the initial subscription date, provided that the user has not consumed a substantial part of the service or used paid features that lead to actual consumption of platform resources, such as AI features, phone number provisioning, call minutes, or any other services determined by mujibai, and has not violated the Terms of Use."
+      },
+      "nonRefundable": {
+        "title": "Non-Refundable Cases",
+        "content": "Refunds are not granted for subscription renewals, partially used periods, purchases of AI credits or call minutes, paid add-ons, plan upgrades or changes after activation, accounts that violate the Terms of Use, or bank fees, taxes, or any charges imposed by third parties."
+      },
+      "billingIssues": {
+        "title": "Payment Errors and Duplicate Charges",
+        "content": "If an amount was charged by mistake, a payment was duplicated, or a subscription was not activated due to a technical issue from mujibai, please contact the support team. After verifying the case, the appropriate action will be taken, including refunding the due amount when applicable."
+      },
+      "request": {
+        "title": "How to Request a Refund",
+        "content": "To request a refund, please contact the support team and provide us with your account email address, invoice number, and the reason for the refund request. We may request additional information to verify the identity of the account owner or the payment transaction before reviewing the request."
+      },
+      "processing": {
+        "title": "Request Review and Refund Period",
+        "content": "Refund requests are typically reviewed within five business days. If approved, the amount is refunded to the original payment method. The amount may take five to fourteen business days to arrive, depending on the bank or payment service provider."
+      },
+      "cancellation": {
+        "title": "Subscription Cancellation",
+        "content": "Canceling a subscription only stops the automatic renewal, and the subscription remains active until the end of the paid period. Canceling a subscription does not automatically grant the right to a refund for the value of the current subscription period."
+      },
+      "refundEffect": {
+        "title": "Effect of Refund",
+        "content": "When a refund request is approved, the subscription may be canceled or access to the associated AI agent, phone number, and landing page widget features may be disabled, and the user may lose access to the services or benefits for which they were refunded."
+      },
+      "discounts": {
+        "title": "Discounts and Offers",
+        "content": "If a subscription was purchased using a discount or coupon, the refund amount - if approved - will be equal to the amount actually paid by the user, not the original price of the service."
+      },
+      "specialOffers": {
+        "title": "Special Offers",
+        "content": "Some promotional or time-limited offers or subscriptions may be subject to different refund conditions, and those conditions are specified when the offer is presented."
+      }
+    },
+    "notice": "By using mujibai and subscribing to its services, you agree to this Refund Policy. mujibai reserves the right to accept or reject any refund request in accordance with this policy and after reviewing each case independently, while taking into account any rights determined by applicable law."
+  }
+}

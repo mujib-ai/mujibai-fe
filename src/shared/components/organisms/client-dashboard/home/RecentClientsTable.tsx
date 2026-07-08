@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
+import { TablePagination } from '@/features/client/tickets';
 import {
   Card,
   CardContent,
@@ -16,7 +17,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/atoms/ui/table';
-import { TablePagination } from '@/features/client/tickets';
 
 /**
  * RecentClientsTable component

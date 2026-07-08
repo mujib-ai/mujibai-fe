@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
+import { Container } from '@/shared/components/atoms/Container';
+
 export default function AboutUsSection() {
   const t = useTranslations('landingPage.aboutUs');
 
@@ -18,12 +20,10 @@ export default function AboutUsSection() {
     >
       <div className="absolute top-0 left-0 -z-10 h-full w-full bg-white/60 dark:bg-black/50" />
 
-      <div className="mx-auto w-full max-w-[1440px] px-4 py-[17px] sm:px-6 md:py-[34px] lg:px-8">
-        <div className="mx-auto mt-[18px] mr-[29px] ml-[29px] flex w-full max-w-[1322px] flex-col items-center justify-start gap-[16px] md:mt-[36px] md:mr-[58px] md:ml-[58px] md:gap-[32px]">
-          <div className="mx-auto flex w-full max-w-[800px] flex-col items-center justify-start gap-[2px] px-[28px] md:gap-[4px] md:px-[56px]">
-            <h2 className="text-center text-5xl font-bold">
-              {t('title')}
-            </h2>
+      <Container className="py-[17px] md:py-[34px]">
+        <div className="mx-auto mt-[18px] flex w-full flex-col items-center justify-start gap-[16px] md:mt-[36px] md:gap-[32px]">
+          <div className="mx-auto flex w-full max-w-[800px] flex-col items-center justify-start gap-[2px] md:gap-[4px]">
+            <h2 className="text-center text-5xl font-bold">{t('title')}</h2>
             <p className="my-4 text-center text-base font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-[30px] dark:text-[#E5E5E5]">
               {t('subTitle')}
             </p>
@@ -57,7 +57,7 @@ export default function AboutUsSection() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

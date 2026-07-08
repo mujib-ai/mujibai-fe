@@ -7,7 +7,11 @@ import Table from '../organisms/Table';
 
 type CallsAndTicketsMode = 'calls' | 'tickets';
 
-export default function CallsAndTicketsPage({ mode }: { mode: CallsAndTicketsMode }) {
+export default function CallsAndTicketsPage({
+  mode,
+}: {
+  mode: CallsAndTicketsMode;
+}) {
   const t = useTranslations('ticketsAndCalls');
   const locale = useLocale();
   const titleKey = mode === 'calls' ? 'callsTitle' : 'ticketsTitle';

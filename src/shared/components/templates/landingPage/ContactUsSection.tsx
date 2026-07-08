@@ -2,20 +2,21 @@
 
 import { useTranslations } from 'next-intl';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
+import { Container } from '@/shared/components/atoms/Container';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 export default function ContactUsSection() {
   const t = useTranslations('landingPage.contactUs');
 
   const formSchema = z.object({
     name: z.string().trim().min(1, t('form.nameRequired')),
-    email: z.string()
+    email: z
+      .string()
       .email(t('form.emailInvalid'))
       .min(1, t('form.emailRequired')),
     message: z.string().trim().min(1, t('form.messageRequired')),
@@ -34,7 +35,10 @@ export default function ContactUsSection() {
     },
   });
 
-  const { handleSubmit, formState: { isSubmitting, errors, touchedFields } } = form;
+  const {
+    handleSubmit,
+    formState: { isSubmitting, errors, touchedFields },
+  } = form;
 
   const onSubmit = async (data: FormData) => {
     console.log('Form submitted:', data);
@@ -44,11 +48,11 @@ export default function ContactUsSection() {
   return (
     <section
       id="contact"
-      className="relative flex w-full flex-col items-center justify-center overflow-hidden px-4 py-10 md:px-10"
+      className="relative flex w-full flex-col items-center justify-center overflow-hidden py-10"
     >
       <div className="absolute top-0 left-0 h-full w-full bg-[#6EEAFF99]/80 dark:bg-[#001434]/50" />
 
-      <div className="relative z-10 flex w-full max-w-7xl flex-col items-center gap-6 rounded-2xl bg-[#ffffff19] px-6 py-10 shadow-md backdrop-blur-sm md:px-10">
+      <Container className="relative z-10 flex flex-col items-center gap-6 rounded-2xl bg-[#ffffff19] py-10 shadow-md backdrop-blur-sm md:px-10">
         <div className="mb-4 text-center">
           <h2 className="text-2xl font-bold text-white md:text-[44px]">
             {t('title')}
@@ -56,7 +60,10 @@ export default function ContactUsSection() {
           <p className="text-sm text-white md:text-base">{t('description')}</p>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col gap-6">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex w-full flex-col gap-6"
+        >
           <div className="flex flex-col gap-4">
             <label className="flex cursor-pointer items-center gap-2 text-white">
               <input
@@ -65,7 +72,9 @@ export default function ContactUsSection() {
                 {...form.register('subject')}
                 className="h-4 w-4 cursor-pointer"
               />
-              <span className="text-text-light text-sm md:text-lg">{t('radio.hi')}</span>
+              <span className="text-text-light text-sm md:text-lg">
+                {t('radio.hi')}
+              </span>
             </label>
 
             <label className="flex cursor-pointer items-center gap-2 text-white">
@@ -75,7 +84,9 @@ export default function ContactUsSection() {
                 {...form.register('subject')}
                 className="h-4 w-4 cursor-pointer"
               />
-              <span className="text-text-light text-sm md:text-lg">{t('radio.quote')}</span>
+              <span className="text-text-light text-sm md:text-lg">
+                {t('radio.quote')}
+              </span>
             </label>
           </div>
 
@@ -86,7 +97,10 @@ export default function ContactUsSection() {
           )}
 
           <div className="flex w-full flex-col gap-2">
-            <label htmlFor="name" className="text-text-light text-sm font-medium md:text-lg">
+            <label
+              htmlFor="name"
+              className="text-text-light text-sm font-medium md:text-lg"
+            >
               {t('form.name')}
             </label>
             <Input
@@ -94,9 +108,7 @@ export default function ContactUsSection() {
               placeholder={t('form.name')}
               {...form.register('name')}
               className={
-                touchedFields.name && errors.name
-                  ? 'border-red-400'
-                  : ''
+                touchedFields.name && errors.name ? 'border-red-400' : ''
               }
             />
             {touchedFields.name && errors.name && (
@@ -107,7 +119,10 @@ export default function ContactUsSection() {
           </div>
 
           <div className="flex w-full flex-col gap-2">
-            <label htmlFor="email" className="text-text-light text-sm font-medium md:text-lg">
+            <label
+              htmlFor="email"
+              className="text-text-light text-sm font-medium md:text-lg"
+            >
               {t('form.email')}
             </label>
             <Input
@@ -116,9 +131,7 @@ export default function ContactUsSection() {
               placeholder={t('form.email')}
               {...form.register('email')}
               className={
-                touchedFields.email && errors.email
-                  ? 'border-red-400'
-                  : ''
+                touchedFields.email && errors.email ? 'border-red-400' : ''
               }
             />
             {touchedFields.email && errors.email && (
@@ -129,7 +142,10 @@ export default function ContactUsSection() {
           </div>
 
           <div className="flex w-full flex-col gap-2">
-            <label htmlFor="message" className="text-text-light text-sm font-medium md:text-lg">
+            <label
+              htmlFor="message"
+              className="text-text-light text-sm font-medium md:text-lg"
+            >
               {t('form.message')}
             </label>
             <Textarea
@@ -138,9 +154,7 @@ export default function ContactUsSection() {
               rows={5}
               {...form.register('message')}
               className={
-                touchedFields.message && errors.message
-                  ? 'border-red-400'
-                  : ''
+                touchedFields.message && errors.message ? 'border-red-400' : ''
               }
             />
             {touchedFields.message && errors.message && (
@@ -160,7 +174,7 @@ export default function ContactUsSection() {
             </Button>
           </div>
         </form>
-      </div>
+      </Container>
     </section>
   );
 }

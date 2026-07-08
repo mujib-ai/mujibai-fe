@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
 import Cookies from 'js-cookie';
 
 import useAuth from './useAuth';

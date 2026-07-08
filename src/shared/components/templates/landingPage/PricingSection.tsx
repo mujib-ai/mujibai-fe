@@ -1,166 +1,131 @@
-'use client';
-
-import { useState } from 'react';
-
-import type { PlanDisplay } from '@/shared/types';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/shared/components/atoms/ui/tabs';
+import { Container } from '@/shared/components/atoms/Container';
 import PricingCards from '@/shared/components/organisms/PricingCards';
+import type { PlanDisplay } from '@/shared/types';
+
+const plans: PlanDisplay[] = [
+  {
+    id: 'free-trial',
+    name: 'تجربة مجانية',
+    description: 'جرّب نبرة مجاناً. لا حاجة لبطاقة ائتمان.',
+    price: 'مجاني',
+    period: '',
+    features: [
+      { name: 'رصيد 20,000', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: false,
+  },
+  {
+    id: 'individual',
+    name: 'الباقة الفردية',
+    description: 'للاستخدام الفردي والمشاريع الشخصية.',
+    price: '39',
+    period: 'الشهر',
+    features: [
+      { name: 'رصيد 50,000', included: true },
+      { name: 'وكلاء صوت بالذكاء الاصطناعي غير محدودين', included: true },
+      { name: 'أعضاء مشاريع غير محدودين', included: true },
+      { name: 'تكامل واتساب', included: true },
+      { name: 'نظام تذاكر مدمج', included: true },
+      { name: 'إدارة جهات الاتصال', included: true },
+      { name: 'تحليلات مكالمات ديناميكية', included: true },
+      { name: 'استنساخ صوت غير محدود', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: false,
+  },
+  {
+    id: 'basic',
+    name: 'الباقة الأساسية',
+    description: 'للشركات الصغيرة والنمو المبكر.',
+    price: '90',
+    period: 'الشهر',
+    features: [
+      { name: 'رصيد 130,000', included: true },
+      { name: 'كل ما في الباقة الفردية، بالإضافة إلى', included: true },
+      { name: 'دعم قياسي، خلال ما يصل إلى 5 أيام عمل', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: false,
+  },
+  {
+    id: 'starter',
+    name: 'الباقة المبدئية',
+    description: 'للفِرق الجاهزة للاستخدام الإنتاجي.',
+    price: '200',
+    period: 'الشهر',
+    features: [
+      { name: 'رصيد 300,000', included: true },
+      { name: 'كل ما في الباقة الأساسية، بالإضافة إلى', included: true },
+      { name: 'دعم قياسي، خلال ما يصل إلى 3 أيام عمل', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: true,
+  },
+  {
+    id: 'professional',
+    name: 'الباقة الاحترافية',
+    description: 'للعمليات المتقدمة وحجم استخدام أعلى.',
+    price: '350',
+    period: 'الشهر',
+    features: [
+      { name: 'رصيد 550,000', included: true },
+      { name: 'كل ما في الباقة المبدئية، بالإضافة إلى', included: true },
+      { name: 'دعم بأولوية، خلال ما يصل إلى يومي عمل', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: false,
+  },
+  {
+    id: 'scale',
+    name: 'باقة التوسع',
+    description: 'للأحجام الكبيرة وعمليات التوسع.',
+    price: '750',
+    period: 'الشهر',
+    features: [
+      { name: 'رصيد 1,250,000', included: true },
+      { name: 'كل ما في الباقة الاحترافية، بالإضافة إلى', included: true },
+      { name: 'دعم بأولوية، خلال ما يصل إلى يوم عمل واحد', included: true },
+      { name: 'وصول API مشمول', included: true },
+    ],
+    isPopular: false,
+  },
+  {
+    id: 'enterprise',
+    name: 'باقة المؤسسات',
+    description: 'للمنظمات ذات المتطلبات المخصصة.',
+    price: 'مخصص',
+    period: '',
+    features: [
+      { name: 'رصيد حسب الطلب', included: true },
+      { name: 'كل ما في باقة التوسع، بالإضافة إلى', included: true },
+      { name: 'اتفاقية مستوى خدمة مخصصة حسب احتياجك', included: true },
+      { name: 'وصول API حسب الطلب', included: true },
+    ],
+    isPopular: false,
+  },
+];
 
 export default function PricingSection() {
-  const [activeTab, setActiveTab] = useState('monthly');
-
-  const plans: { monthly: PlanDisplay[]; yearly: PlanDisplay[] } = {
-    monthly: [
-      {
-        id: '1',
-        name: 'Starter',
-        description: 'Get started with the basics',
-        price: '$0',
-        period: 'month',
-        features: [
-          { name: 'Lorem', included: true },
-          { name: 'Lorem Ipsum', included: false },
-          { name: 'Lorem Ipsum', included: false },
-          { name: 'Lorem Ipsum', included: false },
-        ],
-        isPopular: false,
-      },
-      {
-        id: '2',
-        name: 'Pro',
-        description: 'For growing teams',
-        price: '$44',
-        period: 'month',
-        features: [
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: false },
-        ],
-        isPopular: true,
-      },
-      {
-        id: '3',
-        name: 'Enterprise',
-        description: 'For large organizations',
-        price: '$94',
-        period: 'month',
-        features: [
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-        ],
-        isPopular: false,
-      },
-    ],
-    yearly: [
-      {
-        id: '1',
-        name: 'Starter',
-        description: 'Get started with the basics',
-        price: '$0',
-        period: 'year',
-        features: [
-          { name: 'Lorem', included: true },
-          { name: 'Lorem Ipsum', included: false },
-          { name: 'Lorem Ipsum', included: false },
-          { name: 'Lorem Ipsum', included: false },
-        ],
-        isPopular: false,
-      },
-      {
-        id: '2',
-        name: 'Pro',
-        description: 'For growing teams',
-        price: '$399',
-        period: 'year',
-        features: [
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: false },
-        ],
-        isPopular: true,
-      },
-      {
-        id: '3',
-        name: 'Enterprise',
-        description: 'For large organizations',
-        price: '$899',
-        period: 'year',
-        features: [
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-          { name: 'Lorem Ipsum', included: true },
-        ],
-        isPopular: false,
-      },
-    ],
-  };
-
   return (
-    <>
-      <section className="bg-background-darker relative py-20">
-        <div className="absolute top-1/2 left-1/2 z-0 h-[65%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-60 blur-[160px]" />
+    <section className="bg-background-darker relative py-20">
+      <div className="absolute top-1/2 left-1/2 z-0 h-[65%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-60 blur-[160px]" />
 
-        <div className="relative mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <Tabs
-              defaultValue="monthly"
-              value={activeTab}
-              onValueChange={setActiveTab}
-              className="flex w-full flex-col items-center"
-            >
-              <div className="mb-20 flex flex-col gap-5">
-                <h2 className="text-text-light text-[22px] font-bold md:text-[44px]">
-                  Pricing
-                </h2>
+      <Container className="relative">
+        <div className="text-center">
+          <div className="mb-20 flex flex-col gap-5">
+            <h2 className="text-text-light text-[22px] font-bold md:text-[44px]">
+              Pricing
+            </h2>
 
-                <p className="text-text-light mt-2 text-sm md:text-base">
-                  Plans depending on your needs and use case
-                </p>
-
-                <div>
-                  <TabsList className="flex gap-4 rounded-full bg-white/20 p-1">
-                    <TabsTrigger
-                      value="monthly"
-                      className="w-[200px] rounded-full bg-transparent transition-all duration-300 hover:bg-cyan-500/20 data-[state=active]:bg-cyan-500 data-[state=inactive]:bg-transparent"
-                    >
-                      Monthly
-                    </TabsTrigger>
-
-                    <TabsTrigger
-                      value="yearly"
-                      className="w-[200px] rounded-full bg-transparent transition-all duration-300 hover:bg-cyan-500/20 data-[state=active]:bg-cyan-500 data-[state=inactive]:bg-transparent"
-                    >
-                      Yearly
-                    </TabsTrigger>
-                  </TabsList>
-                </div>
-              </div>
-
-              {activeTab === 'monthly' && (
-                <TabsContent value="monthly" className="w-full">
-                  <PricingCards plans={plans.monthly} />
-                </TabsContent>
-              )}
-
-              {activeTab === 'yearly' && (
-                <TabsContent value="yearly" className="w-full">
-                  <PricingCards plans={plans.yearly} />
-                </TabsContent>
-              )}
-            </Tabs>
+            <p className="text-text-light mt-2 text-sm md:text-base">
+              Plans depending on your needs and use case
+            </p>
           </div>
+
+          <PricingCards plans={plans} />
         </div>
-      </section>
-    </>
+      </Container>
+    </section>
   );
 }

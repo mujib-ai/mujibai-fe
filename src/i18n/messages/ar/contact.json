@@ -1,0 +1,60 @@
+{
+  "contact": {
+    "eyebrow": "تواصل معنا",
+    "titleLead": "لنتحدث عن",
+    "titleRest": "تجربة",
+    "titleAccent": "عملائك",
+    "subtitle": "تواصل مع فريقنا لأسئلة المبيعات والدعم والإعداد والشراكات.",
+    "channels": {
+      "mail": {
+        "name": "راسلنا عبر البريد",
+        "desc": "tech@mujibai.net"
+      },
+      "chat": {
+        "name": "دردشة مباشرة",
+        "desc": "تحدث مع فريقنا في الوقت الفعلي"
+      },
+      "help": {
+        "name": "مركز المساعدة",
+        "desc": "تصفح الأدلة والدروس التعليمية"
+      }
+    },
+    "stats": {
+      "responseValue": "أقل من ساعتين",
+      "responseLabel": "متوسط وقت الاستجابة",
+      "resolvedValue": "98%",
+      "resolvedLabel": "المشكلات التي تم حلها",
+      "statusValue": "24/7",
+      "statusLabel": "توفر الدعم"
+    },
+    "form": {
+      "title": "أرسل لنا رسالة",
+      "online": "الفريق متصل الآن",
+      "reasonLabel": "السبب",
+      "reasons": {
+        "support": "الدعم الفني",
+        "sales": "المبيعات",
+        "bug": "الإبلاغ عن مشكلة",
+        "partner": "الشراكات",
+        "press": "الإعلام"
+      },
+      "name": "الاسم",
+      "namePlaceholder": "اسمك الكامل",
+      "email": "البريد الإلكتروني",
+      "emailPlaceholder": "you@company.com",
+      "company": "الشركة",
+      "companyOptional": "(اختياري)",
+      "companyPlaceholder": "اسم شركتك",
+      "message": "الرسالة",
+      "messagePlaceholder": "كيف يمكننا مساعدتك؟",
+      "submit": "إرسال الرسالة",
+      "consent": "بالإرسال، فإنك توافق على <link>سياسة الخصوصية</link>."
+    },
+    "success": {
+      "title": "تم إرسال الرسالة",
+      "body": "شكرًا <strong>{name}</strong>، لقد استلمنا رسالتك وسنرد عليك على <strong>{email}</strong> قريبًا.",
+      "reference": "رقم التذكرة المرجعي",
+      "again": "إرسال رسالة أخرى"
+    }
+  }
+}

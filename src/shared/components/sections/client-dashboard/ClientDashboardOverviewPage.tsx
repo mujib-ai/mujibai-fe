@@ -2,11 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Client } from '@/shared/types';
-
 import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
 import DataUsageCard from '@/shared/components/organisms/client-dashboard/DataUsageCard';
 import RecentClientsTable from '@/shared/components/organisms/client-dashboard/home/RecentClientsTable';
+import { Client } from '@/shared/types';
 
 export default function ClientDashboardOverviewPage({
   client,

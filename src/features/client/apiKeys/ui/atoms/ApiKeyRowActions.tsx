@@ -1,8 +1,7 @@
 'use client';
 
-import { Edit, Trash2 } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Edit, Trash2 } from 'lucide-react';
 
 import type { ApiKey } from '../../types';
 

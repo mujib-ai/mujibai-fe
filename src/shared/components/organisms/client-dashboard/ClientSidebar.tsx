@@ -3,19 +3,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { User } from '@/shared/types';
-import {
-  BarChart2,
-  EllipsisVertical,
-  Key,
-  LayoutDashboard,
-  Lightbulb,
-  Mic,
-  PhoneCall,
-  Settings,
-  Ticket,
-} from 'lucide-react';
-
+import { useAuth } from '@/features/auth';
 import Logo from '@/shared/components/atoms/Logo';
 import {
   Avatar,
@@ -37,8 +25,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/components/atoms/ui/sidebar';
-
-import { useAuth } from '@/features/auth';
+import { User } from '@/shared/types';
+import {
+  BarChart2,
+  EllipsisVertical,
+  Key,
+  LayoutDashboard,
+  Lightbulb,
+  Mic,
+  PhoneCall,
+  Settings,
+  Ticket,
+} from 'lucide-react';
 
 export default function ClientSidebar({
   dir,

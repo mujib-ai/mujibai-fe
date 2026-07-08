@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { Plus } from 'lucide-react';
 
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Plus } from 'lucide-react';
 
 export default function ApiKeysHeader({
   onCreateNewKey,

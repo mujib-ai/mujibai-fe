@@ -1,7 +1,5 @@
 import Link from 'next/link';
 
-import { Cloud } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Card,
@@ -9,6 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
+import { Cloud } from 'lucide-react';
 
 export default function DataUsageCard({
   used = 52.7,

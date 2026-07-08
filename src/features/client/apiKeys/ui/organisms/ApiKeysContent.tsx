@@ -1,8 +1,8 @@
 'use client';
 
+import type { ApiKey } from '../../types';
 import ApiKeysHeader from '../molecules/ApiKeysHeader';
 import ApiKeysTable from './ApiKeysTable';
-import type { ApiKey } from '../../types';
 
 interface ApiKeysContentProps {
   apiKeys: ApiKey[];

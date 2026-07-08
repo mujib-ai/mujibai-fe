@@ -1,25 +1,29 @@
-import { FieldError, UseFormRegister } from 'react-hook-form';
-
 import { FormField } from '@/shared/components/atoms/FormField';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
+import type {
+  FieldError,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from 'react-hook-form';
 
-interface TextareaFormFieldProps {
-  name: string;
+interface TextareaFormFieldProps<T extends FieldValues> {
+  name: Path<T>;
   label: string;
   placeholder: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<T>;
   error?: FieldError;
   className?: string;
 }
 
-export function TextareaFormField({
+export function TextareaFormField<T extends FieldValues>({
   name,
   label,
   placeholder,
   register,
   error,
   className,
-}: TextareaFormFieldProps) {
+}: TextareaFormFieldProps<T>) {
   return (
     <FormField
       label={label}

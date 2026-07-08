@@ -11,7 +11,6 @@ export interface ApiKey {
   updatedAt: Date;
 }
 
-
 export interface ApiKey {
   id: string;
   name: string;

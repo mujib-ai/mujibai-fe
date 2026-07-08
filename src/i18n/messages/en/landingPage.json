@@ -24,7 +24,7 @@
       "title": "“Mujibai”… Smartly serving your customers",
       "subTitle": "Instantly!",
       "description": "With a deep understanding of your business and fluent Saudi dialect, “Mujibai” comes as your advanced cloud-based voice assistant. Fully developed using the latest AI technologies, it helps you communicate professionally with your customers in the Saudi dialect. It understands call context, responds instantly, creates tickets, and provides accurate reports—empowering you to make the right decisions quickly and confidently.",
-      "button1": "Get Started",
+      "button1": "Contact Us",
       "button2": "Try “Mujibai” for Free"
     },
 
@@ -84,7 +84,7 @@
 
     "whyChooseUs": {
       "title": "Why do the smart choose “Mujibai”?",
-      "getStarted": "Get Started",
+      "getStarted": "Conatct us",
       "propsOne": {
         "title": "Wise in responses",
         "description": "Thanks to its deep understanding of customer needs in the Saudi market and its ability to speak naturally in the Saudi dialect."
@@ -142,17 +142,19 @@
         "whyUs": "Why Us",
         "contactUs": "Contact US",
         "industries": "Industries We Serve",
-        "pricing": "Pricing"
+        "pricing": "Pricing",
+        "helpCenter": "Help Center"
       },
       "contact": {
         "title": "Contact",
-        "phone": "+91 72 7602 0908",
-        "email": "info@lorem.com",
-        "address": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        "phone": "+966 55 595 2780",
+        "email": "tech@mujibai.net",
+        "address": "Ishbiliyah District, Riyadh, Saudi Arabia"
       },
       "copyright": "© Copyright Mujib 2025. All Right Reserved.",
       "termsOfUse": "Terms of use",
-      "privacyPolicy": "Privacy policy"
+      "privacyPolicy": "Privacy policy",
+      "cancellationPolicy": "Cancellation Policy"
     }
   }
 }

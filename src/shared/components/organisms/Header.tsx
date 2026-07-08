@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { User, useAuth } from '@/features/auth';
+import { Container } from '@/shared/components/atoms/Container';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Menu, X } from 'lucide-react';
 
@@ -15,7 +16,10 @@ export default function Header({ hasToken = false }: { hasToken?: boolean }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user } = useAuth();
   return (
-    <header className="mx-auto flex w-full max-w-(--breakpoint-2xl) items-center justify-between px-4 py-4 sm:px-6 sm:py-5 md:px-8 lg:px-10 xl:px-12">
+    <Container
+      as="header"
+      className="flex items-center justify-between py-4 sm:py-5"
+    >
       <div className="shrink-0">
         <Logo />
       </div>
@@ -44,6 +48,6 @@ export default function Header({ hasToken = false }: { hasToken?: boolean }) {
         onClose={() => setIsMenuOpen(false)}
         open={isMenuOpen}
       />
-    </header>
+    </Container>
   );
 }

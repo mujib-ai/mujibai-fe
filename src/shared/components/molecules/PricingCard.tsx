@@ -1,7 +1,8 @@
 'use client';
 
-import type { PlanDisplay } from '@/shared/types';
+import RyialIcon from '@/shared/components/atoms/RyialIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
+import type { PlanDisplay } from '@/shared/types';
 import { CheckCircle, X } from 'lucide-react';
 
 /**
@@ -34,10 +35,15 @@ export default function PricingCard({ plan }: { plan: PlanDisplay }) {
           <h3 className="text-[18px] font-bold md:text-[28px]">{plan.name}</h3>
         )}
 
-        <div className="text-[28px] font-bold md:text-[40px]">
+        <div className="flex items-center gap-1 text-[28px] font-bold md:text-[40px]">
+          {plan.period && <RyialIcon size={24} />}
           <span className="text-cyan-400">{plan.price}</span>
-          <span className="mx-1 text-xs">/</span>
-          <span className="text-[14px] md:text-lg">{plan.period}</span>
+          {plan.period && (
+            <>
+              <span className="mx-1 text-xs">/</span>
+              <span className="text-[14px] md:text-lg">{plan.period}</span>
+            </>
+          )}
         </div>
       </div>
 

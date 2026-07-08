@@ -1,11 +1,14 @@
 'use client';
 
-import { PasswordResetContent, PasswordResetHeader } from '@/shared/components/molecules/PasswordResetComponents';
-
 import { usePasswordResetRequested } from '@/features/auth';
+import {
+  PasswordResetContent,
+  PasswordResetHeader,
+} from '@/shared/components/molecules/PasswordResetComponents';
 
 export default function PasswordResetRequested() {
-  const { loading, handleSendAgain, getTranslations } = usePasswordResetRequested();
+  const { loading, handleSendAgain, getTranslations } =
+    usePasswordResetRequested();
 
   const { title, description, button, sending } = getTranslations();
 
@@ -15,7 +18,7 @@ export default function PasswordResetRequested() {
 
       <div className="flex h-[50%] w-[90%] flex-col items-center justify-center gap-5 sm:w-[50%]">
         <PasswordResetHeader />
-        
+
         <PasswordResetContent
           title={title}
           description={description}

@@ -1,12 +1,13 @@
 import { Label } from '@/shared/components/atoms/ui/label';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
 interface FormFieldTextareaProps {
   label: string;
   placeholder: string;
   required?: boolean;
   name: string;
-  register: any;
+  register: UseFormRegisterReturn;
   error?: string;
 }
 

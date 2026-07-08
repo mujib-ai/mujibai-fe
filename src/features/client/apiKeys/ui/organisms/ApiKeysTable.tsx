@@ -9,8 +9,8 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 
-import ApiKeyRowActions from '../atoms/ApiKeyRowActions';
 import type { ApiKey } from '../../types';
+import ApiKeyRowActions from '../atoms/ApiKeyRowActions';
 
 interface ApiKeysTableProps {
   apiKeys: ApiKey[];

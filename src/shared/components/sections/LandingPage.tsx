@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { useTheme } from 'next-themes';
 
 import Footer from '../templates/Footer';
@@ -18,24 +16,18 @@ export default function LandingPage({
 }: {
   hasToken?: boolean;
 }) {
-  const { theme: currentTheme } = useTheme();
-  const [themeReady, setThemeReady] = useState(false);
-
-  // Don't render landing content until theme is resolved (same gate as ThemeSwitcher)
-  useEffect(() => setThemeReady(true), []);
-
-  if (!themeReady) return null;
+  const { theme } = useTheme();
 
   return (
     <main className="h-screen w-full overflow-x-hidden">
       <HeroSection hasToken={hasToken} />
       <FeaturesSection />
-      <TargetedSectorsSection theme={currentTheme || 'dark'} />
+      <TargetedSectorsSection theme={theme} />
       <WhyChooseUs />
       <PricingSection />
       <AboutUsSection />
       <ContactUsSection />
-      <Footer theme={currentTheme || 'dark'} />
+      <Footer theme={theme} />
     </main>
   );
 }

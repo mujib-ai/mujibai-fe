@@ -1,5 +1,6 @@
 'use client';
 
+import { TablePagination } from '@/features/client/calls';
 import {
   Card,
   CardContent,
@@ -15,8 +16,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/atoms/ui/table';
-
-import { TablePagination } from '@/features/client/calls';
 
 export default function ScenarioPerformance({
   t,

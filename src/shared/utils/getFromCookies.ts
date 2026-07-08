@@ -1,4 +1,4 @@
-export const getFromCookies = (item: any) => {
+export const getFromCookies = (item: string) => {
   const val = document.cookie
     .split('; ')
     .find(row => row.startsWith(`${item}=`))

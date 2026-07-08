@@ -1,20 +1,22 @@
 'use client';
 
 import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/shared/components/atoms/ui/card';
+import {
+  ChartConfig,
+  ChartContainer,
+} from '@/shared/components/atoms/ui/chart';
+import {
   Label,
   PolarGrid,
   PolarRadiusAxis,
   RadialBar,
   RadialBarChart,
 } from 'recharts';
-
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/shared/components/atoms/ui/card';
-import { ChartConfig, ChartContainer } from '@/shared/components/atoms/ui/chart';
 
 import KeywordInsightItem from '../molecules/KeywordInsightItem';
 

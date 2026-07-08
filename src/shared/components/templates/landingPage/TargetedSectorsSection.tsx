@@ -3,7 +3,9 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
-export default function SectorsSection({ theme }: { theme: string }) {
+import { Container } from '@/shared/components/atoms/Container';
+
+export default function SectorsSection({ theme }: { theme?: string }) {
   const t = useTranslations('landingPage.targetedSectors');
   const sectors = [
     {
@@ -47,10 +49,10 @@ export default function SectorsSection({ theme }: { theme: string }) {
     <section className="bg-background-dark relative w-full bg-white dark:bg-[#001434]">
       <div className="absolute top-1/2 left-1/2 z-0 h-[65%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-60 blur-[160px]" />
 
-      <div className="relative mx-auto w-full px-8 py-18">
+      <Container className="relative py-18">
         <div className="mx-auto flex w-full flex-col items-center justify-start gap-10">
           {/* Header section with animations */}
-          <div className="mx-auto flex w-full max-w-[95%] flex-col items-center justify-start gap-3 px-15">
+          <div className="mx-auto flex w-full flex-col items-center justify-start gap-3">
             <h2 className="text-center text-[44px] leading-[54px] font-bold">
               {t('title')}
             </h2>
@@ -93,7 +95,7 @@ export default function SectorsSection({ theme }: { theme: string }) {
 
             {/* Grid of smaller cards */}
             <div className="ml-0 grid w-full grid-cols-1 gap-[14px] sm:grid-cols-2 md:ml-[28px] md:gap-[28px] lg:ml-[14px] lg:w-[68%]">
-              {sectors?.slice(1)?.map((sector) => (
+              {sectors?.slice(1)?.map(sector => (
                 <div
                   key={sector?.id}
                   className="flex w-full flex-col items-start justify-start rounded-xl border border-[#3FA9F5]/30 bg-[#06B6D40D] px-[22px] py-[36px] dark:bg-transparent"
@@ -123,7 +125,7 @@ export default function SectorsSection({ theme }: { theme: string }) {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

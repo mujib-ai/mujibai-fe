@@ -2,8 +2,8 @@ import { useLocale, useTranslations } from 'next-intl';
 
 import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
 
-import Filtering from '../organisms/Filtering';
 import CallsTable from '../organisms/CallsTable';
+import Filtering from '../organisms/Filtering';
 
 export default function CallsPage() {
   const t = useTranslations('ticketsAndCalls');

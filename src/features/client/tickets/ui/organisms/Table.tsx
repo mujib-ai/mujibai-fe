@@ -1,5 +1,3 @@
-import { Eye, Play } from 'lucide-react';
-
 import {
   Card,
   CardContent,
@@ -14,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/atoms/ui/table';
+import { Eye, Play } from 'lucide-react';
 
 import TablePagination from '../molecules/TablePagination';
 

@@ -1,0 +1,261 @@
+{
+  "legal": {
+    "privacy": {
+      "intro": "At mujibai, your privacy is not just a legal clause, but an essential part of the trust we build with our customers. This policy explains the data we collect, how we use it, how we protect it, when we share it, and your rights and choices when using our services.",
+      "disclaimer": "This page has been prepared to explain how we handle personal data and is not considered specialized legal advice.",
+      "eyebrow": "Legal Policies",
+      "title": "Privacy Policy",
+      "lastUpdatedLabel": "Last updated:",
+      "lastUpdated": "July 1, 2026",
+      "sections": {
+        "who": {
+          "title": "Who We Are",
+          "body": "<b>mujibai</b> is a platform specializing in AI-powered customer service agents that answer phone calls and chat with website visitors through a landing page widget. When you use the platform, visit our website, or contact us, we may process certain data necessary to provide, operate, and improve our services."
+        },
+        "what": {
+          "title": "What Data Do We Collect?",
+          "lead": "We collect data necessary to operate the platform and provide a safe and effective user experience, including:",
+          "items": [
+            {
+              "term": "Account Data",
+              "desc": "Such as name, email, encrypted password, account image, language, country, and account settings."
+            },
+            {
+              "term": "Workspace Data",
+              "desc": "Such as workspace names, businesses, team members, roles and permissions, agent settings, and activity logs within the platform."
+            },
+            {
+              "term": "Agent & Knowledge Base Data",
+              "desc": "Such as scripts, prompts, FAQs, knowledge base articles, call flows, and conversation settings that you create or upload to configure your AI agent within mujibai."
+            },
+            {
+              "term": "Phone Number & Call Data",
+              "desc": "When provisioning or connecting a phone number, we process the data necessary to enable call answering, routing, recording, and transcription, including call logs, call recordings, and voice transcripts, according to the permissions you grant us."
+            },
+            {
+              "term": "Landing Page & Chat Data",
+              "desc": "When you embed the mujibai chat widget on your landing page or website, we process visitor conversation transcripts, contact details submitted through the chat, and related interaction data needed to operate and improve the AI agent."
+            },
+            {
+              "term": "Usage and Device Data",
+              "desc": "Such as pages you visit, features you use, usage time, IP address, browser type, operating system, language, time zone, and technical log data."
+            },
+            {
+              "term": "Payment and Subscription Data",
+              "desc": "Such as the selected plan, subscription status, invoice number, amounts paid, and payment history. We do not store full payment card data; payments are processed through authorized payment providers."
+            }
+          ]
+        },
+        "why": {
+          "title": "Why Do We Use This Data?",
+          "lead": "We use your data to provide, operate, and continuously improve mujibai's services for the following purposes:",
+          "items": [
+            {
+              "term": "Account Management",
+              "desc": "We use your data to create your account, handle login, manage your settings, verify your identity, and secure your account."
+            },
+            {
+              "term": "Operating Platform Services",
+              "desc": "We use the data to operate mujibai features, such as configuring AI agents, provisioning and routing phone numbers, embedding the landing page chat widget, conversation analytics, and managing team members."
+            },
+            {
+              "term": "Customizing User Experience",
+              "desc": "We use certain data to customize your experience within the platform, such as remembering your preferences and settings and displaying relevant content."
+            },
+            {
+              "term": "Providing Technical Support",
+              "desc": "We may use your data to respond to your inquiries, diagnose technical problems, and assist you in using our services."
+            },
+            {
+              "term": "Managing Subscriptions and Payments",
+              "desc": "We use subscription and billing data to process payments, manage plans, issue invoices, and renew subscriptions."
+            },
+            {
+              "term": "Improving the Platform",
+              "desc": "We analyze usage and conversation data to understand how the AI agents perform, improve call and chat quality, fix bugs, and develop new features."
+            },
+            {
+              "term": "Security and Fraud Prevention",
+              "desc": "We may use data to detect unauthorized activity, prevent fraud, protect user accounts and phone numbers, and maintain platform security."
+            },
+            {
+              "term": "Compliance with Legal Requirements",
+              "desc": "We may process certain data to comply with applicable laws and regulations, respond to legal requests, and fulfill accounting and regulatory obligations."
+            }
+          ],
+          "note": "We do not use your personal data for any purpose not explained in this policy, and we do not sell your data to any third party."
+        },
+        "ai": {
+          "title": "Use of AI Data",
+          "body": "mujibai uses artificial intelligence technologies to power the AI agents that answer phone calls, respond to website visitors through the landing page widget, and analyze conversations to improve performance. When your agent handles a call or chat, inputs such as caller speech, chat messages, scripts, or knowledge base data may be processed to generate the requested responses. You should not enter sensitive or confidential information that you do not wish to be processed by AI systems."
+        },
+        "socialAccounts": {
+          "title": "Phone Numbers & Landing Page Widget",
+          "body": "When you provision or connect a phone number, or embed the mujibai chat widget on your landing page, mujibai uses the permissions and settings you configure solely to provide the requested features such as answering calls, routing, transcription, and website chat. You can disconnect a phone number or remove the widget from your platform settings at any time."
+        },
+        "sharing": {
+          "title": "When Do We Share Data?",
+          "lead": "We do not sell your data. We may share some information only when necessary to operate the service or comply with legal requirements.",
+          "items": [
+            {
+              "term": "Service Providers",
+              "desc": "We may share data with service providers who assist us with hosting, payments, email sending, analytics, technical support, security, or operating AI, telephony, and voice features."
+            },
+            {
+              "term": "Telephony & Communication Providers",
+              "desc": "We may send or receive data with telephony carriers and communication providers connected to your phone number to execute the actions you request, such as call routing, recording, and transcription."
+            },
+            {
+              "term": "Legal Requirements",
+              "desc": "We may disclose your information if required to comply with laws or regulations, or in response to court orders or official requests from competent authorities."
+            },
+            {
+              "term": "Protecting Rights and Safety",
+              "desc": "We may use or disclose your information when necessary to protect our rights or the rights of our users, or to ensure the security of the platform and prevent its misuse."
+            }
+          ]
+        },
+        "transfers": {
+          "title": "International Data Transfers",
+          "body": "Your data may be stored and processed in countries outside your own, depending on the operational locations of the service providers, telephony carriers, and AI providers we rely on. We take appropriate measures to ensure the protection of your data in accordance with applicable laws."
+        },
+        "retention": {
+          "title": "Data Retention Period",
+          "body": "After a subscription ends or an account is deleted, mujibai begins procedures to delete your data, including call recordings, transcripts, and chat conversations. Data is retained for up to 30 days; during this period, some data may remain temporarily available for restoration or technical processing purposes. After the retention period, personal data and workspace data are deleted from our operational systems, except for data required to be kept by law, for security or accounting purposes, or to prevent fraud."
+        },
+        "accountDeletion": {
+          "title": "Account Deletion",
+          "body": "When you request to delete your account, mujibai begins the deletion request in accordance with this policy. You may be able to cancel the deletion request during the retention period if available. After the deletion process is complete, it will not be possible to recover the account, your phone number connections, or any call and chat data associated with it."
+        },
+        "backups": {
+          "title": "Backups and Logs",
+          "body": "Some data, including call logs and conversation transcripts, may remain in backups or technical logs for a limited time after being deleted from operational systems for security, system recovery, or legal compliance purposes. This data is deleted or overwritten in accordance with internal retention cycles."
+        },
+        "cookies": {
+          "title": "Cookies",
+          "body": "We use cookies and similar technologies to operate the platform, remember your preferences, improve performance, analyze usage, and protect accounts. You can manage cookies through your browser settings, but disabling some may affect the functionality of certain features."
+        },
+        "security": {
+          "title": "Data Security",
+          "body": "We take appropriate technical and organizational measures to protect your data, including call recordings and chat transcripts, such as encryption, secure communication protocols, access control, security monitoring, and backups. However, no electronic transmission or storage method is 100% secure."
+        },
+        "children": {
+          "title": "Children's Privacy",
+          "body": "mujibai services are not directed at children under the age of 13, and we do not knowingly collect personal data from them. If we become aware that we have collected data from a child under the allowed age, we will take appropriate steps to delete it."
+        },
+        "rights": {
+          "title": "Your Rights Regarding Your Data",
+          "body": "According to the regulations applicable in your country, you may have the right to request access to your data, correct it, delete it, restrict its processing, object to its use, or obtain a copy of it. You can send your requests via the contact methods described in this policy."
+        },
+        "changes": {
+          "title": "Changes to the Policy",
+          "body": "We may update this policy from time to time. When making material changes, we will make a reasonable effort to notify you through the platform, via email, or any appropriate means. Your continued use of mujibai after the updates take effect constitutes your acceptance of the updated policy."
+        },
+        "contact": {
+          "title": "Contact Us",
+          "body": "If you have any questions or inquiries regarding the privacy policy or how your personal data is processed, or if you wish to exercise any of your rights regarding your data, you can contact us via email: <email>tech@mujibai.net</email>. We will attempt to respond to your request within a reasonable timeframe in accordance with applicable regulations."
+        }
+      }
+    },
+    "terms": {
+      "intro": "These terms are intended to clarify your rights and responsibilities when using the mujibai platform, ensuring a clear and transparent relationship between you and mujibai when using our services.",
+      "title": "Terms of Service",
+      "eyebrow": "Legal Policies",
+      "lastUpdatedLabel": "Last updated:",
+      "lastUpdated": "July 1, 2026",
+      "disclaimer": "By using the mujibai platform, you agree to be bound by these terms, which constitute a legal agreement between you and mujibai.",
+      "sections": {
+        "agreement": {
+          "title": "Acceptance of Terms",
+          "body": "By using the mujibai platform, creating an account, or subscribing to any of our services, you agree to be bound by these terms and conditions. If you do not agree to them, please do not use the platform."
+        },
+        "service": {
+          "title": "Services We Provide",
+          "body": "mujibai provides AI-powered customer service agents that answer incoming phone calls and chat with visitors through a widget embedded on your landing page or website. Our services include phone number provisioning and call routing, conversation and call analytics, knowledge base and script configuration, team management, and the use of AI technologies to power and continuously improve your agent."
+        },
+        "accounts": {
+          "title": "Accounts and Responsibility",
+          "body": "You are responsible for the accuracy of the information you provide when creating an account, for maintaining the confidentiality of your login details, and for all activities that occur under your account, including your connected phone numbers and embedded widgets. You must notify us immediately if you suspect any unauthorized use of your account."
+        },
+        "content": {
+          "title": "Content You Create",
+          "body": "Ownership of the scripts, knowledge base articles, prompts, and other content you create, upload, or manage via mujibai remains yours or that of the owner. You grant mujibai the necessary technical permissions to process this content solely to configure and operate your AI agent. You bear full responsibility for the legality of the content and that it does not infringe upon the rights of others."
+        },
+        "acceptable": {
+          "title": "Acceptable Use",
+          "lead": "To maintain a safe and fair environment for all users, using the platform is prohibited in any of the following cases:",
+          "items": [
+            {
+              "term": "Illegal Content",
+              "desc": "It is prohibited to upload, configure, or deliver through your AI agent any content that is illegal, infringes intellectual property rights, or involves abuse, defamation, fraud, or any harmful materials."
+            },
+            {
+              "term": "Illegal Use",
+              "desc": "mujibai may not be used for any activity that violates the laws or regulations applicable in the country from which you use the service, including unsolicited or unlawful calling and messaging practices."
+            },
+            {
+              "term": "Unauthorized Access",
+              "desc": "It is prohibited to attempt to access mujibai systems, other users' accounts, phone numbers, or data without authorization, or to attempt to bypass security protection measures."
+            },
+            {
+              "term": "Reverse Engineering",
+              "desc": "It is not permitted to reverse engineer the platform or attempt to extract the source code, decrypt, or exploit technical vulnerabilities."
+            },
+            {
+              "term": "Platform Misuse",
+              "desc": "It is prohibited to use automated tools, bots, or means that may affect the platform's stability, generate excessive or fraudulent calls, or lead to an abnormal consumption of its resources."
+            },
+            {
+              "term": "Account Sharing",
+              "desc": "It is not permitted to share login details with others in a manner that violates the subscription type or usage limits allowed in your plan."
+            },
+            {
+              "term": "Exceeding Subscription Limits",
+              "desc": "It is prohibited to attempt to exceed call minutes, message limits, or other usage restrictions imposed on plans, or to misuse platform resources or AI services."
+            }
+          ]
+        },
+        "subscriptions": {
+          "title": "Subscriptions and Payments",
+          "body": "Subscription fees are calculated according to the plan you choose upon purchase, including any allotted call minutes, phone numbers, or conversation volume. Subscriptions may renew automatically according to the chosen payment method unless you cancel before the renewal date. Cancellations and refunds are subject to the policies designated for that purpose."
+        },
+        "socialPlatforms": {
+          "title": "Third-Party Services",
+          "body": "Some mujibai features rely on external services and providers, such as telephony carriers, AI and voice providers, or payment services. mujibai is not responsible for any downtime, changes, or restrictions imposed by those parties that may affect certain platform features, including call answering or landing page chat availability."
+        },
+        "artificialIntelligence": {
+          "title": "Use of AI",
+          "body": "mujibai provides features based on artificial intelligence technologies to power your agent's phone calls and landing page conversations, and to analyze their performance. Results and responses generated by the AI agent are provided for assistance purposes only, and the user remains responsible for reviewing agent configuration, scripts, and outputs to ensure their accuracy and appropriateness before using them with customers."
+        },
+        "termination": {
+          "title": "Account Suspension or Termination",
+          "body": "mujibai may suspend, restrict, or terminate your account, including your connected phone numbers and landing page widgets, if you violate these terms or use the platform in a way that may harm the service, other users, or violates applicable laws."
+        },
+        "intellectualProperty": {
+          "title": "Intellectual Property",
+          "body": "All intellectual property rights related to the mujibai platform, including software, designs, logos, trademarks, and content owned by mujibai, are reserved to mujibai or its owners, and may not be used or reproduced without prior permission."
+        },
+        "disclaimers": {
+          "title": "Disclaimer",
+          "body": "mujibai services are provided \"as is\" and \"as available\". We do not warrant that the service will be error-free or available without interruption at all times, nor do we warrant that call handling, responses, analytics, or content generated by AI agents will be accurate or suitable for all uses."
+        },
+        "liability": {
+          "title": "Limitation of Liability",
+          "body": "To the extent permitted by law, mujibai shall not be liable for any indirect, incidental, or consequential damages, including loss of data, missed calls, profits, or business opportunities resulting from the use of or inability to use the platform."
+        },
+        "changes": {
+          "title": "Changes to Terms",
+          "body": "mujibai may amend these terms from time to time. In the event of material changes, we will notify users through appropriate means. Your continued use of the platform after the amendments take effect constitutes your acceptance of the updated terms."
+        },
+        "governingLaw": {
+          "title": "Governing Law",
+          "body": "These terms are governed by and construed in accordance with the laws applicable in the country where the mujibai company is registered or as specified in official legal documents, unless the applicable law provides otherwise."
+        },
+        "contact": {
+          "title": "Contact Us",
+          "body": "If you have any questions or inquiries regarding these terms or the use of mujibai services, you can contact us via email: <email>tech@mujibai.net</email>, and we will work to respond to you as soon as possible."
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,6 @@
-import { FieldError } from 'react-hook-form';
-
 import { FormField } from '@/shared/components/atoms/FormField';
 import PasswordInput from '@/shared/components/atoms/PasswordInput';
+import { FieldError } from 'react-hook-form';
 
 interface PasswordFormFieldProps {
   name: string;

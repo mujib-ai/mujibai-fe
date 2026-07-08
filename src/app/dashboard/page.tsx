@@ -1,8 +1,9 @@
 import { cookies } from 'next/headers';
 
 import ClientDashboardOverviewPage from '@/shared/components/sections/client-dashboard/ClientDashboardOverviewPage';
-
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
+
+export const dynamic = 'force-dynamic';
 
 async function getUserFromServer() {
   try {

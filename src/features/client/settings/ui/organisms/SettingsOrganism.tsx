@@ -2,12 +2,11 @@
 
 import { useLocale } from 'next-intl';
 
+import type { TabItem } from '../../types';
 import { AccountSettings } from './AccountSettings';
 import { IntegrationSettings } from './IntegrationSettings';
 import { NotificationPreference } from './NotificationPreference';
 import { SettingsTabs } from './SettingsTabs';
-
-import type { TabItem } from '../../types';
 
 export interface SettingsOrganismProps {
   activeTab: string;
@@ -34,7 +33,8 @@ export function SettingsOrganism({
       activeTab={activeTab}
       onTabChange={onTabChange}
       locale={locale}
-      children={tabContent}
-    />
+    >
+      {tabContent}
+    </SettingsTabs>
   );
 }

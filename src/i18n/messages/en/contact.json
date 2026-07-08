@@ -1,0 +1,60 @@
+{
+  "contact": {
+    "eyebrow": "Contact",
+    "titleLead": "Let's talk about your",
+    "titleRest": "customer",
+    "titleAccent": "experience",
+    "subtitle": "Reach out to our team for sales, support, onboarding, or partnership questions about your AI phone and landing page agents.",
+    "channels": {
+      "mail": {
+        "name": "Email us",
+        "desc": "tech@mujibai.net"
+      },
+      "chat": {
+        "name": "Live chat",
+        "desc": "Chat with our team in real time"
+      },
+      "help": {
+        "name": "Help center",
+        "desc": "Browse guides and tutorials"
+      }
+    },
+    "stats": {
+      "responseValue": "< 2h",
+      "responseLabel": "Avg. response time",
+      "resolvedValue": "98%",
+      "resolvedLabel": "Issues resolved",
+      "statusValue": "24/7",
+      "statusLabel": "Support availability"
+    },
+    "form": {
+      "title": "Send us a message",
+      "online": "Team online",
+      "reasonLabel": "Reason",
+      "reasons": {
+        "support": "Support",
+        "sales": "Sales",
+        "bug": "Report a bug",
+        "partner": "Partnership",
+        "press": "Press"
+      },
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "you@company.com",
+      "company": "Company",
+      "companyOptional": "(optional)",
+      "companyPlaceholder": "Your company name",
+      "message": "Message",
+      "messagePlaceholder": "How can we help?",
+      "submit": "Send message",
+      "consent": "By submitting, you agree to our <link>Privacy Policy</link>."
+    },
+    "success": {
+      "title": "Message sent",
+      "body": "Thanks <strong>{name}</strong>, we've received your message and will reply to <strong>{email}</strong> shortly.",
+      "reference": "Reference ticket",
+      "again": "Send another message"
+    }
+  }
+}

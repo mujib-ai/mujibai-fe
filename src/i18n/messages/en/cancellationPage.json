@@ -1,0 +1,47 @@
+{
+  "cancellationPage": {
+    "badge": "Legal Policies",
+    "title": "Cancellation Policy",
+    "lastUpdated": "Last updated: July 1, 2026",
+    "description": "This policy clarifies how to cancel your subscription, what happens as a result, and how data, features, and services are handled after the subscription ends.",
+    "sections": {
+      "cancelSubscription": {
+        "title": "Canceling Your Subscription",
+        "content": "You can cancel your subscription at any time through your account settings. Canceling your subscription only stops the automatic renewal and does not automatically terminate the current subscription or refund the value of the paid period."
+      },
+      "accessAfterCancellation": {
+        "title": "Access After Cancellation",
+        "content": "You will continue to have access to all features included in your subscription until the end of the period for which you have paid. After the subscription expires, your account may be switched to the free plan—if available—or access to your AI agent, phone number, and landing page widget may be restricted until you resubscribe."
+      },
+      "automaticRenewal": {
+        "title": "Automatic Renewal",
+        "content": "If you cancel your subscription before the next renewal date, you will not be charged any new fees for future periods. You can reactivate your subscription at any time before or after the current period expires."
+      },
+      "scheduledContent": {
+        "title": "Call Answering & Automations",
+        "content": "Phone call answering, IVR routing, and automated agent workflows that rely on a paid subscription may stop after the subscription ends and will not be executed until the subscription is renewed or you subscribe to a plan that supports these features."
+      },
+      "connectedAccounts": {
+        "title": "Connected Phone Numbers & Widgets",
+        "content": "Phone numbers and landing page chat widgets linked to your account may remain saved after the subscription ends; however, certain features associated with them, such as call routing, transcription, analytics, or automation, may become unavailable until you resubscribe."
+      },
+      "aiCredits": {
+        "title": "AI Credits and Add-ons",
+        "content": "AI credits, call minutes, or paid add-ons may be subject to separate terms of use, and canceling the subscription does not result in a refund of their value or an extension of their usage period unless otherwise stated."
+      },
+      "dataRetention": {
+        "title": "Data Retention",
+        "content": "Your workspace data, including call recordings, transcripts, and chat conversations, is retained for up to 30 days after the subscription ends, unless legal or regulatory requirements mandate a different duration. After this period, data may be permanently deleted in accordance with our data retention policy."
+      },
+      "reactivation": {
+        "title": "Reactivating Your Subscription",
+        "content": "You can resubscribe at any time. When you resubscribe, access to your AI agent, phone number, and landing page widget features available under the new plan may be restored, provided that the data is still saved within the retention period."
+      },
+      "support": {
+        "title": "Need Help?",
+        "content": "If you encounter any issues while canceling your subscription or have questions about your subscription status, please contact the support team. Contacting support will not automatically cancel the subscription unless you explicitly request it."
+      }
+    },
+    "notice": "By using mujibai, you agree to this Cancellation Policy. mujibai reserves the right to update this policy from time to time, while considering any rights determined by applicable law."
+  }
+}

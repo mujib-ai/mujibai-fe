@@ -1,7 +1,5 @@
 'use client';
 
-import { Filter } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Select,
@@ -10,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
+import { Filter } from 'lucide-react';
 
 export default function Filtering({
   filterPlaceholderOne,

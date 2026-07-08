@@ -1,19 +1,23 @@
-import { FieldError, UseFormRegister } from 'react-hook-form';
-
 import { FormField } from '@/shared/components/atoms/FormField';
 import { Input } from '@/shared/components/atoms/ui/input';
+import type {
+  FieldError,
+  FieldValues,
+  Path,
+  UseFormRegister,
+} from 'react-hook-form';
 
-interface TextFormFieldProps {
-  name: string;
+interface TextFormFieldProps<T extends FieldValues> {
+  name: Path<T>;
   label: string;
   placeholder: string;
   type?: string;
-  register: UseFormRegister<any>;
+  register: UseFormRegister<T>;
   error?: FieldError;
   className?: string;
 }
 
-export function TextFormField({
+export function TextFormField<T extends FieldValues>({
   name,
   label,
   placeholder,
@@ -21,7 +25,7 @@ export function TextFormField({
   register,
   error,
   className,
-}: TextFormFieldProps) {
+}: TextFormFieldProps<T>) {
   return (
     <FormField
       label={label}

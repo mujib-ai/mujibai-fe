@@ -2,13 +2,13 @@
 
 import StatisticsCard from '../atoms/StatisticsCard';
 
-export default function StatisticsCards({
-  t,
-}: {
-  t: (key: string) => string;
-}) {
+export default function StatisticsCards({ t }: { t: (key: string) => string }) {
   const statisticsCardsData = [
-    { icon: '/dashboard-images/calla.svg', number: '9', title: t('totalCalls') },
+    {
+      icon: '/dashboard-images/calla.svg',
+      number: '9',
+      title: t('totalCalls'),
+    },
     {
       icon: '/dashboard-images/timer.svg',
       number: '124',

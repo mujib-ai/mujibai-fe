@@ -1,5 +1,6 @@
 'use client';
 
+import { TablePagination } from '@/features/client/calls';
 import {
   Table,
   TableBody,
@@ -9,7 +10,6 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 
-import { TablePagination } from '@/features/client/calls';
 import SatisfactionCell from '../atoms/SatisfactionCell';
 
 export default function AiOutboundTable({

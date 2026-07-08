@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-import { FieldError } from 'react-hook-form';
-
 import { FormField } from '@/shared/components/atoms/FormField';
 import {
   Select,
@@ -10,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
+import { FieldError } from 'react-hook-form';
 
 interface SelectOption {
   value: string;

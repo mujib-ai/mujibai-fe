@@ -1,5 +1,5 @@
-import type { PlanDisplay } from '@/shared/types';
 import PricingCard from '@/shared/components/molecules/PricingCard';
+import type { PlanDisplay } from '@/shared/types';
 
 /**
  * PricingCards Component
@@ -7,7 +7,7 @@ import PricingCard from '@/shared/components/molecules/PricingCard';
  */
 function PricingCards({ plans }: { plans: PlanDisplay[] }) {
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-8 lg:flex-row">
+    <div className="flex w-full flex-col flex-wrap items-center justify-center gap-8 lg:flex-row">
       {plans.map(plan => (
         <PricingCard plan={plan} key={plan.id.toString()} />
       ))}

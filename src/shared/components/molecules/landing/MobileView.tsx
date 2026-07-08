@@ -10,9 +10,9 @@ import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
 import { ThemeSwitcher } from '@/shared/components/atoms/ThemeSwitcher';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
-    Sheet,
-    SheetClose,
-    SheetContent,
+  Sheet,
+  SheetClose,
+  SheetContent,
 } from '@/shared/components/atoms/ui/sheet';
 import { User } from '@/shared/types';
 import { motion } from 'framer-motion';

@@ -4,10 +4,9 @@ import { forwardRef, useState } from 'react';
 
 import { useLocale } from 'next-intl';
 
-import { Eye, EyeOff } from 'lucide-react';
-
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
+import { Eye, EyeOff } from 'lucide-react';
 
 interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;

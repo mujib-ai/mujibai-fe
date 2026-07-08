@@ -2,9 +2,8 @@
 
 import * as React from 'react';
 
-import * as SwitchPrimitive from '@radix-ui/react-switch';
-
 import { cn } from '@/shared/lib/utils';
+import * as SwitchPrimitive from '@radix-ui/react-switch';
 
 function Switch({
   className,
@@ -14,7 +13,7 @@ function Switch({
     <SwitchPrimitive.Root
       data-slot="switch"
       className={cn(
-        'peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 bg-input shadow-inner transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+        'peer bg-input focus-visible:ring-ring focus-visible:ring-offset-background data-[state=checked]:bg-primary data-[state=unchecked]:bg-input inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 shadow-inner transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50',
         className
       )}
       {...props}
@@ -32,4 +31,3 @@ function Switch({
 }
 
 export { Switch };
-

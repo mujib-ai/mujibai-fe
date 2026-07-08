@@ -1,7 +1,5 @@
 'use client';
 
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
-
 import {
   Card,
   CardContent,
@@ -14,6 +12,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/shared/components/atoms/ui/chart';
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
 
 import ConversionMetric from '../molecules/ConversionMetric';
 

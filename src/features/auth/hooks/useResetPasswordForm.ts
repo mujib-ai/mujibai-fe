@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -28,7 +29,10 @@ interface UseResetPasswordFormProps {
   token: string;
 }
 
-export function useResetPasswordForm({ userId, token }: UseResetPasswordFormProps) {
+export function useResetPasswordForm({
+  userId,
+  token,
+}: UseResetPasswordFormProps) {
   const t = useTranslations('resetPasswordPage');
   const router = useRouter();
   const { handleResetPassword, alert } = useAuth();
@@ -42,7 +46,11 @@ export function useResetPasswordForm({ userId, token }: UseResetPasswordFormProp
     },
   });
 
-  const { register, handleSubmit, formState: { errors, isSubmitting, isValid } } = form;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = form;
 
   const onSubmit = async (values: ResetPasswordFormData) => {
     const res = await handleResetPassword({

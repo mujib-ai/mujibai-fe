@@ -1,9 +1,8 @@
-import { Bell } from 'lucide-react';
-
 import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
 import { ThemeSwitcher } from '@/shared/components/atoms/ThemeSwitcher';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { SidebarTrigger } from '@/shared/components/atoms/ui/sidebar';
+import { Bell } from 'lucide-react';
 
 export default function DashboardHeader({
   title,

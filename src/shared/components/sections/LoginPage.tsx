@@ -1,13 +1,15 @@
 'use client';
 
-import { Loader2 } from 'lucide-react';
-
+import { useLoginForm } from '@/features/auth';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { EmailField } from '@/shared/components/molecules/EmailField';
-import { ForgotPasswordLink, LoginAlert, LoginHeader } from '@/shared/components/molecules/LoginComponents';
+import {
+  ForgotPasswordLink,
+  LoginAlert,
+  LoginHeader,
+} from '@/shared/components/molecules/LoginComponents';
 import { LoginPasswordField } from '@/shared/components/molecules/LoginPasswordField';
-
-import { useLoginForm } from '@/features/auth';
+import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
   const {
@@ -19,7 +21,16 @@ export default function LoginPage() {
     getTranslations,
   } = useLoginForm();
 
-  const { title, email, emailPlaceholder, password, passwordPlaceholder, forgotPassword, loginButton, loading } = getTranslations();
+  const {
+    title,
+    email,
+    emailPlaceholder,
+    password,
+    passwordPlaceholder,
+    forgotPassword,
+    loginButton,
+    loading,
+  } = getTranslations();
 
   return (
     <div className="relative flex h-screen w-full items-center justify-center">
@@ -30,7 +41,7 @@ export default function LoginPage() {
 
         <div className="rounded-2xl border-t border-b border-white bg-[#FFFFFF80] p-10 sm:w-full md:w-[80%] lg:w-[60%] dark:bg-[#06B6D40F]">
           <LoginAlert alert={alert} />
-          
+
           <h1 className="text-2xl font-semibold">{title}</h1>
 
           <form

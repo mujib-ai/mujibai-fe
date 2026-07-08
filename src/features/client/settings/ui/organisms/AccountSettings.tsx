@@ -67,17 +67,26 @@ export function AccountSettings() {
                 {t('passwordManagementDescription')}
               </p>
             </div>
-            <SettingsFormField id="currentPassword" label={t('currentPassword')}>
+            <SettingsFormField
+              id="currentPassword"
+              label={t('currentPassword')}
+            >
               <PasswordInput placeholder="********" />
             </SettingsFormField>
             <SettingsFormField id="newPassword" label={t('newPassword')}>
               <PasswordInput placeholder="********" />
             </SettingsFormField>
-            <SettingsFormField id="confirmPassword" label={t('confirmPassword')}>
+            <SettingsFormField
+              id="confirmPassword"
+              label={t('confirmPassword')}
+            >
               <PasswordInput placeholder="********" />
             </SettingsFormField>
             <div className="col-span-full mt-6 flex justify-end">
-              <Button className="rounded-full px-8 py-2 font-semibold" type="button">
+              <Button
+                className="rounded-full px-8 py-2 font-semibold"
+                type="button"
+              >
                 {t('saveChanges')}
               </Button>
             </div>

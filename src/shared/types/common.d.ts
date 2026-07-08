@@ -1,4 +1,4 @@
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   data: T;
   message?: string;
   success?: boolean;
@@ -67,7 +67,7 @@ export interface ActivityLog {
   entityId: string;
   userId: string;
   timestamp: Date;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface FileUpload {
@@ -85,8 +85,8 @@ export interface AuditTrail {
   action: string;
   entity: string;
   entityId: string;
-  oldValue?: any;
-  newValue?: any;
+  oldValue?: unknown;
+  newValue?: unknown;
   timestamp: Date;
   ipAddress?: string;
   userAgent?: string;

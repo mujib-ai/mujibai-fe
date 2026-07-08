@@ -1,13 +1,14 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import useEnroll from './useEnroll';
 import type { EnrollmentFormData } from '../validators';
 import { enrollFormSchema } from '../validators';
+import useEnroll from './useEnroll';
 
 export function useEnrollmentForm() {
   const t = useTranslations('enrollPage.enrollForm');
@@ -29,7 +30,11 @@ export function useEnrollmentForm() {
     },
   });
 
-  const { handleSubmit, formState: { errors, touchedFields }, reset } = form;
+  const {
+    handleSubmit,
+    formState: { errors, touchedFields },
+    reset,
+  } = form;
 
   const onSubmit = async (data: EnrollmentFormData) => {
     const res = await handleEnroll({
