@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
+import { toast } from 'sonner';
 
 import { AuthService } from '../services/auth.service';
 import type { LoginCredentials, ResetPasswordCredentials } from '../types';
@@ -60,19 +61,15 @@ export default function useAuth() {
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
     onSuccess: data => {
-      queryClient.setQueryData(['auth'], data);
-      showAlert(
-        'success',
-        'Login Successful',
-        'Welcome back! You have been successfully logged in.'
-      );
+      queryClient.invalidateQueries({ queryKey: ['auth'] });
+      toast.success(data.message || 'Logged in successfully.');
     },
     onError: error => {
       const errorMessage = getErrorMessage(
         error,
         'Login failed - please try again'
       );
-      showAlert('error', 'Login Failed', errorMessage);
+      toast.error(errorMessage);
     },
   });
 

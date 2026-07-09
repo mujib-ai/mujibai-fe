@@ -5,21 +5,14 @@ import { Button } from '@/shared/components/atoms/ui/button';
 import { EmailField } from '@/shared/components/molecules/EmailField';
 import {
   ForgotPasswordLink,
-  LoginAlert,
   LoginHeader,
 } from '@/shared/components/molecules/LoginComponents';
 import { LoginPasswordField } from '@/shared/components/molecules/LoginPasswordField';
 import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
-  const {
-    handleSubmit,
-    onSubmit,
-    isLoading,
-    alert,
-    getFieldProps,
-    getTranslations,
-  } = useLoginForm();
+  const { handleSubmit, onSubmit, isLoading, getFieldProps, getTranslations } =
+    useLoginForm();
 
   const {
     title,
@@ -40,8 +33,6 @@ export default function LoginPage() {
         <LoginHeader />
 
         <div className="rounded-2xl border-t border-b border-white bg-[#FFFFFF80] p-10 sm:w-full md:w-[80%] lg:w-[60%] dark:bg-[#06B6D40F]">
-          <LoginAlert alert={alert} />
-
           <h1 className="text-2xl font-semibold">{title}</h1>
 
           <form

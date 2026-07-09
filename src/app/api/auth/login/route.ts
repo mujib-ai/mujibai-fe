@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Invalid JSON body' }, { status: 400 });
   }
 
-  const backendUrl = `${API_URL.replace(/\/$/, '')}/auth/login`;
+  const backendUrl = `${API_URL.replace(/\/$/, '')}/tenants/login`;
   let backendRes: Response;
   try {
     backendRes = await fetch(backendUrl, {

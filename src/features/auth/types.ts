@@ -16,6 +16,35 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface Tenant {
+  id: string;
+  name: string;
+  slug: string;
+  status: string;
+  isActive: boolean;
+  address: string;
+  phone: string;
+  email: string;
+  website: string;
+  description: string;
+  size: string;
+  industry: string;
+  commercialRegister: string;
+  taxId: string;
+  domain: string;
+  subscriptionId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LoginResponse {
+  message: string;
+  data: {
+    accessToken: string;
+    tenant: Tenant;
+  };
+}
+
 export interface ResetPasswordCredentials {
   userId: string;
   token: string;

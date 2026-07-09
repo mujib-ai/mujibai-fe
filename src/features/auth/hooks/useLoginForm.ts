@@ -29,7 +29,7 @@ export type LoginFormData = z.infer<typeof loginSchema>;
 
 export function useLoginForm() {
   const t = useTranslations('loginPage');
-  const { alert, handleLogin, loginLoading } = useAuth();
+  const { handleLogin, loginLoading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = getAllowedRedirectFrom(searchParams.get('from'));
@@ -80,7 +80,6 @@ export function useLoginForm() {
     handleSubmit,
     onSubmit,
     isLoading,
-    alert,
     getFieldProps,
     getTranslations,
   };

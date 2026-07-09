@@ -4,6 +4,7 @@ import type {
   AuthResponse,
   ForgotPasswordPayload,
   LoginCredentials,
+  LoginResponse,
   ResetPasswordCredentials,
 } from '../types';
 
@@ -18,11 +19,11 @@ export class AuthService {
     return data;
   }
 
-  static async login(credentials: LoginCredentials): Promise<AuthResponse> {
+  static async login(credentials: LoginCredentials): Promise<LoginResponse> {
     const origin = getAppOrigin();
     if (!origin) {
-      const { data } = await AxiosAPI.post<AuthResponse>(
-        '/auth/login',
+      const { data } = await AxiosAPI.post<LoginResponse>(
+        '/tenants/login',
         credentials
       );
       return data;
@@ -42,7 +43,7 @@ export class AuthService {
   }
 
   static async logout(): Promise<AuthResponse> {
-    const { data } = await AxiosAPI.post<AuthResponse>('/auth/logout');
+    const { data } = await AxiosAPI.post<AuthResponse>('/tenants/logout');
     const origin = getAppOrigin();
     if (origin) {
       try {
