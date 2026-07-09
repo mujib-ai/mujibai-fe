@@ -22,7 +22,7 @@ export default function LandingPage({
     <main className="h-screen w-full overflow-x-hidden">
       <HeroSection hasToken={hasToken} />
       <FeaturesSection />
-      <TargetedSectorsSection theme={theme} />
+      <TargetedSectorsSection />
       <WhyChooseUs />
       <PricingSection />
       <AboutUsSection />

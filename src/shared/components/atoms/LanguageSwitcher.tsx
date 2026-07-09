@@ -4,6 +4,7 @@ import { useTransition } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
@@ -18,21 +19,15 @@ import { ChevronDown } from 'lucide-react';
 export default function LanguageSwitcher() {
   const router = useRouter();
   const [, startTransition] = useTransition();
+  const currentLang = useLocale();
 
   function switchTo(locale: string) {
     startTransition(() => {
-      if (typeof window !== 'undefined') {
-        document.cookie = `LANG=${locale}; path=/; max-age=31536000; SameSite=Lax`;
-      }
+      document.cookie = `LANG=${locale}; path=/; max-age=31536000; SameSite=Lax`;
       router.refresh();
     });
     AxiosAPI.defaults.headers['Accept-Language'] = locale;
   }
-
-  const currentLang =
-    typeof document !== 'undefined'
-      ? document.cookie.match(/LANG=(\w+)/)?.[1] || 'en'
-      : 'en';
 
   const currentFlag =
     currentLang === 'ar'

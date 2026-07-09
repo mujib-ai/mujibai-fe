@@ -1,44 +1,52 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { Container } from '@/shared/components/atoms/Container';
+import {
+  GraduationCap,
+  HandHeart,
+  HeartPulse,
+  Plane,
+  ShoppingCart,
+} from 'lucide-react';
 
-export default function SectorsSection({ theme }: { theme?: string }) {
+export default function SectorsSection() {
   const t = useTranslations('landingPage.targetedSectors');
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const sectors = [
     {
       id: 1,
-      icon: '/images/img_group_white_a700_74x86.svg',
+      icon: HeartPulse,
       title: t('sectorOne.title'),
       description: t('sectorOne.description'),
       isLarge: true,
     },
     {
       id: 2,
-      icon: '/images/img_group_white_a700_74x86.svg',
+      icon: GraduationCap,
       title: t('sectorTwo.title'),
       description: t('sectorTwo.description'),
       isLarge: false,
     },
     {
       id: 3,
-      icon: '/images/img_group_white_a700_74x86.svg',
+      icon: HandHeart,
       title: t('sectorThree.title'),
       description: t('sectorThree.description'),
       isLarge: false,
     },
     {
       id: 4,
-      icon: '/images/img_group_white_a700_74x86.svg',
+      icon: Plane,
       title: t('sectorFour.title'),
       description: t('sectorFour.description'),
       isLarge: false,
     },
     {
       id: 5,
-      icon: '/images/img_group_white_a700_74x86.svg',
+      icon: ShoppingCart,
       title: t('sectorFive.title'),
       description: t('sectorFive.description'),
       isLarge: false,
@@ -46,77 +54,63 @@ export default function SectorsSection({ theme }: { theme?: string }) {
   ];
 
   return (
-    <section className="bg-background-dark relative w-full bg-white dark:bg-[#001434]">
+    <section className="relative w-full bg-white dark:bg-[#001434]">
       <div className="absolute top-1/2 left-1/2 z-0 h-[65%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-60 blur-[160px]" />
 
       <Container className="relative py-18">
         <div className="mx-auto flex w-full flex-col items-center justify-start gap-10">
-          {/* Header section with animations */}
           <div className="mx-auto flex w-full flex-col items-center justify-start gap-3">
-            <h2 className="text-center text-[44px] leading-[54px] font-bold">
+            <h2 className="text-center text-[44px] leading-13.5 font-bold">
               {t('title')}
             </h2>
-            <p className="w-full text-center text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-[30px] dark:text-[#E5E5E5]">
+            <p className="w-full text-center text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-7.5 dark:text-[#E5E5E5]">
               {t('subTitle')}
             </p>
           </div>
 
-          <div className="flex w-full flex-col items-start justify-start gap-[14px] md:gap-[28px] lg:flex-row">
-            {/* Large featured card */}
+          <div className="flex w-full flex-col items-start justify-start gap-3.5 md:gap-7 lg:flex-row">
             <div className="h-full w-full lg:w-[32%]">
               <div className="flex w-full flex-col items-start justify-start rounded-xl border border-[#3FA9F5]/30 bg-[#06B6D40D] px-6 py-9 dark:bg-transparent">
                 <div className="rounded-lg bg-white/5 p-3 px-7 dark:bg-[#06B6D40F]">
-                  <Image
-                    src={
-                      theme === 'dark'
-                        ? '/landingPage/targeted-sector-image-one-dark.png'
-                        : '/landingPage/targeted-sector-image-one-light.png'
-                    }
-                    alt={t('sectorOne.title')}
-                    width={100}
-                    height={100}
-                    className="w-20"
-                    style={{ height: 'auto' }}
-                    loading="lazy"
-                    suppressHydrationWarning
+                  <HeartPulse
+                    className="size-20 text-[#06B6D4]"
+                    strokeWidth={1.5}
                   />
                 </div>
 
-                <div className="mt-20 flex w-full flex-col items-start justify-start gap-[4px] md:gap-[8px]">
-                  <h3 className="text-left text-3xl leading-[35px] font-bold">
+                <div className="mt-20 flex w-full flex-col items-start justify-start gap-1 md:gap-2">
+                  <h3 className="text-left text-3xl leading-8.75 font-bold">
                     {t('sectorOne.title')}
                   </h3>
-                  <p className="w-full py-3 text-left text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-[30px] dark:text-[#E5E5E5]">
+                  <p
+                    className={`w-full py-3 text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-7.5 dark:text-[#E5E5E5] ${isRtl ? 'text-right' : 'text-left'}`}
+                  >
                     {t('sectorOne.description')}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Grid of smaller cards */}
-            <div className="ml-0 grid w-full grid-cols-1 gap-[14px] sm:grid-cols-2 md:ml-[28px] md:gap-[28px] lg:ml-[14px] lg:w-[68%]">
+            <div className="ml-0 grid w-full grid-cols-1 gap-3.5 sm:grid-cols-2 md:ml-7 md:gap-7 lg:ml-3.5 lg:w-[68%]">
               {sectors?.slice(1)?.map(sector => (
                 <div
                   key={sector?.id}
-                  className="flex w-full flex-col items-start justify-start rounded-xl border border-[#3FA9F5]/30 bg-[#06B6D40D] px-[22px] py-[36px] dark:bg-transparent"
+                  className="flex w-full flex-col items-start justify-start rounded-xl border border-[#3FA9F5]/30 bg-[#06B6D40D] px-5.5 py-9 dark:bg-transparent"
                 >
                   <div className="rounded-lg bg-white/3 p-3 px-7">
-                    <Image
-                      src={sector.icon}
-                      alt={sector.title}
-                      width={74}
-                      height={86}
-                      className="h-[86px] w-[74px]"
-                      loading="lazy"
-                      suppressHydrationWarning
+                    <sector.icon
+                      className="size-17 text-[#06B6D4]"
+                      strokeWidth={1.5}
                     />
                   </div>
 
-                  <div className="mt-[6px] flex w-full flex-col items-start justify-start md:mt-[12px]">
-                    <h3 className="text-left text-[12px] leading-[15px] font-bold md:text-[24px] md:leading-[30px]">
+                  <div className="mt-1.5 flex w-full flex-col items-start justify-start md:mt-1.5">
+                    <h3 className="text-right text-lg leading-6 font-bold md:text-2xl md:leading-7.5">
                       {sector?.title}
                     </h3>
-                    <p className="w-full text-left text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-[30px] dark:text-[#E5E5E5]">
+                    <p
+                      className={`w-full text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-7.5 dark:text-[#E5E5E5] ${isRtl ? 'text-right' : 'text-left'}`}
+                    >
                       {sector?.description}
                     </p>
                   </div>

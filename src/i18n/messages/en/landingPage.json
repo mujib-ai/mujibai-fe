@@ -58,27 +58,27 @@
     },
 
     "targetedSectors": {
-      "title": "Who benefits from “Mujibai”?",
-      "subTitle": "“Mujibai” can adapt to meet the needs of organizations across various sectors such as",
+      "title": "Who benefits from “Mujib AI”?",
+      "subTitle": "“Mujib AI” adapts to the needs of organizations across a wide range of industries, including:",
       "sectorOne": {
         "title": "Healthcare Sector",
-        "description": ""
+        "description": "Handle patient inquiries, schedule appointments, and provide essential healthcare information."
       },
       "sectorTwo": {
         "title": "Education Sector",
-        "description": ""
+        "description": "Answer student inquiries, assist with admissions, and share course and program information."
       },
       "sectorThree": {
         "title": "Non-Profit Sector",
-        "description": ""
+        "description": "Support beneficiaries, answer donor inquiries, and streamline community engagement."
       },
       "sectorFour": {
         "title": "Tourism Sector",
-        "description": ""
+        "description": "Assist travelers with bookings, answer questions, and provide destination information."
       },
       "sectorFive": {
-        "title": "E-commerce stores on Salla and Zid platforms",
-        "description": ""
+        "title": "E-commerce Stores on Salla & Zid",
+        "description": "Respond to customer inquiries, track orders, and provide product and shipping support."
       }
     },
 
