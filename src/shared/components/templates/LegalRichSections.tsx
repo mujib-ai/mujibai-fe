@@ -7,13 +7,39 @@ type LegalListItem = {
   desc: string;
 };
 
+type LegalBlock =
+  | { type: 'p' | 'h3'; text: string }
+  | ({ type: 'item' } & LegalListItem);
+
 type LegalRichSection = {
   title: string;
   body?: string;
   lead?: string;
   items?: LegalListItem[];
   note?: string;
+  blocks?: LegalBlock[];
 };
+
+type BlockGroup =
+  | { type: 'item-group'; items: LegalListItem[] }
+  | Exclude<LegalBlock, { type: 'item' }>;
+
+function groupBlocks(blocks: LegalBlock[]): BlockGroup[] {
+  const groups: BlockGroup[] = [];
+  for (const block of blocks) {
+    if (block.type === 'item') {
+      const last = groups[groups.length - 1];
+      if (last && last.type === 'item-group') {
+        last.items.push(block);
+      } else {
+        groups.push({ type: 'item-group', items: [block] });
+      }
+    } else {
+      groups.push(block);
+    }
+  }
+  return groups;
+}
 
 export function LegalRichSections({ namespace }: { namespace: string }) {
   const t = useTranslations(namespace);
@@ -63,6 +89,39 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
               {section.note}
             </p>
           )}
+
+          {section.blocks &&
+            groupBlocks(section.blocks).map((group, i) => {
+              if (group.type === 'item-group') {
+                return (
+                  <ul key={i} className="mt-4 flex flex-col gap-3">
+                    {group.items.map(item => (
+                      <li key={item.term}>
+                        <span className="font-semibold">{item.term}: </span>
+                        <span className="text-muted-foreground">
+                          {item.desc}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                );
+              }
+              if (group.type === 'h3') {
+                return (
+                  <h3 key={i} className="mt-5 text-lg font-semibold">
+                    {group.text}
+                  </h3>
+                );
+              }
+              return (
+                <p
+                  key={i}
+                  className="text-muted-foreground mt-3 leading-relaxed"
+                >
+                  {group.text}
+                </p>
+              );
+            })}
         </section>
       ))}
     </div>
