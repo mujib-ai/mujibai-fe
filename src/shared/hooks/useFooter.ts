@@ -2,14 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Twitter,
-} from 'lucide-react';
+import { Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 
 export function useFooter() {
   const t = useTranslations('landingPage.footer');
@@ -33,9 +26,11 @@ export function useFooter() {
   ];
 
   const socialIcons = [
-    { Icon: Facebook, label: 'Facebook' },
-    { Icon: Instagram, label: 'Instagram' },
-    { Icon: Twitter, label: 'Twitter' },
+    {
+      Icon: Linkedin,
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/company/%D9%85%D8%AC%D9%8A%D8%A8-ai/',
+    },
   ];
 
   const contactItems = [

@@ -40,12 +40,23 @@ const Footer = ({ theme }: { theme?: string }) => {
                   </h3>
                   <div className="flex items-center gap-2.5">
                     <ul className="flex items-center justify-center gap-1">
-                      {socialIcons.map(({ Icon, label }) => (
+                      {socialIcons.map(({ Icon, label, href }) => (
                         <li
                           key={label}
-                          className="cursor-pointer rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40"
+                          className="rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40"
                         >
-                          <Icon className="size-5 text-[#3B82F6] dark:text-white" />
+                          {href ? (
+                            <Link
+                              href={href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={label}
+                            >
+                              <Icon className="size-5 text-[#3B82F6] dark:text-white" />
+                            </Link>
+                          ) : (
+                            <Icon className="size-5 cursor-pointer text-[#3B82F6] dark:text-white" />
+                          )}
                         </li>
                       ))}
                     </ul>
