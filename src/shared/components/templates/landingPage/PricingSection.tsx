@@ -1,5 +1,10 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
+
 import { Container } from '@/shared/components/atoms/Container';
 import PricingCards from '@/shared/components/organisms/PricingCards';
+import { PageBackground } from '@/shared/components/templates/PageBackground';
 import type { PlanDisplay } from '@/shared/types';
 
 const plans: PlanDisplay[] = [
@@ -107,25 +112,29 @@ const plans: PlanDisplay[] = [
 ];
 
 export default function PricingSection() {
-  return (
-    <section className="bg-background-darker relative py-20">
-      <div className="absolute top-1/2 left-1/2 z-0 h-[65%] w-[65%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-60 blur-[160px]" />
+  const t = useTranslations('landingPage.pricingSection');
 
-      <Container className="relative">
+  return (
+    <PageBackground
+      showHeader={false}
+      className="bg-background-darker min-h-0 py-20"
+      glowClassName="absolute z-0 h-[65%] w-[65%]"
+    >
+      <Container className="relative z-10">
         <div className="text-center">
           <div className="mb-20 flex flex-col gap-5">
             <h2 className="text-text-light text-[22px] font-bold md:text-[44px]">
-              Pricing
+              {t('title')}
             </h2>
 
             <p className="text-text-light mt-2 text-sm md:text-base">
-              Plans depending on your needs and use case
+              {t('subTitle')}
             </p>
           </div>
 
           <PricingCards plans={plans} />
         </div>
       </Container>
-    </section>
+    </PageBackground>
   );
 }

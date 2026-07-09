@@ -7,6 +7,7 @@ import { useFooter } from '@/shared/hooks/useFooter';
 
 import { Container } from '../atoms/Container';
 import Logo from '../atoms/Logo';
+import { Separator } from '../atoms/ui/separator';
 
 const Footer = ({ theme }: { theme?: string }) => {
   const { t, isRtl, quickLinks, legalLinks, socialIcons, contactItems } =
@@ -113,8 +114,9 @@ const Footer = ({ theme }: { theme?: string }) => {
                 </div>
               </div>
             </div>
+            <Separator className="bg-foreground/15" />
 
-            <div className="border-text-light border-opacity-20 flex flex-col items-center justify-between gap-4 border-t pt-4 sm:flex-row">
+            <div className="flex flex-col items-center justify-between gap-4 pt-4 sm:flex-row">
               <p className="text-text-light-muted text-left text-xs leading-tight font-medium md:text-xs">
                 {t('copyright')}
               </p>

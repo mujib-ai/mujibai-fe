@@ -107,6 +107,11 @@
       }
     },
 
+    "pricingSection": {
+      "title": "Pricing",
+      "subTitle": "Plans depending on your needs and use case"
+    },
+
     "aboutUs": {
       "title": "About “Mujibai”",
       "subTitle": "A Saudi-built AI assistant—by design and by voice—serving Saudi organizations professionally",
@@ -151,7 +156,7 @@
         "email": "tech@mujibai.net",
         "address": "Ishbiliyah District, Riyadh, Saudi Arabia"
       },
-      "copyright": "© Mujib 2025. All Rights Reserved.",
+      "copyright": "© Mujib 2026. All Rights Reserved.",
       "termsOfUse": "Terms of Use",
       "privacyPolicy": "Privacy Policy",
       "cancellationPolicy": "Cancellation Policy"
