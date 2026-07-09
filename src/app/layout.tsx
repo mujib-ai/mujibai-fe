@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import { Providers } from '@/providers/Providers';
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
 import { Toaster } from '@/shared/components/atoms/ui/sonner';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/globals.css';
 
@@ -136,6 +137,7 @@ export default async function RootLayout({
           >
             {children}
             <Toaster position="top-center" />
+            <SpeedInsights />
           </ThemeProvider>
         </Providers>
       </body>
