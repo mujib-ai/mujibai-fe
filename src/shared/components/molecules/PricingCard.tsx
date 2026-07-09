@@ -1,43 +1,26 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import RyialIcon from '@/shared/components/atoms/RyialIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
 import type { PlanDisplay } from '@/shared/types';
 import { CheckCircle, X } from 'lucide-react';
 
-/**
- * PricingCard Component
- * Glassmorphic pricing card with smooth shadows and gradient glow
- * matching the Figma design (dark and light modes supported)
- */
-
 export default function PricingCard({ plan }: { plan: PlanDisplay }) {
+  const t = useTranslations('landingPage.pricingSection');
+
   return (
     <div
       key={plan.id}
-      className={`relative flex w-full flex-col items-center gap-2 rounded-2xl border border-white/20 px-8 py-10 shadow-[0_8px_60px_-10px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all duration-300 lg:w-[344px] ${
-        plan.isPopular
-          ? 'bg-[linear-gradient(180deg,_rgba(59,130,246,0.2)_0%,_rgba(59,130,246,0.1)_100%)] shadow-[0_0_60px_rgba(59,130,246,0.4)]'
-          : 'bg-[linear-gradient(180deg,_rgba(255,255,255,0.4)_0%,_rgba(255,255,255,0.1)_100%)] dark:bg-[linear-gradient(180deg,_rgba(255,255,255,0.08)_0%,_rgba(255,255,255,0.02)_100%)]'
-      }`}
+      className="relative flex w-full flex-col items-center gap-2 rounded-2xl bg-[#FFFFFFCC] px-8 py-10 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 lg:w-86 dark:bg-[#06B6D40F]"
     >
-      <div className="flex w-full flex-col gap-4 text-left">
-        {plan.isPopular ? (
-          <div className="flex items-center justify-between">
-            <h3 className="text-[20px] font-bold md:text-[32px]">
-              {plan.name}
-            </h3>
-            <Button className="rounded-full bg-cyan-500/20 px-4 py-1 text-xs font-medium shadow-md md:text-sm">
-              Trending
-            </Button>
-          </div>
-        ) : (
-          <h3 className="text-[18px] font-bold md:text-[28px]">{plan.name}</h3>
-        )}
+      <div className="flex w-full flex-col gap-4 text-center">
+        <h3 className="text-[18px] font-bold md:text-[28px]">{plan.name}</h3>
 
-        <div className="flex items-center gap-1 text-[28px] font-bold md:text-[40px]">
+        <div className="flex items-center justify-center gap-1 text-[28px] font-bold md:text-[40px]">
           {plan.period && <RyialIcon size={24} />}
-          <span className="text-cyan-400">{plan.price}</span>
+          <span className="text-priamry">{plan.price}</span>
           {plan.period && (
             <>
               <span className="mx-1 text-xs">/</span>
@@ -64,8 +47,8 @@ export default function PricingCard({ plan }: { plan: PlanDisplay }) {
         ))}
       </div>
 
-      <Button className="mt-4 w-full rounded-full bg-cyan-500 py-3 font-semibold shadow-[0_4px_30px_rgba(6,182,212,0.3)] transition-all duration-200 hover:bg-cyan-400">
-        Select
+      <Button className="bg-primary text-foreground mt-4 w-full rounded-full py-3 font-semibold">
+        {t('select')}
       </Button>
 
       {plan.isPopular && (

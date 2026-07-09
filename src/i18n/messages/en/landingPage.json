@@ -109,7 +109,49 @@
 
     "pricingSection": {
       "title": "Pricing",
-      "subTitle": "Plans depending on your needs and use case"
+      "subTitle": "Plans depending on your needs and use case",
+      "select": "Select",
+      "featureList": [
+        "AI voice agents",
+        "Unlimited project members",
+        "WhatsApp integration",
+        "Built-in ticketing system",
+        "Contact management",
+        "Dynamic call analytics",
+        "Voice cloning",
+        "API access",
+        "Priority support",
+        "Custom SLA"
+      ],
+      "plans": {
+        "starter": {
+          "name": "Starter Plan",
+          "description": "For teams ready for production use.",
+          "price": "200",
+          "period": "month",
+          "included": [
+            true, true, true, true, true, false, false, true, false, false
+          ]
+        },
+        "professional": {
+          "name": "Professional Plan",
+          "description": "For advanced operations and higher usage volume.",
+          "price": "350",
+          "period": "month",
+          "included": [
+            true, true, true, true, true, true, true, true, true, false
+          ]
+        },
+        "enterprise": {
+          "name": "Enterprise Plan",
+          "description": "For organizations with custom requirements.",
+          "price": "Custom",
+          "period": "",
+          "included": [
+            true, true, true, true, true, true, true, true, true, true
+          ]
+        }
+      }
     },
 
     "aboutUs": {

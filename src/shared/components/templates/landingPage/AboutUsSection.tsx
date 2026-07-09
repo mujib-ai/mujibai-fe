@@ -17,7 +17,7 @@ export default function AboutUsSection() {
         backgroundImage: "url('/landingPage/about-us-bg-image.jpg')",
       }}
     >
-      <div className="absolute top-0 left-0 -z-10 h-full w-full bg-white/60 dark:bg-black/50" />
+      <div className="absolute top-0 left-0 -z-10 h-full w-full bg-[#FFFFFFED] dark:bg-black/50" />
 
       <Container className="py-4.25 md:py-8.5">
         <div className="mx-auto mt-4.5 flex w-full flex-col items-center justify-start gap-4 md:mt-9 md:gap-8">
@@ -30,13 +30,13 @@ export default function AboutUsSection() {
 
           <div className="flex w-full flex-col items-center justify-between lg:flex-row">
             <div className="lg:w-2.5/12 mb-8 flex h-61.25 w-full items-center justify-center md:h-122.5 lg:mb-0">
-              <div className="h-full w-full overflow-hidden rounded-lg">
+              <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                 <Image
-                  src="/landingPage/about-us-image.jpg"
+                  src="/landingPage/about-us-image.svg"
                   alt="Mujib AI Story"
-                  width={500}
-                  height={500}
-                  className="h-full w-full object-cover"
+                  width={300}
+                  height={300}
+                  className="max-h-3xl max-w-3xl object-cover"
                   loading="lazy"
                 />
               </div>

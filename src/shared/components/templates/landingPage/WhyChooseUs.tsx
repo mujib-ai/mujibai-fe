@@ -1,11 +1,13 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 import { Container } from '@/shared/components/atoms/Container';
 import { Button } from '@/shared/components/atoms/ui/button';
 
 export default function WhyChooseUsSection() {
   const t = useTranslations('landingPage.whyChooseUs');
+  const router = useRouter();
   const reasons = [
     {
       id: 1,
@@ -44,9 +46,7 @@ export default function WhyChooseUsSection() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      <div className="absolute top-0 left-0 z-10 h-full w-full bg-white/90 py-20 dark:bg-black/30" />
-
-      <div className="absolute top-1/2 left-2/2 z-20 h-[45%] w-[45%] -translate-x-2/2 -translate-y-1/2 rounded-full bg-[#06B6D4]/40 opacity-80 blur-[100px]" />
+      <div className="absolute top-0 left-0 z-10 h-full w-full bg-[#FFFFFFF5] py-20 dark:bg-black/30" />
 
       <Container className="relative z-50 py-[16px] md:py-[32px]">
         <div className="mx-auto flex w-full flex-col items-center justify-start gap-[16px] md:gap-[32px]">
@@ -77,6 +77,7 @@ export default function WhyChooseUsSection() {
 
             <div>
               <Button
+                onClick={() => router.push('/contact-us')}
                 variant="default"
                 size="lg"
                 className="bg-primary rounded-full px-15 font-bold text-black dark:text-white"

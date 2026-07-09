@@ -109,7 +109,49 @@
 
     "pricingSection": {
       "title": "الأسعار",
-      "subTitle": "باقات تناسب احتياجاتك واستخدامك"
+      "subTitle": "باقات تناسب احتياجاتك واستخدامك",
+      "select": "اختر",
+      "featureList": [
+        "وكلاء صوت بالذكاء الاصطناعي",
+        "أعضاء مشاريع غير محدودين",
+        "تكامل واتساب",
+        "نظام تذاكر مدمج",
+        "إدارة جهات الاتصال",
+        "تحليلات مكالمات ديناميكية",
+        "استنساخ الصوت",
+        "وصول API",
+        "دعم بأولوية",
+        "اتفاقية مستوى خدمة مخصصة"
+      ],
+      "plans": {
+        "starter": {
+          "name": "الباقة المبدئية",
+          "description": "للفِرق الجاهزة للاستخدام الإنتاجي.",
+          "price": "200",
+          "period": "الشهر",
+          "included": [
+            true, true, true, true, true, false, false, true, false, false
+          ]
+        },
+        "professional": {
+          "name": "الباقة الاحترافية",
+          "description": "للعمليات المتقدمة وحجم استخدام أعلى.",
+          "price": "350",
+          "period": "الشهر",
+          "included": [
+            true, true, true, true, true, true, true, true, true, false
+          ]
+        },
+        "enterprise": {
+          "name": "باقة المؤسسات",
+          "description": "للمنظمات ذات المتطلبات المخصصة.",
+          "price": "مخصص",
+          "period": "",
+          "included": [
+            true, true, true, true, true, true, true, true, true, true
+          ]
+        }
+      }
     },
 
     "aboutUs": {
