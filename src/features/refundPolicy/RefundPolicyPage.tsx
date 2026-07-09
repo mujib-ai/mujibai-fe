@@ -18,13 +18,9 @@ export function RefundPolicyPage() {
   return (
     <PageBackground>
       <Container className="py-16 md:py-20">
-        <span className="text-primary text-sm font-semibold">
-          {t('badge')}
-        </span>
+        <span className="text-primary text-sm font-semibold">{t('badge')}</span>
         <h1 className="mt-2 text-3xl font-bold md:text-4xl">{t('title')}</h1>
-        <p className="text-muted-foreground mt-2 text-sm">
-          {t('lastUpdated')}
-        </p>
+        <p className="text-muted-foreground mt-2 text-sm">{t('lastUpdated')}</p>
         <p className="text-muted-foreground mt-4 max-w-2xl text-base md:text-lg">
           {t('description')}
         </p>
