@@ -119,13 +119,13 @@
                 "type": "code",
                 "language": "text",
                 "filename": "مثال على تنسيق المفتاح السري",
-                "code": "sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+                "code": "mjb_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
               },
               {
                 "type": "callout",
                 "calloutType": "info",
                 "title": "بادئة المفتاح",
-                "text": "تبدأ المفاتيح السرية بـ `sk_live_` متبوعة بمعرّف فريد."
+                "text": "تبدأ المفاتيح السرية بـ `mjb_live_` متبوعة بمعرّف فريد."
               }
             ]
           },
@@ -156,7 +156,7 @@
                 "type": "code",
                 "language": "bash",
                 "filename": ".env",
-                "code": "MUJIBAI_SECRET_KEY=sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+                "code": "MUJIBAI_SECRET_KEY=mjb_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
               }
             ]
           },
@@ -189,7 +189,7 @@
                 "type": "code",
                 "language": "text",
                 "filename": "تنسيق الترويسة",
-                "code": "Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+                "code": "Authorization: Bearer mjb_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
               },
               {
                 "type": "p",
@@ -210,7 +210,7 @@
                   {
                     "label": "cURL",
                     "language": "bash",
-                    "code": "curl https://api.mujibai.net/v1/agents \\\n  -H \"Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\""
+                    "code": "curl https://api.mujibai.net/v1/agents \\\n  -H \"Authorization: Bearer mjb_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\""
                   },
                   {
                     "label": "Node.js",
@@ -294,7 +294,7 @@
                 "type": "code",
                 "language": "bash",
                 "filename": "cURL",
-                "code": "curl -X POST https://api.mujibai.net/v1/calls \\\n  -H \"Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"agent_id\": \"agent_01hz9x2q3k\",\n    \"to\": \"+15550101234\",\n    \"metadata\": { \"lead_id\": \"lead_7841\" }\n  }'"
+                "code": "curl -X POST https://api.mujibai.net/v1/calls \\\n  -H \"Authorization: Bearer mjb_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"agent_id\": \"agent_01hz9x2q3k\",\n    \"to\": \"+15550101234\",\n    \"metadata\": { \"lead_id\": \"lead_7841\" }\n  }'"
               }
             ]
           },
