@@ -28,6 +28,7 @@ import {
 import { User } from '@/shared/types';
 import {
   BarChart2,
+  BookOpen,
   EllipsisVertical,
   Key,
   LayoutDashboard,
@@ -77,6 +78,7 @@ export default function ClientSidebar({
     },
     { title: t('api-keys'), icon: Key, href: '/dashboard/api-keys' },
     { title: t('settings'), icon: Settings, href: '/dashboard/settings' },
+    { title: t('docs'), icon: BookOpen, href: '/docs' },
   ];
 
   const { handleLogout } = useAuth();

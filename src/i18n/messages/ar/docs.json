@@ -1,0 +1,358 @@
+{
+  "docs": {
+    "common": {
+      "docsLink": "التوثيق",
+      "dashboardLink": "لوحة التحكم",
+      "searchPlaceholder": "ابحث في التوثيق...",
+      "searchShortcut": "Ctrl K",
+      "noResults": "لم يتم العثور على نتائج.",
+      "previous": "السابق",
+      "next": "التالي",
+      "openNav": "فتح قائمة تنقل التوثيق",
+      "breadcrumbRoot": "التوثيق"
+    },
+    "nav": {
+      "sections": {
+        "gettingStarted": "البدء",
+        "authentication": "المصادقة",
+        "integrations": "التكاملات"
+      },
+      "items": {
+        "introduction": {
+          "title": "مقدمة",
+          "description": "ما هو مجيب AI وكيفية تنظيم هذا التوثيق."
+        },
+        "secretKeys": {
+          "title": "المفاتيح السرية",
+          "description": "إنشاء المفاتيح السرية وتخزينها وتدويرها بأمان."
+        },
+        "authentication": {
+          "title": "مصادقة الطلبات",
+          "description": "إرسال المفاتيح السرية ضمن ترويسات الطلبات لاستدعاء الواجهة البرمجية."
+        },
+        "voiceAgentIntegration": {
+          "title": "دمج الوكيل الصوتي",
+          "description": "ربط الوكيل الصوتي الذكي بأعمالك."
+        }
+      }
+    },
+    "pages": {
+      "introduction": {
+        "eyebrow": "البدء",
+        "title": "مقدمة",
+        "intro": "يتيح لك مجيب AI إضافة وكيل صوتي محادثي مدعوم بالذكاء الاصطناعي إلى أعمالك — للرد على المكالمات، وتأهيل العملاء المحتملين، والتعامل مع طلبات الدعم. يغطي هذا التوثيق الأمور الثلاثة التي تحتاجها لبناء التكامل: إنشاء المفاتيح السرية، ومصادقة طلبات الواجهة البرمجية، وربط الوكيل الصوتي بأنظمة أعمالك.",
+        "sections": {
+          "whatYouCanBuild": {
+            "title": "ما الذي يمكنك بناؤه",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "تُنظَّم واجهة برمجة تطبيقات مجيب AI حول عدد قليل من اللبنات الأساسية التي يمكنك دمجها لتناسب سير عملك:"
+              },
+              {
+                "type": "item",
+                "term": "المفاتيح السرية",
+                "desc": "تُستخدم لمصادقة كل طلب يرسله خادمك إلى الواجهة البرمجية."
+              },
+              {
+                "type": "item",
+                "term": "جلسات الوكيل الصوتي",
+                "desc": "المكالمات الواردة والصادرة التي يديرها الوكيل الذي قمت بإعداده."
+              },
+              {
+                "type": "item",
+                "term": "الويب هوك (Webhooks)",
+                "desc": "أحداث لحظية (بدء المكالمة، انتهاء المكالمة، إنشاء تذكرة) تُرسل إلى الخادم الخاص بك."
+              }
+            ]
+          },
+          "howDocsAreOrganized": {
+            "title": "كيفية تنظيم هذا التوثيق",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "ابدأ بصفحة [المفاتيح السرية](/docs/secret-keys) لإنشاء أول مفتاح لك، ثم انتقل إلى [مصادقة الطلبات](/docs/authentication) لإجراء أول طلب مصادَق عليه. بعد أن ينجح ذلك، اتبع [دمج الوكيل الصوتي](/docs/voice-agent-integration) لربط الوكيل بأرقام هاتفك وأنظمة أعمالك."
+              }
+            ]
+          },
+          "baseUrl": {
+            "title": "الرابط الأساسي",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "تُرسل جميع طلبات الواجهة البرمجية إلى رابط أساسي واحد. كل نقطة نهاية مذكورة في هذا التوثيق نسبية إليه:"
+              },
+              {
+                "type": "code",
+                "language": "text",
+                "code": "https://api.mujibai.net/v1"
+              }
+            ]
+          }
+        }
+      },
+      "secretKeys": {
+        "eyebrow": "المصادقة",
+        "title": "المفاتيح السرية",
+        "intro": "تُستخدم المفاتيح السرية لمصادقة كل طلب يرسله خادمك إلى واجهة برمجة تطبيقات مجيب AI. يمكن إنشاؤها وإدارتها من لوحة التحكم ضمن `الإعدادات ← مفاتيح API`.",
+        "sections": {
+          "creatingKey": {
+            "title": "إنشاء مفتاح سري",
+            "blocks": [
+              {
+                "type": "step",
+                "text": "انتقل إلى `لوحة التحكم ← مفاتيح API`."
+              },
+              {
+                "type": "step",
+                "text": "اضغط على `إنشاء مفتاح سري` وأعطه اسمًا وصفيًا (مثل `production-backend`)."
+              },
+              {
+                "type": "step",
+                "text": "انسخ المفتاح فور ظهوره — لأسباب أمنية، تُعرض القيمة الكاملة مرة واحدة فقط."
+              },
+              {
+                "type": "step",
+                "text": "احفظه ضمن إعدادات بيئة التشغيل لديك، وليس داخل الكود."
+              },
+              {
+                "type": "code",
+                "language": "text",
+                "filename": "مثال على تنسيق المفتاح السري",
+                "code": "sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+              },
+              {
+                "type": "callout",
+                "calloutType": "info",
+                "title": "بادئة المفتاح",
+                "text": "تبدأ المفاتيح السرية بـ `sk_live_` متبوعة بمعرّف فريد."
+              }
+            ]
+          },
+          "storingKeys": {
+            "title": "تخزين المفاتيح بأمان",
+            "blocks": [
+              {
+                "type": "item",
+                "term": "لا تكشف المفاتيح في العميل",
+                "desc": "لا ترفع المفاتيح السرية إلى نظام التحكم بالإصدار ولا تضعها داخل كود العميل (المتصفح أو تطبيقات الجوال)."
+              },
+              {
+                "type": "item",
+                "term": "استخدم مدير أسرار",
+                "desc": "احفظ المفاتيح في متغيرات البيئة أو مدير أسرار، مثل ملفات `.env` المستثناة من git، أو خدمة خزنة آمنة."
+              },
+              {
+                "type": "item",
+                "term": "استدعِ الواجهة البرمجية من الخادم فقط",
+                "desc": "استدعِ واجهة برمجة تطبيقات مجيب AI من الخادم فقط — ومرر أي ميزة تواجه العميل عبر خادمك الخاص."
+              },
+              {
+                "type": "item",
+                "term": "استخدم مفتاحًا منفصلاً لكل بيئة",
+                "desc": "استخدم مفاتيح منفصلة لكل بيئة (التطوير، الاختبار المرحلي، الإنتاج) حتى تتمكن من إلغاء أحدها دون التأثير على البقية."
+              },
+              {
+                "type": "code",
+                "language": "bash",
+                "filename": ".env",
+                "code": "MUJIBAI_SECRET_KEY=sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+              }
+            ]
+          },
+          "rotating": {
+            "title": "تدوير المفاتيح وإلغاؤها",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "إذا تعرض أحد المفاتيح للتسريب في أي وقت، ألغِه فورًا من `لوحة التحكم ← مفاتيح API` وأنشئ بديلاً له. ستفشل الطلبات التي تستخدم مفتاحًا ملغى وتعيد استجابة `401 Unauthorized`."
+              },
+              {
+                "type": "callout",
+                "calloutType": "warning",
+                "title": "دوّر المفاتيح دوريًا",
+                "text": "حتى في غياب أي تسريب معروف، دوّر مفاتيح الإنتاج السرية وفق جدول منتظم، كل 90 يومًا مثلاً، كإجراء دفاعي إضافي."
+              }
+            ]
+          }
+        }
+      },
+      "authentication": {
+        "eyebrow": "المصادقة",
+        "title": "مصادقة الطلبات",
+        "intro": "يجب أن يتضمن كل طلب إلى واجهة برمجة تطبيقات مجيب AI مفتاحك السري ضمن ترويسة الطلب `Authorization`، باستخدام مخطط `Bearer`.",
+        "sections": {
+          "header": {
+            "title": "ترويسة Authorization",
+            "blocks": [
+              {
+                "type": "code",
+                "language": "text",
+                "filename": "تنسيق الترويسة",
+                "code": "Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d"
+              },
+              {
+                "type": "p",
+                "text": "الطلبات التي لا تحتوي على ترويسة صحيحة، أو تحتوي على مفتاح ملغى أو غير صالح، تحصل على استجابة `401 Unauthorized`."
+              }
+            ]
+          },
+          "exampleRequest": {
+            "title": "مثال على الطلب",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "إليك طلبًا بسيطًا يعرض وكلاءك الصوتيين، موضّحًا بعدة لغات شائعة:"
+              },
+              {
+                "type": "codeTabs",
+                "tabs": [
+                  {
+                    "label": "cURL",
+                    "language": "bash",
+                    "code": "curl https://api.mujibai.net/v1/agents \\\n  -H \"Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\""
+                  },
+                  {
+                    "label": "Node.js",
+                    "language": "javascript",
+                    "code": "const response = await fetch('https://api.mujibai.net/v1/agents', {\n  headers: {\n    Authorization: `Bearer ${process.env.MUJIBAI_SECRET_KEY}`,\n  },\n});\n\nconst agents = await response.json();"
+                  },
+                  {
+                    "label": "Python",
+                    "language": "python",
+                    "code": "import os\nimport requests\n\nresponse = requests.get(\n    \"https://api.mujibai.net/v1/agents\",\n    headers={\"Authorization\": f\"Bearer {os.environ['MUJIBAI_SECRET_KEY']}\"},\n)\n\nagents = response.json()"
+                  }
+                ]
+              }
+            ]
+          },
+          "responseFormat": {
+            "title": "تنسيق الاستجابة",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "تُعيد الاستجابات الناجحة بيانات JSON تحتوي على حقل `data`. أما الأخطاء فتُعاد بتنسيق ثابت يمكنك التعامل معه:"
+              },
+              {
+                "type": "code",
+                "language": "json",
+                "filename": "401 Unauthorized",
+                "code": "{\n  \"error\": {\n    \"type\": \"authentication_error\",\n    \"message\": \"Invalid or missing API key.\"\n  }\n}"
+              }
+            ]
+          },
+          "bestPractices": {
+            "title": "أفضل الممارسات",
+            "blocks": [
+              {
+                "type": "callout",
+                "calloutType": "warning",
+                "title": "من جهة الخادم فقط",
+                "text": "أرسل ترويسة `Authorization` فقط من بيئات خادم موثوقة. لا تكشف مفتاحك السري أبدًا في متصفح أو تطبيق جوال أو أي طلب شبكي من جهة العميل."
+              },
+              {
+                "type": "callout",
+                "calloutType": "info",
+                "title": "استخدم HTTPS",
+                "text": "يجب إجراء جميع الطلبات عبر HTTPS. تُرفض طلبات HTTP العادية."
+              }
+            ]
+          }
+        }
+      },
+      "voiceAgentIntegration": {
+        "eyebrow": "التكاملات",
+        "title": "دمج الوكيل الصوتي",
+        "intro": "يمكن للوكيل الصوتي الذكي الرد على المكالمات الواردة، وإجراء مكالمات صادرة، وتحويل المحادثات إلى فريقك عند الحاجة. يشرح هذا الدليل كيفية ربط وكيل بأعمالك.",
+        "sections": {
+          "step1": {
+            "title": "1. إنشاء وكيل صوتي",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "من `لوحة التحكم ← النص الصوتي`، أنشئ وكيلاً وحدد نصه: التحية، وساعات العمل، وقواعد التصعيد. لكل وكيل معرّف فريد `agent_id`."
+              }
+            ]
+          },
+          "step2": {
+            "title": "2. ربط رقم هاتف",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "اربط رقم هاتف بالوكيل، إما رقمًا تملكه بالفعل (عبر SIP trunking) أو رقمًا تم توفيره عبر مجيب AI. يتم ذلك من `لوحة التحكم ← الإعدادات ← الأرقام`."
+              }
+            ]
+          },
+          "step3": {
+            "title": "3. تشغيل مكالمة صادرة",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "استخدم الواجهة البرمجية لتجعل الوكيل يجري مكالمة صادرة، على سبيل المثال لمتابعة عميل محتمل:"
+              },
+              {
+                "type": "code",
+                "language": "bash",
+                "filename": "cURL",
+                "code": "curl -X POST https://api.mujibai.net/v1/calls \\\n  -H \"Authorization: Bearer sk_live_4f1c9a2b7d3e4a8b9c0d1e2f3a4b5c6d\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"agent_id\": \"agent_01hz9x2q3k\",\n    \"to\": \"+15550101234\",\n    \"metadata\": { \"lead_id\": \"lead_7841\" }\n  }'"
+              }
+            ]
+          },
+          "step4": {
+            "title": "4. الاستماع لأحداث الويب هوك",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "أعد إعداد نقطة نهاية ويب هوك في `لوحة التحكم ← الإعدادات ← الويب هوك` لاستقبال الأحداث اللحظية أثناء تقدم المكالمات:"
+              },
+              {
+                "type": "item",
+                "term": "`call.started`",
+                "desc": "اتصل الوكيل بالمتصل بنجاح."
+              },
+              {
+                "type": "item",
+                "term": "`call.ended`",
+                "desc": "انتهت المكالمة، مع نص تفريغ وملخص."
+              },
+              {
+                "type": "item",
+                "term": "`ticket.created`",
+                "desc": "صعّد الوكيل المكالمة إلى تذكرة دعم."
+              },
+              {
+                "type": "code",
+                "language": "json",
+                "filename": "call.ended payload",
+                "code": "{\n  \"event\": \"call.ended\",\n  \"data\": {\n    \"call_id\": \"call_9k2m1x7q\",\n    \"agent_id\": \"agent_01hz9x2q3k\",\n    \"duration_seconds\": 184,\n    \"summary\": \"Caller asked about pricing and requested a callback.\",\n    \"metadata\": { \"lead_id\": \"lead_7841\" }\n  }\n}"
+              },
+              {
+                "type": "callout",
+                "calloutType": "warning",
+                "title": "تحقق من توقيعات الويب هوك",
+                "text": "يتضمن كل طلب ويب هوك ترويسة `X-Mujibai-Signature`. تحقق منها مقابل سر توقيع الويب هوك الخاص بك قبل الوثوق بالمحتوى."
+              }
+            ]
+          },
+          "nextSteps": {
+            "title": "الخطوات التالية",
+            "blocks": [
+              {
+                "type": "step",
+                "text": "اختبر التدفق من البداية للنهاية بمكالمة حقيقية."
+              },
+              {
+                "type": "step",
+                "text": "راجع نصوص المكالمات المُفرَّغة واضبط نص الوكيل."
+              },
+              {
+                "type": "step",
+                "text": "أطلق التكامل لعملائك عند الاستعداد للإطلاق."
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
