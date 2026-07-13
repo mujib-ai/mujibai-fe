@@ -5,10 +5,10 @@ import type { ChangeEvent, FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
-import { ArrowLeft } from 'lucide-react';
 
 import { FieldLabel } from '../atoms/FieldLabel';
 import { useContactForm } from '../hooks/useContactForm';
@@ -123,7 +123,7 @@ export function ContactForm() {
           >
             {t('submit')}
             <span className="inline-grid size-4 place-items-center" aria-hidden>
-              <ArrowLeft className="size-5" />
+              <ThemedIcon name="arrow-left" size={20} className="size-5" />
             </span>
           </Button>
 

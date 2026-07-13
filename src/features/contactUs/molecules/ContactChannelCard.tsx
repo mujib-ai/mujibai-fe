@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { cn } from '@/shared/lib/utils';
-import { ArrowRight } from 'lucide-react';
 
 import type { ContactChannel } from '../constants';
 
@@ -32,7 +32,11 @@ export function ContactChannelCard({ channel }: { channel: ContactChannel }) {
             {t(`${channel.key}.desc`)}
           </span>
         </span>
-        <ArrowRight className="size-4 shrink-0 text-(--ink-3) transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5" />
+        <ThemedIcon
+          name="arrow-right"
+          size={16}
+          className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 rtl:rotate-180 rtl:group-hover:-translate-x-0.5"
+        />
       </Link>
     </div>
   );

@@ -1,12 +1,9 @@
 import * as React from 'react';
 
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Button, buttonVariants } from '@/shared/components/atoms/ui/button';
 import { cn } from '@/shared/lib/utils';
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from 'lucide-react';
+import { MoreHorizontalIcon } from 'lucide-react';
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -84,7 +81,11 @@ function PaginationPrevious({
       className={cn('gap-1 px-2.5 sm:pl-2.5', className)}
       {...props}
     >
-      {locale === 'ar' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+      {locale === 'ar' ? (
+        <ThemedIcon name="arrow-right" size={16} />
+      ) : (
+        <ThemedIcon name="arrow-left" size={16} />
+      )}
       <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   );
@@ -104,7 +105,11 @@ function PaginationNext({
       {...props}
     >
       <span className="hidden sm:block">{text}</span>
-      {locale === 'ar' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+      {locale === 'ar' ? (
+        <ThemedIcon name="arrow-left" size={16} />
+      ) : (
+        <ThemedIcon name="arrow-right" size={16} />
+      )}
     </PaginationLink>
   );
 }

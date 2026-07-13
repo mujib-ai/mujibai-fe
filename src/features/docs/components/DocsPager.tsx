@@ -1,12 +1,12 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { FLAT_DOCS_NAV } from '@/features/docs/constants';
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { cn } from '@/shared/lib/utils';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 
 export function DocsPager() {
   const pathname = usePathname();
@@ -26,14 +26,14 @@ export function DocsPager() {
         <Link
           href={prev.href}
           className={cn(
-            'group flex flex-1 flex-col items-start gap-1 rounded-lg border p-3 text-sm transition-colors hover:border-primary/40 hover:bg-accent'
+            'group hover:border-primary/40 hover:bg-accent flex flex-1 flex-col items-start gap-1 rounded-lg border p-3 text-sm transition-colors'
           )}
         >
-          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <ArrowLeft className="size-3.5" />
+          <span className="text-muted-foreground flex items-center gap-1 text-xs">
+            <ThemedIcon name="arrow-left" size={14} className="size-3.5" />
             {t('common.previous')}
           </span>
-          <span className="font-medium text-foreground group-hover:text-primary">
+          <span className="text-foreground group-hover:text-primary font-medium">
             {t(`nav.items.${prev.key}.title`)}
           </span>
         </Link>
@@ -44,14 +44,14 @@ export function DocsPager() {
         <Link
           href={next.href}
           className={cn(
-            'group flex flex-1 flex-col items-end gap-1 rounded-lg border p-3 text-right text-sm transition-colors hover:border-primary/40 hover:bg-accent'
+            'group hover:border-primary/40 hover:bg-accent flex flex-1 flex-col items-end gap-1 rounded-lg border p-3 text-right text-sm transition-colors'
           )}
         >
-          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+          <span className="text-muted-foreground flex items-center gap-1 text-xs">
             {t('common.next')}
-            <ArrowRight className="size-3.5" />
+            <ThemedIcon name="arrow-right" size={14} className="size-3.5" />
           </span>
-          <span className="font-medium text-foreground group-hover:text-primary">
+          <span className="text-foreground group-hover:text-primary font-medium">
             {t(`nav.items.${next.key}.title`)}
           </span>
         </Link>

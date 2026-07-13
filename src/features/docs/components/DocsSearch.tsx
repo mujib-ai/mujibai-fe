@@ -2,9 +2,11 @@
 
 import * as React from 'react';
 
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 import { FLAT_DOCS_NAV } from '@/features/docs/constants';
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Dialog,
@@ -13,8 +15,7 @@ import {
 } from '@/shared/components/atoms/ui/dialog';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { cn } from '@/shared/lib/utils';
-import { FileText, Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { FileText } from 'lucide-react';
 
 export function DocsSearch() {
   const router = useRouter();
@@ -70,13 +71,17 @@ export function DocsSearch() {
         type="button"
         variant="outline"
         onClick={() => setOpen(true)}
-        className="w-9 justify-start gap-2 px-0 text-muted-foreground sm:w-full sm:max-w-sm sm:px-3"
+        className="text-muted-foreground w-9 justify-start gap-2 px-0 sm:w-full sm:max-w-sm sm:px-3"
       >
-        <Search className="mx-auto size-4 sm:mx-0" />
+        <ThemedIcon
+          name="search"
+          size={16}
+          className="mx-auto size-4 sm:mx-0"
+        />
         <span className="hidden flex-1 text-left sm:inline">
           {t('common.searchPlaceholder')}
         </span>
-        <kbd className="hidden rounded border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline-block">
+        <kbd className="bg-muted text-muted-foreground hidden rounded border px-1.5 py-0.5 font-mono text-[10px] sm:inline-block">
           {t('common.searchShortcut')}
         </kbd>
       </Button>
@@ -85,7 +90,11 @@ export function DocsSearch() {
           {t('common.searchPlaceholder')}
         </DialogTitle>
         <div className="flex items-center gap-2 border-b px-4">
-          <Search className="size-4 shrink-0 text-muted-foreground" />
+          <ThemedIcon
+            name="search"
+            size={16}
+            className="text-muted-foreground size-4 shrink-0"
+          />
           <Input
             autoFocus
             value={query}
@@ -96,7 +105,7 @@ export function DocsSearch() {
         </div>
         <ul className="max-h-80 overflow-y-auto p-2">
           {results.length === 0 && (
-            <li className="px-3 py-6 text-center text-sm text-muted-foreground">
+            <li className="text-muted-foreground px-3 py-6 text-center text-sm">
               {t('common.noResults')}
             </li>
           )}
@@ -106,15 +115,15 @@ export function DocsSearch() {
                 type="button"
                 onClick={() => handleSelect(item.href)}
                 className={cn(
-                  'flex w-full items-start gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors hover:bg-accent'
+                  'hover:bg-accent flex w-full items-start gap-3 rounded-md px-3 py-2 text-left text-sm transition-colors'
                 )}
               >
-                <FileText className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                <FileText className="text-muted-foreground mt-0.5 size-4 shrink-0" />
                 <span className="flex flex-col">
-                  <span className="font-medium text-foreground">
+                  <span className="text-foreground font-medium">
                     {item.title}
                   </span>
-                  <span className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground text-xs">
                     {item.description}
                   </span>
                 </span>
