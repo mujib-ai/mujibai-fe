@@ -1,16 +1,19 @@
 'use client';
 
-import type { ApiKey } from '../../types';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
+
+import type { ApiKeyPublic } from '../../types';
 import ApiKeysHeader from '../molecules/ApiKeysHeader';
 import ApiKeysTable from './ApiKeysTable';
 
 interface ApiKeysContentProps {
-  apiKeys: ApiKey[];
+  apiKeys: ApiKeyPublic[];
   isLoading: boolean;
   error: string | null;
   onCreateNewKey: () => void;
-  onEditKey: (apiKey: ApiKey) => void;
-  onDeleteKey: (apiKey: ApiKey) => void;
+  onEditKey: (apiKey: ApiKeyPublic) => void;
+  onRotateKey: (apiKey: ApiKeyPublic) => void;
+  onRevokeKey: (apiKey: ApiKeyPublic) => void;
   locale: string;
   translations: {
     viewUsage: string;
@@ -18,11 +21,15 @@ interface ApiKeysContentProps {
     createNewSecretKey: string;
     name: string;
     secretKey: string;
+    environment: string;
+    status: string;
+    scopes: string;
     createdOn: string;
-    createdBy: string;
+    expiresAt: string;
     lastUsed: string;
-    permission: string;
     actions: string;
+    errorPrefix: string;
+    empty: string;
   };
 }
 
@@ -32,22 +39,28 @@ export default function ApiKeysContent({
   error,
   onCreateNewKey,
   onEditKey,
-  onDeleteKey,
+  onRotateKey,
+  onRevokeKey,
   locale,
   translations,
 }: ApiKeysContentProps) {
   if (error) {
     return (
       <div className="flex h-64 items-center justify-center">
-        <div className="text-red-500">Error: {error}</div>
+        <div className="text-red-500">
+          {translations.errorPrefix}
+          {error}
+        </div>
       </div>
     );
   }
 
   if (isLoading) {
     return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-gray-500">Loading...</div>
+      <div className="space-y-4 p-2">
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
+        <Skeleton className="h-10 w-full" />
       </div>
     );
   }
@@ -60,21 +73,30 @@ export default function ApiKeysContent({
         usagePageText={translations.usagePage}
         createNewSecretKeyText={translations.createNewSecretKey}
       />
-      <ApiKeysTable
-        apiKeys={apiKeys}
-        onEdit={onEditKey}
-        onDelete={onDeleteKey}
-        locale={locale}
-        headers={{
-          name: translations.name,
-          secretKey: translations.secretKey,
-          createdOn: translations.createdOn,
-          createdBy: translations.createdBy,
-          lastUsed: translations.lastUsed,
-          permission: translations.permission,
-          actions: translations.actions,
-        }}
-      />
+      {apiKeys.length === 0 ? (
+        <div className="text-muted-foreground flex h-64 items-center justify-center">
+          {translations.empty}
+        </div>
+      ) : (
+        <ApiKeysTable
+          apiKeys={apiKeys}
+          onEdit={onEditKey}
+          onRotate={onRotateKey}
+          onRevoke={onRevokeKey}
+          locale={locale}
+          headers={{
+            name: translations.name,
+            secretKey: translations.secretKey,
+            environment: translations.environment,
+            status: translations.status,
+            scopes: translations.scopes,
+            createdOn: translations.createdOn,
+            expiresAt: translations.expiresAt,
+            lastUsed: translations.lastUsed,
+            actions: translations.actions,
+          }}
+        />
+      )}
     </div>
   );
 }

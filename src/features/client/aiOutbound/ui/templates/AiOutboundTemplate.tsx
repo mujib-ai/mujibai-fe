@@ -1,6 +1,6 @@
 'use client';
 
-import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
+import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 import ActionButtons from '../molecules/ActionButtons';
 import AiOutboundTable from '../organisms/AiOutboundTable';

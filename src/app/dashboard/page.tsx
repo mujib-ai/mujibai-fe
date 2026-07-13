@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-import ClientDashboardOverviewPage from '@/shared/components/sections/client-dashboard/ClientDashboardOverviewPage';
+import ClientDashboardOverviewPage from '@/shared/components/sections/dashboard/ClientDashboardOverviewPage';
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
 
 export const dynamic = 'force-dynamic';
@@ -16,7 +16,7 @@ async function getUserFromServer() {
       authHeaders.Authorization = `Bearer ${accessToken}`;
     }
 
-    const res = await AxiosAPI.get('/auth/check-auth', {
+    const res = await AxiosAPI.get('/tenants/check-auth', {
       headers: authHeaders,
     });
 

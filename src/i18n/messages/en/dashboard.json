@@ -12,8 +12,32 @@
     "myAccount": "My Account",
     "logout": "Log out"
   },
+  "notifications": {
+    "title": "Notifications",
+    "error": "Failed to load notifications.",
+    "panel": {
+      "title": "Notifications",
+      "unreadSummary": "{count, plural, =0 {No unread} one {# unread} other {# unread}}",
+      "markAllRead": "Mark all as read",
+      "close": "Close",
+      "ariaLabel": "Notifications"
+    },
+    "empty": {
+      "title": "You're all caught up.",
+      "subtitle": "New notifications will show up here."
+    },
+    "tabs": {
+      "all": "All",
+      "unread": "Unread"
+    },
+    "chips": {
+      "critical": "Critical",
+      "warning": "Warning"
+    }
+  },
   "dashboardOverview": {
     "welcome": "Welcome,",
+    "subTitle": "Here's what's happening with your account today.",
     "upgradePlan": "Upgrade Plan",
     "recentClients": "Recent Clients",
     "dataUsage": "Data Usage",
@@ -32,7 +56,9 @@
   "ticketsAndCalls": {
     "title": "tickets and calls",
     "callsTitle": "Calls",
+    "callsSubTitle": "Review and manage all your customer calls.",
     "ticketsTitle": "Tickets",
+    "ticketsSubTitle": "Track and resolve customer support tickets.",
     "filterPlaceholderOne": "Filter 1",
     "filterPlaceholderTwo": "Filter 2",
     "customer": "Customer",
@@ -71,6 +97,7 @@
   },
   "performanceAnalytics": {
     "title": "Performance Analytics",
+    "subTitle": "Track how your AI agent is performing over time.",
     "totalCalls": "Total Calls",
     "averageCallDuration": "Average Call Duration",
     "ticketsCreated": "Tickets Created",
@@ -125,17 +152,68 @@
     "actions": "Actions",
     "name": "Name",
     "secretKey": "Secret Key",
+    "environment": "Environment",
+    "status": "Status",
+    "scopesLabel": "Scopes",
     "createdOn": "Created On",
     "createdBy": "Created By",
     "lastUsed": "Last Used",
+    "lastUsedNever": "Never",
     "permission": "Permission",
     "usagePage": "Useage Page",
     "createNewSecretKey": "Create New Secret Key",
-    "viewUsage": "View usage per API key on the"
+    "viewUsage": "View usage per API key on the",
+    "errorPrefix": "Error: ",
+    "empty": "No API keys yet. Create one to get started.",
+    "environments": {
+      "sandbox": "Sandbox",
+      "live": "Live"
+    },
+    "statuses": {
+      "active": "Active",
+      "revoked": "Revoked",
+      "expired": "Expired"
+    },
+    "scopes": {
+      "voice:use": "Voice",
+      "landing-chat:use": "Landing Chat",
+      "post-call-analysis:use": "Post-Call Analysis",
+      "tickets:create": "Create Tickets"
+    },
+    "create": {
+      "title": "Create New Secret Key",
+      "description": "This key grants access to your account via the API. Store it securely — it will only be shown once.",
+      "namePlaceholder": "e.g. Production Server",
+      "environment": "Environment",
+      "scopes": "Scopes",
+      "expiresAt": "Expires At (optional)",
+      "cancel": "Cancel",
+      "submit": "Create Key"
+    },
+    "edit": {
+      "title": "Edit API Key",
+      "description": "Update the name, scopes, or expiration of this key.",
+      "submit": "Save Changes"
+    },
+    "reveal": {
+      "title": "Copy Your Secret Key",
+      "description": "This is the only time your full secret key will be shown. Store it somewhere safe.",
+      "done": "Done"
+    },
+    "rotate": {
+      "title": "Rotate Key"
+    },
+    "revoke": {
+      "title": "Revoke API Key",
+      "message": "Are you sure you want to revoke \"{name}\"? Any application using it will immediately lose access. This cannot be undone.",
+      "cancel": "Cancel",
+      "confirm": "Revoke"
+    }
   },
 
   "settings": {
     "title": "Settings",
+    "subTitle": "Manage your account, notifications, and integrations.",
     "accountSettings": {
       "title": "Account Settings",
       "subTitle": "Update your personal details and contact information.",

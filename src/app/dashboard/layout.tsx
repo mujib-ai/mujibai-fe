@@ -1,7 +1,7 @@
 import { getLocale } from 'next-intl/server';
 
 import { SidebarProvider } from '@/shared/components/atoms/ui/sidebar';
-import ClientSidebar from '@/shared/components/organisms/client-dashboard/ClientSidebar';
+import ClientSidebar from '@/shared/components/organisms/dashboard/ClientSidebar';
 
 export default async function Layout({
   children,

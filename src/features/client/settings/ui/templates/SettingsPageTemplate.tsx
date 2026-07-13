@@ -1,19 +1,21 @@
 'use client';
 
-import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
+import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 interface SettingsPageTemplateProps {
   title: string;
+  subtitle?: string;
   children: React.ReactNode;
 }
 
 export default function SettingsPageTemplate({
   title,
+  subtitle,
   children,
 }: SettingsPageTemplateProps) {
   return (
     <div className="flex h-full w-full flex-col gap-4">
-      <DashboardHeader title={title} />
+      <DashboardHeader title={title} subtitle={subtitle} />
       <div className="z-50 h-full w-full rounded-2xl bg-white/75 p-4 shadow-sm dark:bg-[#001434A6]">
         {children}
       </div>

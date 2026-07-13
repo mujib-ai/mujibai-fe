@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
+import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 interface ApiKeysPageTemplateProps {
   title: string;

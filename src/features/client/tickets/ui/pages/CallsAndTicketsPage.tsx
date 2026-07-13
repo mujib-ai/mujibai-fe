@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from 'next-intl';
 
-import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
+import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 import Filtering from '../organisms/Filtering';
 import Table from '../organisms/Table';
@@ -15,9 +15,10 @@ export default function CallsAndTicketsPage({
   const t = useTranslations('ticketsAndCalls');
   const locale = useLocale();
   const titleKey = mode === 'calls' ? 'callsTitle' : 'ticketsTitle';
+  const subtitleKey = mode === 'calls' ? 'callsSubTitle' : 'ticketsSubTitle';
   return (
     <div className="flex h-full w-full flex-col gap-4">
-      <DashboardHeader title={t(titleKey)} />
+      <DashboardHeader title={t(titleKey)} subtitle={t(subtitleKey)} />
       <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
         <section className="flex flex-col">
           <Filtering

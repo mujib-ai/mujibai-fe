@@ -12,8 +12,32 @@
     "myAccount": "حسابي",
     "logout": "تسجيل الخروج"
   },
+  "notifications": {
+    "title": "الإشعارات",
+    "error": "تعذر تحميل الإشعارات.",
+    "panel": {
+      "title": "الإشعارات",
+      "unreadSummary": "{count, plural, =0 {لا توجد إشعارات غير مقروءة} one {إشعار واحد غير مقروء} two {إشعاران غير مقروءين} few {# إشعارات غير مقروءة} many {# إشعارًا غير مقروء} other {# إشعار غير مقروء}}",
+      "markAllRead": "تعليم الكل كمقروء",
+      "close": "إغلاق",
+      "ariaLabel": "الإشعارات"
+    },
+    "empty": {
+      "title": "لا توجد إشعارات جديدة.",
+      "subtitle": "ستظهر الإشعارات الجديدة هنا."
+    },
+    "tabs": {
+      "all": "الكل",
+      "unread": "غير مقروء"
+    },
+    "chips": {
+      "critical": "حرج",
+      "warning": "تحذير"
+    }
+  },
   "dashboardOverview": {
     "welcome": "مرحبا،",
+    "subTitle": "إليك ما يحدث في حسابك اليوم.",
     "upgradePlan": "ترقية الخطة",
     "recentClients": "العملاء الجدد",
     "dataUsage": "الاستخدام",
@@ -32,7 +56,9 @@
   "ticketsAndCalls": {
     "title": "التذاكر والاتصالات",
     "callsTitle": "المكالمات",
+    "callsSubTitle": "راجع وأدر جميع مكالمات عملائك.",
     "ticketsTitle": "التذاكر",
+    "ticketsSubTitle": "تتبع وحل تذاكر دعم العملاء.",
     "filterPlaceholderOne": "تصفية 1",
     "filterPlaceholderTwo": "تصفية 2",
     "customer": "العميل",
@@ -71,6 +97,7 @@
   },
   "performanceAnalytics": {
     "title": "تحليل الأداء",
+    "subTitle": "تابع أداء وكيل الذكاء الاصطناعي الخاص بك بمرور الوقت.",
     "totalCalls": "اجمالي الاتصالات",
     "averageCallDuration": "متوسط دقيق الاتصال",
     "ticketsCreated": "تذاكر تم انشاءها",
@@ -125,16 +152,67 @@
     "actions": "الإجراءات",
     "name": "الاسم",
     "secretKey": "المفتاح السري",
+    "environment": "البيئة",
+    "status": "الحالة",
+    "scopesLabel": "الصلاحيات",
     "createdOn": "تم الإنشاء في",
     "createdBy": "تم الإنشاء بواسطة",
     "lastUsed": "آخر استخدام",
+    "lastUsedNever": "لم يُستخدم",
     "permission": "الصلاحية",
     "usagePage": "صفحه الاستخدام",
     "createNewSecretKey": "إنشاء مفتاح سري جديد",
-    "viewUsage": "عرض الاستخدام لكل مفتاح API على"
+    "viewUsage": "عرض الاستخدام لكل مفتاح API على",
+    "errorPrefix": "خطأ: ",
+    "empty": "لا توجد مفاتيح API بعد. أنشئ مفتاحًا للبدء.",
+    "environments": {
+      "sandbox": "بيئة تجريبية",
+      "live": "بيئة فعلية"
+    },
+    "statuses": {
+      "active": "نشط",
+      "revoked": "ملغى",
+      "expired": "منتهي الصلاحية"
+    },
+    "scopes": {
+      "voice:use": "الصوت",
+      "landing-chat:use": "دردشة الصفحة الرئيسية",
+      "post-call-analysis:use": "تحليل ما بعد المكالمة",
+      "tickets:create": "إنشاء التذاكر"
+    },
+    "create": {
+      "title": "إنشاء مفتاح سري جديد",
+      "description": "يمنح هذا المفتاح إمكانية الوصول إلى حسابك عبر واجهة البرمجة. احتفظ به بأمان — لن يُعرض إلا مرة واحدة.",
+      "namePlaceholder": "مثال: خادم الإنتاج",
+      "environment": "البيئة",
+      "scopes": "الصلاحيات",
+      "expiresAt": "تاريخ الانتهاء (اختياري)",
+      "cancel": "إلغاء",
+      "submit": "إنشاء المفتاح"
+    },
+    "edit": {
+      "title": "تعديل مفتاح API",
+      "description": "قم بتحديث الاسم أو الصلاحيات أو تاريخ الانتهاء لهذا المفتاح.",
+      "submit": "حفظ التغييرات"
+    },
+    "reveal": {
+      "title": "انسخ مفتاحك السري",
+      "description": "هذه هي المرة الوحيدة التي سيُعرض فيها مفتاحك السري كاملاً. احتفظ به في مكان آمن.",
+      "done": "تم"
+    },
+    "rotate": {
+      "title": "تدوير المفتاح"
+    },
+    "revoke": {
+      "title": "إلغاء مفتاح API",
+      "message": "هل أنت متأكد أنك تريد إلغاء \"{name}\"؟ سيفقد أي تطبيق يستخدمه الوصول فورًا. لا يمكن التراجع عن هذا الإجراء.",
+      "cancel": "إلغاء",
+      "confirm": "إلغاء المفتاح"
+    }
   },
   "settings": {
     "title": "الإعدادات",
+    "subTitle": "إدارة حسابك وإشعاراتك وتكاملاتك.",
     "accountSettings": {
       "title": "إعدادات الحساب",
       "subTitle": "قم بتحديث بياناتك الشخصية ومعلومات الاتصال الخاصة بك.",

@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 
 import { useAuth } from '@/features/auth';
 import Logo from '@/shared/components/atoms/Logo';
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import {
   Avatar,
   AvatarFallback,
@@ -26,18 +27,7 @@ import {
   SidebarMenuItem,
 } from '@/shared/components/atoms/ui/sidebar';
 import { User } from '@/shared/types';
-import {
-  BarChart2,
-  BookOpen,
-  EllipsisVertical,
-  Key,
-  LayoutDashboard,
-  Lightbulb,
-  Mic,
-  PhoneCall,
-  Settings,
-  Ticket,
-} from 'lucide-react';
+import { EllipsisVertical } from 'lucide-react';
 
 export default function ClientSidebar({
   dir,
@@ -49,36 +39,32 @@ export default function ClientSidebar({
   const t = useTranslations('sidebar');
   const pathname = usePathname();
 
-  const menuItems = [
+  const menuItems: { title: string; icon: string; href: string }[] = [
+    { title: t('dashboard'), icon: 'dashboard', href: '/dashboard' },
+    { title: t('calls'), icon: 'calls', href: '/dashboard/calls' },
+    { title: t('tickets'), icon: 'tickets', href: '/dashboard/tickets' },
     {
-      title: t('dashboard'),
-      icon: LayoutDashboard,
-      href: '/dashboard',
+      title: t('voice-script'),
+      icon: 'voice-script',
+      href: '/dashboard/voice-script',
     },
-    {
-      title: t('calls'),
-      icon: PhoneCall,
-      href: '/dashboard/calls',
-    },
-    {
-      title: t('tickets'),
-      icon: Ticket,
-      href: '/dashboard/tickets',
-    },
-    { title: t('voice-script'), icon: Mic, href: '/dashboard/voice-script' },
     {
       title: t('performance-analytics'),
-      icon: BarChart2,
+      icon: 'analytics',
       href: '/dashboard/performance-analytics',
     },
     {
       title: t('ai-outbound'),
-      icon: Lightbulb,
+      icon: 'export-call',
       href: '/dashboard/ai-outbound',
     },
-    { title: t('api-keys'), icon: Key, href: '/dashboard/api-keys' },
-    { title: t('settings'), icon: Settings, href: '/dashboard/settings' },
-    { title: t('docs'), icon: BookOpen, href: '/docs' },
+    {
+      title: t('api-keys'),
+      icon: 'secret-key',
+      href: '/dashboard/api-keys',
+    },
+    { title: t('settings'), icon: 'settings', href: '/dashboard/settings' },
+    { title: t('docs'), icon: 'docs', href: '/docs' },
   ];
 
   const { handleLogout } = useAuth();
@@ -86,7 +72,7 @@ export default function ClientSidebar({
   return (
     <Sidebar
       side={dir}
-      className="my-2 flex w-[250px] flex-col justify-between rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]"
+      className="my-2 flex w-62.5 flex-col justify-between rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]"
     >
       <div className="mt-2 mb-6 flex flex-col items-center">
         <Logo />
@@ -108,14 +94,10 @@ export default function ClientSidebar({
                   }`}
                 >
                   <Link href={String(item.href)}>
-                    <item.icon
-                      className={`h-5 w-5 ${
-                        isActive
-                          ? 'text-[#06B6D4]'
-                          : 'text-gray-700 dark:text-gray-300'
-                      }`}
-                    />
-                    <span className="text-sm font-semibold">{item.title}</span>
+                    <ThemedIcon name={item.icon} className="size-5" />
+                    <span className="text-sm font-semibold text-black dark:text-white">
+                      {item.title}
+                    </span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

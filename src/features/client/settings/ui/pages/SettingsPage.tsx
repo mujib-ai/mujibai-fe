@@ -21,7 +21,7 @@ export default function SettingsPage() {
   const { activeTab, setActiveTab } = useClientSettings(tabItems);
 
   return (
-    <SettingsPageTemplate title={t('title')}>
+    <SettingsPageTemplate title={t('title')} subtitle={t('subTitle')}>
       <SettingsOrganism
         activeTab={activeTab}
         onTabChange={setActiveTab}

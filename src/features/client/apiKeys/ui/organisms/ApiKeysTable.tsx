@@ -1,5 +1,8 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
+import { Badge } from '@/shared/components/atoms/ui/badge';
 import {
   Table,
   TableBody,
@@ -9,21 +12,25 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 
-import type { ApiKey } from '../../types';
+import { API_KEYS_CONSTANTS } from '../../constants';
+import type { ApiKeyPublic } from '../../types';
 import ApiKeyRowActions from '../atoms/ApiKeyRowActions';
 
 interface ApiKeysTableProps {
-  apiKeys: ApiKey[];
-  onEdit: (apiKey: ApiKey) => void;
-  onDelete: (apiKey: ApiKey) => void;
+  apiKeys: ApiKeyPublic[];
+  onEdit: (apiKey: ApiKeyPublic) => void;
+  onRotate: (apiKey: ApiKeyPublic) => void;
+  onRevoke: (apiKey: ApiKeyPublic) => void;
   locale: string;
   headers: {
     name: string;
     secretKey: string;
+    environment: string;
+    status: string;
+    scopes: string;
     createdOn: string;
-    createdBy: string;
+    expiresAt: string;
     lastUsed: string;
-    permission: string;
     actions: string;
   };
 }
@@ -31,10 +38,12 @@ interface ApiKeysTableProps {
 export default function ApiKeysTable({
   apiKeys,
   onEdit,
-  onDelete,
+  onRotate,
+  onRevoke,
   locale,
   headers,
 }: ApiKeysTableProps) {
+  const t = useTranslations('APIKeys');
   const alignClass = locale === 'ar' ? 'text-right' : 'text-left';
 
   return (
@@ -43,10 +52,12 @@ export default function ApiKeysTable({
         <TableRow>
           <TableHead className={alignClass}>{headers.name}</TableHead>
           <TableHead className={alignClass}>{headers.secretKey}</TableHead>
+          <TableHead className={alignClass}>{headers.environment}</TableHead>
+          <TableHead className={alignClass}>{headers.status}</TableHead>
+          <TableHead className={alignClass}>{headers.scopes}</TableHead>
           <TableHead className={alignClass}>{headers.createdOn}</TableHead>
-          <TableHead className={alignClass}>{headers.createdBy}</TableHead>
+          <TableHead className={alignClass}>{headers.expiresAt}</TableHead>
           <TableHead className={alignClass}>{headers.lastUsed}</TableHead>
-          <TableHead className={alignClass}>{headers.permission}</TableHead>
           <TableHead className={alignClass}>{headers.actions}</TableHead>
         </TableRow>
       </TableHeader>
@@ -54,24 +65,49 @@ export default function ApiKeysTable({
         {apiKeys.map(apiKey => (
           <TableRow key={apiKey.id}>
             <TableCell>{apiKey.name}</TableCell>
-            <TableCell>{apiKey.key}</TableCell>
+            <TableCell className="font-mono text-xs">
+              {apiKey.keyPrefix}
+            </TableCell>
             <TableCell>
-              {apiKey.createdAt
-                ? new Date(apiKey.createdAt).toLocaleDateString()
+              <Badge variant="outline">
+                {t(`environments.${apiKey.environment}`)}
+              </Badge>
+            </TableCell>
+            <TableCell>
+              <Badge
+                variant={API_KEYS_CONSTANTS.STATUS_BADGE_VARIANT[apiKey.status]}
+              >
+                {t(`statuses.${apiKey.status}`)}
+              </Badge>
+            </TableCell>
+            <TableCell>
+              <div className="flex flex-wrap gap-1">
+                {apiKey.scopes.map(scope => (
+                  <Badge key={scope} variant="secondary">
+                    {t(`scopes.${scope}`)}
+                  </Badge>
+                ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              {new Date(apiKey.createdAt).toLocaleDateString()}
+            </TableCell>
+            <TableCell>
+              {apiKey.expiresAt
+                ? new Date(apiKey.expiresAt).toLocaleDateString()
                 : '-'}
             </TableCell>
-            <TableCell>{apiKey.createdBy}</TableCell>
             <TableCell>
-              {apiKey.lastUsed
-                ? new Date(apiKey.lastUsed).toLocaleDateString()
-                : '-'}
+              {apiKey.lastUsedAt
+                ? new Date(apiKey.lastUsedAt).toLocaleDateString()
+                : t('lastUsedNever')}
             </TableCell>
-            <TableCell>{apiKey.permissions?.join(', ')}</TableCell>
             <TableCell>
               <ApiKeyRowActions
                 apiKey={apiKey}
                 onEdit={onEdit}
-                onDelete={onDelete}
+                onRotate={onRotate}
+                onRevoke={onRevoke}
               />
             </TableCell>
           </TableRow>

@@ -1,125 +1,194 @@
 'use client';
 
-import React from 'react';
+import { QUERY_CONSTANTS } from '@/shared/constants/query.constants';
+import { getErrorMessage } from '@/shared/utils/getErrorMessage';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
-import { API_KEYS_CONSTANTS } from '../constants';
-import type { ApiKey } from '../types';
+import { ApiKeyService } from '../services';
+import type {
+  ApiKeyPublic,
+  CreateApiKeyDto,
+  UpdateApiKeyExpirationDto,
+  UpdateApiKeyNameDto,
+  UpdateApiKeyScopesDto,
+} from '../types';
 
-export type { ApiKey };
-
-export interface ApiKeysState {
-  apiKeys: ApiKey[];
-  isLoading: boolean;
-  error: string | null;
-}
+const API_KEYS_QUERY_KEY = [QUERY_CONSTANTS.KEYS.API_KEYS];
 
 export default function useApiKeys() {
-  const [state, setState] = React.useState<ApiKeysState>({
-    apiKeys: [
-      {
-        id: '1',
-        name: 'Secret Key',
-        key: `${API_KEYS_CONSTANTS.SECRET_KEY_PREFIX}${API_KEYS_CONSTANTS.MASK_CHAR.repeat(5)}gkbs`,
-        permissions: [API_KEYS_CONSTANTS.PERMISSIONS.ALL],
-        isActive: true,
-        createdBy: 'Abdulrhman A...',
-        createdAt: new Date('2026-09-22'),
-        updatedAt: new Date('2026-09-22'),
-        lastUsed: new Date('2026-10-11'),
-      } as ApiKey,
-    ],
-    isLoading: false,
-    error: null,
+  const queryClient = useQueryClient();
+
+  const {
+    data: apiKeys = [],
+    isLoading,
+    isError,
+    error: queryError,
+  } = useQuery({
+    queryKey: API_KEYS_QUERY_KEY,
+    queryFn: ApiKeyService.list,
   });
 
-  const createApiKey = React.useCallback(async (data: Partial<ApiKey>) => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    try {
-      await new Promise(resolve =>
-        setTimeout(resolve, API_KEYS_CONSTANTS.CREATE_DELAY_MS)
-      );
-      const now = new Date();
-      const newApiKey: ApiKey = {
-        id: Date.now().toString(),
-        name: data.name || API_KEYS_CONSTANTS.DEFAULT_KEY_NAME,
-        key: `${API_KEYS_CONSTANTS.SECRET_KEY_PREFIX}${API_KEYS_CONSTANTS.MASK_CHAR.repeat(5)}${Math.random().toString(36).substring(2, 6)}`,
-        permissions: data.permissions || [API_KEYS_CONSTANTS.PERMISSIONS.ALL],
-        isActive: true,
-        createdBy: 'Current User',
-        createdAt: now,
-        updatedAt: now,
-      };
-      setState(prev => ({
-        ...prev,
-        apiKeys: [...prev.apiKeys, newApiKey],
-        isLoading: false,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error:
-          error instanceof Error ? error.message : 'Failed to create API key',
-        isLoading: false,
-      }));
-    }
-  }, []);
+  function patchCache(
+    apiKeyId: string,
+    patch: Partial<ApiKeyPublic>
+  ): ApiKeyPublic[] | undefined {
+    const previous =
+      queryClient.getQueryData<ApiKeyPublic[]>(API_KEYS_QUERY_KEY);
+    queryClient.setQueryData<ApiKeyPublic[]>(API_KEYS_QUERY_KEY, old =>
+      old?.map(key => (key.id === apiKeyId ? { ...key, ...patch } : key))
+    );
+    return previous;
+  }
 
-  const updateApiKey = React.useCallback(
-    async (id: string, data: Partial<ApiKey>) => {
-      setState(prev => ({ ...prev, isLoading: true, error: null }));
-      try {
-        await new Promise(resolve =>
-          setTimeout(resolve, API_KEYS_CONSTANTS.UPDATE_DELAY_MS)
-        );
-        setState(prev => ({
-          ...prev,
-          apiKeys: prev.apiKeys.map(key =>
-            key.id === id ? { ...key, ...data } : key
-          ),
-          isLoading: false,
-        }));
-      } catch (error) {
-        setState(prev => ({
-          ...prev,
-          error:
-            error instanceof Error ? error.message : 'Failed to update API key',
-          isLoading: false,
-        }));
-      }
+  function rollback(previous: ApiKeyPublic[] | undefined) {
+    if (previous) {
+      queryClient.setQueryData(API_KEYS_QUERY_KEY, previous);
+    }
+  }
+
+  const createMutation = useMutation({
+    mutationFn: (payload: CreateApiKeyDto) => ApiKeyService.create(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+      toast.success('API key created successfully.');
     },
-    []
-  );
+    onError: error => {
+      toast.error(getErrorMessage(error, 'Failed to create API key'));
+    },
+  });
 
-  const deleteApiKey = React.useCallback(async (id: string) => {
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
-    try {
-      await new Promise(resolve =>
-        setTimeout(resolve, API_KEYS_CONSTANTS.DELETE_DELAY_MS)
-      );
-      setState(prev => ({
-        ...prev,
-        apiKeys: prev.apiKeys.filter(key => key.id !== id),
-        isLoading: false,
-      }));
-    } catch (error) {
-      setState(prev => ({
-        ...prev,
-        error:
-          error instanceof Error ? error.message : 'Failed to delete API key',
-        isLoading: false,
-      }));
-    }
-  }, []);
+  const updateNameMutation = useMutation({
+    mutationFn: ({
+      apiKeyId,
+      payload,
+    }: {
+      apiKeyId: string;
+      payload: UpdateApiKeyNameDto;
+    }) => ApiKeyService.updateName(apiKeyId, payload),
+    onMutate: async ({ apiKeyId, payload }) => {
+      await queryClient.cancelQueries({ queryKey: API_KEYS_QUERY_KEY });
+      const previous = patchCache(apiKeyId, { name: payload.name });
+      return { previous };
+    },
+    onError: (error, _vars, context) => {
+      rollback(context?.previous);
+      toast.error(getErrorMessage(error, 'Failed to rename API key'));
+    },
+    onSuccess: () => {
+      toast.success('API key renamed.');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+    },
+  });
 
-  const clearError = React.useCallback(() => {
-    setState(prev => ({ ...prev, error: null }));
-  }, []);
+  const updateScopesMutation = useMutation({
+    mutationFn: ({
+      apiKeyId,
+      payload,
+    }: {
+      apiKeyId: string;
+      payload: UpdateApiKeyScopesDto;
+    }) => ApiKeyService.updateScopes(apiKeyId, payload),
+    onMutate: async ({ apiKeyId, payload }) => {
+      await queryClient.cancelQueries({ queryKey: API_KEYS_QUERY_KEY });
+      const previous = patchCache(apiKeyId, { scopes: payload.scopes });
+      return { previous };
+    },
+    onError: (error, _vars, context) => {
+      rollback(context?.previous);
+      toast.error(getErrorMessage(error, 'Failed to update scopes'));
+    },
+    onSuccess: () => {
+      toast.success('API key scopes updated.');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+    },
+  });
+
+  const updateExpirationMutation = useMutation({
+    mutationFn: ({
+      apiKeyId,
+      payload,
+    }: {
+      apiKeyId: string;
+      payload: UpdateApiKeyExpirationDto;
+    }) => ApiKeyService.updateExpiration(apiKeyId, payload),
+    onMutate: async ({ apiKeyId, payload }) => {
+      await queryClient.cancelQueries({ queryKey: API_KEYS_QUERY_KEY });
+      const previous = patchCache(apiKeyId, { expiresAt: payload.expiresAt });
+      return { previous };
+    },
+    onError: (error, _vars, context) => {
+      rollback(context?.previous);
+      toast.error(getErrorMessage(error, 'Failed to update expiration'));
+    },
+    onSuccess: () => {
+      toast.success('API key expiration updated.');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+    },
+  });
+
+  const rotateMutation = useMutation({
+    mutationFn: (apiKeyId: string) => ApiKeyService.rotate(apiKeyId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+      toast.success('API key rotated. Copy the new secret now.');
+    },
+    onError: error => {
+      toast.error(getErrorMessage(error, 'Failed to rotate API key'));
+    },
+  });
+
+  const revokeMutation = useMutation({
+    mutationFn: (apiKeyId: string) => ApiKeyService.revoke(apiKeyId),
+    onMutate: async (apiKeyId: string) => {
+      await queryClient.cancelQueries({ queryKey: API_KEYS_QUERY_KEY });
+      const previous = patchCache(apiKeyId, { status: 'revoked' });
+      return { previous };
+    },
+    onError: (error, _vars, context) => {
+      rollback(context?.previous);
+      toast.error(getErrorMessage(error, 'Failed to revoke API key'));
+    },
+    onSuccess: () => {
+      toast.success('API key revoked.');
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: API_KEYS_QUERY_KEY });
+    },
+  });
 
   return {
-    ...state,
-    createApiKey,
-    updateApiKey,
-    deleteApiKey,
-    clearError,
+    apiKeys,
+    isLoading,
+    error: isError
+      ? getErrorMessage(queryError, 'Failed to load API keys')
+      : null,
+
+    createApiKey: createMutation.mutateAsync,
+    createLoading: createMutation.isPending,
+
+    updateName: (apiKeyId: string, payload: UpdateApiKeyNameDto) =>
+      updateNameMutation.mutateAsync({ apiKeyId, payload }),
+    updateNameLoading: updateNameMutation.isPending,
+
+    updateScopes: (apiKeyId: string, payload: UpdateApiKeyScopesDto) =>
+      updateScopesMutation.mutateAsync({ apiKeyId, payload }),
+    updateScopesLoading: updateScopesMutation.isPending,
+
+    updateExpiration: (apiKeyId: string, payload: UpdateApiKeyExpirationDto) =>
+      updateExpirationMutation.mutateAsync({ apiKeyId, payload }),
+    updateExpirationLoading: updateExpirationMutation.isPending,
+
+    rotateApiKey: rotateMutation.mutateAsync,
+    rotateLoading: rotateMutation.isPending,
+
+    revokeApiKey: revokeMutation.mutateAsync,
+    revokeLoading: revokeMutation.isPending,
   };
 }

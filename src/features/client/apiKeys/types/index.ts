@@ -1,89 +1,49 @@
-export interface ApiKey {
-  id: string;
-  name: string;
-  key: string;
-  permissions: string[];
-  isActive: boolean;
-  lastUsed?: Date;
-  expiresAt?: Date;
-  createdBy: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export type ApiKeyEnvironment = 'sandbox' | 'live';
 
-export interface ApiKey {
+export type ApiKeyStatus = 'active' | 'revoked' | 'expired';
+
+export type ApiKeyScope =
+  | 'voice:use'
+  | 'landing-chat:use'
+  | 'post-call-analysis:use'
+  | 'tickets:create';
+
+export interface ApiKeyPublic {
   id: string;
+  publicId: string;
+  keyPrefix: string;
   name: string;
-  key: string;
-  permissions: string[];
-  isActive: boolean;
-  lastUsed?: Date;
-  expiresAt?: Date;
-  createdBy: string;
-  createdAt: Date;
-  updatedAt: Date;
+  environment: ApiKeyEnvironment;
+  status: ApiKeyStatus;
+  scopes: ApiKeyScope[];
+  expiresAt?: string;
+  lastUsedAt?: string;
+  lastUsedIp?: string;
+  createdAt: string;
+  updatedAt: string;
+  revokedAt?: string;
 }
 
 export interface CreateApiKeyDto {
   name: string;
-  permissions: string[];
-  expiresAt?: Date;
+  environment?: ApiKeyEnvironment;
+  scopes?: ApiKeyScope[];
+  expiresAt?: string;
 }
 
-export interface UpdateApiKeyDto {
-  name?: string;
-  permissions?: string[];
-  isActive?: boolean;
-  expiresAt?: Date;
+export interface ApiKeyCreatedResponse {
+  apiKey: ApiKeyPublic;
+  fullKey: string;
 }
 
-export interface ApiKeyFilters {
-  search?: string;
-  isActive?: boolean;
-  createdBy?: string;
-  page?: number;
-  limit?: number;
+export interface UpdateApiKeyNameDto {
+  name: string;
 }
 
-export interface PaginatedApiKeysResponse {
-  data: ApiKey[];
-  meta: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+export interface UpdateApiKeyScopesDto {
+  scopes: ApiKeyScope[];
 }
 
-export interface ApiKeyUsage {
-  id: string;
-  apiKeyId: string;
-  endpoint: string;
-  method: string;
-  statusCode: number;
-  responseTime: number;
-  timestamp: Date;
-  ipAddress?: string;
-  userAgent?: string;
-}
-
-export interface ApiKeyUsageFilters {
-  apiKeyId?: string;
-  endpoint?: string;
-  method?: string;
-  statusCode?: number;
-  startDate?: Date;
-  endDate?: Date;
-  page?: number;
-  limit?: number;
-}
-
-export interface ApiKeyUsageResponse {
-  data: ApiKeyUsage[];
-  meta: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+export interface UpdateApiKeyExpirationDto {
+  expiresAt?: string;
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Select,
@@ -8,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
-import { Filter } from 'lucide-react';
 
 export default function Filtering({
   filterPlaceholderOne,
@@ -40,7 +40,7 @@ export default function Filtering({
         </SelectContent>
       </Select>
       <Button>
-        <Filter className="h-5 w-5 text-white" />
+        <ThemedIcon name="filters" size={20} className="h-5 w-5" />
       </Button>
     </div>
   );

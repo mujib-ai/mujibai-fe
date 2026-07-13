@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import DashboardHeader from '@/shared/components/organisms/client-dashboard/DashboardHeader';
+import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 import VoiceScriptHint from '../atoms/VoiceScriptHint';
 import CallGreetingVoice from '../organisms/CallGreetingVoice';
