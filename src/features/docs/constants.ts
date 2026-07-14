@@ -5,13 +5,16 @@ export const DOCS_ROOT = '/docs';
 export const DOCS_NAV: DocNavSection[] = [
   {
     key: 'gettingStarted',
-    items: [{ key: 'introduction', href: '/docs' }],
+    items: [
+      { key: 'introduction', href: '/docs' },
+      { key: 'gettingStarted', href: '/docs/getting-started' },
+    ],
   },
   {
     key: 'authentication',
     items: [
       { key: 'secretKeys', href: '/docs/secret-keys' },
-      { key: 'authentication', href: '/docs/authentication' },
+      { key: 'authentication', href: '/docs/api-authentication' },
     ],
   },
   {
@@ -19,8 +22,10 @@ export const DOCS_NAV: DocNavSection[] = [
     items: [
       {
         key: 'voiceAgentIntegration',
-        href: '/docs/voice-agent-integration',
+        href: '/docs/voice-agent',
       },
+      { key: 'webhooks', href: '/docs/webhooks' },
+      { key: 'integrations', href: '/docs/integrations' },
     ],
   },
 ];

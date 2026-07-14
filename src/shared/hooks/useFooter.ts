@@ -13,15 +13,15 @@ export function useFooter() {
     { href: '#about', label: t('quickLinks.aboutUs') },
     { href: '#features', label: t('quickLinks.features') },
     { href: '#why-us', label: t('quickLinks.whyUs') },
-    { href: '/contact-us', label: t('quickLinks.contactUs') },
+    { href: '/contact', label: t('quickLinks.contactUs') },
     { href: '#industries', label: t('quickLinks.industries') },
     { href: '#pricing', label: t('quickLinks.pricing') },
     { href: '/help-center', label: t('quickLinks.helpCenter') },
   ];
 
   const legalLinks = [
-    { href: '/terms-of-services', label: t('termsOfUse') },
-    { href: '/privacy-policy', label: t('privacyPolicy') },
+    { href: '/terms', label: t('termsOfUse') },
+    { href: '/privacy', label: t('privacyPolicy') },
     { href: '/cancellation-policy', label: t('cancellationPolicy') },
   ];
 

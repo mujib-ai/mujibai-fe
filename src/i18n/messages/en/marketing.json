@@ -1,0 +1,108 @@
+{
+  "marketing": {
+    "aiVoiceAgent": {
+      "title": "AI Voice Agent - mujibai",
+      "description": "mujibai is an AI voice agent that answers business phone calls, books appointments, and creates tickets around the clock."
+    },
+    "aiCallCenter": {
+      "title": "AI Call Center - mujibai",
+      "description": "Run an AI-powered call center with mujibai: automated call answering, routing, and analytics for growing businesses."
+    },
+    "arabicAiReceptionist": {
+      "title": "Arabic AI Receptionist - mujibai",
+      "description": "A native-sounding Arabic AI receptionist that answers calls, understands local dialects, and handles requests for your business."
+    },
+    "automatedCustomerService": {
+      "title": "Automated Customer Service - mujibai",
+      "description": "Automate customer service across phone and chat with mujibai, an AI agent that resolves requests without adding headcount."
+    },
+    "afterHoursCallAnswering": {
+      "title": "After-Hours Call Answering - mujibai",
+      "description": "Never miss a call outside business hours. mujibai answers, triages, and books appointments after hours and on weekends."
+    },
+    "pricing": {
+      "title": "Pricing - mujibai",
+      "description": "mujibai pricing plans for AI customer service agents, phone number provisioning, and add-on usage."
+    },
+    "demo": {
+      "title": "Book a Demo - mujibai",
+      "description": "See mujibai in action. Book a live demo of the AI customer service agent for your business."
+    },
+    "about": {
+      "title": "About mujibai",
+      "description": "Learn about mujibai and the team building AI customer service agents."
+    },
+    "featuresIndex": {
+      "title": "Features - mujibai",
+      "description": "Explore mujibai features: call answering, appointment booking, ticket creation, and more."
+    },
+    "features": {
+      "callAnswering": {
+        "title": "Call Answering",
+        "description": "mujibai answers every inbound call with a natural-sounding AI voice agent."
+      },
+      "appointmentBooking": {
+        "title": "Appointment Booking",
+        "description": "Let mujibai book, reschedule, and confirm appointments directly on the call."
+      },
+      "ticketCreation": {
+        "title": "Ticket Creation",
+        "description": "mujibai automatically creates and routes support tickets from every call."
+      },
+      "knowledgeBase": {
+        "title": "Knowledge Base",
+        "description": "Connect a knowledge base so mujibai answers questions with accurate, up-to-date information."
+      },
+      "callAnalytics": {
+        "title": "Call Analytics",
+        "description": "Understand call volume, outcomes, and trends with mujibai call analytics."
+      },
+      "callRecording": {
+        "title": "Call Recording",
+        "description": "Every mujibai call is recorded and transcribed for quality and compliance."
+      },
+      "integrations": {
+        "title": "Integrations",
+        "description": "Connect mujibai to your CRM, helpdesk, and business systems."
+      },
+      "arabicDialects": {
+        "title": "Arabic Dialects",
+        "description": "mujibai understands and speaks multiple Arabic dialects naturally."
+      }
+    },
+    "industriesIndex": {
+      "title": "Industries - mujibai",
+      "description": "See how mujibai helps clinics, real estate, restaurants, ecommerce, hotels, and maintenance companies."
+    },
+    "industries": {
+      "clinics": {
+        "title": "AI Agent for Clinics - mujibai",
+        "description": "mujibai answers patient calls, books appointments, and handles clinic front-desk requests."
+      },
+      "realEstate": {
+        "title": "AI Agent for Real Estate - mujibai",
+        "description": "mujibai qualifies leads, books viewings, and answers property questions for real estate teams."
+      },
+      "restaurants": {
+        "title": "AI Agent for Restaurants - mujibai",
+        "description": "mujibai takes reservations and answers common questions for restaurants."
+      },
+      "ecommerce": {
+        "title": "AI Agent for Ecommerce - mujibai",
+        "description": "mujibai handles order status, returns, and support calls for ecommerce businesses."
+      },
+      "hotels": {
+        "title": "AI Agent for Hotels - mujibai",
+        "description": "mujibai answers reservation and guest-service calls for hotels around the clock."
+      },
+      "maintenanceCompanies": {
+        "title": "AI Agent for Maintenance Companies - mujibai",
+        "description": "mujibai schedules service calls and creates work tickets for maintenance companies."
+      }
+    },
+    "blogIndex": {
+      "title": "Blog - mujibai",
+      "description": "Articles and guides about AI customer service agents."
+    }
+  }
+}

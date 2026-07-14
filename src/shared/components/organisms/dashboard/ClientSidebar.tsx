@@ -7,35 +7,14 @@ import { useAuth } from '@/features/auth';
 import Logo from '@/shared/components/atoms/Logo';
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/shared/components/atoms/ui/avatar';
-import { Button } from '@/shared/components/atoms/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/shared/components/atoms/ui/dropdown-menu';
-import {
   Sidebar,
   SidebarContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/shared/components/atoms/ui/sidebar';
-import { User } from '@/shared/types';
-import { EllipsisVertical } from 'lucide-react';
 
-export default function ClientSidebar({
-  dir,
-  user,
-}: {
-  dir: 'left' | 'right';
-  user: User;
-}) {
+export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
   const t = useTranslations('sidebar');
   const pathname = usePathname();
 
@@ -62,6 +41,11 @@ export default function ClientSidebar({
       title: t('api-keys'),
       icon: 'secret-key',
       href: '/dashboard/api-keys',
+    },
+    {
+      title: t('billing'),
+      icon: 'receipt',
+      href: '/dashboard/billing',
     },
     { title: t('settings'), icon: 'settings', href: '/dashboard/settings' },
     { title: t('docs'), icon: 'docs', href: '/docs' },
@@ -105,44 +89,6 @@ export default function ClientSidebar({
           })}
         </SidebarMenu>
       </SidebarContent>
-
-      <div className="mt-6 flex items-center gap-3 rounded-xl bg-[#06B6D40F] p-3 dark:bg-[#0e2235]">
-        <Avatar>
-          <AvatarImage
-            src={`https://api.dicebear.com/6.x/initials/svg?seed=${user?.firstName} ${user?.lastName}&backgroundColor=2563eb&backgroundType=solid`}
-            alt={`${user?.firstName} ${user?.lastName}`}
-            className="transition-transform duration-300 group-hover:scale-105"
-          />
-          <AvatarFallback>{`${user?.firstName ?? ''} ${user?.lastName ?? ''}`}</AvatarFallback>
-        </Avatar>
-
-        <div className="flex flex-col text-sm">
-          <span className="font-semibold text-gray-900 dark:text-white">
-            {`${user?.firstName ?? ''} ${user?.lastName ?? ''}`}
-          </span>
-          <span className="text-xs text-gray-500">{user?.role}</span>
-        </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="m-0 p-0 hover:bg-transparent dark:bg-transparent"
-            >
-              <EllipsisVertical className="size-5" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-56 bg-[#fff] dark:bg-[#0e2235]"
-            align="start"
-          >
-            <DropdownMenuLabel>{t('myAccount')}</DropdownMenuLabel>
-
-            <DropdownMenuItem onClick={handleLogout}>
-              {t('logout')}
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
     </Sidebar>
   );
 }

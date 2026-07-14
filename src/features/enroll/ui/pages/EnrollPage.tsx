@@ -5,6 +5,47 @@ import { CheckCircle } from 'lucide-react';
 
 import { EnrollmentForm } from '../organisms';
 
+const EMAIL_REGEX = /[\w.+-]+@[\w-]+\.[\w.-]+/;
+const PHONE_REGEX = /\+\d[\d\s]*\d/;
+
+function linkifyContactInfo(text: string) {
+  const email = text.match(EMAIL_REGEX)?.[0];
+  if (email) {
+    const [before, after] = text.split(email);
+    return (
+      <>
+        {before}
+        <a
+          href={`mailto:${email}`}
+          className="text-primary underline underline-offset-2"
+        >
+          {email}
+        </a>
+        {after}
+      </>
+    );
+  }
+
+  const phone = text.match(PHONE_REGEX)?.[0];
+  if (phone) {
+    const [before, after] = text.split(phone);
+    return (
+      <>
+        {before}
+        <a
+          href={`tel:${phone.replace(/\s+/g, '')}`}
+          className="text-primary underline underline-offset-2"
+        >
+          {phone}
+        </a>
+        {after}
+      </>
+    );
+  }
+
+  return text;
+}
+
 export default function EnrollPage() {
   const t = useTranslations('enrollPage');
   const instructions = [
@@ -40,7 +81,7 @@ export default function EnrollPage() {
                 <li key={index} className="flex items-start gap-3">
                   <CheckCircle className="text-primary mt-0.5 h-5 w-5 shrink-0" />
                   <span className="text-foreground text-sm leading-relaxed">
-                    {item}
+                    {linkifyContactInfo(item)}
                   </span>
                 </li>
               ))}

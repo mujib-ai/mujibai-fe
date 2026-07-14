@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -12,9 +14,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/atoms/ui/table';
+import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { Eye, Play } from 'lucide-react';
 
-import { TablePagination } from '../molecules';
+import { CallsCardList, TablePagination } from '../molecules';
 
 export default function CallsTable({
   t,
@@ -25,6 +28,8 @@ export default function CallsTable({
   locale: string;
   titleKey?: string;
 }) {
+  const isMobile = useIsMobile();
+
   const items = [
     {
       customer: 'Toni Kroos',
@@ -64,73 +69,79 @@ export default function CallsTable({
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="overflow-x-auto">
-          <Table className="w-full rounded-xl border-0 bg-[#FFFFFFBF] dark:bg-[#001434A6]">
-            <TableHeader>
-              <TableRow className="text-foreground border-none">
-                <TableHead
-                  className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  {t('customer')}
-                </TableHead>
-                <TableHead
-                  className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  {t('phone')}
-                </TableHead>
-                <TableHead
-                  className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  {t('duration')}
-                </TableHead>
-                <TableHead
-                  className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  {t('scenario')}
-                </TableHead>
-                <TableHead
-                  className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                >
-                  {t('date')}
-                </TableHead>
-                <TableHead className="text-center">{t('status')}</TableHead>
-                <TableHead className="text-center">{t('receipt')}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {items.map((item, idx) => (
-                <TableRow
-                  key={idx}
-                  className="hover:bg-primary/40 border-none transition-colors dark:hover:bg-[#00214f]/40"
-                >
-                  <TableCell className="text-foreground font-medium">
-                    {item.customer}
-                  </TableCell>
-                  <TableCell className="text-foreground">
-                    {item.phone}
-                  </TableCell>
-                  <TableCell className="text-foreground">
-                    {item.duration}
-                  </TableCell>
-                  <TableCell className="text-foreground">
-                    {item.scenario}
-                  </TableCell>
-                  <TableCell className="text-foreground">{item.date}</TableCell>
-                  <TableCell className="text-center">
-                    <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
-                      <Play fill="#06B6D4" className="size-4" />
-                    </button>
-                  </TableCell>
-                  <TableCell className="text-center">
-                    <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
-                      <Eye className="text-primary size-4" />
-                    </button>
-                  </TableCell>
+        {isMobile ? (
+          <CallsCardList items={items} t={t} />
+        ) : (
+          <div className="overflow-x-auto">
+            <Table className="w-full rounded-xl border-0 bg-[#FFFFFFBF] dark:bg-[#001434A6]">
+              <TableHeader>
+                <TableRow className="text-foreground border-none">
+                  <TableHead
+                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
+                  >
+                    {t('customer')}
+                  </TableHead>
+                  <TableHead
+                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
+                  >
+                    {t('phone')}
+                  </TableHead>
+                  <TableHead
+                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
+                  >
+                    {t('duration')}
+                  </TableHead>
+                  <TableHead
+                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
+                  >
+                    {t('scenario')}
+                  </TableHead>
+                  <TableHead
+                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
+                  >
+                    {t('date')}
+                  </TableHead>
+                  <TableHead className="text-center">{t('status')}</TableHead>
+                  <TableHead className="text-center">{t('receipt')}</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+              </TableHeader>
+              <TableBody>
+                {items.map((item, idx) => (
+                  <TableRow
+                    key={idx}
+                    className="hover:bg-primary/40 border-none transition-colors dark:hover:bg-[#00214f]/40"
+                  >
+                    <TableCell className="text-foreground font-medium">
+                      {item.customer}
+                    </TableCell>
+                    <TableCell className="text-foreground">
+                      {item.phone}
+                    </TableCell>
+                    <TableCell className="text-foreground">
+                      {item.duration}
+                    </TableCell>
+                    <TableCell className="text-foreground">
+                      {item.scenario}
+                    </TableCell>
+                    <TableCell className="text-foreground">
+                      {item.date}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
+                        <Play fill="#06B6D4" className="size-4" />
+                      </button>
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
+                        <Eye className="text-primary size-4" />
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        )}
         <TablePagination
           ofText={t('of')}
           clientsText={t('clients')}

@@ -11,10 +11,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/atoms/ui/table';
+import { useIsMobile } from '@/shared/hooks/use-mobile';
 
 import { API_KEYS_CONSTANTS } from '../../constants';
 import type { ApiKeyPublic } from '../../types';
 import ApiKeyRowActions from '../atoms/ApiKeyRowActions';
+import ApiKeysCardList from '../molecules/ApiKeysCardList';
 
 interface ApiKeysTableProps {
   apiKeys: ApiKeyPublic[];
@@ -44,7 +46,20 @@ export default function ApiKeysTable({
   headers,
 }: ApiKeysTableProps) {
   const t = useTranslations('APIKeys');
+  const isMobile = useIsMobile();
   const alignClass = locale === 'ar' ? 'text-right' : 'text-left';
+
+  if (isMobile) {
+    return (
+      <ApiKeysCardList
+        apiKeys={apiKeys}
+        onEdit={onEdit}
+        onRotate={onRotate}
+        onRevoke={onRevoke}
+        headers={headers}
+      />
+    );
+  }
 
   return (
     <Table className="my-10 bg-white dark:bg-[#00143473]">

@@ -15,9 +15,9 @@ export function PageBackground({
   glowClassName?: string;
 }) {
   return (
-    <div
+    <main
       className={cn(
-        'relative flex min-h-screen w-full flex-col items-center overflow-x-hidden py-12',
+        'relative flex min-h-screen w-full flex-col items-center overflow-x-hidden',
         className
       )}
     >
@@ -30,6 +30,6 @@ export function PageBackground({
 
       {showHeader && <Header />}
       {children}
-    </div>
+    </main>
   );
 }

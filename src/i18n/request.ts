@@ -30,6 +30,8 @@ export default getRequestConfig(async () => {
   const refundPage = (await import(`./messages/${locale}/refundPage.json`))
     .default;
   const docs = (await import(`./messages/${locale}/docs.json`)).default;
+  const marketing = (await import(`./messages/${locale}/marketing.json`))
+    .default;
 
   return {
     locale,
@@ -47,6 +49,7 @@ export default getRequestConfig(async () => {
       ...cancellationPage,
       ...refundPage,
       ...docs,
+      ...marketing,
     },
   };
 });

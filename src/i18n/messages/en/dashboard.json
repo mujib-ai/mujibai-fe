@@ -7,10 +7,16 @@
     "performance-analytics": "Performance Analytics",
     "ai-outbound": "AI Outbound",
     "api-keys": "API Keys",
+    "billing": "Billing",
     "settings": "Settings",
     "docs": "Docs",
     "myAccount": "My Account",
     "logout": "Log out"
+  },
+  "billingPage": {
+    "title": "Billing",
+    "subTitle": "Manage your subscription, payment method, and invoices.",
+    "comingSoon": "Billing details coming soon."
   },
   "notifications": {
     "title": "Notifications",

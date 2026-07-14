@@ -130,10 +130,7 @@ export function ContactForm() {
           <p className="mt-1 text-center text-[11px] leading-relaxed text-(--ink-3)">
             {t.rich('consent', {
               link: chunks => (
-                <Link
-                  href="/privacy-policy"
-                  className="text-(--ink-2) underline"
-                >
+                <Link href="/privacy" className="text-(--ink-2) underline">
                   {chunks}
                 </Link>
               ),

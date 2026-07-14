@@ -115,7 +115,7 @@ export default function MobileNav({
                       variant="outline"
                       className="border-primary text-primary h-12 w-full rounded-full border-2 text-base font-semibold"
                     >
-                      <Link href="/enroll">{t('header.enroll')}</Link>
+                      <Link href="/register">{t('header.enroll')}</Link>
                     </Button>
                   </SheetClose>
                 </>

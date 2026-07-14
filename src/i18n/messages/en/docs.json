@@ -22,6 +22,10 @@
           "title": "Introduction",
           "description": "What Mujib AI is and how the docs are organized."
         },
+        "gettingStarted": {
+          "title": "Getting Started",
+          "description": "Set up your account and make your first API call."
+        },
         "secretKeys": {
           "title": "Secret Keys",
           "description": "Create, store, and rotate secret keys securely."
@@ -33,6 +37,14 @@
         "voiceAgentIntegration": {
           "title": "Voice Agent Integration",
           "description": "Connect the AI Voice Agent to your business."
+        },
+        "webhooks": {
+          "title": "Webhooks",
+          "description": "Receive real-time events for calls and tickets."
+        },
+        "integrations": {
+          "title": "Integrations",
+          "description": "Connect Mujib AI to your CRM and business systems."
         }
       }
     },
@@ -71,7 +83,7 @@
             "blocks": [
               {
                 "type": "p",
-                "text": "Start with [Secret Keys](/docs/secret-keys) to create your first key, then head to [Authenticating Requests](/docs/authentication) to make your first authenticated call. Once that works, follow [Voice Agent Integration](/docs/voice-agent-integration) to connect the agent to your phone numbers and business systems."
+                "text": "Start with [Secret Keys](/docs/secret-keys) to create your first key, then head to [Authenticating Requests](/docs/api-authentication) to make your first authenticated call. Once that works, follow [Voice Agent Integration](/docs/voice-agent) to connect the agent to your phone numbers and business systems."
               }
             ]
           },
@@ -86,6 +98,34 @@
                 "type": "code",
                 "language": "text",
                 "code": "https://api.mujibai.net/v1"
+              }
+            ]
+          }
+        }
+      },
+      "gettingStarted": {
+        "eyebrow": "Getting Started",
+        "title": "Getting Started",
+        "intro": "This guide walks through the minimum steps to make your first authenticated call to the Mujib AI API.",
+        "sections": {
+          "steps": {
+            "title": "Setup steps",
+            "blocks": [
+              {
+                "type": "step",
+                "text": "Create an account and sign in to your dashboard."
+              },
+              {
+                "type": "step",
+                "text": "Create a secret key under `Dashboard → API Keys`."
+              },
+              {
+                "type": "step",
+                "text": "Send an authenticated request using the `Authorization` header."
+              },
+              {
+                "type": "step",
+                "text": "Create a Voice Agent and connect a phone number."
               }
             ]
           }
@@ -252,6 +292,55 @@
                 "calloutType": "info",
                 "title": "Use HTTPS",
                 "text": "All requests must be made over HTTPS. Plain HTTP requests are rejected."
+              }
+            ]
+          }
+        }
+      },
+      "webhooks": {
+        "eyebrow": "Integrations",
+        "title": "Webhooks",
+        "intro": "Configure a webhook endpoint to receive real-time events as calls and tickets progress.",
+        "sections": {
+          "events": {
+            "title": "Available events",
+            "blocks": [
+              {
+                "type": "item",
+                "term": "`call.started`",
+                "desc": "the agent has connected with the caller."
+              },
+              {
+                "type": "item",
+                "term": "`call.ended`",
+                "desc": "the call has finished, with a transcript and summary."
+              },
+              {
+                "type": "item",
+                "term": "`ticket.created`",
+                "desc": "the agent escalated the call to a support ticket."
+              },
+              {
+                "type": "callout",
+                "calloutType": "warning",
+                "title": "Verify webhook signatures",
+                "text": "Every webhook request includes an `X-Mujibai-Signature` header. Verify it against your webhook signing secret before trusting the payload."
+              }
+            ]
+          }
+        }
+      },
+      "integrations": {
+        "eyebrow": "Integrations",
+        "title": "Integrations",
+        "intro": "Connect Mujib AI to the CRM, helpdesk, and business systems you already use.",
+        "sections": {
+          "overview": {
+            "title": "Available integrations",
+            "blocks": [
+              {
+                "type": "p",
+                "text": "Use the API and webhooks to sync call data, tickets, and appointments with your existing tools. More native integrations are on the way."
               }
             ]
           }

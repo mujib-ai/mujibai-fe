@@ -56,7 +56,7 @@ export default function LoginPage() {
             />
 
             <ForgotPasswordLink
-              href="/forget-password"
+              href="/forgot-password"
               label={forgotPassword}
               disabled={isLoading}
             />

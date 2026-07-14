@@ -35,7 +35,7 @@ export default function HeroSection({
 
           <div className="mt-4 flex h-auto flex-col justify-center gap-4 sm:h-17.5 sm:flex-row">
             <Button
-              onClick={() => router.push('/contact-us')}
+              onClick={() => router.push('/contact')}
               className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium text-white shadow-md transition sm:px-14 sm:text-lg"
             >
               {t('button1')}

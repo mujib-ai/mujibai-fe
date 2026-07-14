@@ -7,7 +7,31 @@ export type SeoRouteKey =
   | 'privacyPolicy'
   | 'termsOfService'
   | 'refundPolicy'
-  | 'cancellationPolicy';
+  | 'cancellationPolicy'
+  | 'aiVoiceAgent'
+  | 'aiCallCenter'
+  | 'arabicAiReceptionist'
+  | 'automatedCustomerService'
+  | 'afterHoursCallAnswering'
+  | 'pricing'
+  | 'demo'
+  | 'about'
+  | 'featuresIndex'
+  | 'featureCallAnswering'
+  | 'featureAppointmentBooking'
+  | 'featureTicketCreation'
+  | 'featureKnowledgeBase'
+  | 'featureCallAnalytics'
+  | 'featureCallRecording'
+  | 'featureIntegrations'
+  | 'featureArabicDialects'
+  | 'industriesIndex'
+  | 'industryClinics'
+  | 'industryRealEstate'
+  | 'industryRestaurants'
+  | 'industryEcommerce'
+  | 'industryHotels'
+  | 'industryMaintenanceCompanies';
 
 export type SeoRoute = {
   key: SeoRouteKey;
