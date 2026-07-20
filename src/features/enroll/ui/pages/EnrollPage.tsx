@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl';
 
 import Logo from '@/shared/components/atoms/Logo';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { CheckCircle } from 'lucide-react';
 
 import { EnrollmentForm } from '../organisms';
@@ -36,7 +37,7 @@ function linkifyContactInfo(text: string) {
           href={`tel:${phone.replace(/\s+/g, '')}`}
           className="text-primary underline underline-offset-2"
         >
-          {phone}
+          {formatPhoneNumber(phone)}
         </a>
         {after}
       </>

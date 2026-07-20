@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useLocale, useTranslations } from 'next-intl';
 
 import { TablePagination } from '@/features/client/tickets';
@@ -18,10 +20,8 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 
-/**
- * RecentClientsTable component
- * Displays a styled table of recent clients with pagination.
- */
+const DEFAULT_LIMIT = 6;
+
 export default function RecentClientsTable({ title }: { title: string }) {
   const clients = [
     {
@@ -88,6 +88,17 @@ export default function RecentClientsTable({ title }: { title: string }) {
 
   const t = useTranslations('dashboardOverview');
   const locale = useLocale();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(DEFAULT_LIMIT);
+
+  const totalPages = Math.max(1, Math.ceil(clients.length / limit));
+  const paginatedClients = clients.slice((page - 1) * limit, page * limit);
+
+  const changeLimit = (nextLimit: number) => {
+    setLimit(nextLimit);
+    setPage(1);
+  };
+
   return (
     <Card className="w-full border-0 bg-transparent shadow-none">
       <CardHeader>
@@ -116,7 +127,7 @@ export default function RecentClientsTable({ title }: { title: string }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {clients.map(client => (
+              {paginatedClients.map(client => (
                 <TableRow key={client.id}>
                   <TableCell>{client.name}</TableCell>
                   <TableCell>{client.date}</TableCell>
@@ -129,6 +140,12 @@ export default function RecentClientsTable({ title }: { title: string }) {
 
         <div className="mt-4 flex justify-center">
           <TablePagination
+            page={page}
+            totalPages={totalPages}
+            total={clients.length}
+            limit={limit}
+            onPageChange={setPage}
+            onLimitChange={changeLimit}
             ofText={t('of')}
             clientsText={t('clients')}
             previousText={t('previous')}

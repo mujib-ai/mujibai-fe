@@ -1,3 +1,5 @@
+'use client';
+
 import { useLocale, useTranslations } from 'next-intl';
 
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';

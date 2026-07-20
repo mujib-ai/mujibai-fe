@@ -67,6 +67,7 @@
     "ticketsSubTitle": "Track and resolve customer support tickets.",
     "filterPlaceholderOne": "Filter 1",
     "filterPlaceholderTwo": "Filter 2",
+    "filterAllStatuses": "All Statuses",
     "customer": "Customer",
     "phone": "Phone",
     "duration": "Duration",
@@ -74,6 +75,15 @@
     "date": "Date",
     "status": "Status",
     "receipt": "Receipt",
+    "viewReceipt": "View receipt",
+    "statuses": {
+      "OPEN": "Open",
+      "IN_PROGRESS": "In Progress",
+      "RESOLVED": "Resolved",
+      "CLOSED": "Closed"
+    },
+    "errorPrefix": "Error: ",
+    "empty": "No records yet.",
     "of": "of",
     "rows": "rows",
     "clients": "clients",

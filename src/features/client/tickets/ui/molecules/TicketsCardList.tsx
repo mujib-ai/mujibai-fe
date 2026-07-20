@@ -1,13 +1,15 @@
+import { Badge } from '@/shared/components/atoms/ui/badge';
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
-import { Eye, Play } from 'lucide-react';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/shared/components/atoms/ui/tooltip';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
+import { Eye } from 'lucide-react';
 
-export type TicketItem = {
-  customer: string;
-  phone: string;
-  duration: string;
-  scenario: string;
-  date: string;
-};
+import { TICKET_STATUS_BADGE_VARIANT } from '../../constants';
+import type { TicketItem } from '../../types';
 
 export default function TicketsCardList({
   items,
@@ -18,9 +20,9 @@ export default function TicketsCardList({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      {items.map((item, idx) => (
+      {items.map(item => (
         <Card
-          key={idx}
+          key={item.id}
           className="border-0 bg-[#FFFFFFBF] shadow-none dark:bg-[#001434A6]"
         >
           <CardContent className="flex flex-col gap-3 p-4">
@@ -29,19 +31,29 @@ export default function TicketsCardList({
                 {item.customer}
               </span>
               <div className="flex items-center gap-2">
-                <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
-                  <Play fill="#06B6D4" className="size-4" />
-                </button>
-                <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
-                  <Eye className="text-primary size-4" />
-                </button>
+                <Badge variant={TICKET_STATUS_BADGE_VARIANT[item.status]}>
+                  {t(`statuses.${item.status}`)}
+                </Badge>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <button
+                      type="button"
+                      className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]"
+                    >
+                      <Eye className="text-primary size-4" />
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent>{t('viewReceipt')}</TooltipContent>
+                </Tooltip>
               </div>
             </div>
 
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
               <div>
                 <dt className="text-muted-foreground">{t('phone')}</dt>
-                <dd className="text-foreground font-medium">{item.phone}</dd>
+                <dd className="text-foreground font-medium">
+                  {formatPhoneNumber(item.phone)}
+                </dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">{t('duration')}</dt>

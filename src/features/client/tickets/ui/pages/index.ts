@@ -1,1 +1,1 @@
-export { default as CallsAndTicketsPage } from './CallsAndTicketsPage';
+export { default as TicketsPage } from './TicketsPage';

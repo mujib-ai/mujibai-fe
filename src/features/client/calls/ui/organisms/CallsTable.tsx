@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { Eye, Play } from 'lucide-react';
 
 import { CallsCardList, TablePagination } from '../molecules';
@@ -115,7 +116,7 @@ export default function CallsTable({
                       {item.customer}
                     </TableCell>
                     <TableCell className="text-foreground">
-                      {item.phone}
+                      {formatPhoneNumber(item.phone)}
                     </TableCell>
                     <TableCell className="text-foreground">
                       {item.duration}

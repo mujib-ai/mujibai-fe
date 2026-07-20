@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { CallsAndTicketsPage } from '@/features/client/tickets';
+import TicketsPage from '@/features/client/tickets/ui/pages/TicketsPage';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -12,6 +12,6 @@ export async function generateMetadata(): Promise<Metadata> {
   );
 }
 
-export default function TicketsPage() {
-  return <CallsAndTicketsPage mode="tickets" />;
+export default function DashboardTicketsPage() {
+  return <TicketsPage mode="tickets" />;
 }

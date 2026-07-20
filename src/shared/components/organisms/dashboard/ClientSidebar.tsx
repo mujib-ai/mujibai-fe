@@ -3,7 +3,6 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useAuth } from '@/features/auth';
 import Logo from '@/shared/components/atoms/Logo';
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import {
@@ -50,8 +49,6 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
     { title: t('settings'), icon: 'settings', href: '/dashboard/settings' },
     { title: t('docs'), icon: 'docs', href: '/docs' },
   ];
-
-  const { handleLogout } = useAuth();
 
   return (
     <Sidebar

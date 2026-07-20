@@ -67,6 +67,7 @@
     "ticketsSubTitle": "تتبع وحل تذاكر دعم العملاء.",
     "filterPlaceholderOne": "تصفية 1",
     "filterPlaceholderTwo": "تصفية 2",
+    "filterAllStatuses": "كل الحالات",
     "customer": "العميل",
     "phone": "الهاتف",
     "duration": "الدقيقة",
@@ -74,6 +75,15 @@
     "date": "التاريخ",
     "status": "الحالة",
     "receipt": "الإيصال",
+    "viewReceipt": "عرض الإيصال",
+    "statuses": {
+      "OPEN": "مفتوحة",
+      "IN_PROGRESS": "قيد المعالجة",
+      "RESOLVED": "تم الحل",
+      "CLOSED": "مغلقة"
+    },
+    "errorPrefix": "خطأ: ",
+    "empty": "لا توجد سجلات بعد.",
     "of": "من",
     "rows": "الصفوف",
     "clients": "العملاء",
