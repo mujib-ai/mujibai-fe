@@ -48,36 +48,52 @@ export default function ApiKeysPage() {
     scopes?: ApiKeyScope[];
     expiresAt?: string;
   }) => {
-    const result = await createApiKey(payload);
-    setCreateOpen(false);
-    setRevealedSecret(result.fullKey);
+    try {
+      const result = await createApiKey(payload);
+      setCreateOpen(false);
+      setRevealedSecret(result.fullKey);
+    } catch {
+      // reported to the user via createMutation's onError toast
+    }
   };
 
   const handleEditSubmit = async (
     apiKeyId: string,
     changes: { name?: string; scopes?: ApiKeyScope[]; expiresAt?: string }
   ) => {
-    if (changes.name !== undefined) {
-      await updateName(apiKeyId, { name: changes.name });
+    try {
+      if (changes.name !== undefined) {
+        await updateName(apiKeyId, { name: changes.name });
+      }
+      if (changes.scopes !== undefined) {
+        await updateScopes(apiKeyId, { scopes: changes.scopes });
+      }
+      if ('expiresAt' in changes) {
+        await updateExpiration(apiKeyId, { expiresAt: changes.expiresAt });
+      }
+      setEditingKey(null);
+    } catch {
+      // reported to the user via the relevant mutation's onError toast
     }
-    if (changes.scopes !== undefined) {
-      await updateScopes(apiKeyId, { scopes: changes.scopes });
-    }
-    if ('expiresAt' in changes) {
-      await updateExpiration(apiKeyId, { expiresAt: changes.expiresAt });
-    }
-    setEditingKey(null);
   };
 
   const handleRotate = async (apiKey: ApiKeyPublic) => {
-    const result = await rotateApiKey(apiKey.id);
-    setRevealedSecret(result.fullKey);
+    try {
+      const result = await rotateApiKey(apiKey.id);
+      setRevealedSecret(result.fullKey);
+    } catch {
+      // reported to the user via rotateMutation's onError toast
+    }
   };
 
   const handleRevokeConfirm = async () => {
     if (!revokingKey) return;
-    await revokeApiKey(revokingKey.id);
-    setRevokingKey(null);
+    try {
+      await revokeApiKey(revokingKey.id);
+      setRevokingKey(null);
+    } catch {
+      // reported to the user via revokeMutation's onError toast
+    }
   };
 
   return (

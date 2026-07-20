@@ -40,7 +40,7 @@ export default function RevealApiKeySecretDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="border-input dark:bg-input/30 flex items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2">
+        <div className="border-input dark:bg-input/30 flex min-w-0 items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2">
           <code className="min-w-0 flex-1 truncate font-mono text-sm select-all">
             {fullKey}
           </code>

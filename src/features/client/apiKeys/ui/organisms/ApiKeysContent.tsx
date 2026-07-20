@@ -1,10 +1,9 @@
 'use client';
 
-import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
-
 import type { ApiKeyPublic } from '../../types';
 import ApiKeysHeader from '../molecules/ApiKeysHeader';
 import ApiKeysTable from './ApiKeysTable';
+import ApiKeysTableSkeleton from './ApiKeysTableSkeleton';
 
 interface ApiKeysContentProps {
   apiKeys: ApiKeyPublic[];
@@ -57,11 +56,20 @@ export default function ApiKeysContent({
 
   if (isLoading) {
     return (
-      <div className="space-y-4 p-2">
-        <Skeleton className="h-10 w-full" />
-        <Skeleton className="h-10 w-full" />
-        <Skeleton className="h-10 w-full" />
-      </div>
+      <ApiKeysTableSkeleton
+        locale={locale}
+        headers={{
+          name: translations.name,
+          secretKey: translations.secretKey,
+          environment: translations.environment,
+          status: translations.status,
+          scopes: translations.scopes,
+          createdOn: translations.createdOn,
+          expiresAt: translations.expiresAt,
+          lastUsed: translations.lastUsed,
+          actions: translations.actions,
+        }}
+      />
     );
   }
 
