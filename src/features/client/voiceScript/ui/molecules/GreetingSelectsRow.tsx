@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import {
   Select,
   SelectContent,
@@ -7,7 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
+import { Textarea } from '@/shared/components/atoms/ui/textarea';
 
+import type { VoiceOption } from '../../constants';
+import { VOICE_OPTIONS } from '../../constants';
 import { PlayButton } from '../atoms';
 
 export default function GreetingSelectsRow({
@@ -17,39 +22,33 @@ export default function GreetingSelectsRow({
   t: (key: string) => string;
   locale: string;
 }) {
+  const [voice, setVoice] = useState<VoiceOption | undefined>(undefined);
+  const [greeting, setGreeting] = useState('');
+
   return (
     <div className="flex flex-wrap items-center justify-center gap-3 py-4 sm:flex-nowrap">
-      <Select>
-        <SelectTrigger className="w-full border-0 bg-[#06B6D426]">
-          <SelectValue placeholder={t('selectLanguageGreeting')} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="greeting-1">Greeting 1</SelectItem>
-          <SelectItem value="greeting-2">Greeting 2</SelectItem>
-          <SelectItem value="greeting-3">Greeting 3</SelectItem>
-        </SelectContent>
-      </Select>
-      <Select>
-        <SelectTrigger className="w-full border-0 bg-[#06B6D426]">
+      <Select
+        value={voice}
+        onValueChange={value => setVoice(value as VoiceOption)}
+      >
+        <SelectTrigger className="w-full border-0 bg-[#06B6D426] sm:w-56">
           <SelectValue placeholder={t('selectVoice')} />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="greeting-1">Greeting 1</SelectItem>
-          <SelectItem value="greeting-2">Greeting 2</SelectItem>
-          <SelectItem value="greeting-3">Greeting 3</SelectItem>
+          {VOICE_OPTIONS.map(option => (
+            <SelectItem key={option} value={option}>
+              {t(`voices.${option}`)}
+            </SelectItem>
+          ))}
         </SelectContent>
       </Select>
-      <Select>
-        <SelectTrigger className="w-full border-0 bg-[#06B6D426]">
-          <SelectValue placeholder={t('selectGreeting')} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="greeting-1">Greeting 1</SelectItem>
-          <SelectItem value="greeting-2">Greeting 2</SelectItem>
-          <SelectItem value="greeting-3">Greeting 3</SelectItem>
-        </SelectContent>
-      </Select>
-      <PlayButton locale={locale} />
+      <Textarea
+        value={greeting}
+        onChange={event => setGreeting(event.target.value)}
+        placeholder={t('selectGreeting')}
+        className="min-h-9 resize-none border-0 bg-[#06B6D426]"
+      />
+      <PlayButton locale={locale} text={greeting} voice={voice} />
     </div>
   );
 }
