@@ -3,7 +3,7 @@
     "dashboard": "Dashboard",
     "calls": "Calls",
     "tickets": "Tickets",
-    "voice-script": "Voice Script",
+    "knowledge-base": "Knowledge Base",
     "performance-analytics": "Performance Analytics",
     "ai-outbound": "AI Outbound",
     "api-keys": "API Keys",
@@ -107,33 +107,246 @@
     "next": "Next",
     "previous": "Previous"
   },
-  "VoiceScripts": {
-    "title": "Voice Scripts",
-    "subTitle": "Custom AI speaker scripts for your customers",
-    "callGreeting": "Call Greeting",
-    "selectVoice": "Select Voice",
-    "selectGreeting": "Write your greeting...",
-    "selectLanguageVoice": "Select a voice, then write your greeting to test it",
-    "voices": {
-      "abdullah": "Abdullah",
-      "aisha": "Aisha",
-      "fahad": "Fahad",
-      "sultan": "Sultan",
-      "lulwa": "Lulwa",
-      "noura": "Noura"
+  "KnowledgeBase": {
+    "title": "Knowledge Base",
+    "subTitle": "Upload business documents and data that your AI agent can use to answer customer questions accurately.",
+    "lastSynced": "Last synced {date}",
+    "neverSynced": "Not synced yet",
+    "overallStatus": {
+      "ready": "All sources ready",
+      "processing": "Processing sources",
+      "attention_needed": "Needs attention"
     },
-    "conversation": "Conversation",
-    "descriptions": "Description",
-    "descriptionScript": "Description Script",
-    "noDescriptionAvailable": "No description available",
-    "startByAddingYourFirstDescription": "Start by adding your first description",
-    "editDescription": "Edit Description",
-    "conversationScript": "Conversation Script",
-    "noConversationScriptAvailable": "No conversation script available",
-    "startByAddingYourFirstConversationScript": "Start by adding your first conversation script",
-    "editConversationScript": "Edit Conversation Script",
-    "addNewLine": "Add New Line",
-    "createScript": "Create Script"
+    "actions": {
+      "upload": "Upload Source",
+      "addManualText": "Add Text",
+      "viewDetails": "View details",
+      "retry": "Retry processing",
+      "enable": "Enable source",
+      "disable": "Disable source",
+      "download": "Download original",
+      "delete": "Delete source",
+      "resetFilters": "Reset filters",
+      "backToKnowledgeBase": "Back to Knowledge Base"
+    },
+    "stats": {
+      "totalSources": "Total Sources",
+      "readySources": "Ready",
+      "processingSources": "Processing",
+      "failedSources": "Failed",
+      "totalDocuments": "Documents",
+      "totalChunks": "Indexed Chunks",
+      "lastSuccessfulIngestion": "Last Successful Ingestion",
+      "never": "Never"
+    },
+    "sources": {
+      "title": "Knowledge Sources",
+      "columns": {
+        "source": "Source",
+        "type": "Type",
+        "status": "Status",
+        "progress": "Progress",
+        "documents": "Documents",
+        "chunks": "Chunks",
+        "uploadedAt": "Uploaded At",
+        "updatedAt": "Last Updated",
+        "actions": "Actions"
+      }
+    },
+    "sourceTypes": {
+      "pdf": "PDF",
+      "txt": "Text File",
+      "csv": "CSV",
+      "excel": "Excel",
+      "manual_text": "Manual Text",
+      "faq": "FAQ",
+      "website": "Website",
+      "api": "API"
+    },
+    "status": {
+      "pending": {
+        "label": "Pending",
+        "description": "Waiting to be picked up for processing."
+      },
+      "queued": {
+        "label": "Queued",
+        "description": "In the processing queue."
+      },
+      "processing": {
+        "label": "Processing",
+        "description": "Processing has started."
+      },
+      "extracting": {
+        "label": "Extracting content",
+        "description": "Extracting text and data from the source."
+      },
+      "cleaning": {
+        "label": "Cleaning data",
+        "description": "Cleaning and normalizing extracted data."
+      },
+      "ai_classifying": {
+        "label": "Organizing with AI",
+        "description": "AI is classifying and organizing the content."
+      },
+      "creating_documents": {
+        "label": "Creating documents",
+        "description": "Creating structured documents."
+      },
+      "chunking": {
+        "label": "Splitting content",
+        "description": "Splitting content into chunks."
+      },
+      "embedding": {
+        "label": "Generating embeddings",
+        "description": "Generating vector embeddings."
+      },
+      "indexing": {
+        "label": "Indexing knowledge",
+        "description": "Indexing content for retrieval."
+      },
+      "completed": {
+        "label": "Ready",
+        "description": "Processing completed successfully."
+      },
+      "failed": {
+        "label": "Failed",
+        "description": "Processing failed."
+      },
+      "cancelled": {
+        "label": "Cancelled",
+        "description": "Processing was cancelled."
+      }
+    },
+    "filters": {
+      "searchPlaceholder": "Search sources by name...",
+      "status": "Status",
+      "type": "Type",
+      "enabled": "Availability",
+      "allStatuses": "All Statuses",
+      "allTypes": "All Types",
+      "allSources": "All Sources",
+      "enabledOnly": "Enabled",
+      "disabledOnly": "Disabled",
+      "reset": "Reset filters"
+    },
+    "upload": {
+      "title": "Upload a Knowledge Source",
+      "description": "Upload a PDF, text, CSV, or Excel file for your AI agent to learn from.",
+      "dropzoneLabel": "Drag and drop a file here, or click to browse",
+      "dropzoneHint": "Supported formats: PDF, TXT, CSV, XLS, XLSX",
+      "selectedFile": "Selected file",
+      "fileName": "Name",
+      "fileType": "Type",
+      "fileSize": "Size",
+      "remove": "Remove file",
+      "nameLabel": "Display name (optional)",
+      "namePlaceholder": "e.g. Refund Policy",
+      "chunkingStrategyLabel": "Chunking strategy (optional)",
+      "submit": "Upload",
+      "uploading": "Uploading...",
+      "cancel": "Cancel",
+      "duplicateTitle": "This file was already uploaded",
+      "duplicateMessage": "It matches the existing source \"{name}\".",
+      "viewExisting": "View existing source"
+    },
+    "manualText": {
+      "title": "Add Text Source",
+      "description": "Add business information as plain text for your AI agent to learn from.",
+      "titleLabel": "Title",
+      "titlePlaceholder": "e.g. Store Hours",
+      "contentLabel": "Content",
+      "contentPlaceholder": "Enter the information your AI agent should know...",
+      "categoryLabel": "Category (optional)",
+      "languageLabel": "Language (optional)",
+      "submit": "Add Source",
+      "cancel": "Cancel"
+    },
+    "errors": {
+      "unsupportedType": "This file type is not supported.",
+      "fileTooLarge": "The file exceeds the maximum allowed size.",
+      "emptyFile": "The selected file is empty.",
+      "noFileSelected": "Please select a file to upload.",
+      "titleRequired": "Title is required.",
+      "titleTooLong": "Title is too long.",
+      "contentRequired": "Content is required.",
+      "contentTooLong": "Content is too long.",
+      "uploadFailed": "Failed to upload the file.",
+      "retryFailed": "Failed to retry processing.",
+      "toggleFailed": "Failed to update the source.",
+      "deleteFailed": "Failed to delete the source.",
+      "loadFailed": "Failed to load the knowledge base.",
+      "loadSourcesFailed": "Failed to load knowledge sources.",
+      "loadStatsFailed": "Failed to load statistics.",
+      "loadDetailsFailed": "Failed to load source details.",
+      "testQueryFailed": "Failed to test the knowledge base."
+    },
+    "confirm": {
+      "deleteTitle": "Delete this source?",
+      "deleteMessage": "Deleting \"{name}\" may remove the uploaded file, extracted documents, indexed chunks, and embeddings. This cannot be undone.",
+      "deleteConfirm": "Delete",
+      "deleteCancel": "Cancel",
+      "disableTitle": "Disable this source?",
+      "disableMessage": "\"{name}\" will no longer be used by your AI agent to answer questions until re-enabled.",
+      "disableConfirm": "Disable",
+      "disableCancel": "Cancel"
+    },
+    "details": {
+      "title": "Source Details",
+      "originalFileName": "Original File Name",
+      "sourceType": "Source Type",
+      "fileSize": "File Size",
+      "mimeType": "File Format",
+      "status": "Status",
+      "progress": "Progress",
+      "currentStage": "Current Stage",
+      "createdAt": "Created",
+      "startedAt": "Started",
+      "completedAt": "Completed",
+      "documentCount": "Documents",
+      "chunkCount": "Chunks",
+      "language": "Language",
+      "category": "Category",
+      "errorMessage": "Error",
+      "enabled": "Availability",
+      "enabledYes": "Enabled — used by your AI agent",
+      "enabledNo": "Disabled — not used by your AI agent",
+      "notAvailable": "Not available"
+    },
+    "emptyStates": {
+      "noSourcesTitle": "No knowledge sources yet",
+      "noSourcesDescription": "Upload your business documents so your AI agent can answer customer questions using accurate information.",
+      "noResultsTitle": "No sources match your filters.",
+      "noResultsAction": "Reset filters"
+    },
+    "notifications": {
+      "completed": "\"{name}\" finished processing and is ready.",
+      "failed": "\"{name}\" failed to process.",
+      "disabled": "\"{name}\" was disabled.",
+      "deleted": "\"{name}\" was deleted."
+    },
+    "failedAlert": {
+      "title": "Processing failed",
+      "genericMessage": "Processing failed while handling this source."
+    },
+    "testKnowledge": {
+      "title": "Test Knowledge",
+      "description": "Ask a sample customer question to see how your AI agent would answer it.",
+      "placeholder": "e.g. What are your working hours?",
+      "submit": "Ask",
+      "answerLabel": "Answer",
+      "sourcesLabel": "Source documents used",
+      "noRelevantInfo": "No relevant information was found for this question."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "of": "of",
+      "results": "results"
+    },
+    "loading": "Loading knowledge base...",
+    "errorTitle": "Something went wrong",
+    "errorRetry": "Try again",
+    "downloadUnavailable": "The original file is not available for download."
   },
   "performanceAnalytics": {
     "title": "Performance Analytics",

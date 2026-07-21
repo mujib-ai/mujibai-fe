@@ -22,9 +22,9 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
     { title: t('calls'), icon: 'calls', href: '/dashboard/calls' },
     { title: t('tickets'), icon: 'tickets', href: '/dashboard/tickets' },
     {
-      title: t('voice-script'),
-      icon: 'voice-script',
-      href: '/dashboard/voice-script',
+      title: t('knowledge-base'),
+      icon: 'knowledge-base',
+      href: '/dashboard/knowledge-base',
     },
     {
       title: t('performance-analytics'),
@@ -60,7 +60,7 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
       </div>
 
       <SidebarContent>
-        <SidebarMenu>
+        <SidebarMenu className="gap-1.25">
           {menuItems.map(item => {
             const isActive = pathname === item.href;
 
@@ -68,7 +68,7 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton
                   asChild
-                  className={`my-2 flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 transition-all active:bg-[#06B6D40F] active:text-[#06B6D4] ${
+                  className={`flex cursor-pointer items-center gap-3 rounded-md px-3 py-2 transition-all active:bg-[#06B6D40F] active:text-[#06B6D4] ${
                     isActive
                       ? 'bg-[#06B6D40F] text-[#06B6D4] hover:bg-[#06B6D40F] hover:text-[#06B6D4]'
                       : 'text-gray-700 hover:bg-[#06B6D40F] dark:text-gray-300'

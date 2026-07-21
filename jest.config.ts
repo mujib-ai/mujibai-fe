@@ -13,6 +13,13 @@ const config: Config = {
   testEnvironment: 'jsdom',
   // Add more setup options before each test is run
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  // next/jest's SWC transform rewrites real `import` specifiers using
+  // tsconfig `paths`, but a bare string passed to `jest.mock('@/...')` is
+  // opaque to that rewrite and falls through to Jest's own resolver — which
+  // has no alias awareness unless told explicitly here.
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         destination: '/docs/voice-agent',
         permanent: true,
       },
+      {
+        source: '/dashboard/voice-script',
+        destination: '/dashboard/knowledge-base',
+        permanent: true,
+      },
     ];
   },
 };

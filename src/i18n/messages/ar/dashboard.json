@@ -3,7 +3,7 @@
     "dashboard": "لوحة التحكم",
     "calls": "المكالمات",
     "tickets": "التذاكر",
-    "voice-script": "النصوص الصوتية",
+    "knowledge-base": "قاعدة المعرفة",
     "performance-analytics": "تحليل الأداء",
     "ai-outbound": "مكالمات AI الصادرة",
     "api-keys": "مفاتيح API",
@@ -107,33 +107,246 @@
     "next": "التالي",
     "previous": "السابق"
   },
-  "VoiceScripts": {
-    "title": "النصوص الصوتية",
-    "subTitle": "نصوص صوت الذكاء الاصطناعي المخصصة لعملائك",
-    "callGreeting": "الترحيب في الاتصال",
-    "selectVoice": "اختر الصوت",
-    "selectGreeting": "اكتب تحيتك...",
-    "selectLanguageVoice": "حدد الصوت، ثم اكتب تحيتك لاختبارها",
-    "voices": {
-      "abdullah": "عبدالله",
-      "aisha": "عائشة",
-      "fahad": "فهد",
-      "sultan": "سلطان",
-      "lulwa": "لولوة",
-      "noura": "نورة"
+  "KnowledgeBase": {
+    "title": "قاعدة المعرفة",
+    "subTitle": "ارفع مستندات وبيانات نشاطك التجاري ليستخدمها المساعد الذكي في الإجابة عن أسئلة العملاء بدقة.",
+    "lastSynced": "آخر مزامنة {date}",
+    "neverSynced": "لم تتم المزامنة بعد",
+    "overallStatus": {
+      "ready": "جميع المصادر جاهزة",
+      "processing": "جارٍ معالجة المصادر",
+      "attention_needed": "يتطلب الانتباه"
     },
-    "conversation": "المحادثة",
-    "descriptions": "الوصف",
-    "descriptionScript": "وصف النص",
-    "noDescriptionAvailable": "لا يوجد وصف متاح",
-    "startByAddingYourFirstDescription": "أضف أول وصف",
-    "editDescription": "تعديل الوصف",
-    "conversationScript": "نص المحادثة",
-    "noConversationScriptAvailable": "لا يوجد نص متاح",
-    "startByAddingYourFirstConversationScript": "أضف أول نص",
-    "editConversationScript": "تعديل النص",
-    "addNewLine": "إضافة سطر جديد",
-    "createScript": "إنشاء نص"
+    "actions": {
+      "upload": "رفع مصدر",
+      "addManualText": "إضافة نص",
+      "viewDetails": "عرض التفاصيل",
+      "retry": "إعادة المعالجة",
+      "enable": "تفعيل المصدر",
+      "disable": "تعطيل المصدر",
+      "download": "تنزيل الملف الأصلي",
+      "delete": "حذف المصدر",
+      "resetFilters": "إعادة تعيين الفلاتر",
+      "backToKnowledgeBase": "العودة إلى قاعدة المعرفة"
+    },
+    "stats": {
+      "totalSources": "إجمالي المصادر",
+      "readySources": "جاهزة",
+      "processingSources": "قيد المعالجة",
+      "failedSources": "فشلت",
+      "totalDocuments": "المستندات",
+      "totalChunks": "الأجزاء المفهرسة",
+      "lastSuccessfulIngestion": "آخر معالجة ناجحة",
+      "never": "أبدًا"
+    },
+    "sources": {
+      "title": "مصادر المعرفة",
+      "columns": {
+        "source": "المصدر",
+        "type": "النوع",
+        "status": "الحالة",
+        "progress": "التقدم",
+        "documents": "المستندات",
+        "chunks": "الأجزاء",
+        "uploadedAt": "تاريخ الرفع",
+        "updatedAt": "آخر تحديث",
+        "actions": "الإجراءات"
+      }
+    },
+    "sourceTypes": {
+      "pdf": "PDF",
+      "txt": "ملف نصي",
+      "csv": "CSV",
+      "excel": "إكسل",
+      "manual_text": "نص يدوي",
+      "faq": "الأسئلة الشائعة",
+      "website": "موقع إلكتروني",
+      "api": "واجهة برمجية"
+    },
+    "status": {
+      "pending": {
+        "label": "قيد الانتظار",
+        "description": "بانتظار بدء المعالجة."
+      },
+      "queued": {
+        "label": "في قائمة المعالجة",
+        "description": "في قائمة انتظار المعالجة."
+      },
+      "processing": {
+        "label": "جاري المعالجة",
+        "description": "بدأت المعالجة."
+      },
+      "extracting": {
+        "label": "جاري استخراج المحتوى",
+        "description": "جارٍ استخراج النص والبيانات من المصدر."
+      },
+      "cleaning": {
+        "label": "جاري تنظيف البيانات",
+        "description": "جارٍ تنظيف البيانات المستخرجة وتنسيقها."
+      },
+      "ai_classifying": {
+        "label": "جاري تنظيم البيانات بالذكاء الاصطناعي",
+        "description": "يقوم الذكاء الاصطناعي بتصنيف المحتوى وتنظيمه."
+      },
+      "creating_documents": {
+        "label": "جاري إنشاء المستندات",
+        "description": "جارٍ إنشاء مستندات منظمة."
+      },
+      "chunking": {
+        "label": "جاري تقسيم المحتوى",
+        "description": "جارٍ تقسيم المحتوى إلى أجزاء."
+      },
+      "embedding": {
+        "label": "جاري إنشاء التضمينات",
+        "description": "جارٍ إنشاء التضمينات المتجهة."
+      },
+      "indexing": {
+        "label": "جاري فهرسة المعرفة",
+        "description": "جارٍ فهرسة المحتوى لاسترجاعه لاحقًا."
+      },
+      "completed": {
+        "label": "جاهز",
+        "description": "اكتملت المعالجة بنجاح."
+      },
+      "failed": {
+        "label": "فشلت المعالجة",
+        "description": "فشلت عملية المعالجة."
+      },
+      "cancelled": {
+        "label": "تم الإلغاء",
+        "description": "تم إلغاء المعالجة."
+      }
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث عن المصادر بالاسم...",
+      "status": "الحالة",
+      "type": "النوع",
+      "enabled": "التوفر",
+      "allStatuses": "كل الحالات",
+      "allTypes": "كل الأنواع",
+      "allSources": "كل المصادر",
+      "enabledOnly": "مفعّل",
+      "disabledOnly": "معطّل",
+      "reset": "إعادة تعيين الفلاتر"
+    },
+    "upload": {
+      "title": "رفع مصدر معرفة",
+      "description": "ارفع ملف PDF أو نصي أو CSV أو إكسل ليتعلم منه المساعد الذكي.",
+      "dropzoneLabel": "اسحب الملف وأفلته هنا، أو اضغط للاختيار",
+      "dropzoneHint": "الصيغ المدعومة: PDF, TXT, CSV, XLS, XLSX",
+      "selectedFile": "الملف المختار",
+      "fileName": "الاسم",
+      "fileType": "النوع",
+      "fileSize": "الحجم",
+      "remove": "إزالة الملف",
+      "nameLabel": "اسم العرض (اختياري)",
+      "namePlaceholder": "مثال: سياسة الاسترجاع",
+      "chunkingStrategyLabel": "استراتيجية التقسيم (اختياري)",
+      "submit": "رفع",
+      "uploading": "جارٍ الرفع...",
+      "cancel": "إلغاء",
+      "duplicateTitle": "تم رفع هذا الملف من قبل",
+      "duplicateMessage": "يطابق المصدر الموجود \"{name}\".",
+      "viewExisting": "عرض المصدر الموجود"
+    },
+    "manualText": {
+      "title": "إضافة مصدر نصي",
+      "description": "أضف معلومات نشاطك التجاري كنص عادي ليتعلم منها المساعد الذكي.",
+      "titleLabel": "العنوان",
+      "titlePlaceholder": "مثال: ساعات العمل",
+      "contentLabel": "المحتوى",
+      "contentPlaceholder": "أدخل المعلومات التي يجب أن يعرفها المساعد الذكي...",
+      "categoryLabel": "الفئة (اختياري)",
+      "languageLabel": "اللغة (اختياري)",
+      "submit": "إضافة المصدر",
+      "cancel": "إلغاء"
+    },
+    "errors": {
+      "unsupportedType": "هذا النوع من الملفات غير مدعوم.",
+      "fileTooLarge": "حجم الملف يتجاوز الحد الأقصى المسموح به.",
+      "emptyFile": "الملف المحدد فارغ.",
+      "noFileSelected": "الرجاء اختيار ملف لرفعه.",
+      "titleRequired": "العنوان مطلوب.",
+      "titleTooLong": "العنوان طويل جدًا.",
+      "contentRequired": "المحتوى مطلوب.",
+      "contentTooLong": "المحتوى طويل جدًا.",
+      "uploadFailed": "فشل رفع الملف.",
+      "retryFailed": "فشلت إعادة المعالجة.",
+      "toggleFailed": "فشل تحديث المصدر.",
+      "deleteFailed": "فشل حذف المصدر.",
+      "loadFailed": "تعذر تحميل قاعدة المعرفة.",
+      "loadSourcesFailed": "تعذر تحميل مصادر المعرفة.",
+      "loadStatsFailed": "تعذر تحميل الإحصاءات.",
+      "loadDetailsFailed": "تعذر تحميل تفاصيل المصدر.",
+      "testQueryFailed": "تعذر اختبار قاعدة المعرفة."
+    },
+    "confirm": {
+      "deleteTitle": "هل تريد حذف هذا المصدر؟",
+      "deleteMessage": "قد يؤدي حذف \"{name}\" إلى إزالة الملف المرفوع والمستندات المستخرجة والأجزاء المفهرسة والتضمينات. لا يمكن التراجع عن هذا الإجراء.",
+      "deleteConfirm": "حذف",
+      "deleteCancel": "إلغاء",
+      "disableTitle": "هل تريد تعطيل هذا المصدر؟",
+      "disableMessage": "لن يستخدم المساعد الذكي \"{name}\" للإجابة عن الأسئلة إلى أن تتم إعادة تفعيله.",
+      "disableConfirm": "تعطيل",
+      "disableCancel": "إلغاء"
+    },
+    "details": {
+      "title": "تفاصيل المصدر",
+      "originalFileName": "اسم الملف الأصلي",
+      "sourceType": "نوع المصدر",
+      "fileSize": "حجم الملف",
+      "mimeType": "صيغة الملف",
+      "status": "الحالة",
+      "progress": "التقدم",
+      "currentStage": "المرحلة الحالية",
+      "createdAt": "تاريخ الإنشاء",
+      "startedAt": "تاريخ البدء",
+      "completedAt": "تاريخ الاكتمال",
+      "documentCount": "المستندات",
+      "chunkCount": "الأجزاء",
+      "language": "اللغة",
+      "category": "الفئة",
+      "errorMessage": "الخطأ",
+      "enabled": "التوفر",
+      "enabledYes": "مفعّل — يستخدمه المساعد الذكي",
+      "enabledNo": "معطّل — لا يستخدمه المساعد الذكي",
+      "notAvailable": "غير متاح"
+    },
+    "emptyStates": {
+      "noSourcesTitle": "لا توجد مصادر معرفة بعد",
+      "noSourcesDescription": "ارفع مستندات نشاطك التجاري ليتمكن المساعد الذكي من الإجابة عن أسئلة العملاء بمعلومات دقيقة.",
+      "noResultsTitle": "لا توجد مصادر مطابقة للفلاتر المحددة.",
+      "noResultsAction": "إعادة تعيين الفلاتر"
+    },
+    "notifications": {
+      "completed": "انتهت معالجة \"{name}\" وأصبح جاهزًا.",
+      "failed": "فشلت معالجة \"{name}\".",
+      "disabled": "تم تعطيل \"{name}\".",
+      "deleted": "تم حذف \"{name}\"."
+    },
+    "failedAlert": {
+      "title": "فشلت المعالجة",
+      "genericMessage": "فشلت المعالجة أثناء التعامل مع هذا المصدر."
+    },
+    "testKnowledge": {
+      "title": "اختبار المعرفة",
+      "description": "اطرح سؤال عميل تجريبي لترى كيف سيجيب عليه المساعد الذكي.",
+      "placeholder": "مثال: ما هي ساعات العمل؟",
+      "submit": "اسأل",
+      "answerLabel": "الإجابة",
+      "sourcesLabel": "المستندات المصدرية المستخدمة",
+      "noRelevantInfo": "لم يتم العثور على معلومات ذات صلة بهذا السؤال."
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next": "التالي",
+      "of": "من",
+      "results": "نتيجة"
+    },
+    "loading": "جارٍ تحميل قاعدة المعرفة...",
+    "errorTitle": "حدث خطأ ما",
+    "errorRetry": "أعد المحاولة",
+    "downloadUnavailable": "الملف الأصلي غير متاح للتنزيل."
   },
   "performanceAnalytics": {
     "title": "تحليل الأداء",

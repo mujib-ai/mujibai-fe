@@ -1,20 +1,4 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
-import { useTheme } from 'next-themes';
-import Image from 'next/image';
-
-export function useIconTheme(): 'dark' | 'light' {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  // eslint-disable-next-line react-hooks/set-state-in-effect
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) return 'light';
-  return resolvedTheme === 'dark' ? 'dark' : 'light';
-}
+import { iconData } from '@/shared/components/atoms/iconData';
 
 interface ThemedIconProps {
   name: string;
@@ -29,16 +13,21 @@ export function ThemedIcon({
   size = 20,
   alt = '',
 }: ThemedIconProps) {
-  const iconTheme = useIconTheme();
+  const icon = iconData[name];
+
+  if (!icon) return null;
 
   return (
-    <Image
-      src={`/icons/${name}-${iconTheme}.svg`}
-      alt={alt}
+    <svg
+      aria-hidden={alt ? undefined : true}
+      aria-label={alt || undefined}
+      role={alt ? 'img' : undefined}
+      focusable="false"
+      viewBox={icon.viewBox}
       width={size}
       height={size}
-      className={className}
-      loading="eager"
+      className={`inline-block shrink-0 ${className ?? ''}`}
+      dangerouslySetInnerHTML={{ __html: icon.content }}
     />
   );
 }
