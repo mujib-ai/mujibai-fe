@@ -1,8 +1,8 @@
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
+import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { Eye, Play } from 'lucide-react';
 
 export type CallItem = {
-  customer: string;
   phone: string;
   duration: string;
   scenario: string;
@@ -26,7 +26,7 @@ export default function CallsCardList({
           <CardContent className="flex flex-col gap-3 p-4">
             <div className="flex items-center justify-between gap-2">
               <span className="text-foreground text-base font-semibold">
-                {item.customer}
+                {formatPhoneNumber(item.phone)}
               </span>
               <div className="flex items-center gap-2">
                 <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
@@ -39,10 +39,6 @@ export default function CallsCardList({
             </div>
 
             <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-              <div>
-                <dt className="text-muted-foreground">{t('phone')}</dt>
-                <dd className="text-foreground font-medium">{item.phone}</dd>
-              </div>
               <div>
                 <dt className="text-muted-foreground">{t('duration')}</dt>
                 <dd className="text-foreground font-medium">{item.duration}</dd>

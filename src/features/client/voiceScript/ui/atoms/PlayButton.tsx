@@ -1,7 +1,8 @@
 'use client';
 
 import { Button } from '@/shared/components/atoms/ui/button';
-import { Loader2, Play } from 'lucide-react';
+import { Spinner } from '@heroui/react';
+import { Play } from 'lucide-react';
 
 import type { VoiceOption } from '../../constants';
 import { useTextToSpeech } from '../../hooks';
@@ -26,7 +27,7 @@ export default function PlayButton({
       onClick={() => voice && playSpeech({ text, voice })}
     >
       {isPlaying ? (
-        <Loader2 className="size-5 animate-spin" />
+        <Spinner size="sm" color="current" />
       ) : (
         <Play
           className={`size-5 ${locale === 'ar' && 'rotate-180'}`}

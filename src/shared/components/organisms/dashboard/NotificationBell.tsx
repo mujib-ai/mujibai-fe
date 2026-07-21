@@ -64,7 +64,7 @@ export default function NotificationBell() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -8 }}
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="absolute end-0 top-full z-50 mt-2 w-80 origin-top-right overflow-hidden rounded-2xl border bg-white shadow-lg dark:border-white/10 dark:bg-[#0e2235]"
+            className="bg-background text-foreground absolute end-0 top-full z-50 mt-2 w-80 origin-top-right overflow-hidden rounded-2xl border shadow-lg"
           >
             <NotificationsPanel
               notifications={notifications}

@@ -43,35 +43,17 @@ export default function ApiKeysContent({
   locale,
   translations,
 }: ApiKeysContentProps) {
-  if (error) {
-    return (
-      <div className="flex h-64 items-center justify-center">
-        <div className="text-red-500">
-          {translations.errorPrefix}
-          {error}
-        </div>
-      </div>
-    );
-  }
-
-  if (isLoading) {
-    return (
-      <ApiKeysTableSkeleton
-        locale={locale}
-        headers={{
-          name: translations.name,
-          secretKey: translations.secretKey,
-          environment: translations.environment,
-          status: translations.status,
-          scopes: translations.scopes,
-          createdOn: translations.createdOn,
-          expiresAt: translations.expiresAt,
-          lastUsed: translations.lastUsed,
-          actions: translations.actions,
-        }}
-      />
-    );
-  }
+  const headers = {
+    name: translations.name,
+    secretKey: translations.secretKey,
+    environment: translations.environment,
+    status: translations.status,
+    scopes: translations.scopes,
+    createdOn: translations.createdOn,
+    expiresAt: translations.expiresAt,
+    lastUsed: translations.lastUsed,
+    actions: translations.actions,
+  };
 
   return (
     <div className="space-y-4">
@@ -81,8 +63,17 @@ export default function ApiKeysContent({
         usagePageText={translations.usagePage}
         createNewSecretKeyText={translations.createNewSecretKey}
       />
-      {apiKeys.length === 0 ? (
-        <div className="text-muted-foreground flex h-64 items-center justify-center">
+      {error ? (
+        <div className="flex h-64 items-center justify-center">
+          <p className="text-destructive text-sm">
+            {translations.errorPrefix}
+            {error}
+          </p>
+        </div>
+      ) : isLoading ? (
+        <ApiKeysTableSkeleton locale={locale} headers={headers} />
+      ) : apiKeys.length === 0 ? (
+        <div className="text-muted-foreground flex h-64 items-center justify-center text-sm">
           {translations.empty}
         </div>
       ) : (
@@ -92,17 +83,7 @@ export default function ApiKeysContent({
           onRotate={onRotateKey}
           onRevoke={onRevokeKey}
           locale={locale}
-          headers={{
-            name: translations.name,
-            secretKey: translations.secretKey,
-            environment: translations.environment,
-            status: translations.status,
-            scopes: translations.scopes,
-            createdOn: translations.createdOn,
-            expiresAt: translations.expiresAt,
-            lastUsed: translations.lastUsed,
-            actions: translations.actions,
-          }}
+          headers={headers}
         />
       )}
     </div>

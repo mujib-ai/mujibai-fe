@@ -15,7 +15,7 @@ function getAppOrigin(): string {
 
 export class AuthService {
   static async checkAuth(): Promise<AuthResponse> {
-    const { data } = await AxiosAPI.get<AuthResponse>('/tenants/check-auth');
+    const { data } = await AxiosAPI.get<AuthResponse>('/tenants/me');
     return data;
   }
 

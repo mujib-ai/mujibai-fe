@@ -30,7 +30,7 @@ async function getUserFromServer() {
       authHeaders.Authorization = `Bearer ${accessToken}`;
     }
 
-    const res = await AxiosAPI.get('/tenants/check-auth', {
+    const res = await AxiosAPI.get('/tenants/me', {
       headers: authHeaders,
     });
 

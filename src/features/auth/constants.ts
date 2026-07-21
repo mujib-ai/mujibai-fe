@@ -34,7 +34,7 @@ export const AUTH_CONSTANTS = {
     LOGIN_ENDPOINT: '/auth/login',
     REGISTER_ENDPOINT: '/auth/register',
     LOGOUT_ENDPOINT: '/auth/logout',
-    CHECK_AUTH_ENDPOINT: '/tenants/check-auth',
+    CHECK_AUTH_ENDPOINT: '/tenants/me',
     FORGOT_PASSWORD_ENDPOINT: '/auth/forgot-password',
     RESET_PASSWORD_ENDPOINT: '/auth/reset-password',
   },

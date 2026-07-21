@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "name": "nextjs-app-template",
+  "name": "mujibai",
   "version": "1.0.0",
   "private": true,
   "lint-staged": {

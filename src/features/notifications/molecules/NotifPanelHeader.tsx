@@ -21,7 +21,7 @@ export function NotifPanelHeader({
   const t = useTranslations('notifications.panel');
 
   return (
-    <div className="flex items-center justify-between border-b px-4 py-3 dark:border-white/10">
+    <div className="flex items-center justify-between border-b px-4 py-3">
       <div>
         <p className="text-sm font-semibold">{t('title')}</p>
         <p className="text-muted-foreground text-xs">

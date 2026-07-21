@@ -33,28 +33,24 @@ export default function CallsTable({
 
   const items = [
     {
-      customer: 'Toni Kroos',
       phone: '03:34',
       duration: '05:34',
       scenario: 'Appointments Booking',
       date: 'Sample date',
     },
     {
-      customer: 'Toni Kroos',
       phone: '03:34',
       duration: '05:34',
       scenario: 'Appointments Booking',
       date: 'Sample date',
     },
     {
-      customer: 'Toni Kroos',
       phone: '03:34',
       duration: '05:34',
       scenario: 'Appointments Booking',
       date: 'Sample date',
     },
     {
-      customer: 'Toni Kroos',
       phone: '03:34',
       duration: '05:34',
       scenario: 'Appointments Booking',
@@ -77,11 +73,6 @@ export default function CallsTable({
             <Table className="w-full rounded-xl border-0 bg-[#FFFFFFBF] dark:bg-[#001434A6]">
               <TableHeader>
                 <TableRow className="text-foreground border-none">
-                  <TableHead
-                    className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
-                  >
-                    {t('customer')}
-                  </TableHead>
                   <TableHead
                     className={`${locale === 'ar' ? 'text-right' : 'text-left'}`}
                   >
@@ -113,9 +104,6 @@ export default function CallsTable({
                     className="hover:bg-primary/40 border-none transition-colors dark:hover:bg-[#00214f]/40"
                   >
                     <TableCell className="text-foreground font-medium">
-                      {item.customer}
-                    </TableCell>
-                    <TableCell className="text-foreground">
                       {formatPhoneNumber(item.phone)}
                     </TableCell>
                     <TableCell className="text-foreground">

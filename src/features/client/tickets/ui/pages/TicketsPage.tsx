@@ -34,13 +34,15 @@ export default function TicketsPage({ mode }: { mode: CallsAndTicketsMode }) {
       <DashboardHeader title={t(titleKey)} subtitle={t(subtitleKey)} />
       <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
         <section className="flex flex-col">
-          <Filtering
-            status={status}
-            onStatusChange={changeStatus}
-            statusPlaceholder={t('status')}
-            allStatusesText={t('filterAllStatuses')}
-            t={t}
-          />
+          {(status !== undefined || total > 0 || isLoading) && (
+            <Filtering
+              status={status}
+              onStatusChange={changeStatus}
+              statusPlaceholder={t('status')}
+              allStatusesText={t('filterAllStatuses')}
+              t={t}
+            />
+          )}
           <Table
             t={t}
             locale={locale}

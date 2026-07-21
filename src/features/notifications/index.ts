@@ -1,4 +1,5 @@
 export * from './types';
+export { NotificationDetail } from './organisms/NotificationDetail';
 export {
   NotificationsPanel,
   type NotificationsPanelProps,

@@ -9,7 +9,6 @@ import { Badge } from '@/shared/components/atoms/ui/badge';
 
 import { NotifIcon } from '../atoms/NotifIcon';
 import { NOTIFICATION_SEVERITY_META } from '../constants/notifTypeMeta';
-import { getNotificationHref } from '../lib/notificationLinks';
 import type { NotificationPublic } from '../types';
 
 interface NotificationListItemProps {
@@ -24,7 +23,6 @@ export function NotificationListItem({
   const t = useTranslations('notifications');
   const format = useFormatter();
   const meta = NOTIFICATION_SEVERITY_META[notification.severity];
-  const href = getNotificationHref(notification);
   const isUnread = !notification.readAt;
 
   const date = new Date(notification.createdAt);
@@ -32,8 +30,8 @@ export function NotificationListItem({
 
   const content = (
     <div
-      className={`flex items-start gap-3 border-b px-4 py-3 text-sm last:border-b-0 dark:border-white/10 ${
-        isUnread ? 'bg-[#06B6D40F] dark:bg-[#06B6D41A]' : ''
+      className={`flex items-start gap-3 border-b px-4 py-3 text-sm last:border-b-0 ${
+        isUnread ? 'bg-primary/5' : ''
       }`}
     >
       <div
@@ -71,25 +69,13 @@ export function NotificationListItem({
     </div>
   );
 
-  if (href) {
-    return (
-      <Link
-        href={href}
-        onClick={onRowClick}
-        className="block hover:bg-black/2 dark:hover:bg-white/2"
-      >
-        {content}
-      </Link>
-    );
-  }
-
   return (
-    <button
-      type="button"
+    <Link
+      href={`/dashboard/notifications/${notification.id}`}
       onClick={onRowClick}
-      className="block w-full text-left hover:bg-black/2 dark:hover:bg-white/2"
+      className="hover:bg-accent block"
     >
       {content}
-    </button>
+    </Link>
   );
 }

@@ -39,15 +39,32 @@
     "chips": {
       "critical": "Critical",
       "warning": "Warning"
+    },
+    "detail": {
+      "title": "Notification",
+      "subTitle": "Full details for this notification.",
+      "back": "Back to notifications",
+      "receivedAt": "Received",
+      "markAsRead": "Mark as read",
+      "viewResource": "View related {resourceType}",
+      "notFoundTitle": "Notification not found.",
+      "notFoundSubtitle": "It may have expired or is no longer available.",
+      "unread": "Unread"
     }
   },
   "dashboardOverview": {
     "welcome": "Welcome,",
     "subTitle": "Here's what's happening with your account today.",
     "upgradePlan": "Upgrade Plan",
-    "recentClients": "Recent Clients",
+    "newCalls": "New Calls",
+    "newCallsSummary": "{total} new calls this week — {answered} answered, {missed} missed.",
     "dataUsage": "Data Usage",
-    "clientName": "Client Name",
+    "left": "left",
+    "phone": "Phone",
+    "scenario": "Scenario",
+    "status": "Status",
+    "answered": "Answered",
+    "missed": "Missed",
     "date": "Date",
     "duration": "Duration",
     "next": "Next",
@@ -55,7 +72,7 @@
     "page": "Page",
     "of": "of",
     "rows": "rows",
-    "clients": "clients",
+    "clients": "calls",
     "more": "More",
     "dataTitle": "Data"
   },

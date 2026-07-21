@@ -1,14 +1,7 @@
 'use client';
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/shared/components/atoms/ui/pagination';
+import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
+import { buttonVariants } from '@/shared/components/atoms/ui/button';
 import {
   Select,
   SelectContent,
@@ -16,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
+import { cn } from '@/shared/lib/utils';
+import { Pagination } from '@heroui/react';
 
 const PAGE_SIZE_OPTIONS = [6, 12, 24] as const;
 
@@ -106,66 +101,74 @@ export default function TablePagination({
         </p>
       </div>
       {totalPages > 1 && (
-        <Pagination className="mx-0 w-fit rounded-[6px] bg-[#FFFFFFBF] py-1 dark:bg-[#001434A6]">
-          <PaginationContent className="gap-1">
-            <PaginationItem>
-              <PaginationPrevious
-                href="#"
-                locale={locale}
-                text={previousText}
-                aria-disabled={page <= 1}
-                className={
-                  page <= 1 ? 'pointer-events-none opacity-50' : undefined
-                }
-                onClick={event => {
-                  event.preventDefault();
-                  goTo(page - 1);
-                }}
-              />
-            </PaginationItem>
+        <Pagination className="mx-0 flex w-fit items-center rounded-[6px] bg-[#FFFFFFBF] py-1 dark:bg-[#001434A6]">
+          <Pagination.Content className="flex flex-row items-center gap-1">
+            <Pagination.Item>
+              <Pagination.Previous
+                aria-label="Go to previous page"
+                isDisabled={page <= 1}
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'default' }),
+                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pl-2.5'
+                )}
+                onPress={() => goTo(page - 1)}
+              >
+                <Pagination.PreviousIcon>
+                  {locale === 'ar' ? (
+                    <ThemedIcon name="arrow-right" size={16} />
+                  ) : (
+                    <ThemedIcon name="arrow-left" size={16} />
+                  )}
+                </Pagination.PreviousIcon>
+                <span className="hidden sm:block">{previousText}</span>
+              </Pagination.Previous>
+            </Pagination.Item>
             {buildPageList(page, totalPages).map((item, index) =>
               item === 'ellipsis' ? (
-                <PaginationItem key={`ellipsis-${index}`}>
-                  <PaginationEllipsis className="text-foreground" />
-                </PaginationItem>
+                <Pagination.Item key={`ellipsis-${index}`}>
+                  <Pagination.Ellipsis className="text-foreground flex size-9 items-center justify-center" />
+                </Pagination.Item>
               ) : (
-                <PaginationItem key={item}>
-                  <PaginationLink
-                    href="#"
+                <Pagination.Item key={item}>
+                  <Pagination.Link
                     isActive={item === page}
-                    className={
+                    className={cn(
+                      buttonVariants({
+                        variant: item === page ? 'outline' : 'ghost',
+                        size: 'icon',
+                      }),
                       item === page
-                        ? 'text-foreground rounded-md bg-[#00d9ff] font-medium hover:bg-[#00b9e6]'
-                        : 'text-foreground rounded-md'
-                    }
-                    onClick={event => {
-                      event.preventDefault();
-                      goTo(item);
-                    }}
+                        ? 'text-foreground bg-[#00d9ff] font-medium hover:bg-[#00b9e6]'
+                        : 'text-foreground'
+                    )}
+                    onPress={() => goTo(item)}
                   >
                     {item}
-                  </PaginationLink>
-                </PaginationItem>
+                  </Pagination.Link>
+                </Pagination.Item>
               )
             )}
-            <PaginationItem>
-              <PaginationNext
-                href="#"
-                text={nextText}
-                locale={locale}
-                aria-disabled={page >= totalPages}
-                className={
-                  page >= totalPages
-                    ? 'pointer-events-none opacity-50'
-                    : undefined
-                }
-                onClick={event => {
-                  event.preventDefault();
-                  goTo(page + 1);
-                }}
-              />
-            </PaginationItem>
-          </PaginationContent>
+            <Pagination.Item>
+              <Pagination.Next
+                aria-label="Go to next page"
+                isDisabled={page >= totalPages}
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'default' }),
+                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pr-2.5'
+                )}
+                onPress={() => goTo(page + 1)}
+              >
+                <span className="hidden sm:block">{nextText}</span>
+                <Pagination.NextIcon>
+                  {locale === 'ar' ? (
+                    <ThemedIcon name="arrow-left" size={16} />
+                  ) : (
+                    <ThemedIcon name="arrow-right" size={16} />
+                  )}
+                </Pagination.NextIcon>
+              </Pagination.Next>
+            </Pagination.Item>
+          </Pagination.Content>
         </Pagination>
       )}
     </div>

@@ -15,7 +15,7 @@ export default function DashboardHeader({
   subtitle?: string;
 }) {
   return (
-    <div className="z-50 flex w-full flex-wrap items-center justify-between gap-2 rounded-2xl bg-[#FFFFFFBF] px-5 py-4 shadow-sm dark:bg-[#001434A6]">
+    <div className="relative z-60 flex w-full flex-wrap items-center justify-between gap-2 rounded-2xl bg-[#FFFFFFBF] px-5 py-4 shadow-sm dark:bg-[#001434A6]">
       <div className="flex items-center gap-2">
         <SidebarTrigger>
           <ThemedIcon name="sidebar" className="size-5" />

@@ -28,7 +28,7 @@ export function NotifTabs({
       onValueChange={value => onChange(value as NotificationTab)}
       className="gap-0"
     >
-      <TabsList className="h-fit w-full justify-start rounded-none border-b bg-transparent p-2 dark:border-white/10">
+      <TabsList className="h-fit w-full justify-start rounded-none border-b bg-transparent p-2">
         {NOTIFICATION_TABS.map(tab => (
           <TabsTrigger
             key={tab}

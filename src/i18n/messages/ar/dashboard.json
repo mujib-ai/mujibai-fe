@@ -39,15 +39,32 @@
     "chips": {
       "critical": "حرج",
       "warning": "تحذير"
+    },
+    "detail": {
+      "title": "الإشعار",
+      "subTitle": "التفاصيل الكاملة لهذا الإشعار.",
+      "back": "العودة إلى الإشعارات",
+      "receivedAt": "تاريخ الاستلام",
+      "markAsRead": "تعليم كمقروء",
+      "viewResource": "عرض {resourceType} المرتبط",
+      "notFoundTitle": "لم يتم العثور على الإشعار.",
+      "notFoundSubtitle": "قد يكون منتهي الصلاحية أو لم يعد متاحًا.",
+      "unread": "غير مقروء"
     }
   },
   "dashboardOverview": {
     "welcome": "مرحبا،",
     "subTitle": "إليك ما يحدث في حسابك اليوم.",
     "upgradePlan": "ترقية الخطة",
-    "recentClients": "العملاء الجدد",
+    "newCalls": "المكالمات الجديدة",
+    "newCallsSummary": "{total} مكالمة جديدة هذا الأسبوع — {answered} تم الرد عليها، {missed} فائتة.",
     "dataUsage": "الاستخدام",
-    "clientName": "اسم العميل",
+    "left": "متبقية",
+    "phone": "الهاتف",
+    "scenario": "السيناريو",
+    "status": "الحالة",
+    "answered": "تم الرد",
+    "missed": "فائتة",
     "date": "التاريخ",
     "duration": "الدقيقة",
     "next": "التالي",
@@ -55,7 +72,7 @@
     "page": "الصفحة",
     "of": "من",
     "rows": "الصفوف",
-    "clients": "العملاء",
+    "clients": "مكالمة",
     "more": "المزيد",
     "dataTitle": "البيانات"
   },
