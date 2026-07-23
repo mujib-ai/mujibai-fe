@@ -12,7 +12,7 @@ import {
 import { cn } from '@/shared/lib/utils';
 import { Pagination } from '@heroui/react';
 
-const PAGE_SIZE_OPTIONS = [6, 12, 24] as const;
+const PAGE_SIZE_OPTIONS = [6, 12, 20, 24] as const;
 
 function buildPageList(
   current: number,
@@ -85,7 +85,7 @@ export default function TablePagination({
           value={String(limit)}
           onValueChange={value => onLimitChange(Number(value))}
         >
-          <SelectTrigger className="text-foreground w-[80px] rounded-md bg-[#FFFFFFBF] text-sm transition-colors focus:ring-2 focus:ring-[#00d9ff]/40 dark:bg-[#001434A6]">
+          <SelectTrigger className="bg-control text-foreground h-12 w-[80px] rounded-full border-0 text-sm shadow-none transition-colors focus-visible:ring-0">
             <SelectValue />
           </SelectTrigger>
           <SelectContent className="text-foreground border-[#0b254a] bg-[#FFFFFFBF] dark:bg-[#001434A6]">

@@ -75,7 +75,10 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
                   }`}
                 >
                   <Link href={String(item.href)}>
-                    <ThemedIcon name={item.icon} className="size-5" />
+                    <ThemedIcon
+                      name={item.icon}
+                      className="size-7 [&_path]:[stroke:0.35]"
+                    />
                     <span className="text-sm font-semibold text-black dark:text-white">
                       {item.title}
                     </span>

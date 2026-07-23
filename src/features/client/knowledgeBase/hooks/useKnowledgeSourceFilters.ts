@@ -35,6 +35,9 @@ export default function useKnowledgeSourceFilters() {
   const debouncedSearch = useDebounce(searchInput, 400);
 
   const page = Number(searchParams.get('page') ?? '1') || 1;
+  const pageSize =
+    Number(searchParams.get('limit') ?? String(DEFAULT_PAGE_SIZE)) ||
+    DEFAULT_PAGE_SIZE;
   const status =
     (searchParams.get('status') as IngestionStatus | null) ?? undefined;
   const sourceType =
@@ -76,7 +79,7 @@ export default function useKnowledgeSourceFilters() {
   const filters: KnowledgeSourceFilters = useMemo(
     () => ({
       page,
-      pageSize: DEFAULT_PAGE_SIZE,
+      pageSize,
       status,
       sourceType,
       isEnabled,
@@ -84,11 +87,26 @@ export default function useKnowledgeSourceFilters() {
       sortBy,
       sortOrder,
     }),
-    [page, status, sourceType, isEnabled, searchParams, sortBy, sortOrder]
+    [
+      page,
+      pageSize,
+      status,
+      sourceType,
+      isEnabled,
+      searchParams,
+      sortBy,
+      sortOrder,
+    ]
   );
 
   const setPage = useCallback(
     (nextPage: number) => updateParams({ page: String(nextPage) }, false),
+    [updateParams]
+  );
+
+  const setPageSize = useCallback(
+    (nextPageSize: number) =>
+      updateParams({ limit: String(nextPageSize) }, true),
     [updateParams]
   );
 
@@ -137,6 +155,7 @@ export default function useKnowledgeSourceFilters() {
     searchInput,
     setSearchInput,
     setPage,
+    setPageSize,
     setStatusFilter,
     setSourceTypeFilter,
     setEnabledFilter,

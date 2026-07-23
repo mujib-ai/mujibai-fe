@@ -59,7 +59,10 @@ export default function LanguageSwitcher() {
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent align="end" className="min-w-32">
+        <DropdownMenuContent
+          align="end"
+          className="bg-popover min-w-32 border shadow-md"
+        >
           <DropdownMenuItem onClick={() => switchTo('en')}>
             <div className="flex items-center gap-2">
               <div className="relative h-5 w-5 overflow-hidden rounded-full">

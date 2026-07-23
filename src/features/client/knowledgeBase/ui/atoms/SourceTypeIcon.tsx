@@ -1,23 +1,24 @@
 import {
   FileSpreadsheet,
   FileText,
-  FileType,
   Globe,
   MessageCircleQuestion,
-  Plug,
+  NotebookPen,
+  Table,
+  Webhook,
 } from 'lucide-react';
 
 import type { KnowledgeSourceType } from '../../types';
 
 const SOURCE_TYPE_ICONS = {
   pdf: FileText,
-  txt: FileType,
+  txt: FileText,
   csv: FileSpreadsheet,
-  excel: FileSpreadsheet,
-  manual_text: FileType,
+  excel: Table,
+  manual_text: NotebookPen,
   faq: MessageCircleQuestion,
   website: Globe,
-  api: Plug,
+  api: Webhook,
 } satisfies Record<KnowledgeSourceType, typeof FileText>;
 
 interface SourceTypeIconProps {

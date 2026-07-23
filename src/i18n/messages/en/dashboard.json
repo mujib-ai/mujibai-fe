@@ -467,10 +467,8 @@
       "profileInformation": "Profile Information",
       "passwordManagement": "Password Management",
       "passwordManagementDescription": "Update your password for enhanced account security.",
-      "firstName": "First Name",
-      "firstNamePlaceholder": "Your frist Name",
-      "lastName": "Last Name",
-      "lastNamePlaceholder": "Your last Name",
+      "name": "Tenant Name",
+      "namePlaceholder": "Your tenant name",
       "email": "Email",
       "emailPlaceholder": "Your email",
       "phone": "Phone",
@@ -482,6 +480,19 @@
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
+      "logo": {
+        "title": "Tenant Logo",
+        "description": "Upload a PNG, JPG/JPEG, WebP, or SVG logo up to 2 MB.",
+        "choose": "Choose Logo",
+        "upload": "Upload Logo",
+        "uploading": "Uploading...",
+        "removeSelection": "Remove selected logo",
+        "previewAlt": "{name} tenant logo",
+        "invalidType": "Please choose a PNG, JPG/JPEG, WebP, or SVG image.",
+        "tooLarge": "The logo must be 2 MB or smaller.",
+        "success": "Tenant logo updated successfully.",
+        "uploadFailed": "Failed to upload the tenant logo."
+      },
       "saveChanges": "Save Changes"
     },
     "integrationSettings": {

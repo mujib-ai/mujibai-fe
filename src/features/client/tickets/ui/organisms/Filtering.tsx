@@ -45,7 +45,7 @@ export default function Filtering({
               )
             }
           >
-            <SelectTrigger className="h-11 w-65 rounded-lg border-0 bg-[#F7F7F7F2] shadow-none transition-colors dark:bg-[#001434A6]">
+            <SelectTrigger className="bg-control h-12 w-65 rounded-full border-0 shadow-none transition-colors focus-visible:ring-0">
               <SelectValue placeholder={statusPlaceholder} />
             </SelectTrigger>
             <SelectContent>

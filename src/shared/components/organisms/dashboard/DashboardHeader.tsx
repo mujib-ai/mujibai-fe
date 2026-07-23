@@ -6,6 +6,7 @@ import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { SidebarTrigger } from '@/shared/components/atoms/ui/sidebar';
 
 import NotificationBell from './NotificationBell';
+import TenantAvatarMenu from './TenantAvatarMenu';
 
 export default function DashboardHeader({
   title,
@@ -31,6 +32,7 @@ export default function DashboardHeader({
         <NotificationBell />
         <LanguageSwitcher />
         <ThemeSwitcher />
+        <TenantAvatarMenu />
       </div>
     </div>
   );

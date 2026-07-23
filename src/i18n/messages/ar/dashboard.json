@@ -466,10 +466,8 @@
       "profileInformation": "معلومات الملف الشخصي",
       "passwordManagement": "إدارة كلمة المرور",
       "passwordManagementDescription": "قم بتحديث كلمة المرور الخاصة بك لتعزيز أمان الحساب.",
-      "firstName": "الاسم الأول",
-      "firstNamePlaceholder": "الاسم الأول",
-      "lastName": "اسم العائلة",
-      "lastNamePlaceholder": "اسم العائلة",
+      "name": "اسم المنشأة",
+      "namePlaceholder": "اسم المنشأة",
       "email": "البريد الإلكتروني",
       "emailPlaceholder": "البريد الإلكتروني",
       "phone": "رقم الهاتف",
@@ -481,6 +479,19 @@
       "currentPassword": "كلمة المرور الحالية",
       "newPassword": "كلمة المرور الجديدة",
       "confirmPassword": "تأكيد كلمة المرور",
+      "logo": {
+        "title": "شعار المنشأة",
+        "description": "ارفع شعارًا بصيغة PNG أو JPG/JPEG أو WebP أو SVG بحجم لا يتجاوز 2 ميجابايت.",
+        "choose": "اختيار الشعار",
+        "upload": "رفع الشعار",
+        "uploading": "جارٍ الرفع...",
+        "removeSelection": "إزالة الشعار المحدد",
+        "previewAlt": "شعار منشأة {name}",
+        "invalidType": "يرجى اختيار صورة بصيغة PNG أو JPG/JPEG أو WebP أو SVG.",
+        "tooLarge": "يجب ألا يتجاوز حجم الشعار 2 ميجابايت.",
+        "success": "تم تحديث شعار المنشأة بنجاح.",
+        "uploadFailed": "تعذر رفع شعار المنشأة."
+      },
       "saveChanges": "حفظ التغييرات"
     },
     "integrationSettings": {

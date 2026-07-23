@@ -16,14 +16,14 @@ export function SearchInput({
   return (
     <div
       className={cn(
-        'col-span-3 flex w-full items-center gap-2 rounded-full bg-[#06B6D426] px-3 py-2 dark:bg-white/10',
+        'bg-control col-span-3 flex w-full items-center gap-2 rounded-full px-3 py-2',
         containerClassName
       )}
     >
       <Input
         {...props}
         className={cn(
-          'flex-1 border-0 py-0 shadow-none focus-visible:ring-0 dark:bg-transparent',
+          'flex-1 border-0 bg-transparent py-0 shadow-none focus-visible:ring-0 dark:bg-transparent',
           className
         )}
       />

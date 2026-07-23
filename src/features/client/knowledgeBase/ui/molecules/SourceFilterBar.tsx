@@ -27,7 +27,7 @@ const SOURCE_TYPES: KnowledgeSourceType[] = [
 const ALL = 'all';
 
 const SELECT_TRIGGER_CLASS =
-  'border-input flex h-9 w-40 cursor-pointer items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs outline-none';
+  'bg-control flex h-12 w-40 cursor-pointer items-center justify-between gap-2 rounded-full border-0 px-3 py-2 text-sm whitespace-nowrap shadow-none outline-none transition-colors focus-visible:ring-0';
 const SELECT_POPOVER_CLASS =
   'bg-popover text-popover-foreground z-50 min-w-40 overflow-hidden rounded-md border shadow-md';
 const SELECT_ITEM_CLASS =

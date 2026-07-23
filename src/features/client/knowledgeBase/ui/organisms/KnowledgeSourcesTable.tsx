@@ -2,9 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
+import { TablePagination } from '@/features/client/tickets';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { Button, Table } from '@heroui/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { INGESTION_STATUS_CONFIG } from '../../constants/ingestion-status';
 import type { KnowledgeSource } from '../../types';
@@ -25,7 +25,9 @@ interface KnowledgeSourcesTableProps {
   page: number;
   totalPages: number;
   totalItems: number;
+  pageSize: number;
   onPageChange: (page: number) => void;
+  onPageSizeChange: (pageSize: number) => void;
   locale: string;
   can: (permission: string) => boolean;
   onViewDetails: (source: KnowledgeSource) => void;
@@ -50,7 +52,9 @@ export default function KnowledgeSourcesTable({
   page,
   totalPages,
   totalItems,
+  pageSize,
   onPageChange,
+  onPageSizeChange,
   locale,
   can,
   onViewDetails,
@@ -214,34 +218,19 @@ export default function KnowledgeSourcesTable({
       )}
 
       {totalItems > 0 && (
-        <div className="flex flex-wrap items-center justify-between gap-3 px-1">
-          <p className="text-muted-foreground text-sm">
-            {totalItems} {t('pagination.results')}
-          </p>
-          {totalPages > 1 && (
-            <div className="flex items-center gap-2">
-              <Button
-                isDisabled={page <= 1}
-                onPress={() => onPageChange(page - 1)}
-                className={BUTTON_OUTLINE_CLASS}
-              >
-                <ChevronLeft className="size-4 rtl:rotate-180" />
-                {t('pagination.previous')}
-              </Button>
-              <span className="text-muted-foreground text-sm whitespace-nowrap">
-                {page} {t('pagination.of')} {totalPages}
-              </span>
-              <Button
-                isDisabled={page >= totalPages}
-                onPress={() => onPageChange(page + 1)}
-                className={BUTTON_OUTLINE_CLASS}
-              >
-                {t('pagination.next')}
-                <ChevronRight className="size-4 rtl:rotate-180" />
-              </Button>
-            </div>
-          )}
-        </div>
+        <TablePagination
+          page={page}
+          totalPages={totalPages}
+          total={totalItems}
+          limit={pageSize}
+          onPageChange={onPageChange}
+          onLimitChange={onPageSizeChange}
+          ofText={t('pagination.of')}
+          clientsText={t('pagination.results')}
+          previousText={t('pagination.previous')}
+          nextText={t('pagination.next')}
+          locale={locale}
+        />
       )}
     </div>
   );

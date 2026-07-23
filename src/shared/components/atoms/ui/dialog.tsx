@@ -154,7 +154,7 @@ function DialogContent({
         <Modal.Dialog
           data-slot="dialog-content"
           className={cn(
-            'bg-background relative grid w-full gap-4 rounded-lg border p-6 shadow-lg outline-none',
+            'bg-control relative grid w-full gap-4 rounded-3xl border-0 p-6 shadow-none outline-none',
             className
           )}
           {...props}

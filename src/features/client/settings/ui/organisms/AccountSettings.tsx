@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
+import { useAuth } from '@/features/auth';
 import PasswordInput from '@/shared/components/atoms/PasswordInput';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
@@ -12,9 +13,11 @@ import {
 } from '@/shared/components/atoms/ui/card';
 
 import SettingsFormField from '../atoms/SettingsFormField';
+import { TenantLogoUpload } from '../molecules/TenantLogoUpload';
 
 export function AccountSettings() {
   const t = useTranslations('settings.accountSettings');
+  const { user } = useAuth();
 
   return (
     <div className="w-full">
@@ -28,15 +31,15 @@ export function AccountSettings() {
             <p className="text-sm text-gray-400">{t('subTitle')}</p>
           </div>
           <form className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <SettingsFormField
-              id="firstName"
-              label={t('firstName')}
-              placeholder={t('firstNamePlaceholder')}
+            <TenantLogoUpload
+              currentLogoUrl={user?.logoUrl ?? user?.avatar}
+              tenantName={user?.name}
             />
             <SettingsFormField
-              id="lastName"
-              label={t('lastName')}
-              placeholder={t('lastNamePlaceholder')}
+              id="name"
+              label={t('name')}
+              placeholder={t('namePlaceholder')}
+              defaultValue={user?.name}
             />
             <SettingsFormField
               id="email"

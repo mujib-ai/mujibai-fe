@@ -49,29 +49,27 @@ export default function KnowledgeBaseStats({
     return (
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {STAT_TILE_KEYS.map(key => (
-          <>
-            <Card
-              key={key}
-              className="flex min-h-32.25 min-w-45.25 flex-col gap-3 rounded-xl bg-[#FFFFFFBF] p-4 dark:bg-[#FFFFFF0F]"
-            >
-              <Card.Header className="flex flex-row items-center justify-between gap-2 px-4">
-                <Skeleton
-                  animationType="none"
-                  className={`${SKELETON_BAR} h-3 w-16 rounded`}
-                />
-                <Skeleton
-                  animationType="none"
-                  className={`${SKELETON_BAR} size-4 rounded`}
-                />
-              </Card.Header>
-              <Card.Content className="px-4">
-                <Skeleton
-                  animationType="none"
-                  className={`${SKELETON_BAR} h-7 w-10 rounded`}
-                />
-              </Card.Content>
-            </Card>
-          </>
+          <Card
+            key={key}
+            className="flex min-h-32.25 min-w-45.25 flex-col gap-3 rounded-xl bg-[#FFFFFFBF] p-4 dark:bg-[#FFFFFF0F]"
+          >
+            <Card.Header className="flex flex-row items-center justify-between gap-2 px-4">
+              <Skeleton
+                animationType="none"
+                className={`${SKELETON_BAR} h-3 w-16 rounded`}
+              />
+              <Skeleton
+                animationType="none"
+                className={`${SKELETON_BAR} size-4 rounded`}
+              />
+            </Card.Header>
+            <Card.Content className="px-4">
+              <Skeleton
+                animationType="none"
+                className={`${SKELETON_BAR} h-7 w-10 rounded`}
+              />
+            </Card.Content>
+          </Card>
         ))}
       </div>
     );

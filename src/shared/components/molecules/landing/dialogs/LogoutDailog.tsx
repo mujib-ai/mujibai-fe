@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/shared/components/atoms/ui/button';

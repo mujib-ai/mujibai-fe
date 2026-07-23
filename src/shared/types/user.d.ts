@@ -3,9 +3,11 @@ export type UserRole = 'ADMIN' | 'CLIENT';
 export interface User {
   id: string;
   email: string;
+  name?: string;
   firstName: string;
   lastName: string;
   avatar?: string;
+  logoUrl?: string;
   role: UserRole;
   isActive: boolean;
   createdAt: Date;
@@ -36,6 +38,7 @@ export interface UpdateUserDto {
   firstName?: string;
   lastName?: string;
   avatar?: string;
+  logoUrl?: string;
   role?: 'admin' | 'user' | 'client';
   isActive?: boolean;
 }

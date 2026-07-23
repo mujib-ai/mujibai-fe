@@ -46,7 +46,9 @@ export function KnowledgeBaseContent({
         page={sourceFilters.page}
         totalPages={totalPages}
         totalItems={totalItems}
+        pageSize={sourceFilters.filters.pageSize}
         onPageChange={sourceFilters.setPage}
+        onPageSizeChange={sourceFilters.setPageSize}
         locale={locale}
         can={can}
         onViewDetails={source => actions.setSelectedSourceId(source.id)}

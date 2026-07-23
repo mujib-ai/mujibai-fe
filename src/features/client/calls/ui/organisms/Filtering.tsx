@@ -20,7 +20,7 @@ export default function Filtering({
   return (
     <div className="flex w-full items-center justify-end gap-3 px-2 py-2">
       <Select>
-        <SelectTrigger className="h-[44px] w-[260px] rounded-lg border-0 bg-[#F7F7F7F2] shadow-none transition-colors dark:bg-[#001434A6]">
+        <SelectTrigger className="bg-control h-12 w-[260px] rounded-full border-0 shadow-none transition-colors focus-visible:ring-0">
           <SelectValue placeholder={filterPlaceholderOne} />
         </SelectTrigger>
         <SelectContent className="border-[#0b254a] bg-[#001434] text-gray-200">
@@ -30,7 +30,7 @@ export default function Filtering({
         </SelectContent>
       </Select>
       <Select>
-        <SelectTrigger className="h-[44px] w-[260px] rounded-lg border-0 bg-[#F7F7F7F2] shadow-none transition-colors dark:bg-[#001434A6]">
+        <SelectTrigger className="bg-control h-12 w-[260px] rounded-full border-0 shadow-none transition-colors focus-visible:ring-0">
           <SelectValue placeholder={filterPlaceholderTwo} />
         </SelectTrigger>
         <SelectContent className="border-[#0b254a] bg-[#001434] text-gray-200">

@@ -23,7 +23,6 @@ export default function ActionsButtons({
   const t = useTranslations('landingPage');
 
   const isAuthenticated = user || hasToken;
-  const isClientOrAdmin = user?.role === 'CLIENT' || user?.role === 'ADMIN';
   const dashboardHref = '/dashboard';
 
   return (
@@ -57,7 +56,7 @@ export default function ActionsButtons({
         </div>
       )}
 
-      {isAuthenticated && (isClientOrAdmin || !user) && (
+      {isAuthenticated && (
         <div className="flex gap-1.5 lg:gap-2 xl:gap-2.5">
           <Button
             className="h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base dark:text-white"
