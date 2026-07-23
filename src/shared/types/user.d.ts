@@ -8,6 +8,10 @@ export interface User {
   lastName: string;
   avatar?: string;
   logoUrl?: string;
+  phone?: string;
+  address?: string;
+  description?: string;
+  website?: string;
   role: UserRole;
   isActive: boolean;
   createdAt: Date;

@@ -46,21 +46,25 @@ export function AccountSettings() {
               label={t('email')}
               type="email"
               placeholder={t('emailPlaceholder')}
+              defaultValue={user?.email}
             />
             <SettingsFormField
               id="phone"
               label={t('phone')}
               placeholder={t('phonePlaceholder')}
+              defaultValue={user?.phone}
             />
             <SettingsFormField
               id="location"
               label={t('location')}
               placeholder={t('locationPlaceholder')}
+              defaultValue={user?.address}
             />
             <SettingsFormField
               id="bio"
               label={t('bio')}
               placeholder={t('bioPlaceholder')}
+              defaultValue={user?.description}
             />
             <div className="col-span-full mt-8 flex flex-col gap-2">
               <h1 className="text-lg font-semibold">

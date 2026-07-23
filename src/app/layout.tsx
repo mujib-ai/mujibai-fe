@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import { Providers } from '@/providers/Providers';
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
+import { VisitTracker } from '@/shared/components/atoms/VisitTracker';
 import { Toaster } from '@/shared/components/atoms/ui/sonner';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -137,6 +138,7 @@ export default async function RootLayout({
           >
             {children}
             <Toaster position="top-center" />
+            <VisitTracker />
             <SpeedInsights />
           </ThemeProvider>
         </Providers>

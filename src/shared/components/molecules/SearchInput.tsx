@@ -16,7 +16,7 @@ export function SearchInput({
   return (
     <div
       className={cn(
-        'bg-control col-span-3 flex w-full items-center gap-2 rounded-full px-3 py-2',
+        'bg-control col-span-3 flex w-full items-center gap-2 rounded-full px-3',
         containerClassName
       )}
     >
