@@ -3,7 +3,7 @@
 import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useQuery } from '@tanstack/react-query';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
 
 export default function useKnowledgeSource(sourceId: string | undefined) {
@@ -13,7 +13,7 @@ export default function useKnowledgeSource(sourceId: string | undefined) {
     isError,
     error,
   } = useQuery({
-    queryKey: knowledgeBaseKeys.sourceDetail(sourceId ?? ''),
+    queryKey: knowledgeKeys.source(sourceId ?? ''),
     queryFn: () => KnowledgeSourcesService.get(sourceId as string),
     enabled: !!sourceId,
   });

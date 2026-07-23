@@ -110,8 +110,6 @@
   "KnowledgeBase": {
     "title": "قاعدة المعرفة",
     "subTitle": "ارفع مستندات وبيانات نشاطك التجاري ليستخدمها المساعد الذكي في الإجابة عن أسئلة العملاء بدقة.",
-    "lastSynced": "آخر مزامنة {date}",
-    "neverSynced": "لم تتم المزامنة بعد",
     "overallStatus": {
       "ready": "جميع المصادر جاهزة",
       "processing": "جارٍ معالجة المصادر",
@@ -131,13 +129,11 @@
     },
     "stats": {
       "totalSources": "إجمالي المصادر",
-      "readySources": "جاهزة",
+      "completedSources": "جاهزة",
       "processingSources": "قيد المعالجة",
       "failedSources": "فشلت",
       "totalDocuments": "المستندات",
-      "totalChunks": "الأجزاء المفهرسة",
-      "lastSuccessfulIngestion": "آخر معالجة ناجحة",
-      "never": "أبدًا"
+      "totalChunks": "الأجزاء المفهرسة"
     },
     "sources": {
       "title": "مصادر المعرفة",
@@ -276,7 +272,6 @@
       "deleteFailed": "فشل حذف المصدر.",
       "loadFailed": "تعذر تحميل قاعدة المعرفة.",
       "loadSourcesFailed": "تعذر تحميل مصادر المعرفة.",
-      "loadStatsFailed": "تعذر تحميل الإحصاءات.",
       "loadDetailsFailed": "تعذر تحميل تفاصيل المصدر.",
       "testQueryFailed": "تعذر اختبار قاعدة المعرفة."
     },
@@ -298,7 +293,6 @@
       "mimeType": "صيغة الملف",
       "status": "الحالة",
       "progress": "التقدم",
-      "currentStage": "المرحلة الحالية",
       "createdAt": "تاريخ الإنشاء",
       "startedAt": "تاريخ البدء",
       "completedAt": "تاريخ الاكتمال",

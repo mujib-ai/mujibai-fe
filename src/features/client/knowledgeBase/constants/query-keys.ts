@@ -1,22 +1,18 @@
 import type { KnowledgeSourceFilters } from '../types';
 
-export const knowledgeBaseKeys = {
+export const knowledgeKeys = {
   all: ['knowledge-base'] as const,
 
-  active: () => [...knowledgeBaseKeys.all, 'active'] as const,
+  stats: () => [...knowledgeKeys.all, 'stats'] as const,
 
-  stats: (knowledgeBaseId: string) =>
-    [...knowledgeBaseKeys.all, 'stats', knowledgeBaseId] as const,
+  sourcesRoot: () => [...knowledgeKeys.all, 'sources'] as const,
 
-  sourcesRoot: (knowledgeBaseId: string) =>
-    [...knowledgeBaseKeys.all, 'sources', knowledgeBaseId] as const,
+  sources: (filters: KnowledgeSourceFilters) =>
+    [...knowledgeKeys.sourcesRoot(), filters] as const,
 
-  sources: (knowledgeBaseId: string, filters: KnowledgeSourceFilters) =>
-    [...knowledgeBaseKeys.sourcesRoot(knowledgeBaseId), filters] as const,
+  status: (sourceId: string) =>
+    [...knowledgeKeys.all, 'status', sourceId] as const,
 
-  sourceStatus: (sourceId: string) =>
-    [...knowledgeBaseKeys.all, 'source-status', sourceId] as const,
-
-  sourceDetail: (sourceId: string) =>
-    [...knowledgeBaseKeys.all, 'source-detail', sourceId] as const,
+  source: (sourceId: string) =>
+    [...knowledgeKeys.all, 'source', sourceId] as const,
 };

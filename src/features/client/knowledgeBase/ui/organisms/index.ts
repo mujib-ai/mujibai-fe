@@ -9,4 +9,3 @@ export { default as ToggleSourceConfirmDialog } from './ToggleSourceConfirmDialo
 export { default as FailedSourceAlert } from './FailedSourceAlert';
 export { default as SourceDetailsContent } from './SourceDetailsContent';
 export { default as SourceDetailsSheet } from './SourceDetailsSheet';
-export { default as TestKnowledgePanel } from './TestKnowledgePanel';

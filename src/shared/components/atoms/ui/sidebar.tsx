@@ -11,7 +11,6 @@ import {
   SheetDescription,
   SheetTitle,
 } from '@/shared/components/atoms/ui/sheet';
-import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 import {
   Tooltip,
   TooltipContent,
@@ -20,6 +19,7 @@ import {
 } from '@/shared/components/atoms/ui/tooltip';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { cn } from '@/shared/lib/utils';
+import { Skeleton } from '@heroui/react';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeftIcon } from 'lucide-react';

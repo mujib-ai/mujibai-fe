@@ -13,7 +13,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@/shared/components/atoms/ui/dialog';
-import { Input } from '@/shared/components/atoms/ui/input';
+import { SearchInput } from '@/shared/components/molecules/SearchInput';
 import { cn } from '@/shared/lib/utils';
 import { FileText } from 'lucide-react';
 
@@ -89,18 +89,12 @@ export function DocsSearch() {
         <DialogTitle className="sr-only">
           {t('common.searchPlaceholder')}
         </DialogTitle>
-        <div className="flex items-center gap-2 border-b px-4">
-          <ThemedIcon
-            name="search"
-            size={16}
-            className="text-muted-foreground size-4 shrink-0"
-          />
-          <Input
+        <div className="p-4">
+          <SearchInput
             autoFocus
             value={query}
             onChange={event => setQuery(event.target.value)}
             placeholder={t('common.searchPlaceholder')}
-            className="border-0 shadow-none focus-visible:ring-0"
           />
         </div>
         <ul className="max-h-80 overflow-y-auto p-2">

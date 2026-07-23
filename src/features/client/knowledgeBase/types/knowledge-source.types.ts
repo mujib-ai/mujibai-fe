@@ -12,7 +12,6 @@ export type KnowledgeSourceType =
 
 export interface KnowledgeSource {
   id: string;
-  knowledgeBaseId: string;
   name: string;
   sourceType: KnowledgeSourceType;
   originalFileName: string | null;

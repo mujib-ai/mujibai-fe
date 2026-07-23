@@ -2,8 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
+import { SearchInput } from '@/shared/components/molecules/SearchInput';
 import { Button, ListBox, ListBoxItem, Select } from '@heroui/react';
-import { ChevronDown, RotateCcw, Search } from 'lucide-react';
+import { ChevronDown, RotateCcw } from 'lucide-react';
 
 import { INGESTION_STATUSES } from '../../constants/ingestion-status';
 import type {
@@ -100,19 +101,13 @@ export default function SourceFilterBar({
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <div className="relative min-w-48 flex-1">
-        <Search
-          aria-hidden
-          className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2"
-        />
-        <input
-          value={searchInput}
-          onChange={event => onSearchChange(event.target.value)}
-          placeholder={t('filters.searchPlaceholder')}
-          aria-label={t('filters.searchPlaceholder')}
-          className="border-input placeholder:text-muted-foreground focus-visible:ring-ring h-9 w-full rounded-md border bg-transparent py-1 pr-3 pl-9 text-sm shadow-xs outline-none focus-visible:ring-2"
-        />
-      </div>
+      <SearchInput
+        value={searchInput}
+        onChange={event => onSearchChange(event.target.value)}
+        placeholder={t('filters.searchPlaceholder')}
+        aria-label={t('filters.searchPlaceholder')}
+        containerClassName="min-w-48 flex-1"
+      />
 
       <FilterSelect
         ariaLabel={t('filters.status')}

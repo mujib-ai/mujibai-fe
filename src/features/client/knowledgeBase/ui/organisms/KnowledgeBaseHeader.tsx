@@ -1,6 +1,6 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/utils';
 import { Button, Chip } from '@heroui/react';
@@ -8,36 +8,43 @@ import { FilePlus, Upload } from 'lucide-react';
 
 import { KNOWLEDGE_BASE_PERMISSIONS } from '../../constants/permissions';
 import { STATUS_COLOR_CLASSES } from '../../constants/status-colors';
-import type { KnowledgeBase, StatusColor } from '../../types';
-import { formatDate } from '../../utils/format-date';
+import type {
+  KnowledgeBaseOverallStatus,
+  KnowledgeBaseStats,
+  StatusColor,
+} from '../../types';
 
-const OVERALL_STATUS_COLOR: Record<
-  KnowledgeBase['overallStatus'],
-  StatusColor
-> = {
+const OVERALL_STATUS_COLOR: Record<KnowledgeBaseOverallStatus, StatusColor> = {
   ready: 'success',
   processing: 'accent',
   attention_needed: 'danger',
 };
 
+function deriveOverallStatus(
+  stats: KnowledgeBaseStats
+): KnowledgeBaseOverallStatus {
+  if (stats.failedSources > 0) return 'attention_needed';
+  if (stats.processingSources > 0) return 'processing';
+  return 'ready';
+}
+
 interface KnowledgeBaseHeaderProps {
-  knowledgeBase: KnowledgeBase | undefined;
+  stats: KnowledgeBaseStats | undefined;
   can: (permission: string) => boolean;
   onUpload: () => void;
   onAddManualText: () => void;
 }
 
 export default function KnowledgeBaseHeader({
-  knowledgeBase,
+  stats,
   can,
   onUpload,
   onAddManualText,
 }: KnowledgeBaseHeaderProps) {
   const t = useTranslations('KnowledgeBase');
-  const locale = useLocale();
 
-  const canUpload = can(KNOWLEDGE_BASE_PERMISSIONS.UPLOAD);
-  const canCreate = can(KNOWLEDGE_BASE_PERMISSIONS.CREATE);
+  const canCreateSource = can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_CREATE);
+  const overallStatus = stats ? deriveOverallStatus(stats) : undefined;
 
   return (
     <div className="flex flex-col gap-3">
@@ -45,30 +52,21 @@ export default function KnowledgeBaseHeader({
         <div className="flex flex-col gap-1">
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-lg font-semibold">{t('sources.title')}</h2>
-            {knowledgeBase && (
+            {overallStatus && (
               <Chip
                 className={cn(
                   'inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
-                  STATUS_COLOR_CLASSES[
-                    OVERALL_STATUS_COLOR[knowledgeBase.overallStatus]
-                  ]
+                  STATUS_COLOR_CLASSES[OVERALL_STATUS_COLOR[overallStatus]]
                 )}
               >
-                {t(`overallStatus.${knowledgeBase.overallStatus}`)}
+                {t(`overallStatus.${overallStatus}`)}
               </Chip>
             )}
           </div>
-          <p className="text-muted-foreground text-sm">
-            {knowledgeBase?.lastSyncAt
-              ? t('lastSynced', {
-                  date: formatDate(knowledgeBase.lastSyncAt, locale),
-                })
-              : t('neverSynced')}
-          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {canCreate && knowledgeBase?.capabilities.manualText && (
+          {canCreateSource && (
             <Button
               onPress={onAddManualText}
               className="border-input hover:bg-accent inline-flex cursor-pointer items-center gap-1.5 rounded-md border bg-transparent px-3 py-1.5 text-sm shadow-xs"
@@ -77,7 +75,7 @@ export default function KnowledgeBaseHeader({
               {t('actions.addManualText')}
             </Button>
           )}
-          {canUpload && (
+          {canCreateSource && (
             <Button
               onPress={onUpload}
               className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-sm"

@@ -1,3 +1,4 @@
+import { DEFAULT_MAX_FILE_SIZE_BYTES } from '../../constants/supported-file-types';
 import type { KnowledgeBasePageController } from '../../hooks/useKnowledgeBasePageController';
 import DeleteSourceDialog from './DeleteSourceDialog';
 import ManualTextSourceDialog from './ManualTextSourceDialog';
@@ -13,7 +14,6 @@ export function KnowledgeBaseDialogs({
   controller,
 }: KnowledgeBaseDialogsProps) {
   const {
-    knowledgeBase,
     can,
     uploadState,
     manualTextState,
@@ -32,9 +32,7 @@ export function KnowledgeBaseDialogs({
         onSubmit={actions.handleUploadSubmit}
         isUploading={uploadState.isUploading}
         uploadProgress={uploadState.uploadProgress}
-        maxFileSizeBytes={
-          knowledgeBase?.capabilities.maxFileSizeBytes ?? 25 * 1024 * 1024
-        }
+        maxFileSizeBytes={DEFAULT_MAX_FILE_SIZE_BYTES}
         duplicateInfo={uploadState.duplicateInfo}
         onClearDuplicateInfo={uploadState.clearDuplicateInfo}
         onViewExistingSource={actions.handleViewExistingSource}

@@ -3,8 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { FormField } from '@/shared/components/atoms/FormField';
-import { Button } from '@heroui/react';
-import { Loader2 } from 'lucide-react';
+import { Button, Spinner } from '@heroui/react';
 
 import { useUploadSourceForm } from '../../hooks/forms';
 import type { UploadSourceDialogProps } from '../../interfaces';
@@ -118,7 +117,7 @@ export default function UploadSourceDialog({
           >
             {isUploading ? (
               <span className="flex items-center gap-2">
-                <Loader2 className="size-4 animate-spin" />
+                <Spinner size="sm" color="current" />
                 {t('upload.uploading')}
               </span>
             ) : (

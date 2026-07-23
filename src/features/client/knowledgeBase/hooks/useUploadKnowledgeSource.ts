@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import type { DuplicateSourceInfo } from '../interfaces';
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
 import type {
@@ -16,9 +16,7 @@ import type {
   UploadKnowledgeSourceDto,
 } from '../types';
 
-export default function useUploadKnowledgeSource(
-  knowledgeBaseId: string | undefined
-) {
+export default function useUploadKnowledgeSource() {
   const queryClient = useQueryClient();
   const [uploadProgress, setUploadProgress] = useState(0);
   const [duplicateInfo, setDuplicateInfo] =
@@ -26,8 +24,6 @@ export default function useUploadKnowledgeSource(
 
   const mutation = useMutation({
     mutationFn: async (dto: UploadKnowledgeSourceDto) => {
-      if (!knowledgeBaseId) throw new Error('No active knowledge base');
-
       setUploadProgress(0);
       setDuplicateInfo(null);
 
@@ -38,19 +34,11 @@ export default function useUploadKnowledgeSource(
         formData.append('chunkingStrategy', dto.chunkingStrategy);
       }
 
-      return KnowledgeSourcesService.upload(
-        knowledgeBaseId,
-        formData,
-        setUploadProgress
-      );
+      return KnowledgeSourcesService.upload(formData, setUploadProgress);
     },
     onSuccess: (source: KnowledgeSource) => {
-      if (!knowledgeBaseId) return;
       queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
-      });
-      queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.stats(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
       toast.success(`"${source.name}" was uploaded and queued for processing.`);
     },

@@ -3,8 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/shared/lib/utils';
-import { Chip } from '@heroui/react';
-import { Loader2 } from 'lucide-react';
+import { Chip, Spinner } from '@heroui/react';
 
 import { INGESTION_STATUS_CONFIG } from '../../constants/ingestion-status';
 import { STATUS_COLOR_CLASSES } from '../../constants/status-colors';
@@ -31,7 +30,7 @@ export default function IngestionStatusBadge({
         className
       )}
     >
-      {config.isProcessing && <Loader2 className="size-3 animate-spin" />}
+      {config.isProcessing && <Spinner size="sm" color="current" />}
       {t(`status.${status}.label`)}
     </Chip>
   );

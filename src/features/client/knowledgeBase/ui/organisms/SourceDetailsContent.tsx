@@ -47,7 +47,6 @@ export default function SourceDetailsContent({
           : null,
     },
     { labelKey: 'details.mimeType', value: source.mimeType },
-    { labelKey: 'details.currentStage', value: source.currentStage },
     {
       labelKey: 'details.createdAt',
       value: formatDate(source.createdAt, locale),

@@ -4,53 +4,52 @@ import type {
   ApiEnvelope,
   KnowledgeSource,
   KnowledgeSourceFilters,
-  PaginatedResponse,
+  KnowledgeSourcesOverview,
   UploadManualTextSourceDto,
 } from '../types';
 
 export class KnowledgeSourcesService {
   static async list(
-    knowledgeBaseId: string,
     filters: KnowledgeSourceFilters
-  ): Promise<PaginatedResponse<KnowledgeSource>> {
-    const { data } = await AxiosAPI.get<
-      ApiEnvelope<PaginatedResponse<KnowledgeSource>>
-    >(`/knowledge-bases/${knowledgeBaseId}/sources`, {
-      params: {
-        page: filters.page,
-        page_size: filters.pageSize,
-        status: filters.status,
-        source_type: filters.sourceType,
-        is_enabled: filters.isEnabled,
-        search: filters.search || undefined,
-        sort_by: filters.sortBy,
-        sort_order: filters.sortOrder,
-      },
-    });
+  ): Promise<KnowledgeSourcesOverview> {
+    const { data } = await AxiosAPI.get<ApiEnvelope<KnowledgeSourcesOverview>>(
+      '/knowledge-base/sources',
+      {
+        params: {
+          page: filters.page,
+          limit: filters.pageSize,
+          status: filters.status,
+          source_type: filters.sourceType,
+          is_enabled: filters.isEnabled,
+          search: filters.search || undefined,
+          sort_by: filters.sortBy,
+          sort_order: filters.sortOrder,
+        },
+      }
+    );
     return data.data;
   }
 
   static async get(sourceId: string): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.get<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-sources/${sourceId}`
+      `/knowledge-base/sources/${sourceId}`
     );
     return data.data;
   }
 
   static async getStatus(sourceId: string): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.get<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-sources/${sourceId}/status`
+      `/knowledge-base/sources/${sourceId}/status`
     );
     return data.data;
   }
 
   static async upload(
-    knowledgeBaseId: string,
     formData: FormData,
     onUploadProgress?: (percent: number) => void
   ): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.post<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-bases/${knowledgeBaseId}/sources/upload`,
+      '/knowledge-base/sources/upload',
       formData,
       {
         onUploadProgress: event => {
@@ -64,11 +63,10 @@ export class KnowledgeSourcesService {
   }
 
   static async uploadManualText(
-    knowledgeBaseId: string,
     payload: UploadManualTextSourceDto
   ): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.post<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-bases/${knowledgeBaseId}/sources/manual-text`,
+      '/knowledge-base/sources/manual-text',
       payload
     );
     return data.data;
@@ -76,7 +74,7 @@ export class KnowledgeSourcesService {
 
   static async retry(sourceId: string): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.post<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-sources/${sourceId}/retry`
+      `/knowledge-base/sources/${sourceId}/retry`
     );
     return data.data;
   }
@@ -86,18 +84,18 @@ export class KnowledgeSourcesService {
     isEnabled: boolean
   ): Promise<KnowledgeSource> {
     const { data } = await AxiosAPI.patch<ApiEnvelope<KnowledgeSource>>(
-      `/knowledge-sources/${sourceId}/enabled`,
+      `/knowledge-base/sources/${sourceId}`,
       { isEnabled }
     );
     return data.data;
   }
 
   static async remove(sourceId: string): Promise<void> {
-    await AxiosAPI.delete(`/knowledge-sources/${sourceId}`);
+    await AxiosAPI.delete(`/knowledge-base/sources/${sourceId}`);
   }
 
   static getDownloadUrl(sourceId: string): string {
     const baseURL = AxiosAPI.defaults.baseURL ?? '';
-    return `${baseURL}/knowledge-sources/${sourceId}/download`;
+    return `${baseURL}/knowledge-base/sources/${sourceId}/download`;
   }
 }

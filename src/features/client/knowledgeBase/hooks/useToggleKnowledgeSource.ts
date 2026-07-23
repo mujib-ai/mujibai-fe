@@ -4,7 +4,7 @@ import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
 import {
   patchSourceInQueries,
@@ -17,23 +17,18 @@ interface ToggleVariables {
   isEnabled: boolean;
 }
 
-export default function useToggleKnowledgeSource(
-  knowledgeBaseId: string | undefined
-) {
+export default function useToggleKnowledgeSource() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: ({ sourceId, isEnabled }: ToggleVariables) =>
       KnowledgeSourcesService.setEnabled(sourceId, isEnabled),
     onMutate: async ({ sourceId, isEnabled }: ToggleVariables) => {
-      if (!knowledgeBaseId) return undefined;
       await queryClient.cancelQueries({
-        queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
-      const snapshot = snapshotSourceQueries(queryClient, knowledgeBaseId);
-      patchSourceInQueries(queryClient, knowledgeBaseId, sourceId, {
-        isEnabled,
-      });
+      const snapshot = snapshotSourceQueries(queryClient);
+      patchSourceInQueries(queryClient, sourceId, { isEnabled });
       return { snapshot };
     },
     onError: (error, _vars, context) => {
@@ -47,12 +42,8 @@ export default function useToggleKnowledgeSource(
       );
     },
     onSettled: () => {
-      if (!knowledgeBaseId) return;
       queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
-      });
-      queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.stats(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
     },
   });

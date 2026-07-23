@@ -2,7 +2,7 @@
 
 import { useEnrollmentForm } from '@/features/enroll';
 import { Button } from '@/shared/components/atoms/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Spinner } from '@heroui/react';
 
 import { FormField, FormFieldTextarea } from '../atoms';
 
@@ -108,7 +108,7 @@ export default function EnrollmentForm() {
           >
             {isEnrollLoading ? (
               <>
-                <Loader2 className="size-5 animate-spin" />
+                <Spinner size="md" color="current" />
                 <span className="ml-2">{t('submitting')}</span>
               </>
             ) : (

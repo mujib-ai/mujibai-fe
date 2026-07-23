@@ -2,9 +2,9 @@
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.organizeImports": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
@@ -50,5 +50,6 @@
   "terminal.integrated.defaultProfile.windows": "Git Bash",
   "terminal.integrated.fontSize": 14,
 
-  "importSorter.generalConfiguration.sortOnBeforeSave": true
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "testing.automaticallyOpenTestResults": "neverOpen"
 }

@@ -7,10 +7,8 @@ import { useRouter } from 'next/navigation';
 
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
 import type { KnowledgeSource } from '../types';
-import useActiveKnowledgeBase from './useActiveKnowledgeBase';
 import useDeleteKnowledgeSource from './useDeleteKnowledgeSource';
 import useKnowledgeBasePermissions from './useKnowledgeBasePermissions';
-import useKnowledgeBaseStats from './useKnowledgeBaseStats';
 import useKnowledgeSourceEvents from './useKnowledgeSourceEvents';
 import useKnowledgeSourceFilters from './useKnowledgeSourceFilters';
 import useKnowledgeSources from './useKnowledgeSources';
@@ -23,34 +21,26 @@ export function useKnowledgeBasePageController() {
   const locale = useLocale();
   const router = useRouter();
 
-  const {
-    knowledgeBase,
-    isLoading: isKnowledgeBaseLoading,
-    error: knowledgeBaseError,
-  } = useActiveKnowledgeBase();
-  const knowledgeBaseId = knowledgeBase?.id;
-  const { stats, isLoading: isStatsLoading } =
-    useKnowledgeBaseStats(knowledgeBaseId);
-
   const sourceFilters = useKnowledgeSourceFilters();
   const { filters, page, setPage } = sourceFilters;
 
   const {
     sources,
+    stats,
     totalItems,
     totalPages,
     isLoading: isSourcesLoading,
     error: sourcesError,
-  } = useKnowledgeSources(knowledgeBaseId, filters);
+  } = useKnowledgeSources(filters);
 
-  useKnowledgeSourceEvents(knowledgeBaseId, sources);
+  useKnowledgeSourceEvents(sources);
 
   const { can } = useKnowledgeBasePermissions();
-  const uploadState = useUploadKnowledgeSource(knowledgeBaseId);
-  const manualTextState = useUploadManualTextSource(knowledgeBaseId);
-  const retryState = useRetryKnowledgeSource(knowledgeBaseId);
-  const toggleState = useToggleKnowledgeSource(knowledgeBaseId);
-  const deleteState = useDeleteKnowledgeSource(knowledgeBaseId, {
+  const uploadState = useUploadKnowledgeSource();
+  const manualTextState = useUploadManualTextSource();
+  const retryState = useRetryKnowledgeSource();
+  const toggleState = useToggleKnowledgeSource();
+  const deleteState = useDeleteKnowledgeSource({
     page,
     onPageChange: setPage,
   });
@@ -137,17 +127,12 @@ export function useKnowledgeBasePageController() {
 
   return {
     locale,
-    knowledgeBase,
-    knowledgeBaseId,
-    knowledgeBaseError,
     stats,
     sources,
     totalItems,
     totalPages,
     sourcesError,
     can,
-    isKnowledgeBaseLoading,
-    isStatsLoading,
     isSourcesLoading,
     sourceFilters,
     uploadState,

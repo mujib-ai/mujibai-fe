@@ -2,10 +2,10 @@
 
 import { useTheme } from 'next-themes';
 
+import { Spinner } from '@heroui/react';
 import {
   CircleCheckIcon,
   InfoIcon,
-  Loader2Icon,
   OctagonXIcon,
   TriangleAlertIcon,
 } from 'lucide-react';
@@ -23,7 +23,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         info: <InfoIcon className="size-4" />,
         warning: <TriangleAlertIcon className="size-4" />,
         error: <OctagonXIcon className="size-4" />,
-        loading: <Loader2Icon className="size-4 animate-spin" />,
+        loading: <Spinner size="sm" color="current" />,
       }}
       style={
         {

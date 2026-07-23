@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Modal } from '@heroui/react';
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { Button, Modal, Spinner } from '@heroui/react';
+import { AlertTriangle } from 'lucide-react';
 
 import type { DeleteSourceDialogProps } from '../../interfaces';
 
@@ -56,7 +56,7 @@ export default function DeleteSourceDialog({
             >
               {isDeleting ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="size-4 animate-spin" />
+                  <Spinner size="sm" color="current" />
                   {t('deleteConfirm')}
                 </span>
               ) : (

@@ -58,7 +58,6 @@ export default function KnowledgeSourceCard({
         <SourceStatusSummary
           status={source.status}
           progress={source.progress}
-          currentStage={source.currentStage}
           errorMessage={source.errorMessage}
         />
         <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">

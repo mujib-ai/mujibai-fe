@@ -4,7 +4,7 @@ import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useQuery } from '@tanstack/react-query';
 
 import { isFinalIngestionStatus } from '../constants/ingestion-status';
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
 
 const ACTIVE_POLL_INTERVAL_MS = 4000;
@@ -16,7 +16,7 @@ export default function useKnowledgeSourceStatus(sourceId: string | undefined) {
     isError,
     error,
   } = useQuery({
-    queryKey: knowledgeBaseKeys.sourceStatus(sourceId ?? ''),
+    queryKey: knowledgeKeys.status(sourceId ?? ''),
     queryFn: () => KnowledgeSourcesService.getStatus(sourceId as string),
     enabled: !!sourceId,
     refetchInterval: query => {

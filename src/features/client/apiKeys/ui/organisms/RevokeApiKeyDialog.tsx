@@ -12,7 +12,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/components/atoms/ui/dialog';
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { Spinner } from '@heroui/react';
+import { AlertTriangle } from 'lucide-react';
 
 import type { ApiKeyPublic } from '../../types';
 
@@ -52,7 +53,7 @@ export default function RevokeApiKeyDialog({
           <Button variant="destructive" disabled={loading} onClick={onConfirm}>
             {loading ? (
               <span className="flex items-center gap-2">
-                <Loader2 className="size-4 animate-spin" />
+                <Spinner size="sm" color="current" />
                 {t('revoke.confirm')}
               </span>
             ) : (

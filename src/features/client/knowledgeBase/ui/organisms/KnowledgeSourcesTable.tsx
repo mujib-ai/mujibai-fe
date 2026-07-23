@@ -183,10 +183,7 @@ export default function KnowledgeSourcesTable({
                       {INGESTION_STATUS_CONFIG[source.status].isProcessing ? (
                         <UploadProgressBar
                           value={source.progress}
-                          label={
-                            source.currentStage ??
-                            t(`status.${source.status}.label`)
-                          }
+                          label={t(`status.${source.status}.label`)}
                           className="w-40"
                         />
                       ) : (

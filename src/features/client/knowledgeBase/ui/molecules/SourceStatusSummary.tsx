@@ -9,7 +9,6 @@ import { IngestionStatusBadge, UploadProgressBar } from '../atoms';
 interface SourceStatusSummaryProps {
   status: IngestionStatus;
   progress: number;
-  currentStage: string | null;
   errorMessage?: string | null;
   className?: string;
 }
@@ -17,7 +16,6 @@ interface SourceStatusSummaryProps {
 export default function SourceStatusSummary({
   status,
   progress,
-  currentStage,
   errorMessage,
   className,
 }: SourceStatusSummaryProps) {
@@ -30,7 +28,7 @@ export default function SourceStatusSummary({
       {config.isProcessing && (
         <UploadProgressBar
           value={progress}
-          label={currentStage ?? t(`status.${status}.label`)}
+          label={t(`status.${status}.label`)}
           className="mt-2 w-full max-w-48"
         />
       )}

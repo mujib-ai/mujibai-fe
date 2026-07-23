@@ -2,7 +2,7 @@
 
 import type { ComponentType } from 'react';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 import { Card, Skeleton } from '@heroui/react';
 import {
@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 
 import type { KnowledgeBaseStats as KnowledgeBaseStatsType } from '../../types';
-import { formatDate } from '../../utils/format-date';
 
 const SKELETON_BAR = 'rounded-md bg-black/10 dark:bg-white/10';
 
@@ -31,22 +30,48 @@ interface StatTile {
   icon: ComponentType<{ className?: string }>;
 }
 
+const STAT_TILE_KEYS = [
+  'total',
+  'completed',
+  'processing',
+  'failed',
+  'documents',
+  'chunks',
+];
+
 export default function KnowledgeBaseStats({
   stats,
   isLoading,
 }: KnowledgeBaseStatsProps) {
   const t = useTranslations('KnowledgeBase.stats');
-  const locale = useLocale();
 
   if (isLoading || !stats) {
     return (
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, index) => (
-          <Skeleton
-            key={index}
-            animationType="none"
-            className={`${SKELETON_BAR} h-24 w-full rounded-xl`}
-          />
+        {STAT_TILE_KEYS.map(key => (
+          <>
+            <Card
+              key={key}
+              className="flex min-h-32.25 min-w-45.25 flex-col gap-3 rounded-xl bg-[#FFFFFFBF] p-4 dark:bg-[#FFFFFF0F]"
+            >
+              <Card.Header className="flex flex-row items-center justify-between gap-2 px-4">
+                <Skeleton
+                  animationType="none"
+                  className={`${SKELETON_BAR} h-3 w-16 rounded`}
+                />
+                <Skeleton
+                  animationType="none"
+                  className={`${SKELETON_BAR} size-4 rounded`}
+                />
+              </Card.Header>
+              <Card.Content className="px-4">
+                <Skeleton
+                  animationType="none"
+                  className={`${SKELETON_BAR} h-7 w-10 rounded`}
+                />
+              </Card.Content>
+            </Card>
+          </>
         ))}
       </div>
     );
@@ -60,9 +85,9 @@ export default function KnowledgeBaseStats({
       icon: Database,
     },
     {
-      key: 'ready',
-      labelKey: 'readySources',
-      value: stats.readySources,
+      key: 'completed',
+      labelKey: 'completedSources',
+      value: stats.completedSources,
       icon: CircleCheck,
     },
     {
@@ -95,11 +120,11 @@ export default function KnowledgeBaseStats({
     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
       {tiles.map(tile => (
         <Card
-          key={tile.key}
-          className="bg-card text-card-foreground flex flex-col gap-2 rounded-xl border py-4 shadow-sm"
+          key={tile.labelKey}
+          className="flex min-h-32.25 min-w-45.25 flex-col gap-3 rounded-xl bg-[#FFFFFFBF] p-4 dark:bg-[#FFFFFF0F]"
         >
           <Card.Header className="flex flex-row items-center justify-between gap-2 px-4">
-            <Card.Title className="text-muted-foreground text-xs font-medium">
+            <Card.Title className="text-xs font-medium">
               {t(tile.labelKey)}
             </Card.Title>
             <tile.icon className="text-muted-foreground size-4" aria-hidden />
@@ -109,20 +134,6 @@ export default function KnowledgeBaseStats({
           </Card.Content>
         </Card>
       ))}
-      <Card className="bg-card text-card-foreground col-span-2 flex flex-col gap-2 rounded-xl border py-4 shadow-sm sm:col-span-1 lg:col-span-2">
-        <Card.Header className="px-4">
-          <Card.Title className="text-muted-foreground text-xs font-medium">
-            {t('lastSuccessfulIngestion')}
-          </Card.Title>
-        </Card.Header>
-        <Card.Content className="px-4">
-          <p className="text-sm font-semibold">
-            {stats.lastSuccessfulIngestionAt
-              ? formatDate(stats.lastSuccessfulIngestionAt, locale)
-              : t('never')}
-          </p>
-        </Card.Content>
-      </Card>
     </div>
   );
 }

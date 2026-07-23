@@ -1,16 +1,11 @@
 import type { QueryClient } from '@tanstack/react-query';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
-import type { KnowledgeSource, PaginatedResponse } from '../types';
+import { knowledgeKeys } from '../constants/query-keys';
+import type { KnowledgeSourcesOverview } from '../types';
 
-type SourcesPage = PaginatedResponse<KnowledgeSource>;
-
-export function snapshotSourceQueries(
-  queryClient: QueryClient,
-  knowledgeBaseId: string
-) {
-  return queryClient.getQueriesData<SourcesPage>({
-    queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
+export function snapshotSourceQueries(queryClient: QueryClient) {
+  return queryClient.getQueriesData<KnowledgeSourcesOverview>({
+    queryKey: knowledgeKeys.sourcesRoot(),
   });
 }
 
@@ -25,18 +20,20 @@ export function rollbackSourceQueries(
 
 export function patchSourceInQueries(
   queryClient: QueryClient,
-  knowledgeBaseId: string,
   sourceId: string,
-  patch: Partial<KnowledgeSource>
+  patch: Partial<KnowledgeSourcesOverview['sources']['data'][number]>
 ) {
-  queryClient.setQueriesData<SourcesPage>(
-    { queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId) },
+  queryClient.setQueriesData<KnowledgeSourcesOverview>(
+    { queryKey: knowledgeKeys.sourcesRoot() },
     old =>
       old && {
         ...old,
-        items: old.items.map(item =>
-          item.id === sourceId ? { ...item, ...patch } : item
-        ),
+        sources: {
+          ...old.sources,
+          data: old.sources.data.map(item =>
+            item.id === sourceId ? { ...item, ...patch } : item
+          ),
+        },
       }
   );
 }

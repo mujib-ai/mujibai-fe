@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/shared/components/atoms/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Spinner } from '@heroui/react';
 
 const logoImage = '/logo.svg';
 
@@ -51,7 +51,7 @@ export function PasswordResetContent({
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
-            <Loader2 className="size-5 animate-spin" />
+            <Spinner size="md" color="current" />
             {sendingText}
           </span>
         ) : (

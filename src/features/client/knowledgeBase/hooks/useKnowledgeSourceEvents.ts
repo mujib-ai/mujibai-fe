@@ -7,13 +7,10 @@ import { useTranslations } from 'next-intl';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import type { KnowledgeSource } from '../types';
 
-export default function useKnowledgeSourceEvents(
-  knowledgeBaseId: string | undefined,
-  sources: KnowledgeSource[]
-) {
+export default function useKnowledgeSourceEvents(sources: KnowledgeSource[]) {
   const queryClient = useQueryClient();
   const t = useTranslations('KnowledgeBase');
   const previousStatuses = useRef<Map<string, string>>(new Map());
@@ -37,10 +34,10 @@ export default function useKnowledgeSourceEvents(
       previousStatuses.current.set(source.id, source.status);
     }
 
-    if (shouldInvalidateStats && knowledgeBaseId) {
+    if (shouldInvalidateStats) {
       queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.stats(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
     }
-  }, [sources, knowledgeBaseId, queryClient, t]);
+  }, [sources, queryClient, t]);
 }

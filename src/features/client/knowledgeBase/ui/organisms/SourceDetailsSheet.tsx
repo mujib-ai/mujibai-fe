@@ -24,8 +24,8 @@ export default function SourceDetailsSheet({
       className="fixed inset-0 z-50 bg-black/50"
     >
       <Drawer.Content
-        placement="right"
-        className="bg-background fixed inset-y-0 right-0 z-50 flex h-full w-3/4 flex-col gap-4 border-l shadow-lg outline-none sm:max-w-md"
+        placement="left"
+        className="bg-background fixed inset-y-0 left-0 z-50 flex h-full w-3/4 flex-col gap-4 border-r shadow-lg outline-none sm:max-w-md"
       >
         <Drawer.Dialog className="flex h-full flex-col overflow-y-auto outline-none">
           <Drawer.CloseTrigger className="ring-offset-background focus:ring-ring absolute top-4 right-4 cursor-pointer rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden" />

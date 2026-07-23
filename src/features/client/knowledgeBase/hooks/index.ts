@@ -1,5 +1,3 @@
-export { default as useActiveKnowledgeBase } from './useActiveKnowledgeBase';
-export { default as useKnowledgeBaseStats } from './useKnowledgeBaseStats';
 export { default as useKnowledgeSource } from './useKnowledgeSource';
 export { default as useKnowledgeSourceFilters } from './useKnowledgeSourceFilters';
 export { default as useKnowledgeSources } from './useKnowledgeSources';

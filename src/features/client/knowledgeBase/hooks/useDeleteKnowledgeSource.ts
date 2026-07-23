@@ -4,9 +4,9 @@ import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { knowledgeBaseKeys } from '../constants/query-keys';
+import { knowledgeKeys } from '../constants/query-keys';
 import { KnowledgeSourcesService } from '../services/knowledge-sources.service';
-import type { KnowledgeSource, PaginatedResponse } from '../types';
+import type { KnowledgeSourcesOverview } from '../types';
 import {
   rollbackSourceQueries,
   snapshotSourceQueries,
@@ -17,38 +17,40 @@ interface DeletePagination {
   onPageChange: (page: number) => void;
 }
 
-export default function useDeleteKnowledgeSource(
-  knowledgeBaseId: string | undefined,
-  pagination: DeletePagination
-) {
+export default function useDeleteKnowledgeSource(pagination: DeletePagination) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: (sourceId: string) => KnowledgeSourcesService.remove(sourceId),
     onMutate: async (sourceId: string) => {
-      if (!knowledgeBaseId) return undefined;
       await queryClient.cancelQueries({
-        queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
-      const snapshot = snapshotSourceQueries(queryClient, knowledgeBaseId);
+      const snapshot = snapshotSourceQueries(queryClient);
 
       let emptiedPage = false;
-      queryClient.setQueriesData<PaginatedResponse<KnowledgeSource>>(
-        { queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId) },
+      queryClient.setQueriesData<KnowledgeSourcesOverview>(
+        { queryKey: knowledgeKeys.sourcesRoot() },
         old => {
           if (!old) return old;
-          const items = old.items.filter(item => item.id !== sourceId);
+          const data = old.sources.data.filter(item => item.id !== sourceId);
           if (
-            items.length === 0 &&
-            items.length !== old.items.length &&
+            data.length === 0 &&
+            data.length !== old.sources.data.length &&
             pagination.page > 1
           ) {
             emptiedPage = true;
           }
           return {
             ...old,
-            items,
-            totalItems: Math.max(0, old.totalItems - 1),
+            sources: {
+              ...old.sources,
+              data,
+              pagination: {
+                ...old.sources.pagination,
+                total: Math.max(0, old.sources.pagination.total - 1),
+              },
+            },
           };
         }
       );
@@ -67,12 +69,8 @@ export default function useDeleteKnowledgeSource(
       }
     },
     onSettled: () => {
-      if (!knowledgeBaseId) return;
       queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.sourcesRoot(knowledgeBaseId),
-      });
-      queryClient.invalidateQueries({
-        queryKey: knowledgeBaseKeys.stats(knowledgeBaseId),
+        queryKey: knowledgeKeys.sourcesRoot(),
       });
     },
   });

@@ -45,7 +45,7 @@ export const ACCEPTED_UPLOAD_INPUT_ACCEPT = [
   ...ACCEPTED_UPLOAD_MIME_TYPES,
 ].join(',');
 
-export const DEFAULT_MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024;
+export const DEFAULT_MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024;
 
 export function getSourceTypeForFile(file: File): KnowledgeSourceType | null {
   const lowerName = file.name.toLowerCase();

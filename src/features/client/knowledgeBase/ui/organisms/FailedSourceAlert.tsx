@@ -48,7 +48,7 @@ export default function FailedSourceAlert({
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {can(KNOWLEDGE_BASE_PERMISSIONS.RETRY) && (
+        {can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_RETRY) && (
           <Button
             isDisabled={isRetrying}
             onPress={onRetry}
@@ -58,16 +58,17 @@ export default function FailedSourceAlert({
             {t('actions.retry')}
           </Button>
         )}
-        {onUploadReplacement && can(KNOWLEDGE_BASE_PERMISSIONS.UPLOAD) && (
-          <Button
-            onPress={onUploadReplacement}
-            className={BUTTON_OUTLINE_CLASS}
-          >
-            <Upload className="size-4" />
-            {t('actions.upload')}
-          </Button>
-        )}
-        {can(KNOWLEDGE_BASE_PERMISSIONS.DELETE) && (
+        {onUploadReplacement &&
+          can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_CREATE) && (
+            <Button
+              onPress={onUploadReplacement}
+              className={BUTTON_OUTLINE_CLASS}
+            >
+              <Upload className="size-4" />
+              {t('actions.upload')}
+            </Button>
+          )}
+        {can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_DELETE) && (
           <Button onPress={onDelete} className={BUTTON_OUTLINE_CLASS}>
             <Trash2 className="size-4" />
             {t('actions.delete')}

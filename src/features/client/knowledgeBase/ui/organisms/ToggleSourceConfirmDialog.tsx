@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Button, Modal } from '@heroui/react';
-import { EyeOff, Loader2 } from 'lucide-react';
+import { Button, Modal, Spinner } from '@heroui/react';
+import { EyeOff } from 'lucide-react';
 
 import type { ToggleSourceConfirmDialogProps } from '../../interfaces';
 
@@ -56,7 +56,7 @@ export default function ToggleSourceConfirmDialog({
             >
               {isToggling ? (
                 <span className="flex items-center gap-2">
-                  <Loader2 className="size-4 animate-spin" />
+                  <Spinner size="sm" color="current" />
                   {t('disableConfirm')}
                 </span>
               ) : (

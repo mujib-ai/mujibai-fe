@@ -14,13 +14,13 @@ export type {
   DuplicateSourceErrorData,
 } from './knowledge-source.types';
 export type {
-  KnowledgeBase,
-  KnowledgeBaseCapabilities,
+  KnowledgeBaseOverallStatus,
   KnowledgeBaseStats,
-  TestKnowledgeResult,
 } from './knowledge-base.types';
 export type {
   ApiEnvelope,
   PaginatedResponse,
   ApiErrorData,
+  KnowledgeSourcesPagination,
+  KnowledgeSourcesOverview,
 } from './api-response.types';

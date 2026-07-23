@@ -8,7 +8,7 @@ import {
   LoginHeader,
 } from '@/shared/components/molecules/LoginComponents';
 import { LoginPasswordField } from '@/shared/components/molecules/LoginPasswordField';
-import { Loader2 } from 'lucide-react';
+import { Spinner } from '@heroui/react';
 
 export default function LoginPage() {
   const { handleSubmit, onSubmit, isLoading, getFieldProps, getTranslations } =
@@ -68,7 +68,7 @@ export default function LoginPage() {
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <Loader2 className="size-4 animate-spin" />
+                  <Spinner size="sm" color="current" />
                   {loading}
                 </span>
               ) : (

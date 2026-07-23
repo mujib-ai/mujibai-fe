@@ -110,8 +110,6 @@
   "KnowledgeBase": {
     "title": "Knowledge Base",
     "subTitle": "Upload business documents and data that your AI agent can use to answer customer questions accurately.",
-    "lastSynced": "Last synced {date}",
-    "neverSynced": "Not synced yet",
     "overallStatus": {
       "ready": "All sources ready",
       "processing": "Processing sources",
@@ -131,13 +129,11 @@
     },
     "stats": {
       "totalSources": "Total Sources",
-      "readySources": "Ready",
+      "completedSources": "Ready",
       "processingSources": "Processing",
       "failedSources": "Failed",
       "totalDocuments": "Documents",
-      "totalChunks": "Indexed Chunks",
-      "lastSuccessfulIngestion": "Last Successful Ingestion",
-      "never": "Never"
+      "totalChunks": "Indexed Chunks"
     },
     "sources": {
       "title": "Knowledge Sources",
@@ -276,7 +272,6 @@
       "deleteFailed": "Failed to delete the source.",
       "loadFailed": "Failed to load the knowledge base.",
       "loadSourcesFailed": "Failed to load knowledge sources.",
-      "loadStatsFailed": "Failed to load statistics.",
       "loadDetailsFailed": "Failed to load source details.",
       "testQueryFailed": "Failed to test the knowledge base."
     },
@@ -298,7 +293,6 @@
       "mimeType": "File Format",
       "status": "Status",
       "progress": "Progress",
-      "currentStage": "Current Stage",
       "createdAt": "Created",
       "startedAt": "Started",
       "completedAt": "Completed",

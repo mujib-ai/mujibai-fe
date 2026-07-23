@@ -43,13 +43,13 @@ export default function SourceActionsMenu({
   const t = useTranslations('KnowledgeBase.actions');
 
   const canRetry =
-    can(KNOWLEDGE_BASE_PERMISSIONS.RETRY) &&
+    can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_RETRY) &&
     RETRYABLE_STATUSES.includes(source.status);
   const canDownload =
-    can(KNOWLEDGE_BASE_PERMISSIONS.VIEW) &&
+    can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_VIEW) &&
     DOWNLOADABLE_SOURCE_TYPES.includes(source.sourceType);
-  const canUpdate = can(KNOWLEDGE_BASE_PERMISSIONS.UPDATE);
-  const canDelete = can(KNOWLEDGE_BASE_PERMISSIONS.DELETE);
+  const canUpdate = can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_UPDATE);
+  const canDelete = can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_DELETE);
 
   return (
     <Dropdown>

@@ -15,7 +15,7 @@ export default function KnowledgeBasePage() {
   return (
     <KnowledgeBasePageTemplate title={t('title')} subtitle={t('subTitle')}>
       <KnowledgeBaseHeader
-        knowledgeBase={controller.knowledgeBase}
+        stats={controller.stats}
         can={controller.can}
         onUpload={() => controller.actions.setUploadDialogOpen(true)}
         onAddManualText={() => controller.actions.setManualTextDialogOpen(true)}
