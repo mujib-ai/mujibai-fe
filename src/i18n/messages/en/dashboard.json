@@ -548,7 +548,8 @@
         "weekly": "Weekly",
         "monthly": "Monthly",
         "never": "Never"
-      }
+      },
+      "saveFailed": "Failed to update notification preferences."
     }
   }
 }
