@@ -1,32 +1,53 @@
 'use client';
 
+import type { AnalyticsOverview } from '@/features/client/analytics/types';
+import {
+  formatDuration,
+  formatPercentage,
+} from '@/features/client/analytics/utils/analytics-formatters';
+
 import StatisticsCard from '../atoms/StatisticsCard';
 
-export default function StatisticsCards({ t }: { t: (key: string) => string }) {
+export default function StatisticsCards({
+  t,
+  overview,
+  isLoading,
+}: {
+  t: (key: string) => string;
+  overview: AnalyticsOverview | null;
+  isLoading: boolean;
+}) {
+  const number = (value: number | undefined) =>
+    isLoading || value === undefined ? '—' : value.toLocaleString();
+
   const statisticsCardsData = [
     {
       icon: '/dashboard-images/calla.svg',
-      number: '9',
+      number: number(overview?.totalCalls),
       title: t('totalCalls'),
     },
     {
       icon: '/dashboard-images/timer.svg',
-      number: '124',
+      number: isLoading
+        ? '—'
+        : formatDuration(overview?.averageCallDurationSeconds ?? null),
       title: t('averageCallDuration'),
     },
     {
       icon: '/dashboard-images/tickets.svg',
-      number: '4',
+      number: number(overview?.ticketsCreated),
       title: t('ticketsCreated'),
     },
     {
       icon: '/dashboard-images/correct-call.svg',
-      number: '124',
+      number: number(overview?.answeredCalls),
       title: t('answeredCalls'),
     },
     {
       icon: '/dashboard-images/success-calls.svg',
-      number: '104',
+      number: isLoading
+        ? '—'
+        : formatPercentage(overview?.customerSatisfactionPercentage ?? null),
       title: t('customerSatisfaction'),
     },
   ];

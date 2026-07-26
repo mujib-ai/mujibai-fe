@@ -9,6 +9,7 @@ export const QUERY_CONSTANTS = {
     TICKETS: 'tickets',
     PERFORMANCE: 'performance',
     AI_OUTBOUND: 'aiOutbound',
+    ANALYTICS: 'analytics',
   } as const,
 
   CACHE_TIMES: {

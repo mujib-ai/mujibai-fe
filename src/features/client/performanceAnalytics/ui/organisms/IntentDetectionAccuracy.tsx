@@ -1,5 +1,7 @@
 'use client';
 
+import type { TopKeywordItem } from '@/features/client/analytics/types';
+import { formatPercentage } from '@/features/client/analytics/utils/analytics-formatters';
 import {
   Card,
   CardContent,
@@ -20,14 +22,14 @@ import {
 
 import KeywordInsightItem from '../molecules/KeywordInsightItem';
 
-const chartData = [
-  { browser: 'safari', visitors: 200, fill: 'var(--color-safari)' },
-];
-
 export default function IntentDetectionAccuracy({
   t,
+  intentDetectionRatePercentage,
+  topKeywords,
 }: {
   t: (key: string) => string;
+  intentDetectionRatePercentage: number | null;
+  topKeywords: TopKeywordItem[];
 }) {
   const chartConfig = {
     visitors: { label: t('accuracy') },
@@ -37,12 +39,12 @@ export default function IntentDetectionAccuracy({
     },
   } satisfies ChartConfig;
 
-  const keywords = [
-    t('appointment'),
-    t('location'),
-    t('price'),
-    t('hours'),
-    t('services'),
+  const chartData = [
+    {
+      browser: 'safari',
+      visitors: intentDetectionRatePercentage ?? 0,
+      fill: 'var(--color-safari)',
+    },
   ];
 
   return (
@@ -89,7 +91,7 @@ export default function IntentDetectionAccuracy({
                             y={viewBox.cy}
                             className="fill-foreground text-4xl font-bold"
                           >
-                            68%
+                            {formatPercentage(intentDetectionRatePercentage, 0)}
                           </tspan>
                           <tspan
                             x={viewBox.cx}
@@ -110,11 +112,16 @@ export default function IntentDetectionAccuracy({
         <div className="z-50 flex h-full w-full items-center rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
           <div className="flex flex-col items-center justify-around gap-2">
             <h1 className="text-2xl font-semibold">{t('keywordInsights')}</h1>
-            <ul className="flex flex-wrap items-center justify-center gap-2">
-              {keywords.map((keyword, index) => (
-                <KeywordInsightItem key={index} text={keyword} />
-              ))}
-            </ul>
+            {topKeywords.length > 0 && (
+              <ul className="flex flex-wrap items-center justify-center gap-2">
+                {topKeywords.map((item, index) => (
+                  <KeywordInsightItem
+                    key={`${item.keyword}-${index}`}
+                    text={item.keyword}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </Card>
