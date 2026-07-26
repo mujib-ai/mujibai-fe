@@ -12,9 +12,14 @@ export interface ClientSettingsState {
   tabs: TabItem[];
 }
 
-export default function useClientSettings(initialTabs: TabItem[]) {
+export default function useClientSettings(
+  initialTabs: TabItem[],
+  initialActiveTab?: string
+) {
   const [state, setState] = React.useState<ClientSettingsState>({
-    activeTab: CLIENT_SETTINGS_CONSTANTS.DEFAULT_ACTIVE_TAB,
+    activeTab:
+      (initialActiveTab as ClientSettingsState['activeTab']) ??
+      CLIENT_SETTINGS_CONSTANTS.DEFAULT_ACTIVE_TAB,
     tabs: initialTabs,
   });
 

@@ -2,6 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
+import { GoogleCalendarIntegrationPage } from '@/features/client/integrations/googleCalendar';
+import { SlackIntegrationPage } from '@/features/client/integrations/slack';
+
 import { IntegrationCard } from '../molecules';
 
 export function IntegrationSettings() {
@@ -17,24 +20,14 @@ export function IntegrationSettings() {
       </div>
 
       <div className="my-2 grid grid-cols-1 gap-4 px-5 md:grid-cols-2 lg:grid-cols-3">
-        <IntegrationCard
-          title={t('slack')}
-          subtitle={t('slackDesc')}
-          add={t('add')}
-          image="/dashboard-images/devicon_slack.svg"
-        />
+        <SlackIntegrationPage />
         <IntegrationCard
           title={t('whatsapp')}
           subtitle={t('whatsappDesc')}
           add={t('add')}
           image="/dashboard-images/logos_whatsapp-icon.svg"
         />
-        <IntegrationCard
-          title={t('googleCalendar')}
-          subtitle={t('googleCalendarDesc')}
-          add={t('add')}
-          image="/dashboard-images/logos_google-calendar.svg"
-        />
+        <GoogleCalendarIntegrationPage />
       </div>
     </div>
   );

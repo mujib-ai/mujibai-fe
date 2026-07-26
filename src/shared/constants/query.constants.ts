@@ -10,6 +10,10 @@ export const QUERY_CONSTANTS = {
     PERFORMANCE: 'performance',
     AI_OUTBOUND: 'aiOutbound',
     ANALYTICS: 'analytics',
+    SLACK_INTEGRATION: 'slackIntegration',
+    SLACK_CHANNELS: 'slackChannels',
+    GOOGLE_CALENDAR_INTEGRATION: 'googleCalendarIntegration',
+    GOOGLE_CALENDAR_CALENDARS: 'googleCalendarCalendars',
   } as const,
 
   CACHE_TIMES: {
