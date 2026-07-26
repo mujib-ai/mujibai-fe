@@ -57,7 +57,7 @@
     "subTitle": "إليك ما يحدث في حسابك اليوم.",
     "upgradePlan": "ترقية الخطة",
     "newCalls": "المكالمات الجديدة",
-    "newCallsSummary": "{total} مكالمة جديدة هذا الأسبوع — {answered} تم الرد عليها، {missed} فائتة.",
+    "newCallsSummary": "{total} مكالمة — {answered} تم الرد عليها، {missed} فائتة.",
     "dataUsage": "الاستخدام",
     "left": "متبقية",
     "phone": "الهاتف",
@@ -65,6 +65,7 @@
     "status": "الحالة",
     "answered": "تم الرد",
     "missed": "فائتة",
+    "failed": "فشلت",
     "date": "التاريخ",
     "duration": "الدقيقة",
     "next": "التالي",
@@ -74,7 +75,11 @@
     "rows": "الصفوف",
     "clients": "مكالمة",
     "more": "المزيد",
-    "dataTitle": "البيانات"
+    "dataTitle": "البيانات",
+    "errorPrefix": "خطأ: ",
+    "retry": "إعادة المحاولة",
+    "empty": "لا توجد مكالمات بعد.",
+    "updating": "جارٍ التحديث..."
   },
   "ticketsAndCalls": {
     "title": "التذاكر والاتصالات",
@@ -99,13 +104,21 @@
       "RESOLVED": "تم الحل",
       "CLOSED": "مغلقة"
     },
+    "callStatuses": {
+      "answered": "تم الرد",
+      "missed": "فائتة",
+      "failed": "فشلت"
+    },
     "errorPrefix": "خطأ: ",
     "empty": "لا توجد سجلات بعد.",
     "of": "من",
     "rows": "الصفوف",
     "clients": "العملاء",
     "next": "التالي",
-    "previous": "السابق"
+    "previous": "السابق",
+    "retry": "إعادة المحاولة",
+    "playRecording": "تشغيل التسجيل",
+    "updating": "جارٍ التحديث..."
   },
   "KnowledgeBase": {
     "title": "قاعدة المعرفة",

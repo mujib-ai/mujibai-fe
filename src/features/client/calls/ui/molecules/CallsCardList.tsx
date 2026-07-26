@@ -1,13 +1,10 @@
+import { Badge } from '@/shared/components/atoms/ui/badge';
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
 import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { Eye, Play } from 'lucide-react';
 
-export type CallItem = {
-  phone: string;
-  duration: string;
-  scenario: string;
-  date: string;
-};
+import { CALL_STATUS_BADGE_VARIANT } from '../../constants';
+import type { CallItem } from '../../types';
 
 export default function CallsCardList({
   items,
@@ -18,9 +15,9 @@ export default function CallsCardList({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      {items.map((item, idx) => (
+      {items.map(item => (
         <Card
-          key={idx}
+          key={item.id}
           className="border-0 bg-[#FFFFFFBF] shadow-none dark:bg-[#001434A6]"
         >
           <CardContent className="flex flex-col gap-3 p-4">
@@ -29,10 +26,21 @@ export default function CallsCardList({
                 {formatPhoneNumber(item.phone)}
               </span>
               <div className="flex items-center gap-2">
-                <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
+                <Badge variant={CALL_STATUS_BADGE_VARIANT[item.status]}>
+                  {t(`callStatuses.${item.status}`)}
+                </Badge>
+                <button
+                  type="button"
+                  aria-label={t('playRecording')}
+                  className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]"
+                >
                   <Play fill="#06B6D4" className="size-4" />
                 </button>
-                <button className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]">
+                <button
+                  type="button"
+                  aria-label={t('viewReceipt')}
+                  className="rounded-full bg-[#06B6D426] p-2 transition-colors dark:bg-[#00214f]"
+                >
                   <Eye className="text-primary size-4" />
                 </button>
               </div>

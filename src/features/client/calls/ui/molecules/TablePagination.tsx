@@ -29,7 +29,7 @@ export default function TablePagination({
     <div className="flex w-full items-center justify-between bg-transparent py-2">
       <div className="flex items-center gap-2">
         <Select>
-          <SelectTrigger className="bg-control text-foreground h-12 w-[80px] rounded-full border-0 text-sm shadow-none transition-colors focus-visible:ring-0">
+          <SelectTrigger className="bg-control text-foreground h-12 w-20 rounded-full border-0 text-sm shadow-none transition-colors focus-visible:ring-0">
             <SelectValue placeholder="06" />
           </SelectTrigger>
           <SelectContent className="text-foreground border-[#0b254a] bg-[#FFFFFFBF] dark:bg-[#001434A6]">

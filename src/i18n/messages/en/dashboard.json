@@ -57,7 +57,7 @@
     "subTitle": "Here's what's happening with your account today.",
     "upgradePlan": "Upgrade Plan",
     "newCalls": "New Calls",
-    "newCallsSummary": "{total} new calls this week — {answered} answered, {missed} missed.",
+    "newCallsSummary": "{total} calls — {answered} answered, {missed} missed.",
     "dataUsage": "Data Usage",
     "left": "left",
     "phone": "Phone",
@@ -65,6 +65,7 @@
     "status": "Status",
     "answered": "Answered",
     "missed": "Missed",
+    "failed": "Failed",
     "date": "Date",
     "duration": "Duration",
     "next": "Next",
@@ -74,7 +75,11 @@
     "rows": "rows",
     "clients": "calls",
     "more": "More",
-    "dataTitle": "Data"
+    "dataTitle": "Data",
+    "errorPrefix": "Error: ",
+    "retry": "Retry",
+    "empty": "No calls yet.",
+    "updating": "Updating..."
   },
   "ticketsAndCalls": {
     "title": "tickets and calls",
@@ -99,13 +104,21 @@
       "RESOLVED": "Resolved",
       "CLOSED": "Closed"
     },
+    "callStatuses": {
+      "answered": "Answered",
+      "missed": "Missed",
+      "failed": "Failed"
+    },
     "errorPrefix": "Error: ",
     "empty": "No records yet.",
     "of": "of",
     "rows": "rows",
     "clients": "clients",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "retry": "Retry",
+    "playRecording": "Play recording",
+    "updating": "Updating..."
   },
   "KnowledgeBase": {
     "title": "Knowledge Base",
