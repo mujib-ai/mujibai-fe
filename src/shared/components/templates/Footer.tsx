@@ -101,12 +101,13 @@ const Footer = ({ theme }: { theme?: string }) => {
                         {index === 2 ? (
                           <p className="w-[50%]">{item.text}</p>
                         ) : (
-                          <span
+                          <Link
+                            href={item.href ?? '#'}
                             dir={item.dir}
-                            className="text-text-light-muted text-left text-sm leading-tight font-normal md:text-sm"
+                            className="text-text-light-muted hover:text-text-light text-left text-sm leading-tight font-normal transition-colors md:text-sm"
                           >
                             {item.text}
-                          </span>
+                          </Link>
                         )}
                       </div>
                     ))}

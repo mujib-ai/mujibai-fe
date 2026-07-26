@@ -34,8 +34,18 @@ export function useFooter() {
   ];
 
   const contactItems = [
-    { Icon: Phone, text: t('contact.phone'), dir: 'ltr' as const },
-    { Icon: Mail, text: t('contact.email'), dir: 'ltr' as const },
+    {
+      Icon: Phone,
+      text: t('contact.phone'),
+      href: `tel:${t('contact.phone').replace(/\s+/g, '')}`,
+      dir: 'ltr' as const,
+    },
+    {
+      Icon: Mail,
+      text: t('contact.email'),
+      href: `mailto:${t('contact.email')}`,
+      dir: 'ltr' as const,
+    },
     {
       Icon: MapPin,
       text: t('contact.address'),
