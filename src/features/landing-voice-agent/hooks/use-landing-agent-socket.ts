@@ -49,11 +49,23 @@ export function useLandingAgentSocket({
     shouldReconnectRef.current = false;
     if (reconnectTimerRef.current) clearTimeout(reconnectTimerRef.current);
     reconnectTimerRef.current = null;
-    if (event && socketRef.current?.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify(event));
-    }
-    socketRef.current?.close(1000, 'Session closed');
+
+    const socket = socketRef.current;
     socketRef.current = null;
+    if (!socket) return;
+
+    if (socket.readyState === WebSocket.OPEN) {
+      if (event) socket.send(JSON.stringify(event));
+      socket.close(1000, 'Session closed');
+      return;
+    }
+
+    if (socket.readyState === WebSocket.CONNECTING) {
+      socket.onmessage = null;
+      socket.onerror = null;
+      socket.onclose = null;
+      socket.onopen = () => socket.close(1000, 'Session closed');
+    }
   }, []);
 
   const connectSocket = useCallback(() => {
@@ -68,7 +80,6 @@ export function useLandingAgentSocket({
     const socket = new WebSocket(socketUrl);
     socketRef.current = socket;
     socket.onopen = () => {
-      reconnectCountRef.current = 0;
       if (initialEventRef.current) send(initialEventRef.current);
     };
     socket.onmessage = message => {
@@ -84,6 +95,7 @@ export function useLandingAgentSocket({
     };
     socket.onerror = () => undefined;
     socket.onclose = closeEvent => {
+      if (socketRef.current !== socket) return;
       socketRef.current = null;
       if (!shouldReconnectRef.current || closeEvent.code === 1000) return;
       if (reconnectCountRef.current >= LANDING_AGENT_MAX_RECONNECTS) {
@@ -99,8 +111,18 @@ export function useLandingAgentSocket({
     };
   }, [send]);
 
+  useEffect(() => {
+    connectSocketRef.current = connectSocket;
+  }, [connectSocket]);
+
   const connect = useCallback(
     (initialEvent: LandingAgentClientEvent) => {
+      if (
+        socketRef.current?.readyState === WebSocket.CONNECTING ||
+        socketRef.current?.readyState === WebSocket.OPEN
+      ) {
+        return;
+      }
       disconnect();
       reconnectCountRef.current = 0;
       shouldReconnectRef.current = true;
