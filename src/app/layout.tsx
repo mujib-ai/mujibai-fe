@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
 import localFont from 'next/font/local';
+import Script from 'next/script';
 
 import { Providers } from '@/providers/Providers';
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
@@ -122,6 +123,20 @@ export default async function RootLayout({
     >
       <head>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-9CMX51PF21"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-9CMX51PF21');
+          `}
+        </Script>
       </head>
       <body
         suppressHydrationWarning
