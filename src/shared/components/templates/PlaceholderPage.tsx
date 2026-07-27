@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
 
 type PlaceholderPageItem = {
@@ -21,13 +22,19 @@ export function PlaceholderPage({
   return (
     <PageBackground>
       <Container className="py-16 md:py-20">
-        <h1 className="text-3xl font-bold md:text-4xl">{title}</h1>
-        <p className="mt-4 max-w-2xl text-base text-(--ink-3) md:text-lg">
-          {description}
-        </p>
+        <Reveal>
+          <h1 className="text-3xl font-bold md:text-4xl">{title}</h1>
+          <p className="mt-4 max-w-2xl text-base text-(--ink-3) md:text-lg">
+            {description}
+          </p>
+        </Reveal>
 
         {items && items.length > 0 && (
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+          <Reveal
+            as="ul"
+            stagger={0.08}
+            className="mt-10 grid gap-4 sm:grid-cols-2"
+          >
             {items.map(item => (
               <li key={item.href}>
                 <Link
@@ -41,7 +48,7 @@ export function PlaceholderPage({
                 </Link>
               </li>
             ))}
-          </ul>
+          </Reveal>
         )}
       </Container>
     </PageBackground>

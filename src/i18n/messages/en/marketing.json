@@ -1,5 +1,9 @@
 {
   "marketing": {
+    "home": {
+      "title": "Mujib AI | The Voice That Understands, Serves, and Connects",
+      "description": "Mujib AI is your intelligent voice assistant that speaks with empathy, understands your customers, and responds instantly — making every call unforgettable."
+    },
     "aiVoiceAgent": {
       "title": "AI Voice Agent - mujibai",
       "description": "mujibai is an AI voice agent that answers business phone calls, books appointments, and creates tickets around the clock."

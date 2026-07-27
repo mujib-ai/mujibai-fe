@@ -3,6 +3,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { Button } from '@/shared/components/atoms/ui/button';
 
 export default function WhyChooseUsSection() {
@@ -57,7 +58,10 @@ export default function WhyChooseUsSection() {
           </div>
 
           <div className="flex w-full flex-col items-start justify-start gap-[20px] md:gap-[40px]">
-            <div className="mr-[5px] flex w-full flex-col items-start justify-start gap-[13px] md:mr-[10px] md:gap-[26px]">
+            <Reveal
+              stagger={0.1}
+              className="mr-[5px] flex w-full flex-col items-start justify-start gap-[13px] md:mr-[10px] md:gap-[26px]"
+            >
               {reasons.map(reason => (
                 <div
                   key={reason.id}
@@ -73,7 +77,7 @@ export default function WhyChooseUsSection() {
                   </p>
                 </div>
               ))}
-            </div>
+            </Reveal>
 
             <div>
               <Button

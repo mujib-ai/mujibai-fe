@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import PricingCards from '@/shared/components/organisms/PricingCards';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
 import type { PlanDisplay } from '@/shared/types';
@@ -51,7 +52,7 @@ export default function PricingSection() {
     >
       <Container className="relative z-10">
         <div className="text-center">
-          <div className="mb-20 flex flex-col gap-5">
+          <Reveal className="mb-20 flex flex-col gap-5">
             <h2 className="text-text-light text-[22px] font-bold md:text-[44px]">
               {t('title')}
             </h2>
@@ -59,9 +60,11 @@ export default function PricingSection() {
             <p className="text-text-light mt-2 text-sm md:text-base">
               {t('subTitle')}
             </p>
-          </div>
+          </Reveal>
 
-          <PricingCards plans={plans} />
+          <Reveal delay={0.15}>
+            <PricingCards plans={plans} />
+          </Reveal>
         </div>
       </Container>
     </PageBackground>

@@ -2,6 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
+import { Reveal } from '@/shared/components/atoms/Reveal';
+
 type LegalListItem = {
   term: string;
   desc: string;
@@ -46,7 +48,7 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
   const sections = t.raw('sections') as Record<string, LegalRichSection>;
 
   return (
-    <div className="mt-10 flex flex-col gap-8">
+    <Reveal stagger={0.08} className="mt-10 flex flex-col gap-8">
       {Object.entries(sections).map(([key, section]) => (
         <section key={key}>
           <h2 className="text-xl font-semibold md:text-2xl">{section.title}</h2>
@@ -124,6 +126,6 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
             })}
         </section>
       ))}
-    </div>
+    </Reveal>
   );
 }

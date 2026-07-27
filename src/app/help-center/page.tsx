@@ -9,7 +9,7 @@ import {
   createSeoMetadata,
 } from '@/shared/seo';
 
-const route = PUBLIC_SEO_ROUTES[1];
+const route = PUBLIC_SEO_ROUTES.find(r => r.key === 'helpCenter')!;
 
 export async function generateMetadata(): Promise<Metadata> {
   return createSeoMetadata(route);

@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation';
 
 import { BLOG_POSTS, getPostsByCategory } from '@/features/blog/data';
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
-import { createNoIndexMetadata } from '@/shared/seo';
+import { createNoIndexMetadata, createSeoMetadata } from '@/shared/seo';
 
 export function generateStaticParams() {
   const categorySlugs = new Set(BLOG_POSTS.map(post => post.categorySlug));
@@ -18,10 +19,21 @@ export async function generateMetadata({
   params: Promise<{ categorySlug: string }>;
 }): Promise<Metadata> {
   const { categorySlug } = await params;
-  return createNoIndexMetadata(
-    `${categorySlug} - mujibai Blog`,
-    `Posts in the ${categorySlug} category.`
-  );
+  const posts = getPostsByCategory(categorySlug);
+
+  if (posts.length === 0) {
+    return createNoIndexMetadata('Category not found - mujibai', '');
+  }
+
+  const categoryLabel = posts[0].category;
+
+  return createSeoMetadata({
+    path: `/blog/category/${categorySlug}`,
+    title: `${categoryLabel} - mujibai Blog`,
+    description: `Posts in the ${categoryLabel} category.`,
+    keywords: [categoryLabel, 'mujibai blog'],
+    category: 'Blog',
+  });
 }
 
 export default async function BlogCategoryPage({
@@ -39,11 +51,17 @@ export default async function BlogCategoryPage({
   return (
     <PageBackground>
       <Container className="py-16 md:py-20">
-        <h1 className="text-3xl font-bold capitalize md:text-4xl">
-          {posts[0].category}
-        </h1>
+        <Reveal>
+          <h1 className="text-3xl font-bold capitalize md:text-4xl">
+            {posts[0].category}
+          </h1>
+        </Reveal>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <Reveal
+          as="ul"
+          stagger={0.06}
+          className="mt-10 grid gap-4 sm:grid-cols-2"
+        >
           {posts.map(post => (
             <li key={post.slug}>
               <Link
@@ -55,7 +73,7 @@ export default async function BlogCategoryPage({
               </Link>
             </li>
           ))}
-        </ul>
+        </Reveal>
       </Container>
     </PageBackground>
   );

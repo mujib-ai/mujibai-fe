@@ -28,6 +28,65 @@
       "button2": "جرّب «مُجيب AI» مجانًا"
     },
 
+    "interactiveExperience": {
+      "badge": "التجربة التفاعلية",
+      "title": "جرّب منتجات الصوت من مجيب ai في مكان واحد",
+      "description": "جرّب حلول مجيبai الصوتية مع الوكيل الصوتي، وتحويل النص إلى صوت، وتحويل الصوت إلى نص، واستنساخ الأصوات بتجربة واقعية وباللهجة السعودية",
+      "tabs": {
+        "voiceAgent": "الوكيل الصوتي",
+        "textToSpeech": "النص إلى كلام",
+        "speechToText": "الكلام إلى نص"
+      },
+      "voiceAgent": {
+        "callCta": {
+          "title": "تفضّل مكالمة سريعة؟",
+          "description": "اتصل بنا مباشرة لمناقشة تجربة الوكيل الصوتي مع فريقنا.",
+          "note": "متاح لأسئلة التجربة والمبيعات."
+        },
+        "divider": "أو",
+        "mic": {
+          "idleTitle": "انقر على الميكروفون لبدء التحدث",
+          "activeTitle": "جارٍ الاستماع… انقر للإيقاف",
+          "description": "احصل على مكالمة فورية من وكيل الذكاء الاصطناعي لدينا."
+        }
+      },
+      "textToSpeech": {
+        "studioLabel": "استوديو النص إلى كلام",
+        "heading": "أنشئ تعليق صوتي عربي واقعي",
+        "categories": {
+          "appointment": "حجز موعد",
+          "ad": "إعلان",
+          "podcast": "بودكاست",
+          "story": "قصة قصيرة"
+        },
+        "textareaLabel": "إدخال النص العربي",
+        "placeholder": "وصلَت لقهوه بسيطه في حي الملقى، قهوتهم الصراحة رهيبه مره.",
+        "personasLabel": "شخصيات الصوت",
+        "generateButton": "إنشاء الصوت"
+      },
+      "speechToText": {
+        "heading": "استخراج مباشر للنص",
+        "description": "جرّب التحدث بشكل طبيعي أو ارفع ملف صوتي للنسخ.",
+        "textBox": {
+          "label": "النص",
+          "status": "جاهز",
+          "placeholder": "سيظهر هنا النص المباشر أو من الملف."
+        },
+        "live": {
+          "idleTitle": "اضغط الميكروفون لبدء النسخ الفوري",
+          "activeTitle": "جارٍ الاستماع… انقر للإيقاف",
+          "title": "تحدث مباشر"
+        },
+        "divider": "أو",
+        "upload": {
+          "title": "رفع ملف",
+          "description": "ارفع ملف MP3 أو WAV للنسخ."
+        }
+      },
+      "demoToast": "هذه نسخة تجريبية من الواجهة فقط، ولا تتم معالجة صوت فعلي.",
+      "disclaimer": "باستخدامك لخدماتنا المدعومة بالذكاء الاصطناعي، بما في ذلك على سبيل المثال لا الحصر الوكلاء الصوتيين، تحويل النص إلى كلام، الكلام إلى نص، واستنساخ الصوت، فإنك توافق على سياسة الخصوصية الخاصة بنا. أنت المسؤول الوحيد عن كيفية استخدامك لهذا العرض التجريبي، ولا تتحمل الشركة أي مسؤولية عن أي محتوى يتم إنشاؤه أو استخدامه لاحقًا."
+    },
+
     "features": {
       "title": "مزايا «مُجيب AI»... تجعلك من عملائك قريب!",
       "description": "يتمتّع «مُجيب AI» بمزايا نوعيّة تؤهله ليكون خيارك الأمثل في التواصل مع عملائك",
@@ -130,7 +189,16 @@
           "price": "200",
           "period": "الشهر",
           "included": [
-            true, true, true, true, true, false, false, true, false, false
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false
           ]
         },
         "professional": {
@@ -139,7 +207,16 @@
           "price": "350",
           "period": "الشهر",
           "included": [
-            true, true, true, true, true, true, true, true, true, false
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false
           ]
         },
         "enterprise": {
@@ -148,7 +225,16 @@
           "price": "مخصص",
           "period": "",
           "included": [
-            true, true, true, true, true, true, true, true, true, true
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
           ]
         }
       }

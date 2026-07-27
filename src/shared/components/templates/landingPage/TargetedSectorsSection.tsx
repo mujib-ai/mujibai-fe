@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import {
   GraduationCap,
   HandHeart,
@@ -59,16 +60,19 @@ export default function SectorsSection() {
 
       <Container className="relative py-18">
         <div className="mx-auto flex w-full flex-col items-center justify-start gap-10">
-          <div className="mx-auto flex w-full flex-col items-center justify-start gap-3">
+          <Reveal className="mx-auto flex w-full flex-col items-center justify-start gap-3">
             <h2 className="text-center text-[44px] leading-13.5 font-bold">
               {t('title')}
             </h2>
             <p className="w-full text-center text-base leading-relaxed font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-7.5 dark:text-[#E5E5E5]">
               {t('subTitle')}
             </p>
-          </div>
+          </Reveal>
 
-          <div className="flex w-full flex-col items-start justify-start gap-3.5 md:gap-7 lg:flex-row">
+          <Reveal
+            stagger={0.1}
+            className="flex w-full flex-col items-start justify-start gap-3.5 md:gap-7 lg:flex-row"
+          >
             <div className="h-full w-full lg:w-[32%]">
               <div className="flex w-full flex-col items-start justify-start rounded-xl border border-[#3FA9F5]/30 bg-[#06B6D40D] px-6 py-9 dark:bg-transparent">
                 <div className="rounded-lg bg-white/5 p-3 px-7 dark:bg-[#06B6D40F]">
@@ -117,7 +121,7 @@ export default function SectorsSection() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 
 export default function AboutUsSection() {
   const t = useTranslations('landingPage.aboutUs');
@@ -21,14 +22,17 @@ export default function AboutUsSection() {
 
       <Container className="py-4.25 md:py-8.5">
         <div className="mx-auto mt-4.5 flex w-full flex-col items-center justify-start gap-4 md:mt-9 md:gap-8">
-          <div className="mx-auto flex w-full max-w-200 flex-col items-center justify-start gap-0.5 md:gap-1">
+          <Reveal className="mx-auto flex w-full max-w-200 flex-col items-center justify-start gap-0.5 md:gap-1">
             <h2 className="text-center text-5xl font-bold">{t('title')}</h2>
             <p className="my-4 text-center text-base font-normal tracking-[0.2px] text-[#4E4E4E] transition-colors duration-300 ease-in-out md:text-lg md:leading-7.5 dark:text-[#E5E5E5]">
               {t('subTitle')}
             </p>
-          </div>
+          </Reveal>
 
-          <div className="flex w-full flex-col items-center justify-between lg:flex-row">
+          <Reveal
+            stagger={0.15}
+            className="flex w-full flex-col items-center justify-between lg:flex-row"
+          >
             <div className="lg:w-2.5/12 mb-8 flex h-61.25 w-full items-center justify-center md:h-122.5 lg:mb-0">
               <div className="flex h-full w-full items-center justify-center overflow-hidden rounded-lg">
                 <Image
@@ -56,7 +60,7 @@ export default function AboutUsSection() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

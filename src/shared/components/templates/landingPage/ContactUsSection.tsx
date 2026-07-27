@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Textarea } from '@/shared/components/atoms/ui/textarea';
@@ -32,22 +33,26 @@ export default function ContactUsSection() {
           alt="contact us background image"
           width={500}
           height={500}
+          loading="lazy"
+          sizes="100vw"
           className="absolute top-0 left-0 h-full w-screen object-cover"
         />
       </div>
       <div className="absolute inset-0 bg-[#6EEAFF99] dark:bg-[#001434]/50" />
 
       <Container className="relative z-10 flex flex-col items-center gap-6 rounded-2xl bg-[#FFFFFFCC] py-10 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 md:px-10 dark:bg-[#06B6D40F]">
-        <div className="mb-4 text-center">
+        <Reveal className="mb-4 text-center">
           <h2 className="text-foreground text-2xl font-bold md:text-[44px]">
             {t('title')}
           </h2>
           <p className="text-muted-foreground text-sm md:text-base">
             {t('description')}
           </p>
-        </div>
+        </Reveal>
 
-        <form
+        <Reveal
+          as="form"
+          delay={0.15}
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full flex-col gap-6"
         >
@@ -154,7 +159,7 @@ export default function ContactUsSection() {
               {isSubmitting ? 'Sending...' : t('form.submit')}
             </Button>
           </div>
-        </form>
+        </Reveal>
       </Container>
     </section>
   );

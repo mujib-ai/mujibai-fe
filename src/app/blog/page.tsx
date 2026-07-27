@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { getAllPosts } from '@/features/blog/data';
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
 import { createNoIndexMetadata } from '@/shared/seo';
 
@@ -19,12 +20,18 @@ export default async function BlogPage() {
   return (
     <PageBackground>
       <Container className="py-16 md:py-20">
-        <h1 className="text-3xl font-bold md:text-4xl">{t('title')}</h1>
-        <p className="mt-4 max-w-2xl text-base text-(--ink-3) md:text-lg">
-          {t('description')}
-        </p>
+        <Reveal>
+          <h1 className="text-3xl font-bold md:text-4xl">{t('title')}</h1>
+          <p className="mt-4 max-w-2xl text-base text-(--ink-3) md:text-lg">
+            {t('description')}
+          </p>
+        </Reveal>
 
-        <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+        <Reveal
+          as="ul"
+          stagger={0.06}
+          className="mt-10 grid gap-4 sm:grid-cols-2"
+        >
           {posts.map(post => (
             <li key={post.slug}>
               <Link
@@ -36,7 +43,7 @@ export default async function BlogPage() {
               </Link>
             </li>
           ))}
-        </ul>
+        </Reveal>
       </Container>
     </PageBackground>
   );

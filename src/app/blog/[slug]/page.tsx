@@ -3,8 +3,9 @@ import { notFound } from 'next/navigation';
 
 import { BLOG_POSTS, getPostBySlug } from '@/features/blog/data';
 import { Container } from '@/shared/components/atoms/Container';
+import { Reveal } from '@/shared/components/atoms/Reveal';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
-import { createNoIndexMetadata } from '@/shared/seo';
+import { createArticleSeoMetadata, createNoIndexMetadata } from '@/shared/seo';
 
 export function generateStaticParams() {
   return BLOG_POSTS.map(post => ({ slug: post.slug }));
@@ -22,7 +23,22 @@ export async function generateMetadata({
     return createNoIndexMetadata('Post not found - mujibai', '');
   }
 
-  return createNoIndexMetadata(`${post.title} - mujibai Blog`, post.excerpt);
+  return createArticleSeoMetadata({
+    path: `/blog/${post.slug}`,
+    title: `${post.title} - mujibai Blog`,
+    description: post.excerpt,
+    keywords: post.tags.map(tag => tag.label),
+    category: 'Blog',
+    image: {
+      url: `/og?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.category)}`,
+      alt: post.title,
+    },
+    article: {
+      publishedTime: post.date,
+      section: post.category,
+      tags: post.tags.map(tag => tag.label),
+    },
+  });
 }
 
 export default async function BlogPostPage({
@@ -40,14 +56,16 @@ export default async function BlogPostPage({
   return (
     <PageBackground>
       <Container className="py-16 md:py-20">
-        <span className="text-primary text-sm font-semibold">
-          {post.category}
-        </span>
-        <h1 className="mt-2 text-3xl font-bold md:text-4xl">{post.title}</h1>
-        <p className="mt-4 text-sm text-(--ink-3)">{post.date}</p>
-        <p className="mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
-          {post.content}
-        </p>
+        <Reveal>
+          <span className="text-primary text-sm font-semibold">
+            {post.category}
+          </span>
+          <h1 className="mt-2 text-3xl font-bold md:text-4xl">{post.title}</h1>
+          <p className="mt-4 text-sm text-(--ink-3)">{post.date}</p>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed md:text-lg">
+            {post.content}
+          </p>
+        </Reveal>
       </Container>
     </PageBackground>
   );

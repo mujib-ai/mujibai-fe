@@ -11,7 +11,6 @@ export default function Loading() {
         height={80}
         className="size-20"
         priority
-        loading="eager"
       />
     </div>
   );

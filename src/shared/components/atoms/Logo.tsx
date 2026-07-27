@@ -15,6 +15,7 @@ export default function Logo() {
           alt="Logo"
           fill
           priority
+          sizes="200px"
           className="object-contain"
         />
       </div>

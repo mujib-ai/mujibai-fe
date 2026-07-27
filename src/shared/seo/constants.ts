@@ -1,11 +1,34 @@
-import type { SeoRoute } from './types';
+import type { AppLocale, SeoRoute } from './types';
 
 export const SITE_NAME = 'mujibai';
 export const SITE_CREATOR = 'mujibai';
 export const SITE_PUBLISHER = 'mujibai';
-export const DEFAULT_LOCALE = 'ar_SA';
-export const DEFAULT_OG_IMAGE = '/loader-logo.svg';
 export const SITE_EMAIL = 'tech@mujibai.net';
+
+/**
+ * Locale cookie ('LANG') defaults to 'en' when absent — see src/i18n/request.ts.
+ * Keep this in sync; it drives the default og:locale when no request locale is available.
+ */
+export const DEFAULT_APP_LOCALE: AppLocale = 'en';
+
+export const OG_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
+  en: 'en_US',
+  ar: 'ar_SA',
+};
+
+export const SUPPORTED_APP_LOCALES: AppLocale[] = ['en', 'ar'];
+
+/** Kept for callers that need a static default before a request locale is known. */
+export const DEFAULT_LOCALE = OG_LOCALE_BY_APP_LOCALE[DEFAULT_APP_LOCALE];
+
+export const DEFAULT_OG_IMAGE_PATH = '/og';
+export const DEFAULT_OG_IMAGE_TYPE = 'image/png';
+export const DEFAULT_OG_IMAGE_WIDTH = 1200;
+export const DEFAULT_OG_IMAGE_HEIGHT = 630;
+export const DEFAULT_OG_IMAGE_ALT = `${SITE_NAME} - AI customer service agents for phone & web`;
+
+/** @deprecated use DEFAULT_OG_IMAGE_PATH — kept as an alias to avoid churn in existing imports. */
+export const DEFAULT_OG_IMAGE = DEFAULT_OG_IMAGE_PATH;
 
 export const PUBLIC_SEO_ROUTES = [
   {
@@ -455,4 +478,17 @@ export const PUBLIC_SEO_ROUTES = [
   },
 ] as const satisfies readonly SeoRoute[];
 
-export const DISALLOWED_ROUTES = ['/auth', '/dashboard'] as const;
+/**
+ * `/auth` was dead — the (auth) segment is a Next.js route group and adds no
+ * path prefix, so the real private routes are listed individually here.
+ * '/register' is intentionally omitted: it's a public company-enrollment
+ * form, not an account page, and stays indexable.
+ */
+export const DISALLOWED_ROUTES = [
+  '/login',
+  '/forgot-password',
+  '/reset-password',
+  '/password-reset-requested',
+  '/dashboard',
+  '/offline',
+] as const;

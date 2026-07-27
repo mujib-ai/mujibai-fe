@@ -1,3 +1,5 @@
+import { Reveal } from '@/shared/components/atoms/Reveal';
+
 type LegalSimpleSection = {
   title: string;
   content: string;
@@ -9,7 +11,7 @@ export function LegalSimpleSections({
   sections: Record<string, LegalSimpleSection>;
 }) {
   return (
-    <div className="mt-10 flex flex-col gap-8">
+    <Reveal stagger={0.08} className="mt-10 flex flex-col gap-8">
       {Object.entries(sections).map(([key, section]) => (
         <section key={key}>
           <h2 className="text-xl font-semibold md:text-2xl">{section.title}</h2>
@@ -18,6 +20,6 @@ export function LegalSimpleSections({
           </p>
         </section>
       ))}
-    </div>
+    </Reveal>
   );
 }

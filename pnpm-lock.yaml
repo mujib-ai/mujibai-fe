@@ -7,6 +7,9 @@ settings:
 importers:
   .:
     dependencies:
+      '@gsap/react':
+        specifier: ^2.1.2
+        version: 2.1.2(gsap@3.15.0)(react@19.2.4)
       '@heroui/react':
         specifier: ^3.2.2
         version: 3.2.2(@react-spectrum/provider@3.11.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)
@@ -70,6 +73,9 @@ importers:
       framer-motion:
         specifier: ^12.23.26
         version: 12.27.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      gsap:
+        specifier: ^3.15.0
+        version: 3.15.0
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
@@ -536,6 +542,15 @@ packages:
       {
         integrity: sha512-XOMO2Hupl0wdd172Y06h6kLpBz6Dv+J4okPLl4LPtzbr8f66WbIoy4ev98EBuZ6ZK4h5ydTN6XneT4QVpD7cdA==,
       }
+
+  '@gsap/react@2.1.2':
+    resolution:
+      {
+        integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==,
+      }
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
 
   '@heroui/react@3.2.2':
     resolution:
@@ -4785,6 +4800,12 @@ packages:
         integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==,
       }
 
+  gsap@3.15.0:
+    resolution:
+      {
+        integrity: sha512-dMW4CWBTUK1AEEDeZc1g4xpPGIrSf9fJF960qbTZmN/QwZIWY5wgliS6JWl9/25fpTGJrMRtSjGtOmPnfjZB+A==,
+      }
+
   has-bigints@1.1.0:
     resolution:
       {
@@ -7361,6 +7382,11 @@ snapshots:
   '@formatjs/intl-localematcher@0.6.2':
     dependencies:
       tslib: 2.8.1
+
+  '@gsap/react@2.1.2(gsap@3.15.0)(react@19.2.4)':
+    dependencies:
+      gsap: 3.15.0
+      react: 19.2.4
 
   '@heroui/react@3.2.2(@react-spectrum/provider@3.11.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@types/react-dom@19.2.3(@types/react@19.2.8))(@types/react@19.2.8)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(tailwindcss@4.1.18)':
     dependencies:
@@ -10250,6 +10276,8 @@ snapshots:
   gopd@1.2.0: {}
 
   graceful-fs@4.2.11: {}
+
+  gsap@3.15.0: {}
 
   has-bigints@1.1.0: {}
 

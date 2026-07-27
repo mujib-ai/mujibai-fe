@@ -28,6 +28,65 @@
       "button2": "Try “Mujibai” for Free"
     },
 
+    "interactiveExperience": {
+      "badge": "Interactive Experience",
+      "title": "Try our voice products, all in one place",
+      "description": "Experience our voice tone solutions — Voice Agent, Text-to-Speech, Speech-to-Text, and voice cloning — with a realistic experience in the Saudi dialect.",
+      "tabs": {
+        "voiceAgent": "Voice Agent",
+        "textToSpeech": "Text to Speech",
+        "speechToText": "Speech to Text"
+      },
+      "voiceAgent": {
+        "callCta": {
+          "title": "Prefer a quick call?",
+          "description": "Call us directly to discuss the Voice Agent experience with our team.",
+          "note": "Available for demo and sales questions."
+        },
+        "divider": "or",
+        "mic": {
+          "idleTitle": "Tap the microphone to start talking",
+          "activeTitle": "Listening… tap to stop",
+          "description": "Get an instant call from our AI voice agent."
+        }
+      },
+      "textToSpeech": {
+        "studioLabel": "Text-to-Speech Studio",
+        "heading": "Create a realistic Arabic voiceover",
+        "categories": {
+          "appointment": "Appointment Booking",
+          "ad": "Ad",
+          "podcast": "Podcast",
+          "story": "Short Story"
+        },
+        "textareaLabel": "Enter Arabic text",
+        "placeholder": "وصلَت لقهوه بسيطه في حي الملقى، قهوتهم الصراحة رهيبه مره.",
+        "personasLabel": "Voice personas",
+        "generateButton": "Generate Voice"
+      },
+      "speechToText": {
+        "heading": "Live text extraction",
+        "description": "Try speaking naturally or upload an audio file to transcribe.",
+        "textBox": {
+          "label": "Text",
+          "status": "Ready",
+          "placeholder": "The live or file transcript will appear here."
+        },
+        "live": {
+          "idleTitle": "Press the microphone to start instant transcription.",
+          "activeTitle": "Listening… tap to stop",
+          "title": "Live speech"
+        },
+        "divider": "or",
+        "upload": {
+          "title": "Upload file",
+          "description": "Upload an MP3 or WAV file to transcribe."
+        }
+      },
+      "demoToast": "This is a UI-only demo — no audio is processed.",
+      "disclaimer": "By using our AI-powered services, including but not limited to voice agents, text-to-speech, speech-to-text, and voice cloning, you agree to our privacy policy. You are solely responsible for how you use this demo, and the company assumes no liability for any content generated or used afterward."
+    },
+
     "features": {
       "title": "“Mujibai” features… bringing you closer to your customers!",
       "description": "“Mujibai” offers powerful features that make it your ideal choice for customer communication",
@@ -130,7 +189,16 @@
           "price": "200",
           "period": "month",
           "included": [
-            true, true, true, true, true, false, false, true, false, false
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false
           ]
         },
         "professional": {
@@ -139,7 +207,16 @@
           "price": "350",
           "period": "month",
           "included": [
-            true, true, true, true, true, true, true, true, true, false
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false
           ]
         },
         "enterprise": {
@@ -148,7 +225,16 @@
           "price": "Custom",
           "period": "",
           "included": [
-            true, true, true, true, true, true, true, true, true, true
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
           ]
         }
       }
