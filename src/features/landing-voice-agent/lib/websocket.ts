@@ -11,7 +11,8 @@ const SERVER_EVENT_TYPES = new Set([
   'session.ended',
 ]);
 
-export function getLandingAgentWebSocketUrl(value?: string): string {
+export function getLandingAgentWebSocketUrl(): string {
+  const value = process.env.NEXT_PUBLIC_LANDING_AGENT_WS_URL;
   if (!value) throw new Error('configuration');
 
   const url = new URL(value);

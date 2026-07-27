@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useCallback, useEffect, useRef } from 'react';
 
@@ -16,13 +16,11 @@ import type {
 } from '../types/landing-agent.types';
 
 interface SocketOptions {
-  url?: string;
   onEvent: (event: LandingAgentServerEvent) => void;
   onConnectionState: (state: 'connecting' | 'reconnecting' | 'error') => void;
 }
 
 export function useLandingAgentSocket({
-  url,
   onEvent,
   onConnectionState,
 }: SocketOptions) {
@@ -61,7 +59,7 @@ export function useLandingAgentSocket({
   const connectSocket = useCallback(() => {
     let socketUrl: string;
     try {
-      socketUrl = getLandingAgentWebSocketUrl(url);
+      socketUrl = getLandingAgentWebSocketUrl();
     } catch {
       stateRef.current('error');
       return;
@@ -99,7 +97,7 @@ export function useLandingAgentSocket({
         LANDING_AGENT_RECONNECT_DELAY_MS * reconnectCountRef.current
       );
     };
-  }, [send, url]);
+  }, [send]);
 
   const connect = useCallback(
     (initialEvent: LandingAgentClientEvent) => {

@@ -1,9 +1,8 @@
-﻿import type { Metadata, Viewport } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 
-import { PublicLandingAgent } from '@/features/landing-voice-agent';
 import { Providers } from '@/providers/Providers';
 import { PwaManager } from '@/shared/components/atoms/PwaManager';
 import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
@@ -106,9 +105,6 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
-            <PublicLandingAgent
-              enabled={process.env.NEXT_PUBLIC_ENABLE_LANDING_AGENT !== 'false'}
-            />
             <Toaster position="top-center" />
             <VisitTracker />
             <SpeedInsights />

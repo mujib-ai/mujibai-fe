@@ -1,19 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 
-import { useTranslations } from 'next-intl';
-
+import { useLandingAgent } from '@/features/landing-voice-agent/hooks/use-landing-agent';
 import { Card } from '@/shared/components/atoms/ui/card';
 
 import { MicButton } from './MicButton';
 
 export function VoiceAgentPanel() {
   const t = useTranslations('landingPage.interactiveExperience');
-  const [listening, setListening] = useState(false);
+  const locale = useLocale();
+  const agent = useLandingAgent(locale === 'ar' ? 'ar' : 'en');
+  const listening = !['idle', 'ended', 'error'].includes(agent.state);
 
   const toggleListening = () => {
-    setListening(prev => !prev);
+    if (listening) {
+      agent.end();
+      return;
+    }
+    void agent.start();
   };
 
   return (

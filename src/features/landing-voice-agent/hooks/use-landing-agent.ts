@@ -1,9 +1,8 @@
-﻿'use client';
+'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { base64ToArrayBuffer, pcm16ToAudioBuffer } from '../lib/audio';
-import { LANDING_AGENT_WS_ENV } from '../lib/constants';
 import type {
   AgentState,
   LandingAgentLanguage,
@@ -140,13 +139,16 @@ export function useLandingAgent(language: LandingAgentLanguage) {
     (next: 'connecting' | 'reconnecting' | 'error') => {
       setState(next);
       if (next === 'error')
-        setError(LANDING_AGENT_WS_ENV ? 'connection' : 'configuration');
+        setError(
+          process.env.NEXT_PUBLIC_LANDING_AGENT_WS_URL
+            ? 'connection'
+            : 'configuration'
+        );
     },
     []
   );
 
   const { connect, disconnect, send } = useLandingAgentSocket({
-    url: LANDING_AGENT_WS_ENV,
     onEvent: handleServerEvent,
     onConnectionState: handleConnectionState,
   });
