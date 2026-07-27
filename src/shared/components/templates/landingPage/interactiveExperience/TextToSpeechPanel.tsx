@@ -54,10 +54,10 @@ export function TextToSpeechPanel({ isRtl }: { isRtl: boolean }) {
   };
 
   return (
-    <Card className="relative flex flex-col items-center gap-2 rounded-2xl bg-[#FFFFFFCC] px-8 py-10 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 dark:bg-[#06B6D40F]">
+    <Card className="relative flex w-full flex-col gap-2 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
       <CardHeader
         className={cn(
-          'border-border gap-1 border-b px-8 pt-8 pb-6',
+          'border-border w-full gap-1 border-b px-0 pt-4 pb-6 sm:px-8 sm:pt-8',
           isRtl ? 'text-right' : 'text-left'
         )}
       >
@@ -67,7 +67,7 @@ export function TextToSpeechPanel({ isRtl }: { isRtl: boolean }) {
         <h3 className="text-xl font-bold">{t('textToSpeech.heading')}</h3>
       </CardHeader>
 
-      <CardContent className="flex flex-col gap-6 px-8 pb-8">
+      <CardContent className="w-full px-0 pb-4 sm:px-8 sm:pb-8">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[2fr_1fr]">
           <div className="flex flex-col gap-2">
             <div className="text-muted-foreground flex items-center justify-between text-xs">

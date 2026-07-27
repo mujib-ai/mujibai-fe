@@ -20,7 +20,7 @@ export function SpeechToTextPanel() {
   };
 
   return (
-    <Card className="relative flex w-full flex-col gap-2 rounded-2xl bg-[#FFFFFFCC] px-8 py-10 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 dark:bg-[#06B6D40F]">
+    <Card className="relative flex w-full flex-col gap-2 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
       <CardContent className="flex flex-col gap-6 p-0">
         <div>
           <h3 className="text-xl font-bold">{t('speechToText.heading')}</h3>

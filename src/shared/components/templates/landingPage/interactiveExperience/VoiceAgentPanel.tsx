@@ -22,8 +22,8 @@ export function VoiceAgentPanel() {
   };
 
   return (
-    <Card className="relative flex w-full flex-col items-center gap-2 rounded-2xl bg-[#FFFFFFCC] px-8 py-10 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 lg:w-86 dark:bg-[#06B6D40F]">
-      <div className="flex flex-col items-center justify-center gap-4 p-12 text-center">
+    <Card className="relative flex w-full flex-col items-center gap-2 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
+      <div className="flex flex-col items-center justify-center gap-4 p-6 text-center sm:p-12">
         <MicButton
           active={listening}
           onClick={toggleListening}

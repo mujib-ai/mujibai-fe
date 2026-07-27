@@ -55,20 +55,20 @@ export default function InteractiveExperienceSection() {
           <TabsList className="mx-auto grid h-auto w-full max-w-2xl grid-cols-3 rounded-full bg-[#3B82F614] p-1 dark:bg-[#3B82F614]">
             <TabsTrigger
               value="speechToText"
-              className="flex-1 rounded-full px-6 py-5 text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
+              className="min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white sm:px-6 sm:py-5 sm:text-sm dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
             >
               {t('tabs.speechToText')}
             </TabsTrigger>
 
             <TabsTrigger
               value="textToSpeech"
-              className="flex-1 rounded-full px-6 py-5 text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
+              className="min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white sm:px-6 sm:py-5 sm:text-sm dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
             >
               {t('tabs.textToSpeech')}
             </TabsTrigger>
             <TabsTrigger
               value="voiceAgent"
-              className="flex-1 rounded-full px-6 py-5 text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
+              className="min-w-0 flex-1 rounded-full px-2 py-3 text-xs font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white sm:px-6 sm:py-5 sm:text-sm dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
             >
               {t('tabs.voiceAgent')}
             </TabsTrigger>
