@@ -89,6 +89,7 @@ export function useLandingAgent(language: LandingAgentLanguage) {
 
   const handleServerEvent = useCallback(
     (event: LandingAgentServerEvent) => {
+      console.log('[landing-agent] server event', event);
       switch (event.type) {
         case 'session.ready':
           setSessionId(event.sessionId);
@@ -137,6 +138,7 @@ export function useLandingAgent(language: LandingAgentLanguage) {
 
   const handleConnectionState = useCallback(
     (next: 'connecting' | 'reconnecting' | 'error') => {
+      console.log('[landing-agent] connection state', next);
       setState(next);
       if (next === 'error')
         setError(
@@ -164,6 +166,7 @@ export function useLandingAgent(language: LandingAgentLanguage) {
 
   const cleanup = useCallback(
     (sendEnd = false) => {
+      console.log('[landing-agent] cleanup()', { sendEnd });
       stopMicrophone();
       disconnect(sendEnd ? { type: 'session.end' } : undefined);
       stopPlayback();
