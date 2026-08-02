@@ -38,10 +38,6 @@ export const viewport: Viewport = {
 const vazirmatn = localFont({
   variable: '--font-vazirmatn',
   display: 'swap',
-  // This family is only applied to text for the 'ar' locale (see the body
-  // style below) — the default locale is 'en', which never uses it. With
-  // preload on, Next would fetch all 9 weights on the critical path of
-  // every English page for a font that's never rendered there.
   preload: false,
   src: [
     { path: '../../public/font/Vazirmatn-Thin.ttf', weight: '100' },
@@ -93,7 +89,7 @@ export default async function RootLayout({
       <body
         suppressHydrationWarning
         style={{
-          fontFamily: locale === 'ar' ? 'var(--font-vazirmatn)' : undefined,
+          fontFamily: 'var(--font-vazirmatn)',
         }}
       >
         <Providers locale={locale} messages={messages}>
