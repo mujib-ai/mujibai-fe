@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -9,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { setPendingTwoFactorLogin } from '../lib/pending-two-factor';
 import { getAllowedRedirectFrom } from '../lib/redirect';
 import { isTwoFactorRequiredError } from '../services/auth.service';
 import useAuth from './useAuth';
@@ -26,15 +25,10 @@ export function useLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = getAllowedRedirectFrom(searchParams.get('from'));
-  const [requiresTwoFactor, setRequiresTwoFactor] = useState(false);
-  const [twoFactorCode, setTwoFactorCode] = useState('');
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: { email: '', password: '' },
   });
 
   const {
@@ -44,9 +38,9 @@ export function useLoginForm() {
     reset,
   } = form;
 
-  const completeLogin = async (values: LoginFormData, code?: string) => {
+  const completeLogin = async (values: LoginFormData) => {
     try {
-      const response = await handleLogin({ ...values, code });
+      const response = await handleLogin(values);
       reset();
       const destination = from ?? '/';
       if (!response.data.tenant.isTwoFactorEnabled) {
@@ -55,28 +49,12 @@ export function useLoginForm() {
       }
       router.push(destination);
     } catch (error) {
-      if (!code && isTwoFactorRequiredError(error)) {
-        setRequiresTwoFactor(true);
-        setTwoFactorCode('');
-        return;
+      if (isTwoFactorRequiredError(error)) {
+        setPendingTwoFactorLogin(values, from ?? '/');
+        router.push('/verify-2fa');
       }
-      if (code) setTwoFactorCode('');
     }
   };
-
-  const onSubmit = (values: LoginFormData) => completeLogin(values);
-
-  const onTwoFactorSubmit = () => {
-    if (twoFactorCode.length !== 6) return;
-    return completeLogin(form.getValues(), twoFactorCode);
-  };
-
-  const returnToCredentials = () => {
-    setRequiresTwoFactor(false);
-    setTwoFactorCode('');
-  };
-
-  const isLoading = isSubmitting || loginLoading;
 
   const getFieldProps = (fieldName: keyof LoginFormData) => ({
     register: register(fieldName),
@@ -92,23 +70,13 @@ export function useLoginForm() {
     forgotPassword: t('forgotPassword'),
     loginButton: t('loginButton'),
     loading: t('loading'),
-    twoFactorTitle: t('twoFactorTitle'),
-    twoFactorDescription: t('twoFactorDescription'),
-    verifyCode: t('verifyCode'),
-    backToLogin: t('backToLogin'),
   });
 
   return {
-    form,
     handleSubmit,
-    onSubmit,
-    isLoading,
+    onSubmit: completeLogin,
+    isLoading: isSubmitting || loginLoading,
     getFieldProps,
     getTranslations,
-    requiresTwoFactor,
-    twoFactorCode,
-    setTwoFactorCode,
-    onTwoFactorSubmit,
-    returnToCredentials,
   };
 }
