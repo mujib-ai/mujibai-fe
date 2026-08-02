@@ -122,7 +122,7 @@ function DialogOverlay({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="dialog-overlay"
-      className={cn('fixed inset-0 z-50 bg-black/50', className)}
+      className={cn('fixed inset-0 z-100 bg-black/50', className)}
       {...props}
     />
   );
@@ -145,7 +145,7 @@ function DialogContent({
       isOpen={open}
       onOpenChange={onOpenChange}
       data-slot="dialog-portal"
-      className="data-entering:animate-in data-entering:fade-in-0 data-exiting:animate-out data-exiting:fade-out-0 fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="data-entering:animate-in data-entering:fade-in-0 data-exiting:animate-out data-exiting:fade-out-0 fixed inset-0 z-100 flex items-center justify-center bg-black/50"
     >
       <Modal.Container
         data-slot="dialog-overlay"
@@ -154,7 +154,7 @@ function DialogContent({
         <Modal.Dialog
           data-slot="dialog-content"
           className={cn(
-            'bg-control relative grid w-full gap-4 rounded-3xl border-0 p-6 shadow-none outline-none',
+            'bg-popover relative grid w-full gap-4 rounded-3xl border-0 p-6 shadow-none outline-none',
             className
           )}
           {...props}

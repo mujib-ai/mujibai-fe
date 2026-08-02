@@ -25,7 +25,7 @@ export default function DeleteSourceDialog({
       isOpen={!!source}
       onOpenChange={isOpen => !isOpen && onClose()}
       isDismissable={!isDeleting}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/50"
     >
       <Modal.Container placement="center" className="w-full px-4 sm:max-w-md">
         <Modal.Dialog className="bg-background relative flex w-full flex-col gap-4 rounded-xl border p-6 shadow-lg outline-none">

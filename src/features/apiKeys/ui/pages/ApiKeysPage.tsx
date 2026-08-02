@@ -56,9 +56,7 @@ export default function ApiKeysPage() {
       const result = await createApiKey(payload);
       setCreateOpen(false);
       setRevealedSecret(result.fullKey);
-    } catch {
-      // reported to the user via createMutation's onError toast
-    }
+    } catch {}
   };
 
   const handleEditSubmit = async (
@@ -76,18 +74,14 @@ export default function ApiKeysPage() {
         await updateExpiration(apiKeyId, { expiresAt: changes.expiresAt });
       }
       setEditingKey(null);
-    } catch {
-      // reported to the user via the relevant mutation's onError toast
-    }
+    } catch {}
   };
 
   const handleRotate = async (apiKey: ApiKeyPublic) => {
     try {
       const result = await rotateApiKey(apiKey.id);
       setRevealedSecret(result.fullKey);
-    } catch {
-      // reported to the user via rotateMutation's onError toast
-    }
+    } catch {}
   };
 
   const handleRevokeConfirm = async () => {
@@ -95,9 +89,7 @@ export default function ApiKeysPage() {
     try {
       await revokeApiKey(revokingKey.id);
       setRevokingKey(null);
-    } catch {
-      // reported to the user via revokeMutation's onError toast
-    }
+    } catch {}
   };
 
   return (

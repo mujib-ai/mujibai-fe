@@ -34,7 +34,7 @@ export default function RevokeApiKeyDialog({
 
   return (
     <Dialog open={!!apiKey} onOpenChange={open => !open && onClose()}>
-      <DialogContent showCloseButton={false}>
+      <DialogContent showCloseButton={true}>
         <DialogHeader>
           <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-500/10">
             <AlertTriangle className="size-6 text-red-600 dark:text-red-500" />
