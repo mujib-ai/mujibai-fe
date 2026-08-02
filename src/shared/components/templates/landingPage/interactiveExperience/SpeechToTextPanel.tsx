@@ -4,19 +4,33 @@ import { useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
+import { useSTT } from '@/features/stt';
 import { Badge } from '@/shared/components/atoms/ui/badge';
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
-import { Upload } from 'lucide-react';
+import { Loader2, Upload } from 'lucide-react';
 
 import { MicButton } from './MicButton';
 
 export function SpeechToTextPanel() {
   const t = useTranslations('landingPage.interactiveExperience');
   const [listening, setListening] = useState(false);
+  const [transcript, setTranscript] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { transcribe, isTranscribing } = useSTT();
 
   const toggleListening = () => {
     setListening(prev => !prev);
+  };
+
+  const handleFileChange = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+
+    const result = await transcribe(file);
+    setTranscript(result.text);
   };
 
   return (
@@ -43,8 +57,19 @@ export function SpeechToTextPanel() {
                 {t('speechToText.textBox.status')}
               </Badge>
             </div>
-            <p className="text-muted-foreground min-h-24 text-sm">
-              {t('speechToText.textBox.placeholder')}
+            <p className="text-foreground min-h-24 text-sm whitespace-pre-wrap">
+              {isTranscribing ? (
+                <span className="text-muted-foreground inline-flex items-center gap-2">
+                  <Loader2 className="size-4 animate-spin" />
+                  {t('speechToText.textBox.processing')}
+                </span>
+              ) : (
+                transcript || (
+                  <span className="text-muted-foreground">
+                    {t('speechToText.textBox.placeholder')}
+                  </span>
+                )
+              )}
             </p>
           </div>
 
@@ -76,10 +101,15 @@ export function SpeechToTextPanel() {
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="border-border hover:bg-control flex items-center gap-3 rounded-xl border border-dashed p-4 text-start transition-colors"
+          disabled={isTranscribing}
+          className="border-border hover:bg-control flex items-center gap-3 rounded-xl border border-dashed p-4 text-start transition-colors disabled:cursor-not-allowed disabled:opacity-60"
         >
           <span className="bg-control flex size-10 shrink-0 items-center justify-center rounded-full">
-            <Upload className="size-4" strokeWidth={1.75} />
+            {isTranscribing ? (
+              <Loader2 className="size-4 animate-spin" strokeWidth={1.75} />
+            ) : (
+              <Upload className="size-4" strokeWidth={1.75} />
+            )}
           </span>
           <span>
             <span className="block text-sm font-semibold">
@@ -92,8 +122,9 @@ export function SpeechToTextPanel() {
           <input
             ref={fileInputRef}
             type="file"
-            accept="audio/mp3,audio/wav,audio/mpeg"
+            accept="audio/wav,.wav"
             className="hidden"
+            onChange={handleFileChange}
           />
         </button>
       </CardContent>

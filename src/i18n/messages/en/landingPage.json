@@ -70,7 +70,8 @@
         "textBox": {
           "label": "Text",
           "status": "Ready",
-          "placeholder": "The live or file transcript will appear here."
+          "placeholder": "The live or file transcript will appear here.",
+          "processing": "Transcribing audio…"
         },
         "live": {
           "idleTitle": "Press the microphone to start instant transcription.",
@@ -80,7 +81,7 @@
         "divider": "or",
         "upload": {
           "title": "Upload file",
-          "description": "Upload an MP3 or WAV file to transcribe."
+          "description": "Upload a WAV file to transcribe."
         }
       },
       "demoToast": "This is a UI-only demo — no audio is processed.",
