@@ -1,11 +1,11 @@
 'use client';
 
-import type { AnalyticsTrendPoint } from '@/features/client/analytics/types';
+import type { AnalyticsTrendPoint } from '@/features/analytics/types';
 import {
   buildTrendChartConfig,
   getTrendSeriesKeys,
   getTrendXKey,
-} from '@/features/client/analytics/utils/analytics-chart-mappers';
+} from '@/features/analytics/utils/analytics-chart-mappers';
 import {
   Card,
   CardContent,

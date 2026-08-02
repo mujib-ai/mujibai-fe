@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { SourceDetailsPage } from '@/features/client/knowledgeBase';
+import { SourceDetailsPage } from '@/features/knowledgeBase';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {

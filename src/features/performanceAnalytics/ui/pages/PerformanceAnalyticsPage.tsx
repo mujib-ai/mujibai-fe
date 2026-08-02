@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { useAnalytics } from '@/features/client/analytics';
+import { useAnalytics } from '@/features/analytics';
 
 import PerformanceAnalyticsTemplate from '../templates/PerformanceAnalyticsTemplate';
 

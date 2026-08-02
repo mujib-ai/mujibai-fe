@@ -6,7 +6,7 @@ import type {
   AnalyticsOverview,
   AnalyticsTrendPoint,
   TopKeywordItem,
-} from '@/features/client/analytics/types';
+} from '@/features/analytics/types';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 import StatisticsCards from '../organisms/StatisticsCards';

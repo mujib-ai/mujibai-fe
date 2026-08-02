@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { ApiKeysPage } from '@/features/client/apiKeys';
+import { ApiKeysPage } from '@/features/apiKeys';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {

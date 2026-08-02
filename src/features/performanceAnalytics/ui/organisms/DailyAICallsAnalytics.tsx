@@ -4,7 +4,7 @@ import type {
   AnalyticsOverview,
   AnalyticsTrendPoint,
   TopKeywordItem,
-} from '@/features/client/analytics/types';
+} from '@/features/analytics/types';
 
 import DailyAICalls from './DailyAICalls';
 import IntentDetectionAccuracy from './IntentDetectionAccuracy';

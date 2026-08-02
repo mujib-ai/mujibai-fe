@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-import { TablePagination } from '@/features/client/tickets';
+import { TablePagination } from '@/features/tickets';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { Button, Table } from '@heroui/react';
 

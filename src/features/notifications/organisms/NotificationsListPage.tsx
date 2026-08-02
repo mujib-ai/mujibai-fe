@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import CallsPagination from '@/features/client/calls/ui/molecules/CallsPagination';
+import CallsPagination from '@/features/calls/ui/molecules/CallsPagination';
 import Reveal from '@/shared/components/atoms/Reveal';
 import { Button } from '@/shared/components/atoms/ui/button';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';

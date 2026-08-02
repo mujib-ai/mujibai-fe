@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
-import { GoogleCalendarIntegrationPage } from '@/features/client/integrations/googleCalendar';
-import { SlackIntegrationPage } from '@/features/client/integrations/slack';
+import { GoogleCalendarIntegrationPage } from '@/features/integrations/googleCalendar';
+import { SlackIntegrationPage } from '@/features/integrations/slack';
 
 import { IntegrationCard } from '../molecules';
 

@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import CallsTableSkeleton from '@/features/client/calls/ui/organisms/CallsTableSkeleton';
+import CallsTableSkeleton from '@/features/calls/ui/organisms/CallsTableSkeleton';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 export default function CallsLoading() {

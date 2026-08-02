@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import useAuth from '@/features/auth/hooks/useAuth';
-import { useTenantPreferences } from '@/features/client/settings/hooks/useTenantPreferences';
+import { useTenantPreferences } from '@/features/settings/hooks/useTenantPreferences';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   DropdownMenu,

@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import TicketsTableSkeleton from '@/features/client/tickets/ui/organisms/TicketsTableSkeleton';
+import TicketsTableSkeleton from '@/features/tickets/ui/organisms/TicketsTableSkeleton';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 export default function TicketsLoading() {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { CallsPage } from '@/features/client/calls';
+import { CallsPage } from '@/features/calls';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {

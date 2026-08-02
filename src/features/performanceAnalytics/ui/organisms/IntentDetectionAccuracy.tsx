@@ -1,7 +1,7 @@
 'use client';
 
-import type { TopKeywordItem } from '@/features/client/analytics/types';
-import { formatPercentage } from '@/features/client/analytics/utils/analytics-formatters';
+import type { TopKeywordItem } from '@/features/analytics/types';
+import { formatPercentage } from '@/features/analytics/utils/analytics-formatters';
 import {
   Card,
   CardContent,

@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 
-import KnowledgeBaseStats from '@/features/client/knowledgeBase/ui/organisms/KnowledgeBaseStats';
-import KnowledgeSourcesTableSkeleton from '@/features/client/knowledgeBase/ui/organisms/KnowledgeSourcesTableSkeleton';
+import KnowledgeBaseStats from '@/features/knowledgeBase/ui/organisms/KnowledgeBaseStats';
+import KnowledgeSourcesTableSkeleton from '@/features/knowledgeBase/ui/organisms/KnowledgeSourcesTableSkeleton';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { Skeleton } from '@heroui/react';

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 
 import useAuth from '@/features/auth/hooks/useAuth';
-import { useTenantPreferences } from '@/features/client/settings/hooks/useTenantPreferences';
+import { useTenantPreferences } from '@/features/settings/hooks/useTenantPreferences';
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Button } from '@/shared/components/atoms/ui/button';
 

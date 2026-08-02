@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { PerformanceAnalyticsPage } from '@/features/client/performanceAnalytics';
+import { PerformanceAnalyticsPage } from '@/features/performanceAnalytics';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {

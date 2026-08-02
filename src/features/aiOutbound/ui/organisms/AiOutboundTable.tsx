@@ -1,6 +1,6 @@
 'use client';
 
-import { TablePagination } from '@/features/client/calls';
+import { TablePagination } from '@/features/calls';
 import {
   Table,
   TableBody,

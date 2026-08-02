@@ -8,7 +8,7 @@ import {
   CallsErrorState,
   CallsPagination,
   useRecentCalls,
-} from '@/features/client/calls';
+} from '@/features/calls';
 import { Badge } from '@/shared/components/atoms/ui/badge';
 import {
   Card,

@@ -1,10 +1,10 @@
 'use client';
 
-import type { AnalyticsOverview } from '@/features/client/analytics/types';
+import type { AnalyticsOverview } from '@/features/analytics/types';
 import {
   formatDuration,
   formatPercentage,
-} from '@/features/client/analytics/utils/analytics-formatters';
+} from '@/features/analytics/utils/analytics-formatters';
 
 import StatisticsCard from '../atoms/StatisticsCard';
 

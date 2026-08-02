@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
-import { AiOutboundPage } from '@/features/client/aiOutbound';
+import { AiOutboundPage } from '@/features/aiOutbound';
 import { createNoIndexMetadata } from '@/shared/seo';
 
 export async function generateMetadata(): Promise<Metadata> {

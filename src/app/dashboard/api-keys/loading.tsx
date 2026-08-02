@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import ApiKeysTableSkeleton from '@/features/client/apiKeys/ui/organisms/ApiKeysTableSkeleton';
+import ApiKeysTableSkeleton from '@/features/apiKeys/ui/organisms/ApiKeysTableSkeleton';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
 export default function ApiKeysLoading() {
