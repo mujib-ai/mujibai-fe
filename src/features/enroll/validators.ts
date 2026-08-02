@@ -17,7 +17,7 @@ export const enrollFormSchema = z.object({
   companyWebsite: z
     .string()
     .min(2, 'Company website must be at least 2 characters')
-    .max(500, 'Company website must be at most 500 characters'),
+    .max(492, 'Company website must be at most 492 characters'),
   address: z
     .string()
     .min(2, 'Address must be at least 2 characters')
@@ -28,12 +28,20 @@ export const enrollFormSchema = z.object({
     .max(255, 'Business field must be at most 255 characters'),
   commercialRegister: z
     .string()
-    .min(2, 'Commercial register must be at least 2 characters')
-    .max(255, 'Commercial register must be at most 255 characters'),
+    .max(255, 'Commercial register must be at most 255 characters')
+    .optional()
+    .refine(
+      val => !val || val.length >= 2,
+      'Commercial register must be at least 2 characters'
+    ),
   taxNumber: z
     .string()
-    .min(2, 'Tax number must be at least 2 characters')
-    .max(255, 'Tax number must be at most 255 characters'),
+    .max(255, 'Tax number must be at most 255 characters')
+    .optional()
+    .refine(
+      val => !val || val.length >= 2,
+      'Tax number must be at least 2 characters'
+    ),
   message: z
     .string()
     .max(2000, 'Message must be at most 2000 characters')

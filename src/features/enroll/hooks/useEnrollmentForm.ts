@@ -21,7 +21,7 @@ export function useEnrollmentForm() {
       email: '',
       phone: '',
       companyName: '',
-      companyWebsite: 'https://',
+      companyWebsite: '',
       address: '',
       businessField: '',
       commercialRegister: '',
@@ -39,6 +39,9 @@ export function useEnrollmentForm() {
   const onSubmit = async (data: EnrollmentFormData) => {
     const res = await handleEnroll({
       ...data,
+      companyWebsite: `https://${data.companyWebsite}`,
+      commercialRegister: data.commercialRegister || undefined,
+      taxNumber: data.taxNumber || undefined,
       message: data.message || undefined,
     });
 

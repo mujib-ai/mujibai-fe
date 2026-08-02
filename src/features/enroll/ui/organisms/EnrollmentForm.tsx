@@ -4,7 +4,7 @@ import { useEnrollmentForm } from '@/features/enroll';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Spinner } from '@heroui/react';
 
-import { FormField, FormFieldTextarea } from '../atoms';
+import { FormField, FormFieldTextarea, FormFieldWebsite } from '../atoms';
 
 export default function EnrollmentForm() {
   const { handleSubmit, onSubmit, isEnrollLoading, t, getFieldProps } =
@@ -52,7 +52,7 @@ export default function EnrollmentForm() {
           {...getFieldProps('companyName')}
         />
 
-        <FormField
+        <FormFieldWebsite
           label={t('website')}
           placeholder={t('companyWebsitePlaceholder')}
           required
@@ -79,7 +79,6 @@ export default function EnrollmentForm() {
         <FormField
           label={t('commercialRegister')}
           placeholder={t('commercialRegisterPlaceholder')}
-          required
           name="commercialRegister"
           {...getFieldProps('commercialRegister')}
         />
@@ -87,7 +86,6 @@ export default function EnrollmentForm() {
         <FormField
           label={t('taxId')}
           placeholder={t('taxIdPlaceholder')}
-          required
           name="taxNumber"
           {...getFieldProps('taxNumber')}
         />

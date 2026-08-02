@@ -6,8 +6,8 @@ export interface EnrollmentFormValues {
   companyWebsite: string;
   address: string;
   businessField: string;
-  commercialRegister: string;
-  taxNumber: string;
+  commercialRegister?: string;
+  taxNumber?: string;
   message?: string;
 }
 
