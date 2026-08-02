@@ -1,11 +1,13 @@
 'use client';
 
-import { useTransition } from 'react';
+import { useEffect, useTransition } from 'react';
 
 import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
+import useAuth from '@/features/auth/hooks/useAuth';
+import { useTenantPreferences } from '@/features/client/settings/hooks/useTenantPreferences';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   DropdownMenu,
@@ -16,17 +18,37 @@ import {
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
 import { ChevronDown } from 'lucide-react';
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({
+  persist = false,
+}: {
+  persist?: boolean;
+}) {
   const router = useRouter();
   const [, startTransition] = useTransition();
   const currentLang = useLocale();
+  const { user } = useAuth();
+  const { updatePreferences } = useTenantPreferences();
 
-  function switchTo(locale: string) {
+  useEffect(() => {
+    if (!persist || !user?.language || user.language === currentLang) return;
+    document.cookie = `LANG=${user.language}; path=/; max-age=31536000; SameSite=Lax`;
+    AxiosAPI.defaults.headers['Accept-Language'] = user.language;
+    router.refresh();
+  }, [currentLang, persist, router, user?.language]);
+
+  async function switchTo(locale: string) {
+    if (persist) {
+      try {
+        await updatePreferences({ language: locale });
+      } catch {
+        return;
+      }
+    }
+    AxiosAPI.defaults.headers['Accept-Language'] = locale;
     startTransition(() => {
       document.cookie = `LANG=${locale}; path=/; max-age=31536000; SameSite=Lax`;
       router.refresh();
     });
-    AxiosAPI.defaults.headers['Accept-Language'] = locale;
   }
 
   const currentFlag =

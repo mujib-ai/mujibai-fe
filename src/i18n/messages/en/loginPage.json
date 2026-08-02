@@ -11,6 +11,10 @@
     "passwordRequired": "Password is required",
     "forgotPassword": "Forgot password?",
     "loginButton": "Login",
-    "loading": "Logging in..."
+    "loading": "Logging in...",
+    "twoFactorTitle": "Enter your authentication code",
+    "twoFactorDescription": "Enter the 6-digit code from your authenticator app to continue.",
+    "verifyCode": "Verify code",
+    "backToLogin": "Back to login"
   }
 }

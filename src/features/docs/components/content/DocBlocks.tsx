@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import type { DocBlock, DocRichSection } from '@/features/docs/types';
 import { renderRichText } from '@/features/docs/lib/renderRichText';
+import type { DocBlock, DocRichSection } from '@/features/docs/types';
 
 import { Callout } from './Callout';
 import { CodeBlock } from './CodeBlock';
@@ -49,7 +49,7 @@ function DocBlockGroup({ group }: { group: BlockGroup }): ReactNode {
         <DocList>
           {group.blocks.map((item, i) => (
             <li key={i}>
-              <span className="font-semibold text-foreground">
+              <span className="text-foreground font-semibold">
                 {renderRichText(item.term)}
               </span>{' '}
               — {renderRichText(item.desc)}

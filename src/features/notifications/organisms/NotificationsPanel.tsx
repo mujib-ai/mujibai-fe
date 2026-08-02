@@ -3,6 +3,7 @@
 import { type ReactElement, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { filterNotifications } from '../lib/filterNotifications';
 import { NotifEmptyState } from '../molecules/NotifEmptyState';
@@ -41,7 +42,7 @@ export function NotificationsPanel({
     <div
       role="dialog"
       aria-label={t('panel.ariaLabel')}
-      className="flex max-h-[28rem] flex-col"
+      className="flex max-h-112 flex-col"
     >
       <NotifPanelHeader
         unreadCount={unreadCount}
@@ -79,6 +80,16 @@ export function NotificationsPanel({
           ))
         )}
       </div>
+
+      {notifications.length > 0 && (
+        <Link
+          href="/dashboard/notifications"
+          onClick={onClose}
+          className="text-primary hover:bg-accent border-t px-4 py-2.5 text-center text-sm font-medium"
+        >
+          {t('viewAll')}
+        </Link>
+      )}
     </div>
   );
 }

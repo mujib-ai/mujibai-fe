@@ -1,5 +1,6 @@
 'use client';
 
+import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,9 +10,10 @@ import { Container } from '../atoms/Container';
 import Logo from '../atoms/Logo';
 import { Separator } from '../atoms/ui/separator';
 
-const Footer = ({ theme }: { theme?: string }) => {
+const Footer = () => {
   const { t, isRtl, quickLinks, legalLinks, socialIcons, contactItems } =
     useFooter();
+  const { theme } = useTheme();
 
   return (
     <footer

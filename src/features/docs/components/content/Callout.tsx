@@ -11,7 +11,8 @@ const CALLOUT_CONFIG: Record<
 > = {
   info: {
     icon: Info,
-    className: 'border-primary/30 bg-primary/5 text-foreground [&_svg]:text-primary',
+    className:
+      'border-primary/30 bg-primary/5 text-foreground [&_svg]:text-primary',
   },
   warning: {
     icon: AlertTriangle,

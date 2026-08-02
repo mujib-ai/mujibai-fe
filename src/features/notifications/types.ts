@@ -25,12 +25,18 @@ export interface GetNotificationsQuery {
   pageSize?: number;
 }
 
+export interface NotificationsPagination {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
 export interface PaginatedNotifications {
   items: NotificationPublic[];
-  page: number;
-  pageSize: number;
-  total: number;
-  hasMore: boolean;
+  pagination: NotificationsPagination;
 }
 
 export type NotificationTab = 'all' | 'unread';

@@ -6,7 +6,10 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
-import { AuthService } from '../services/auth.service';
+import {
+  AuthService,
+  isTwoFactorRequiredError,
+} from '../services/auth.service';
 import type { LoginCredentials, ResetPasswordCredentials } from '../types';
 
 /** API error response */
@@ -26,6 +29,7 @@ const getErrorMessage = (error: unknown, defaultMessage: string): string => {
     const axiosError = error as AxiosError<ApiErrorResponse>;
     return axiosError.response?.data?.message || defaultMessage;
   }
+  if (error instanceof Error) return error.message;
   return defaultMessage;
 };
 
@@ -65,6 +69,7 @@ export default function useAuth() {
       toast.success(data.message || 'Logged in successfully.');
     },
     onError: error => {
+      if (isTwoFactorRequiredError(error)) return;
       const errorMessage = getErrorMessage(
         error,
         'Login failed - please try again'
@@ -130,12 +135,7 @@ export default function useAuth() {
   });
 
   const handleLogin = async (credentials: LoginCredentials) => {
-    try {
-      const data = await loginMutation.mutateAsync(credentials);
-      return data;
-    } catch {
-      return null;
-    }
+    return loginMutation.mutateAsync(credentials);
   };
 
   const handleLogout = async () => {

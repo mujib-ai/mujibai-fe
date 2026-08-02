@@ -30,8 +30,8 @@ export default function DashboardHeader({
       </div>
       <div className="flex items-center gap-2">
         <NotificationBell />
-        <LanguageSwitcher />
-        <ThemeSwitcher />
+        <LanguageSwitcher persist />
+        <ThemeSwitcher persist />
         <TenantAvatarMenu />
       </div>
     </div>

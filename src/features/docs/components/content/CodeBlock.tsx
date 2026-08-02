@@ -36,13 +36,13 @@ export function CodeBlock({
   return (
     <div
       className={cn(
-        'my-4 overflow-hidden rounded-lg border bg-muted/40 dark:bg-input/20',
+        'bg-muted/40 dark:bg-input/20 my-4 overflow-hidden rounded-lg border',
         className
       )}
     >
       {(filename || language) && (
-        <div className="flex items-center justify-between border-b bg-muted/60 px-4 py-2 dark:bg-input/30">
-          <span className="font-mono text-xs text-muted-foreground">
+        <div className="bg-muted/60 dark:bg-input/30 flex items-center justify-between border-b px-4 py-2">
+          <span className="text-muted-foreground font-mono text-xs">
             {filename ?? language}
           </span>
         </div>
@@ -53,11 +53,11 @@ export function CodeBlock({
           variant="ghost"
           size="icon-sm"
           onClick={handleCopy}
-          className="absolute top-2 right-2 text-muted-foreground hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground absolute top-2 right-2"
           aria-label="Copy code"
         >
           {copied ? (
-            <Check className="size-4 text-primary" />
+            <Check className="text-primary size-4" />
           ) : (
             <Copy className="size-4" />
           )}

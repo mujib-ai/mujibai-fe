@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -7,18 +9,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { getAllowedRedirectFrom } from '../lib/redirect';
+import { isTwoFactorRequiredError } from '../services/auth.service';
 import useAuth from './useAuth';
-
-const ALLOWED_REDIRECT_PREFIXES = ['/dashboard'];
-
-function getAllowedRedirectFrom(from: string | null): string | null {
-  if (!from || typeof from !== 'string') return null;
-  const path = from.startsWith('/') ? from : `/${from}`;
-  const isAllowed = ALLOWED_REDIRECT_PREFIXES.some(
-    prefix => path === prefix || path.startsWith(`${prefix}/`)
-  );
-  return isAllowed ? path : null;
-}
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -33,6 +26,8 @@ export function useLoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = getAllowedRedirectFrom(searchParams.get('from'));
+  const [requiresTwoFactor, setRequiresTwoFactor] = useState(false);
+  const [twoFactorCode, setTwoFactorCode] = useState('');
 
   const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -49,12 +44,36 @@ export function useLoginForm() {
     reset,
   } = form;
 
-  const onSubmit = async (values: LoginFormData) => {
-    const response = await handleLogin(values);
-    if (response) {
+  const completeLogin = async (values: LoginFormData, code?: string) => {
+    try {
+      const response = await handleLogin({ ...values, code });
       reset();
-      router.push(from ?? '/');
+      const destination = from ?? '/';
+      if (!response.data.tenant.isTwoFactorEnabled) {
+        router.push(`/security-check?from=${encodeURIComponent(destination)}`);
+        return;
+      }
+      router.push(destination);
+    } catch (error) {
+      if (!code && isTwoFactorRequiredError(error)) {
+        setRequiresTwoFactor(true);
+        setTwoFactorCode('');
+        return;
+      }
+      if (code) setTwoFactorCode('');
     }
+  };
+
+  const onSubmit = (values: LoginFormData) => completeLogin(values);
+
+  const onTwoFactorSubmit = () => {
+    if (twoFactorCode.length !== 6) return;
+    return completeLogin(form.getValues(), twoFactorCode);
+  };
+
+  const returnToCredentials = () => {
+    setRequiresTwoFactor(false);
+    setTwoFactorCode('');
   };
 
   const isLoading = isSubmitting || loginLoading;
@@ -73,6 +92,10 @@ export function useLoginForm() {
     forgotPassword: t('forgotPassword'),
     loginButton: t('loginButton'),
     loading: t('loading'),
+    twoFactorTitle: t('twoFactorTitle'),
+    twoFactorDescription: t('twoFactorDescription'),
+    verifyCode: t('verifyCode'),
+    backToLogin: t('backToLogin'),
   });
 
   return {
@@ -82,5 +105,10 @@ export function useLoginForm() {
     isLoading,
     getFieldProps,
     getTranslations,
+    requiresTwoFactor,
+    twoFactorCode,
+    setTwoFactorCode,
+    onTwoFactorSubmit,
+    returnToCredentials,
   };
 }

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 
 import { Container } from '@/shared/components/atoms/Container';
 import { Reveal } from '@/shared/components/atoms/Reveal';
@@ -16,9 +17,32 @@ import {
 import { Sparkles } from 'lucide-react';
 
 import { AnimatedTabPanel } from './interactiveExperience/AnimatedTabPanel';
-import { SpeechToTextPanel } from './interactiveExperience/SpeechToTextPanel';
-import { TextToSpeechPanel } from './interactiveExperience/TextToSpeechPanel';
-import { VoiceAgentPanel } from './interactiveExperience/VoiceAgentPanel';
+
+const panelFallback = (
+  <div className="bg-muted h-75 w-full animate-pulse rounded-2xl" />
+);
+
+const VoiceAgentPanel = dynamic(
+  () =>
+    import('./interactiveExperience/VoiceAgentPanel').then(
+      m => m.VoiceAgentPanel
+    ),
+  { loading: () => panelFallback }
+);
+const TextToSpeechPanel = dynamic(
+  () =>
+    import('./interactiveExperience/TextToSpeechPanel').then(
+      m => m.TextToSpeechPanel
+    ),
+  { loading: () => panelFallback }
+);
+const SpeechToTextPanel = dynamic(
+  () =>
+    import('./interactiveExperience/SpeechToTextPanel').then(
+      m => m.SpeechToTextPanel
+    ),
+  { loading: () => panelFallback }
+);
 
 type TabKey = 'voiceAgent' | 'textToSpeech' | 'speechToText';
 

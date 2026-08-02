@@ -109,7 +109,7 @@ export default function TablePagination({
                 isDisabled={page <= 1}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pl-2.5'
+                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:ps-2.5'
                 )}
                 onPress={() => goTo(page - 1)}
               >
@@ -154,7 +154,7 @@ export default function TablePagination({
                 isDisabled={page >= totalPages}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pr-2.5'
+                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pe-2.5'
                 )}
                 onPress={() => goTo(page + 1)}
               >

@@ -1,5 +1,6 @@
 'use client';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { Container } from '@/shared/components/atoms/Container';
@@ -38,15 +39,15 @@ export default function WhyChooseUsSection() {
   ];
 
   return (
-    <section
-      className="bg-background-dark relative w-full"
-      style={{
-        backgroundImage: "url('/landingPage/img_.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
+    <section className="bg-background-dark relative w-full overflow-hidden">
+      <Image
+        src="/landingPage/img_.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-center"
+        loading="lazy"
+      />
       <div className="absolute top-0 left-0 z-10 h-full w-full bg-[#FFFFFFF5] py-20 dark:bg-black/30" />
 
       <Container className="relative z-50 py-[16px] md:py-[32px]">

@@ -5,7 +5,6 @@ import Script from 'next/script';
 
 import { Providers } from '@/providers/Providers';
 import { PwaManager } from '@/shared/components/atoms/PwaManager';
-import { ThemeProvider } from '@/shared/components/atoms/ThemeProvider';
 import { VisitTracker } from '@/shared/components/atoms/VisitTracker';
 import { Toaster } from '@/shared/components/atoms/ui/sonner';
 import { SITE_NAME, createUrl } from '@/shared/seo';
@@ -98,18 +97,11 @@ export default async function RootLayout({
         }}
       >
         <Providers locale={locale} messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Toaster position="top-center" />
-            <VisitTracker />
-            <SpeedInsights />
-            <PwaManager />
-          </ThemeProvider>
+          {children}
+          <Toaster position="top-center" />
+          <VisitTracker />
+          <SpeedInsights />
+          <PwaManager />
         </Providers>
       </body>
     </html>

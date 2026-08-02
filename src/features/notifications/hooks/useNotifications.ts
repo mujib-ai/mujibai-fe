@@ -26,7 +26,7 @@ export function useNotifications() {
     isError: isListError,
   } = useQuery({
     queryKey: LIST_QUERY_KEY,
-    queryFn: () => NotificationService.list({ page: 1, pageSize: 20 }),
+    queryFn: () => NotificationService.list(),
   });
 
   const { data: unreadCount = 0 } = useQuery({
@@ -152,7 +152,10 @@ export function useNotifications() {
           old && {
             ...old,
             items: old.items.filter(n => n.id !== notificationId),
-            total: Math.max(0, old.total - 1),
+            pagination: {
+              ...old.pagination,
+              total: Math.max(0, old.pagination.total - 1),
+            },
           }
       );
       if (removed && !removed.readAt && context.previousUnreadCount) {
@@ -192,7 +195,10 @@ export function useNotifications() {
           items: exists
             ? old.items.map(n => (n.id === notification.id ? notification : n))
             : [notification, ...old.items],
-          total: exists ? old.total : old.total + 1,
+          pagination: {
+            ...old.pagination,
+            total: exists ? old.pagination.total : old.pagination.total + 1,
+          },
         };
       });
     },
@@ -216,7 +222,10 @@ export function useNotifications() {
           patchList(old => ({
             ...old,
             items: old.items.filter(n => n.id !== event.data.id),
-            total: Math.max(0, old.total - 1),
+            pagination: {
+              ...old.pagination,
+              total: Math.max(0, old.pagination.total - 1),
+            },
           }));
           break;
         case 'notification.read':

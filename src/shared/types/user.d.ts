@@ -1,5 +1,3 @@
-export type UserRole = 'ADMIN' | 'CLIENT';
-
 export interface User {
   id: string;
   email: string;
@@ -12,13 +10,15 @@ export interface User {
   address?: string;
   description?: string;
   website?: string;
-  role: UserRole;
   isActive: boolean;
   createdAt: Date;
   updatedAt: Date;
   browserNotifications?: boolean;
   emailNotifications?: boolean;
   smsNotifications?: boolean;
+  theme?: 'light' | 'dark' | 'system';
+  language?: string;
+  isTwoFactorEnabled?: boolean;
 }
 
 export interface UserProfile {
@@ -35,7 +35,6 @@ export interface CreateUserDto {
   firstName: string;
   lastName: string;
   password: string;
-  role?: 'admin' | 'user' | 'client';
 }
 
 export interface UpdateUserDto {
@@ -43,13 +42,11 @@ export interface UpdateUserDto {
   lastName?: string;
   avatar?: string;
   logoUrl?: string;
-  role?: 'admin' | 'user' | 'client';
   isActive?: boolean;
 }
 
 export interface UserFilters {
   search?: string;
-  role?: 'admin' | 'user' | 'client';
   isActive?: boolean;
   page?: number;
   limit?: number;

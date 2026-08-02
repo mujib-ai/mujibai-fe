@@ -26,7 +26,9 @@ export function NotificationListItem({
   const isUnread = !notification.readAt;
 
   const date = new Date(notification.createdAt);
-  const time = Number.isNaN(date.getTime()) ? '' : format.relativeTime(date);
+  const time = Number.isNaN(date.getTime())
+    ? ''
+    : format.relativeTime(date, new Date());
 
   const content = (
     <div

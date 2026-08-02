@@ -11,7 +11,7 @@ export async function DocsHeader() {
   const t = await getTranslations('docs.common');
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/60 lg:px-8">
+    <header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-40 flex h-16 items-center gap-3 border-b px-4 backdrop-blur lg:px-8">
       <DocsMobileNav />
 
       <Logo />
@@ -19,7 +19,7 @@ export async function DocsHeader() {
       <nav className="hidden items-center gap-4 lg:flex">
         <Link
           href="/docs"
-          className="text-sm font-medium text-foreground transition-colors hover:text-primary"
+          className="text-foreground hover:text-primary text-sm font-medium transition-colors"
         >
           {t('docsLink')}
         </Link>

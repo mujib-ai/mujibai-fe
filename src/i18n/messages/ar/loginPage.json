@@ -11,6 +11,10 @@
     "passwordRequired": "كلمة المرور مطلوبة",
     "forgotPassword": "هل نسيت كلمة المرور؟",
     "loginButton": "تسجيل الدخول",
-    "loading": "جاري تسجيل الدخول..."
+    "loading": "جاري تسجيل الدخول...",
+    "twoFactorTitle": "أدخل رمز المصادقة",
+    "twoFactorDescription": "أدخل الرمز المكون من 6 أرقام من تطبيق المصادقة للمتابعة.",
+    "verifyCode": "تحقق من الرمز",
+    "backToLogin": "العودة إلى تسجيل الدخول"
   }
 }

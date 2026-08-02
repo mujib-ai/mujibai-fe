@@ -9,7 +9,7 @@ export function DocParagraph({
   return (
     <p
       className={cn(
-        'my-4 leading-relaxed text-muted-foreground [&:not(:first-child)]:mt-4',
+        'text-muted-foreground my-4 leading-relaxed [&:not(:first-child)]:mt-4',
         className
       )}
       {...props}
@@ -21,7 +21,7 @@ export function DocList({ className, ...props }: React.ComponentProps<'ul'>) {
   return (
     <ul
       className={cn(
-        'my-4 ml-6 list-disc space-y-2 text-muted-foreground marker:text-primary',
+        'text-muted-foreground marker:text-primary my-4 ms-6 list-disc space-y-2',
         className
       )}
       {...props}
@@ -36,7 +36,7 @@ export function DocOrderedList({
   return (
     <ol
       className={cn(
-        'my-4 ml-6 list-decimal space-y-2 text-muted-foreground marker:text-primary',
+        'text-muted-foreground marker:text-primary my-4 ms-6 list-decimal space-y-2',
         className
       )}
       {...props}
@@ -51,7 +51,7 @@ export function InlineCode({
   return (
     <code
       className={cn(
-        'rounded-md border bg-muted px-1.5 py-0.5 font-mono text-[0.85em] text-foreground dark:bg-input/30',
+        'bg-muted text-foreground dark:bg-input/30 rounded-md border px-1.5 py-0.5 font-mono text-[0.85em]',
         className
       )}
       {...props}

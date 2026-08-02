@@ -34,11 +34,7 @@ async function getUserFromServer() {
       headers: authHeaders,
     });
 
-    const client = await AxiosAPI.get(`/clients/${res.data?.data.id}`, {
-      headers: authHeaders,
-    });
-
-    return client.data?.data;
+    return res.data?.data;
   } catch (error) {
     console.log('error', error);
     return null;

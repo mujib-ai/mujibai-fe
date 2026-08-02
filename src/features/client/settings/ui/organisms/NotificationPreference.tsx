@@ -68,12 +68,12 @@ export function NotificationPreference() {
     <div>
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">
+          <CardTitle className="text-xl font-semibold">
             {t('emailsNotifications.title')}
           </CardTitle>
           <CardDescription>{t('emailsNotifications.subTitle')}</CardDescription>
         </CardHeader>
-        <CardContent className="rounded-xl bg-white py-6 dark:bg-[#00143473]">
+        <CardContent className="bg-surface rounded-2xl p-6">
           <NotificationController
             title={t('emailsNotifications.dailyPerformanceReportsTitle')}
             description={t(
@@ -109,12 +109,12 @@ export function NotificationPreference() {
 
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">
+          <CardTitle className="text-xl font-semibold">
             {t('inAppNotifications.title')}
           </CardTitle>
           <CardDescription>{t('inAppNotifications.subTitle')}</CardDescription>
         </CardHeader>
-        <CardContent className="rounded-xl bg-white py-6 dark:bg-[#00143473]">
+        <CardContent className="bg-surface rounded-2xl p-6">
           <NotificationController
             title={t('inAppNotifications.newMessageTitle')}
             description={t('inAppNotifications.newMessageSubTitle')}
@@ -142,12 +142,12 @@ export function NotificationPreference() {
       <div className="grid grid-cols-1 items-start justify-start gap-4 md:grid-cols-1 lg:grid-cols-2">
         <Card className="border-none bg-transparent shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-xl font-semibold">
               {t('usageBilling.title')}
             </CardTitle>
             <CardDescription>{t('usageBilling.subTitle')}</CardDescription>
           </CardHeader>
-          <CardContent className="rounded-xl bg-white py-6 dark:bg-[#00143473]">
+          <CardContent className="bg-surface rounded-2xl p-6">
             <NotificationController
               title={t('usageBilling.usageExceedsTitle')}
               description={t('usageBilling.usageExceedsSubTitle')}
@@ -173,12 +173,12 @@ export function NotificationPreference() {
         </Card>
         <Card className="border-none bg-transparent shadow-none">
           <CardHeader>
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-xl font-semibold">
               {t('newInvoice.title')}
             </CardTitle>
             <CardDescription>{t('newInvoice.subTitle')}</CardDescription>
           </CardHeader>
-          <CardContent className="rounded-xl bg-white py-6 dark:bg-[#00143473]">
+          <CardContent className="bg-surface rounded-2xl p-6">
             <div className="flex flex-col gap-4">
               <Label className="text-base font-medium text-white">
                 {t('newInvoice.chooseYourPreference')}

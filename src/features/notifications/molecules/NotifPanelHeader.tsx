@@ -39,7 +39,7 @@ export function NotifPanelHeader({
           {t('markAllRead')}
         </Button>
         <Button
-          variant="ghost"
+          variant="destructive"
           size="icon-sm"
           onClick={onClose}
           aria-label={t('close')}

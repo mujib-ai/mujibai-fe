@@ -7,10 +7,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/shared/components/atoms/ui/tooltip';
+import { EmptyState } from '@/shared/components/molecules/EmptyState';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { Table } from '@heroui/react';
-import { Eye } from 'lucide-react';
+import { Eye, Ticket } from 'lucide-react';
 
 import { TICKET_STATUS_BADGE_VARIANT } from '../../constants';
 import type { TicketItem } from '../../types';
@@ -61,8 +62,8 @@ export default function TicketsTable({
         ) : isLoading ? (
           <TicketsTableSkeleton t={t} locale={locale} titleKey={titleKey} />
         ) : tickets.length === 0 ? (
-          <div className="text-muted-foreground flex h-40 items-center justify-center text-sm">
-            {t('empty')}
+          <div className="flex min-h-40 items-center justify-center">
+            <EmptyState icon={Ticket} title={t('empty')} />
           </div>
         ) : isMobile ? (
           <TicketsCardList items={tickets} t={t} />

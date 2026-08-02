@@ -21,10 +21,11 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div className="flex flex-col gap-1">
-      <Label className="text-sm font-medium">
+      <Label htmlFor={name} className="text-sm font-medium">
         {label} {required && <span className="text-cyan-500">*</span>}
       </Label>
       <Input
+        id={name}
         placeholder={placeholder}
         className={`h-11 rounded-lg border-none bg-[#06B6D40F] placeholder:text-gray-500 ${
           error ? 'border border-red-500' : ''

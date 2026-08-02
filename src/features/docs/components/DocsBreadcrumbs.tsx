@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -12,7 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/shared/components/atoms/ui/breadcrumb';
-import { useTranslations } from 'next-intl';
 
 export function DocsBreadcrumbs() {
   const pathname = usePathname();
@@ -42,7 +42,9 @@ export function DocsBreadcrumbs() {
           <>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>{t(`nav.items.${page.key}.title`)}</BreadcrumbPage>
+              <BreadcrumbPage>
+                {t(`nav.items.${page.key}.title`)}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </>
         )}

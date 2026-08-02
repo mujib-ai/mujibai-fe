@@ -8,6 +8,30 @@ import type {
   ResetPasswordCredentials,
 } from '../types';
 
+export class AuthRequestError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly details?: Record<string, unknown>
+  ) {
+    super(message);
+    this.name = 'AuthRequestError';
+  }
+}
+
+export function isTwoFactorRequiredError(error: unknown): boolean {
+  if (!(error instanceof AuthRequestError)) return false;
+  if (
+    error.details?.requiresTwoFactor === true ||
+    error.details?.isTwoFactorRequired === true
+  ) {
+    return true;
+  }
+  return /(?:two[- ]factor|2fa|totp).*(?:required|missing)|(?:required|missing).*(?:two[- ]factor|2fa|totp)/i.test(
+    error.message
+  );
+}
+
 function getAppOrigin(): string {
   if (typeof window !== 'undefined') return window.location.origin;
   return process.env.NEXT_PUBLIC_APP_URL ?? '';
@@ -38,7 +62,13 @@ export class AuthService {
       credentials: 'include',
     });
     const data = await res.json();
-    if (!res.ok) throw new Error(data?.message ?? 'Login failed');
+    if (!res.ok) {
+      throw new AuthRequestError(
+        data?.message ?? 'Login failed',
+        res.status,
+        typeof data === 'object' && data ? data : undefined
+      );
+    }
     return data;
   }
 

@@ -2,6 +2,8 @@
 
 import * as React from 'react';
 
+import { useTranslations } from 'next-intl';
+
 import Logo from '@/shared/components/atoms/Logo';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
@@ -11,7 +13,6 @@ import {
   SheetTrigger,
 } from '@/shared/components/atoms/ui/sheet';
 import { Menu } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 
 import { DocsNav } from './DocsNav';
 

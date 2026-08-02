@@ -20,7 +20,9 @@
   },
   "notifications": {
     "title": "الإشعارات",
+    "subTitle": "تابع كل ما يحدث في حسابك أولاً بأول.",
     "error": "تعذر تحميل الإشعارات.",
+    "viewAll": "عرض جميع الإشعارات",
     "panel": {
       "title": "الإشعارات",
       "unreadSummary": "{count, plural, =0 {لا توجد إشعارات غير مقروءة} one {إشعار واحد غير مقروء} two {إشعاران غير مقروءين} few {# إشعارات غير مقروءة} many {# إشعارًا غير مقروء} other {# إشعار غير مقروء}}",
@@ -40,6 +42,38 @@
       "critical": "حرج",
       "warning": "تحذير"
     },
+    "row": {
+      "actions": "إجراءات الإشعار",
+      "delete": "حذف الإشعار"
+    },
+    "groups": {
+      "today": "اليوم",
+      "yesterday": "أمس"
+    },
+    "filters": {
+      "eventType": "نوع الحدث",
+      "allEventTypes": "كل أنواع الأحداث",
+      "severity": "الأهمية",
+      "allSeverities": "كل المستويات",
+      "severityOption": {
+        "info": "معلومة",
+        "success": "نجاح",
+        "warning": "تحذير",
+        "critical": "حرج"
+      },
+      "readStatus": "الحالة",
+      "allStatuses": "الكل",
+      "unread": "غير مقروء",
+      "read": "مقروء",
+      "dateFrom": "من تاريخ",
+      "dateTo": "إلى تاريخ"
+    },
+    "pagination": {
+      "of": "عرض",
+      "results": "نتيجة",
+      "previous": "السابق",
+      "next": "التالي"
+    },
     "detail": {
       "title": "الإشعار",
       "subTitle": "التفاصيل الكاملة لهذا الإشعار.",
@@ -51,6 +85,16 @@
       "notFoundSubtitle": "قد يكون منتهي الصلاحية أو لم يعد متاحًا.",
       "unread": "غير مقروء"
     }
+  },
+  "routeError": {
+    "title": "حدث خطأ ما",
+    "description": "تعذر تحميل هذه الصفحة. يرجى المحاولة مرة أخرى.",
+    "retry": "إعادة المحاولة"
+  },
+  "notFound": {
+    "title": "الصفحة غير موجودة",
+    "description": "الصفحة التي تبحث عنها غير موجودة أو تم نقلها.",
+    "backHome": "العودة إلى الرئيسية"
   },
   "dashboardOverview": {
     "welcome": "مرحبا،",

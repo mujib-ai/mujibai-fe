@@ -14,7 +14,10 @@ export interface AuthResponse {
 export interface LoginCredentials {
   email: string;
   password: string;
+  code?: string;
 }
+
+export type TenantTheme = 'light' | 'dark' | 'system';
 
 export interface Tenant {
   id: string;
@@ -35,6 +38,9 @@ export interface Tenant {
   subscriptionId: string;
   createdAt: string;
   updatedAt: string;
+  theme: TenantTheme;
+  language: string;
+  isTwoFactorEnabled: boolean;
 }
 
 export interface LoginResponse {

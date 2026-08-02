@@ -2,6 +2,8 @@
 
 import { useLocale } from 'next-intl';
 
+import { TwoFactorSettingsCard } from '@/features/security';
+
 import type { TabItem } from '../../types';
 import { AccountSettings } from './AccountSettings';
 import { IntegrationSettings } from './IntegrationSettings';
@@ -22,7 +24,12 @@ export function SettingsOrganism({
   const locale = useLocale();
 
   const tabContent = {
-    accountSettings: <AccountSettings />,
+    accountSettings: (
+      <>
+        <AccountSettings />
+        <TwoFactorSettingsCard />
+      </>
+    ),
     integrationSettings: <IntegrationSettings />,
     notificationPreference: <NotificationPreference />,
   };

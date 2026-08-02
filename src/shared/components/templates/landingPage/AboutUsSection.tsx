@@ -12,12 +12,15 @@ export default function AboutUsSection() {
   const isRtl = locale === 'ar';
 
   return (
-    <section
-      className="relative z-50 w-full bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/landingPage/about-us-bg-image.jpg')",
-      }}
-    >
+    <section className="relative z-50 w-full overflow-hidden">
+      <Image
+        src="/landingPage/about-us-bg-image.webp"
+        alt=""
+        fill
+        sizes="100vw"
+        className="-z-20 object-cover object-center"
+        loading="lazy"
+      />
       <div className="absolute top-0 left-0 -z-10 h-full w-full bg-[#FFFFFFED] dark:bg-black/50" />
 
       <Container className="py-4.25 md:py-8.5">

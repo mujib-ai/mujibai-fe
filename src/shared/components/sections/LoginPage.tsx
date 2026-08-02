@@ -1,6 +1,7 @@
 'use client';
 
 import { useLoginForm } from '@/features/auth';
+import { TwoFactorCodeInput } from '@/features/security/molecules/TwoFactorCodeInput';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { EmailField } from '@/shared/components/molecules/EmailField';
 import {
@@ -11,8 +12,18 @@ import { LoginPasswordField } from '@/shared/components/molecules/LoginPasswordF
 import { Spinner } from '@heroui/react';
 
 export default function LoginPage() {
-  const { handleSubmit, onSubmit, isLoading, getFieldProps, getTranslations } =
-    useLoginForm();
+  const {
+    handleSubmit,
+    onSubmit,
+    isLoading,
+    getFieldProps,
+    getTranslations,
+    requiresTwoFactor,
+    twoFactorCode,
+    setTwoFactorCode,
+    onTwoFactorSubmit,
+    returnToCredentials,
+  } = useLoginForm();
 
   const {
     title,
@@ -23,6 +34,10 @@ export default function LoginPage() {
     forgotPassword,
     loginButton,
     loading,
+    twoFactorTitle,
+    twoFactorDescription,
+    verifyCode,
+    backToLogin,
   } = getTranslations();
 
   return (
@@ -33,37 +48,74 @@ export default function LoginPage() {
         <LoginHeader />
 
         <div className="rounded-2xl border-t border-b border-white bg-[#FFFFFF80] p-10 sm:w-full md:w-[80%] lg:w-[60%] dark:bg-[#06B6D40F]">
-          <h1 className="text-2xl font-semibold">{title}</h1>
+          <h1 className="text-2xl font-semibold">
+            {requiresTwoFactor ? twoFactorTitle : title}
+          </h1>
+          {requiresTwoFactor ? (
+            <p className="text-muted-foreground mt-2 text-sm">
+              {twoFactorDescription}
+            </p>
+          ) : null}
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={
+              requiresTwoFactor
+                ? event => {
+                    event.preventDefault();
+                    void onTwoFactorSubmit();
+                  }
+                : handleSubmit(onSubmit)
+            }
             className="flex flex-col gap-4 py-5"
           >
-            <EmailField
-              id="email"
-              label={email}
-              placeholder={emailPlaceholder}
-              disabled={isLoading}
-              {...getFieldProps('email')}
-            />
+            {requiresTwoFactor ? (
+              <div className="flex flex-col items-center gap-4">
+                <TwoFactorCodeInput
+                  value={twoFactorCode}
+                  onChange={setTwoFactorCode}
+                  disabled={isLoading}
+                  autoFocus
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  onClick={returnToCredentials}
+                  disabled={isLoading}
+                >
+                  {backToLogin}
+                </Button>
+              </div>
+            ) : (
+              <>
+                <EmailField
+                  id="email"
+                  label={email}
+                  placeholder={emailPlaceholder}
+                  disabled={isLoading}
+                  {...getFieldProps('email')}
+                />
 
-            <LoginPasswordField
-              id="password"
-              label={password}
-              placeholder={passwordPlaceholder}
-              disabled={isLoading}
-              {...getFieldProps('password')}
-            />
+                <LoginPasswordField
+                  id="password"
+                  label={password}
+                  placeholder={passwordPlaceholder}
+                  disabled={isLoading}
+                  {...getFieldProps('password')}
+                />
 
-            <ForgotPasswordLink
-              href="/forgot-password"
-              label={forgotPassword}
-              disabled={isLoading}
-            />
+                <ForgotPasswordLink
+                  href="/forgot-password"
+                  label={forgotPassword}
+                  disabled={isLoading}
+                />
+              </>
+            )}
 
             <Button
               type="submit"
-              disabled={isLoading}
+              disabled={
+                isLoading || (requiresTwoFactor && twoFactorCode.length !== 6)
+              }
               className="text-md mt-2 w-full rounded-full py-5 text-white capitalize transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
@@ -71,6 +123,8 @@ export default function LoginPage() {
                   <Spinner size="sm" color="current" />
                   {loading}
                 </span>
+              ) : requiresTwoFactor ? (
+                verifyCode
               ) : (
                 loginButton
               )}

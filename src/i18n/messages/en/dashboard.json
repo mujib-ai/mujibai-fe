@@ -20,7 +20,9 @@
   },
   "notifications": {
     "title": "Notifications",
+    "subTitle": "Stay up to date with everything happening on your account.",
     "error": "Failed to load notifications.",
+    "viewAll": "View all notifications",
     "panel": {
       "title": "Notifications",
       "unreadSummary": "{count, plural, =0 {No unread} one {# unread} other {# unread}}",
@@ -40,6 +42,38 @@
       "critical": "Critical",
       "warning": "Warning"
     },
+    "row": {
+      "actions": "Notification actions",
+      "delete": "Delete notification"
+    },
+    "groups": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "filters": {
+      "eventType": "Event type",
+      "allEventTypes": "All event types",
+      "severity": "Severity",
+      "allSeverities": "All severities",
+      "severityOption": {
+        "info": "Info",
+        "success": "Success",
+        "warning": "Warning",
+        "critical": "Critical"
+      },
+      "readStatus": "Status",
+      "allStatuses": "All",
+      "unread": "Unread",
+      "read": "Read",
+      "dateFrom": "From date",
+      "dateTo": "To date"
+    },
+    "pagination": {
+      "of": "Showing",
+      "results": "results",
+      "previous": "Previous",
+      "next": "Next"
+    },
     "detail": {
       "title": "Notification",
       "subTitle": "Full details for this notification.",
@@ -51,6 +85,16 @@
       "notFoundSubtitle": "It may have expired or is no longer available.",
       "unread": "Unread"
     }
+  },
+  "routeError": {
+    "title": "Something went wrong",
+    "description": "We couldn't load this page. Please try again.",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist or has been moved.",
+    "backHome": "Back to home"
   },
   "dashboardOverview": {
     "welcome": "Welcome,",

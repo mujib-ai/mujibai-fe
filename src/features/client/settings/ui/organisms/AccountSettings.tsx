@@ -25,7 +25,7 @@ export function AccountSettings() {
         <CardHeader>
           <CardTitle className="text-xl font-semibold">{t('title')}</CardTitle>
         </CardHeader>
-        <CardContent className="rounded-2xl bg-[#FFFFFFBF] p-6 dark:bg-[#00143473]">
+        <CardContent className="bg-surface rounded-2xl p-6">
           <div className="mb-6 flex flex-col gap-2">
             <h1 className="text-lg font-semibold">{t('profileInformation')}</h1>
             <p className="text-sm text-gray-400">{t('subTitle')}</p>

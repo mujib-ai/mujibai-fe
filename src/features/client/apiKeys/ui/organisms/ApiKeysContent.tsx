@@ -1,5 +1,8 @@
 'use client';
 
+import { EmptyState } from '@/shared/components/molecules/EmptyState';
+import { KeyRound } from 'lucide-react';
+
 import type { ApiKeyPublic } from '../../types';
 import ApiKeysHeader from '../molecules/ApiKeysHeader';
 import ApiKeysTable from './ApiKeysTable';
@@ -73,8 +76,8 @@ export default function ApiKeysContent({
       ) : isLoading ? (
         <ApiKeysTableSkeleton locale={locale} headers={headers} />
       ) : apiKeys.length === 0 ? (
-        <div className="text-muted-foreground flex h-64 items-center justify-center text-sm">
-          {translations.empty}
+        <div className="flex min-h-64 items-center justify-center">
+          <EmptyState icon={KeyRound} title={translations.empty} />
         </div>
       ) : (
         <ApiKeysTable

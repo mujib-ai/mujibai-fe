@@ -3,15 +3,19 @@
 import React from 'react';
 
 import { useLocale, useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 
 import { useApiKeys } from '../../hooks';
 import type { ApiKeyPublic, ApiKeyScope } from '../../types';
 import ApiKeysContent from '../organisms/ApiKeysContent';
-import CreateApiKeyDialog from '../organisms/CreateApiKeyDialog';
-import EditApiKeyDialog from '../organisms/EditApiKeyDialog';
 import RevealApiKeySecretDialog from '../organisms/RevealApiKeySecretDialog';
 import RevokeApiKeyDialog from '../organisms/RevokeApiKeyDialog';
 import ApiKeysPageTemplate from '../templates/ApiKeysPageTemplate';
+
+const CreateApiKeyDialog = dynamic(
+  () => import('../organisms/CreateApiKeyDialog')
+);
+const EditApiKeyDialog = dynamic(() => import('../organisms/EditApiKeyDialog'));
 
 export default function ApiKeysPage() {
   const t = useTranslations('APIKeys');

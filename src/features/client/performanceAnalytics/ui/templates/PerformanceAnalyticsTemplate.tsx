@@ -1,5 +1,7 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import type {
   AnalyticsOverview,
   AnalyticsTrendPoint,
@@ -7,9 +9,23 @@ import type {
 } from '@/features/client/analytics/types';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 
-import DailyAICallsAnalytics from '../organisms/DailyAICallsAnalytics';
-import ScenarioPerformanceAnalytics from '../organisms/ScenarioPerformanceAnalytics';
 import StatisticsCards from '../organisms/StatisticsCards';
+
+const chartGridFallback = (
+  <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <div className="bg-muted h-75 animate-pulse rounded-2xl lg:col-span-2" />
+    <div className="bg-muted h-75 animate-pulse rounded-2xl" />
+  </div>
+);
+
+const DailyAICallsAnalytics = dynamic(
+  () => import('../organisms/DailyAICallsAnalytics'),
+  { loading: () => chartGridFallback }
+);
+const ScenarioPerformanceAnalytics = dynamic(
+  () => import('../organisms/ScenarioPerformanceAnalytics'),
+  { loading: () => chartGridFallback }
+);
 
 export default function PerformanceAnalyticsTemplate({
   t,

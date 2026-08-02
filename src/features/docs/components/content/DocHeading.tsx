@@ -18,7 +18,7 @@ export function DocHeading({ level, children, className }: DocHeadingProps) {
     <Tag
       id={id}
       className={cn(
-        'group relative scroll-mt-24 font-semibold tracking-tight text-foreground',
+        'group text-foreground relative scroll-mt-24 font-semibold tracking-tight',
         level === 2 && 'mt-10 mb-4 border-b pb-2 text-2xl first:mt-0',
         level === 3 && 'mt-8 mb-3 text-lg',
         className
@@ -29,7 +29,7 @@ export function DocHeading({ level, children, className }: DocHeadingProps) {
         className="absolute -left-5 inline-flex h-full items-center opacity-0 transition-opacity group-hover:opacity-100"
         aria-label={`Link to ${children}`}
       >
-        <LinkIcon className="size-4 text-muted-foreground" />
+        <LinkIcon className="text-muted-foreground size-4" />
       </a>
       {children}
     </Tag>

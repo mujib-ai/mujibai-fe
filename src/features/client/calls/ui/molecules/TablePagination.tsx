@@ -49,7 +49,7 @@ export default function TablePagination({
               aria-label="Go to previous page"
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'default' }),
-                'text-foreground gap-1 px-2.5 sm:pl-2.5'
+                'text-foreground gap-1 px-2.5 sm:ps-2.5'
               )}
             >
               <Pagination.PreviousIcon>
@@ -111,7 +111,7 @@ export default function TablePagination({
               aria-label="Go to next page"
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'default' }),
-                'text-foreground gap-1 px-2.5 sm:pr-2.5'
+                'text-foreground gap-1 px-2.5 sm:pe-2.5'
               )}
             >
               <span className="hidden sm:block">{nextText}</span>

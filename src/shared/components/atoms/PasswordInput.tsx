@@ -2,8 +2,6 @@
 
 import { forwardRef, useState } from 'react';
 
-import { useLocale } from 'next-intl';
-
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Eye, EyeOff } from 'lucide-react';
@@ -19,8 +17,6 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     ref
   ) => {
     const [showPassword, setShowPassword] = useState(false);
-    const locale = useLocale();
-    const isRTL = locale === 'ar';
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === ' ') e.preventDefault();
@@ -36,9 +32,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           placeholder={placeholder}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          className={`mt-3 w-full ${className} ${
-            isRTL ? 'pr-3 pl-12 text-right' : 'pr-12 pl-3 text-left'
-          } focus:border-primary focus:ring-primary/30 border border-transparent bg-[#06B6D40F] transition-all duration-200 placeholder:text-[#000000BF] focus:ring-2 dark:bg-[#3B82F633] dark:placeholder:text-[#FFFFFFBF]`}
+          className={`mt-3 w-full ${className} focus:border-primary focus:ring-primary/30 border border-transparent bg-[#06B6D40F] ps-3 pe-12 text-start transition-all duration-200 placeholder:text-[#000000BF] focus:ring-2 dark:bg-[#3B82F633] dark:placeholder:text-[#FFFFFFBF]`}
           {...props}
         />
 
@@ -47,9 +41,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           variant="ghost"
           size="icon"
           onClick={() => setShowPassword(prev => !prev)}
-          className={`hover:text-primary absolute hover:bg-transparent dark:hover:bg-transparent ${
-            isRTL ? 'left-2' : 'right-2'
-          } text-primary top-[50%] h-9 w-9 -translate-y-[30%]`}
+          className="hover:text-primary text-primary absolute end-2 top-[50%] h-9 w-9 -translate-y-[30%] hover:bg-transparent dark:hover:bg-transparent"
           aria-label={showPassword ? 'Hide password' : 'Show password'}
         >
           {showPassword ? (

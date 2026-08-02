@@ -165,7 +165,7 @@ function DialogContent({
               type="button"
               data-slot="dialog-close"
               onClick={() => onOpenChange(false)}
-              className="ring-offset-background focus:ring-ring absolute top-4 right-4 cursor-pointer rounded-sm bg-red-500 p-1 text-white transition-opacity hover:bg-red-600 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+              className="ring-offset-background focus:ring-ring bg-destructive hover:bg-destructive/90 absolute top-4 right-4 cursor-pointer rounded-full p-2 text-white transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
             >
               <XIcon />
               <span className="sr-only">Close</span>

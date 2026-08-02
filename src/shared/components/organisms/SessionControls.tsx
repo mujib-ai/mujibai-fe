@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from '@/shared/components/atoms/ui/button';
-import { CloudLightning, CloudOff } from 'react-feather';
+import { CloudLightning, CloudOff } from 'lucide-react';
 
 interface SessionStoppedProps {
   startSession: () => void;
