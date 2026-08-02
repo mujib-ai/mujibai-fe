@@ -1,20 +1,47 @@
 import * as z from 'zod';
 
 export const enrollFormSchema = z.object({
-  name: z.string().min(1, 'Full name is required'),
-  email: z.string().email('Invalid email').min(1, 'Email is required'),
-  phone: z.string().min(1, 'Phone is required'),
-  company: z.string().min(1, 'Company name is required'),
-  website: z.string().url('Invalid website URL').min(1, 'Website is required'),
-  address: z.string().min(1, 'Address is required'),
-  industry: z.string().min(1, 'Industry is required'),
-  commercialRegister: z.string().min(1, 'Commercial register is required'),
-  taxId: z.string().min(1, 'Tax ID is required'),
+  fullName: z
+    .string()
+    .min(2, 'Full name must be at least 2 characters')
+    .max(255, 'Full name must be at most 255 characters'),
+  email: z.string().email('Invalid email'),
+  phone: z
+    .string()
+    .min(2, 'Phone must be at least 2 characters')
+    .max(50, 'Phone must be at most 50 characters'),
+  companyName: z
+    .string()
+    .min(2, 'Company name must be at least 2 characters')
+    .max(255, 'Company name must be at most 255 characters'),
+  companyWebsite: z
+    .string()
+    .min(2, 'Company website must be at least 2 characters')
+    .max(500, 'Company website must be at most 500 characters'),
+  address: z
+    .string()
+    .min(2, 'Address must be at least 2 characters')
+    .max(500, 'Address must be at most 500 characters'),
+  businessField: z
+    .string()
+    .min(2, 'Business field must be at least 2 characters')
+    .max(255, 'Business field must be at most 255 characters'),
+  commercialRegister: z
+    .string()
+    .min(2, 'Commercial register must be at least 2 characters')
+    .max(255, 'Commercial register must be at most 255 characters'),
+  taxNumber: z
+    .string()
+    .min(2, 'Tax number must be at least 2 characters')
+    .max(255, 'Tax number must be at most 255 characters'),
   message: z
     .string()
-    .min(10, 'Message must be at least 10 characters')
-    .max(500, 'Message must be less than 500 characters')
-    .min(1, 'Message is required'),
+    .max(2000, 'Message must be at most 2000 characters')
+    .optional()
+    .refine(
+      val => !val || val.length >= 2,
+      'Message must be at least 2 characters'
+    ),
 });
 
 export type EnrollmentFormData = z.infer<typeof enrollFormSchema>;

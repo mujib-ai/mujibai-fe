@@ -17,15 +17,15 @@ export function useEnrollmentForm() {
   const form = useForm<EnrollmentFormData>({
     resolver: zodResolver(enrollFormSchema),
     defaultValues: {
-      name: '',
+      fullName: '',
       email: '',
       phone: '',
-      company: '',
-      website: '',
+      companyName: '',
+      companyWebsite: 'https://',
       address: '',
-      industry: '',
+      businessField: '',
       commercialRegister: '',
-      taxId: '',
+      taxNumber: '',
       message: '',
     },
   });
@@ -38,12 +38,8 @@ export function useEnrollmentForm() {
 
   const onSubmit = async (data: EnrollmentFormData) => {
     const res = await handleEnroll({
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      company: data.company,
-      address: data.address,
-      planId: (data as EnrollmentFormData & { planId?: string }).planId ?? '',
+      ...data,
+      message: data.message || undefined,
     });
 
     if (res) {

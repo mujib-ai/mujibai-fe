@@ -24,8 +24,8 @@ export default function EnrollmentForm() {
           label={t('name')}
           placeholder={t('namePlaceholder')}
           required
-          name="name"
-          {...getFieldProps('name')}
+          name="fullName"
+          {...getFieldProps('fullName')}
         />
 
         <FormField
@@ -48,16 +48,16 @@ export default function EnrollmentForm() {
           label={t('company')}
           placeholder={t('companyNamePlaceholder')}
           required
-          name="company"
-          {...getFieldProps('company')}
+          name="companyName"
+          {...getFieldProps('companyName')}
         />
 
         <FormField
           label={t('website')}
           placeholder={t('companyWebsitePlaceholder')}
           required
-          name="website"
-          {...getFieldProps('website')}
+          name="companyWebsite"
+          {...getFieldProps('companyWebsite')}
         />
 
         <FormField
@@ -72,8 +72,8 @@ export default function EnrollmentForm() {
           label={t('industry')}
           placeholder={t('industryPlaceholder')}
           required
-          name="industry"
-          {...getFieldProps('industry')}
+          name="businessField"
+          {...getFieldProps('businessField')}
         />
 
         <FormField
@@ -88,14 +88,13 @@ export default function EnrollmentForm() {
           label={t('taxId')}
           placeholder={t('taxIdPlaceholder')}
           required
-          name="taxId"
-          {...getFieldProps('taxId')}
+          name="taxNumber"
+          {...getFieldProps('taxNumber')}
         />
 
         <FormFieldTextarea
           label={t('message')}
           placeholder={t('messagePlaceholder')}
-          required
           name="message"
           {...getFieldProps('message')}
         />

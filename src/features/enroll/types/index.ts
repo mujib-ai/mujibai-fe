@@ -1,10 +1,14 @@
 export interface EnrollmentFormValues {
-  name: string;
+  fullName: string;
   email: string;
-  phone?: string;
-  company?: string;
-  address?: string;
-  planId: string;
+  phone: string;
+  companyName: string;
+  companyWebsite: string;
+  address: string;
+  businessField: string;
+  commercialRegister: string;
+  taxNumber: string;
+  message?: string;
 }
 
 export interface EnrollResponse {

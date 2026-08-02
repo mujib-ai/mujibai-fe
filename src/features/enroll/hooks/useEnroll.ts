@@ -10,6 +10,9 @@ import type { ApiErrorResponse, EnrollmentFormValues } from '../types';
 const getErrorMessage = (error: unknown, defaultMessage: string): string => {
   if (error instanceof AxiosError) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
+    if (axiosError.response?.status === 429) {
+      return 'Too many requests - please wait a moment and try again';
+    }
     return axiosError.response?.data?.message || defaultMessage;
   }
   return defaultMessage;
