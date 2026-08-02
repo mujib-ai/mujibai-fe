@@ -606,6 +606,29 @@
         "never": "Never"
       },
       "saveFailed": "Failed to update notification preferences."
+    },
+    "notificationSettings": {
+      "title": "Notification Settings",
+      "subTitle": "Choose how you want to be notified for each event type",
+      "channels": "Channels",
+      "frequency": "Frequency",
+      "threshold": "Threshold (%)",
+      "mandatory": "This notification is mandatory and cannot be fully disabled.",
+      "channel": {
+        "in_app": "In-app",
+        "email": "Email",
+        "slack": "Slack",
+        "whatsapp": "WhatsApp"
+      },
+      "frequencyOption": {
+        "immediate": "Immediate",
+        "daily": "Daily",
+        "weekly": "Weekly",
+        "monthly": "Monthly",
+        "disabled": "Disabled"
+      },
+      "loadFailed": "Failed to load notification settings.",
+      "saveFailed": "Failed to update notification settings."
     }
   }
 }

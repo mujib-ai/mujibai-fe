@@ -11,7 +11,7 @@ export class TenantSettingsService {
     const formData = new FormData();
     formData.append('logo', file);
 
-    const { data } = await AxiosAPI.post<TenantLogoResponse>(
+    const { data } = await AxiosAPI.put<TenantLogoResponse>(
       '/tenants/me/logo',
       formData
     );

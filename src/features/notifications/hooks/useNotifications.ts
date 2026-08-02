@@ -1,11 +1,18 @@
 'use client';
 
+import { useCallback } from 'react';
+
 import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { NotificationService } from '../services/notifications.api';
-import type { PaginatedNotifications } from '../types';
+import type {
+  NotificationPublic,
+  NotificationSocketEvent,
+  PaginatedNotifications,
+} from '../types';
+import { useNotificationsSocket } from './useNotificationsSocket';
 
 const LIST_QUERY_KEY = ['notifications', 'list'];
 const UNREAD_COUNT_QUERY_KEY = ['notifications', 'unread-count'];
@@ -165,6 +172,93 @@ export function useNotifications() {
       queryClient.invalidateQueries({ queryKey: UNREAD_COUNT_QUERY_KEY });
     },
   });
+
+  const patchList = useCallback(
+    (updater: (old: PaginatedNotifications) => PaginatedNotifications) => {
+      queryClient.setQueryData<PaginatedNotifications | undefined>(
+        LIST_QUERY_KEY,
+        old => (old ? updater(old) : old)
+      );
+    },
+    [queryClient]
+  );
+
+  const upsertNotification = useCallback(
+    (notification: NotificationPublic) => {
+      patchList(old => {
+        const exists = old.items.some(n => n.id === notification.id);
+        return {
+          ...old,
+          items: exists
+            ? old.items.map(n => (n.id === notification.id ? notification : n))
+            : [notification, ...old.items],
+          total: exists ? old.total : old.total + 1,
+        };
+      });
+    },
+    [patchList]
+  );
+
+  const handleSocketEvent = useCallback(
+    (event: NotificationSocketEvent) => {
+      switch (event.type) {
+        case 'connection.ready':
+          queryClient.setQueryData(
+            UNREAD_COUNT_QUERY_KEY,
+            event.data.unreadCount
+          );
+          break;
+        case 'notification.created':
+        case 'notification.updated':
+          upsertNotification(event.data);
+          break;
+        case 'notification.deleted':
+          patchList(old => ({
+            ...old,
+            items: old.items.filter(n => n.id !== event.data.id),
+            total: Math.max(0, old.total - 1),
+          }));
+          break;
+        case 'notification.read':
+          patchList(old => ({
+            ...old,
+            items: old.items.map(n =>
+              n.id === event.data.id && !n.readAt
+                ? { ...n, readAt: new Date().toISOString() }
+                : n
+            ),
+          }));
+          queryClient.setQueryData(
+            UNREAD_COUNT_QUERY_KEY,
+            event.data.unreadCount
+          );
+          break;
+        case 'notifications.read_all':
+          patchList(old => ({
+            ...old,
+            items: old.items.map(n =>
+              n.readAt ? n : { ...n, readAt: new Date().toISOString() }
+            ),
+          }));
+          queryClient.setQueryData(
+            UNREAD_COUNT_QUERY_KEY,
+            event.data.unreadCount
+          );
+          break;
+        case 'notifications.unread_count':
+          queryClient.setQueryData(
+            UNREAD_COUNT_QUERY_KEY,
+            event.data.unreadCount
+          );
+          break;
+        case 'error':
+          break;
+      }
+    },
+    [queryClient, patchList, upsertNotification]
+  );
+
+  useNotificationsSocket({ enabled: true, onEvent: handleSocketEvent });
 
   return {
     notifications: list?.items ?? [],
