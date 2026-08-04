@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { TablePagination } from '@/features/tickets';
+import { ErrorState } from '@/shared/components/molecules/ErrorState';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { Button, Table } from '@heroui/react';
 
@@ -73,11 +74,7 @@ export default function KnowledgeSourcesTable({
   }
 
   if (error) {
-    return (
-      <div className="border-destructive/30 bg-destructive/5 rounded-lg border p-8 text-center">
-        <p className="text-destructive text-sm">{error}</p>
-      </div>
-    );
+    return <ErrorState title={error} />;
   }
 
   if (sources.length === 0) {
@@ -134,17 +131,17 @@ export default function KnowledgeSourcesTable({
               <Table.Header>
                 <Table.Column
                   isRowHeader
-                  className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap"
+                  className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap"
                 >
                   {t('sources.columns.source')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.type')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.status')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.progress')}
                 </Table.Column>
                 <Table.Column className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
@@ -153,13 +150,13 @@ export default function KnowledgeSourcesTable({
                 <Table.Column className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.chunks')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.uploadedAt')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-left align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.updatedAt')}
                 </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-right align-middle font-medium whitespace-nowrap">
+                <Table.Column className="text-foreground h-10 px-2 text-end align-middle font-medium whitespace-nowrap">
                   {t('sources.columns.actions')}
                 </Table.Column>
               </Table.Header>
@@ -206,7 +203,7 @@ export default function KnowledgeSourcesTable({
                     <Table.Cell className="p-2 align-middle">
                       {formatDate(source.updatedAt, locale)}
                     </Table.Cell>
-                    <Table.Cell className="p-2 text-right align-middle">
+                    <Table.Cell className="p-2 text-end align-middle">
                       <SourceActionsMenu source={source} {...rowActions} />
                     </Table.Cell>
                   </Table.Row>

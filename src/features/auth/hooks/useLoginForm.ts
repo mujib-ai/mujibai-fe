@@ -41,12 +41,14 @@ export function useLoginForm() {
   const completeLogin = async (values: LoginFormData) => {
     try {
       const response = await handleLogin(values);
-      reset();
       const destination = from ?? '/';
-      if (!response.data.tenant.isTwoFactorEnabled) {
-        router.push(`/security-check?from=${encodeURIComponent(destination)}`);
+      if (response.data.tenant?.isTwoFactorEnabled === true) {
+        setPendingTwoFactorLogin(values, destination);
+        reset();
+        router.push('/verify-2fa');
         return;
       }
+      reset();
       router.push(destination);
     } catch (error) {
       if (isTwoFactorRequiredError(error)) {

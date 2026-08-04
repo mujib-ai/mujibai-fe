@@ -18,7 +18,7 @@ export default function ClientDashboardOverviewPage({
     <div className="flex h-full w-full flex-col gap-4">
       <DashboardHeader title={title} subtitle={t('subTitle')} />
 
-      <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
+      <div className="bg-surface z-50 h-full w-full rounded-2xl border border-white/40 p-4 shadow-sm backdrop-blur-sm sm:p-5 dark:border-white/10">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div className="col-span-2 md:col-span-2">
             <RecentCallsTable title={t('newCalls')} />

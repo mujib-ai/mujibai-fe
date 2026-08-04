@@ -46,8 +46,8 @@ export interface Tenant {
 export interface LoginResponse {
   message: string;
   data: {
-    accessToken: string;
-    tenant: Tenant;
+    accessToken?: string;
+    tenant?: Tenant;
   };
 }
 

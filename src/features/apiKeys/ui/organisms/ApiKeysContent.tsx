@@ -1,6 +1,7 @@
 'use client';
 
 import { EmptyState } from '@/shared/components/molecules/EmptyState';
+import { ErrorState } from '@/shared/components/molecules/ErrorState';
 import { KeyRound } from 'lucide-react';
 
 import type { ApiKeyPublic } from '../../types';
@@ -67,12 +68,7 @@ export default function ApiKeysContent({
         createNewSecretKeyText={translations.createNewSecretKey}
       />
       {error ? (
-        <div className="flex h-64 items-center justify-center">
-          <p className="text-destructive text-sm">
-            {translations.errorPrefix}
-            {error}
-          </p>
-        </div>
+        <ErrorState title={translations.errorPrefix} description={error} />
       ) : isLoading ? (
         <ApiKeysTableSkeleton locale={locale} headers={headers} />
       ) : apiKeys.length === 0 ? (

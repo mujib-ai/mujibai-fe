@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 
-import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
+import { PageLayout } from '@/shared/components/templates/PageLayout';
 
 interface KnowledgeBasePageTemplateProps {
   title: string;
@@ -16,11 +16,12 @@ export default function KnowledgeBasePageTemplate({
   children,
 }: KnowledgeBasePageTemplateProps) {
   return (
-    <div className="flex h-full w-full flex-col gap-4">
-      <DashboardHeader title={title} subtitle={subtitle} />
-      <div className="z-50 flex h-full w-full flex-col gap-6 rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
-        {children}
-      </div>
-    </div>
+    <PageLayout
+      title={title}
+      subtitle={subtitle}
+      contentClassName="flex flex-col gap-6"
+    >
+      {children}
+    </PageLayout>
   );
 }

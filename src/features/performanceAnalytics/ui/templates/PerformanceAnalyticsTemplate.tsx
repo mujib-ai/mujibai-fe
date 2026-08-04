@@ -7,7 +7,7 @@ import type {
   AnalyticsTrendPoint,
   TopKeywordItem,
 } from '@/features/analytics/types';
-import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
+import { PageLayout } from '@/shared/components/templates/PageLayout';
 
 import StatisticsCards from '../organisms/StatisticsCards';
 
@@ -41,18 +41,15 @@ export default function PerformanceAnalyticsTemplate({
   isLoading: boolean;
 }) {
   return (
-    <div className="flex h-full w-full flex-col gap-4">
-      <DashboardHeader title={t('title')} subtitle={t('subTitle')} />
-      <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
-        <StatisticsCards t={t} overview={overview} isLoading={isLoading} />
-        <DailyAICallsAnalytics
-          t={t}
-          points={callsTrendPoints}
-          overview={overview}
-          topKeywords={topKeywords}
-        />
-        <ScenarioPerformanceAnalytics t={t} />
-      </div>
-    </div>
+    <PageLayout title={t('title')} subtitle={t('subTitle')}>
+      <StatisticsCards t={t} overview={overview} isLoading={isLoading} />
+      <DailyAICallsAnalytics
+        t={t}
+        points={callsTrendPoints}
+        overview={overview}
+        topKeywords={topKeywords}
+      />
+      <ScenarioPerformanceAnalytics t={t} />
+    </PageLayout>
   );
 }

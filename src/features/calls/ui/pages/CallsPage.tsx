@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
+import { PageLayout } from '@/shared/components/templates/PageLayout';
 
 import { useCalls } from '../../hooks';
 import CallsTable from '../organisms/CallsTable';
@@ -25,34 +25,31 @@ export default function CallsPage() {
   } = useCalls();
 
   return (
-    <div className="flex h-full w-full flex-col gap-4">
-      <DashboardHeader title={t('callsTitle')} subtitle={t('callsSubTitle')} />
-      <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
-        <section className="flex flex-col">
-          {(status !== undefined || pagination.total > 0 || isLoading) && (
-            <Filtering
-              status={status}
-              onStatusChange={setStatus}
-              statusPlaceholder={t('status')}
-              allStatusesText={t('filterAllStatuses')}
-              t={t}
-            />
-          )}
-          <CallsTable
+    <PageLayout title={t('callsTitle')} subtitle={t('callsSubTitle')}>
+      <section className="flex flex-col">
+        {(status !== undefined || pagination.total > 0 || isLoading) && (
+          <Filtering
+            status={status}
+            onStatusChange={setStatus}
+            statusPlaceholder={t('status')}
+            allStatusesText={t('filterAllStatuses')}
             t={t}
-            locale={locale}
-            titleKey="callsTitle"
-            calls={calls}
-            pagination={pagination}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            error={error}
-            onPageChange={setPage}
-            onLimitChange={setLimit}
-            onRetry={refetch}
           />
-        </section>
-      </div>
-    </div>
+        )}
+        <CallsTable
+          t={t}
+          locale={locale}
+          titleKey="callsTitle"
+          calls={calls}
+          pagination={pagination}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          error={error}
+          onPageChange={setPage}
+          onLimitChange={setLimit}
+          onRetry={refetch}
+        />
+      </section>
+    </PageLayout>
   );
 }

@@ -55,6 +55,21 @@ export async function POST(request: NextRequest) {
   const responseData = await backendRes.json().catch(() => ({}));
   const status = backendRes.status;
 
+  const submittedCode =
+    typeof body === 'object' && body && 'code' in body
+      ? String((body as Record<string, unknown>).code ?? '')
+      : '';
+  const isTwoFactorChallenge =
+    status >= 200 &&
+    status < 300 &&
+    responseData?.data?.tenant?.isTwoFactorEnabled === true &&
+    !/^\d{6}$/.test(submittedCode);
+
+  if (isTwoFactorChallenge && responseData?.data) {
+    delete responseData.data.accessToken;
+    delete responseData.data.refreshToken;
+  }
+
   const nextRes = NextResponse.json(responseData, { status });
 
   const getSetCookie = (headers: Headers): string[] => {
@@ -74,7 +89,7 @@ export async function POST(request: NextRequest) {
   const setCookieValues = getSetCookie(backendRes.headers);
   const isSuccess = status >= 200 && status < 300;
 
-  if (isSuccess) {
+  if (isSuccess && !isTwoFactorChallenge) {
     const data = responseData?.data;
     if (data?.accessToken) {
       nextRes.cookies.set('access_token', data.accessToken, {

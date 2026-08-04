@@ -72,7 +72,7 @@ export function NotificationDetail({
         title={t('detail.title')}
         subtitle={t('detail.subTitle')}
       />
-      <div className="z-50 h-full w-full rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
+      <div className="bg-surface z-50 h-full w-full rounded-2xl border border-white/40 p-4 shadow-sm backdrop-blur-sm sm:p-5 dark:border-white/10">
         <Link
           href="/dashboard"
           className="text-primary mb-4 inline-flex items-center gap-1 text-sm"

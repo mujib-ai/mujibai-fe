@@ -90,7 +90,7 @@ export default function CallsTable({
             <Table.ScrollContainer className="overflow-x-auto">
               <Table.Content
                 aria-label={t(titleKey)}
-                className="w-full min-w-180 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
+                className="bg-surface w-full min-w-180 rounded-xl border"
               >
                 <Table.Header>
                   <Table.Column

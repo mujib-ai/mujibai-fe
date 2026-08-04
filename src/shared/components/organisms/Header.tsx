@@ -25,7 +25,7 @@ export default function Header({ hasToken = false }: { hasToken?: boolean }) {
   return (
     <div
       className={cn(
-        'sticky top-0 z-50 w-full transition-colors duration-300',
+        'sticky top-0 z-[90] w-full transition-colors duration-300',
         isScrolled &&
           'border-border/60 bg-background/70 border-b shadow-sm backdrop-blur-md'
       )}

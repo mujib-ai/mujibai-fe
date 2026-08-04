@@ -62,7 +62,7 @@ export default function SourceDetailsPage({
         {t('actions.backToKnowledgeBase')}
       </Link>
 
-      <div className="rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
+      <div className="bg-surface rounded-2xl border border-white/40 p-4 shadow-sm backdrop-blur-sm sm:p-5 dark:border-white/10">
         {isLoading ? (
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center gap-2">

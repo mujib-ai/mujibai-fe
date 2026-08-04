@@ -22,8 +22,8 @@ export function EmptyState({
   children,
 }: EmptyStateProps): ReactElement {
   return (
-    <div className="flex flex-col items-center gap-2 px-4 py-10 text-center">
-      <div className="text-muted-foreground bg-muted mb-1 flex size-12 items-center justify-center rounded-full">
+    <div className="bg-muted/20 flex min-h-48 flex-col items-center justify-center gap-2 rounded-xl border border-dashed px-5 py-10 text-center">
+      <div className="text-primary bg-primary/10 mb-1 flex size-12 items-center justify-center rounded-full">
         <Icon className="size-5" />
       </div>
       <p className="text-sm font-semibold">{title}</p>

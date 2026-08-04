@@ -64,7 +64,9 @@ export default function useAuth() {
 
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
-    onSuccess: data => {
+    onSuccess: (data, credentials) => {
+      if (data.data.tenant?.isTwoFactorEnabled === true && !credentials.code)
+        return;
       queryClient.invalidateQueries({ queryKey: ['auth'] });
       toast.success(data.message || 'Logged in successfully.');
     },

@@ -12,9 +12,10 @@
     "forgotPassword": "Forgot password?",
     "loginButton": "Login",
     "loading": "Logging in...",
-    "twoFactorTitle": "Enter your authentication code",
-    "twoFactorDescription": "Enter the 6-digit code from your authenticator app to continue.",
-    "verifyCode": "Verify code",
-    "backToLogin": "Back to login"
+    "twoFactorTitle": "Additional verification required",
+    "twoFactorDescription": "Your account is protected with two-factor authentication. Enter the 6-digit code from your authenticator app to finish signing in.",
+    "twoFactorCode": "Authentication code",
+    "verifyCode": "Verify and sign in",
+    "backToLogin": "Sign in to a different account"
   }
 }

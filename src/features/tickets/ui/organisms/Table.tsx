@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from '@/shared/components/atoms/ui/tooltip';
 import { EmptyState } from '@/shared/components/molecules/EmptyState';
+import { ErrorState } from '@/shared/components/molecules/ErrorState';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
 import { Table } from '@heroui/react';
@@ -53,12 +54,7 @@ export default function TicketsTable({
     <Card className="w-full border-0 bg-transparent shadow-none">
       <CardContent>
         {error ? (
-          <div className="flex h-40 items-center justify-center">
-            <p className="text-destructive text-sm">
-              {t('errorPrefix')}
-              {error}
-            </p>
-          </div>
+          <ErrorState title={t('errorPrefix')} description={error} />
         ) : isLoading ? (
           <TicketsTableSkeleton t={t} locale={locale} titleKey={titleKey} />
         ) : tickets.length === 0 ? (
@@ -72,7 +68,7 @@ export default function TicketsTable({
             <Table.ScrollContainer className="overflow-x-auto">
               <Table.Content
                 aria-label={t(titleKey)}
-                className="w-full min-w-180 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
+                className="bg-surface w-full min-w-180 rounded-xl border"
               >
                 <Table.Header>
                   <Table.Column

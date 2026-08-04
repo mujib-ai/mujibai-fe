@@ -41,11 +41,7 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
       icon: 'secret-key',
       href: '/dashboard/api-keys',
     },
-    {
-      title: t('billing'),
-      icon: 'receipt',
-      href: '/dashboard/billing',
-    },
+
     { title: t('settings'), icon: 'settings', href: '/dashboard/settings' },
     { title: t('docs'), icon: 'docs', href: '/docs' },
   ];

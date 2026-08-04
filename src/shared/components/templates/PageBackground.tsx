@@ -17,7 +17,7 @@ export function PageBackground({
   return (
     <main
       className={cn(
-        'relative flex min-h-screen w-full flex-col items-center overflow-x-hidden',
+        'relative flex min-h-screen w-full flex-col items-center overflow-x-clip',
         className
       )}
     >

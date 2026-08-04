@@ -7,17 +7,12 @@
     "performance-analytics": "تحليل الأداء",
     "ai-outbound": "مكالمات AI الصادرة",
     "api-keys": "مفاتيح API",
-    "billing": "الفوترة",
     "settings": "الإعدادات",
     "docs": "التوثيق",
     "myAccount": "حسابي",
     "logout": "تسجيل الخروج"
   },
-  "billingPage": {
-    "title": "الفوترة",
-    "subTitle": "إدارة اشتراكك وطريقة الدفع وفواتيرك.",
-    "comingSoon": "تفاصيل الفوترة قريبًا."
-  },
+
   "notifications": {
     "title": "الإشعارات",
     "subTitle": "تابع كل ما يحدث في حسابك أولاً بأول.",

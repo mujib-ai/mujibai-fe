@@ -8,6 +8,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import CallsPagination from '@/features/calls/ui/molecules/CallsPagination';
 import Reveal from '@/shared/components/atoms/Reveal';
 import { Button } from '@/shared/components/atoms/ui/button';
+import { ErrorState } from '@/shared/components/molecules/ErrorState';
+import { LoadingState } from '@/shared/components/molecules/LoadingState';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
 import { gsap, useGSAP } from '@/shared/lib/gsap';
@@ -83,7 +85,7 @@ export function NotificationsListPage(): ReactElement {
       <div ref={headerRef} className="flex h-full w-full flex-col gap-4">
         <DashboardHeader title={t('title')} subtitle={t('subTitle')} />
 
-        <div className="z-10 flex w-full flex-1 flex-col gap-4 rounded-2xl bg-[#FFFFFFBF] p-4 shadow-sm dark:bg-[#001434A6]">
+        <div className="bg-surface relative z-10 flex w-full flex-1 flex-col gap-4 rounded-2xl border border-white/40 p-4 shadow-sm backdrop-blur-sm sm:p-5 dark:border-white/10">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <NotificationsPageTabs
               active={activeTab}
@@ -102,18 +104,9 @@ export function NotificationsListPage(): ReactElement {
           </div>
 
           {isError ? (
-            <p className="text-destructive px-4 py-8 text-center text-sm">
-              {t('error')}
-            </p>
+            <ErrorState title={t('error')} />
           ) : isLoading ? (
-            <div className="space-y-2">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-muted h-20 animate-pulse rounded-2xl"
-                />
-              ))}
-            </div>
+            <LoadingState label={t('title')} rows={5} />
           ) : notifications.length === 0 ? (
             <NotifEmptyState />
           ) : (
