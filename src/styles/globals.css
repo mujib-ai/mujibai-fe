@@ -127,6 +127,20 @@ body {
   --surface: #00143473;
 }
 
+/* Global safety net: collapse any CSS-driven motion (width/opacity transitions,
+   press states, etc.) to near-instant when the user prefers reduced motion.
+   GSAP-driven motion is separately gated per-animation via useReducedMotion(). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .thin-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--primary-color) transparent;
@@ -151,5 +165,59 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/**
+ * Dialog enter/exit motion, kept in plain CSS (rather than GSAP) because the
+ * underlying react-aria Modal owns its own exit-before-unmount contract via
+ * `data-entering`/`data-exiting` + animationend detection. Durations/eases
+ * mirror the GSAP tokens in `src/shared/lib/motion/tokens.ts` so the dialog
+ * feels like part of the same system. See PageTransition/Sheet/Dropdown for
+ * the JS-driven equivalents.
+ */
+@keyframes dialog-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes dialog-backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes dialog-panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+}
+@keyframes dialog-panel-out {
+  to {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+}
+
+[data-slot='dialog-portal'][data-entering] {
+  animation: dialog-backdrop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+[data-slot='dialog-portal'][data-exiting] {
+  animation: dialog-backdrop-out 0.18s cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+[data-slot='dialog-overlay'][data-entering] {
+  animation: dialog-panel-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+[data-slot='dialog-overlay'][data-exiting] {
+  animation: dialog-panel-out 0.18s cubic-bezier(0.55, 0, 1, 0.45) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='dialog-portal'][data-entering],
+  [data-slot='dialog-portal'][data-exiting],
+  [data-slot='dialog-overlay'][data-entering],
+  [data-slot='dialog-overlay'][data-exiting] {
+    animation-duration: 0.001s;
+    transform: none !important;
   }
 }

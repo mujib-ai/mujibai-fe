@@ -3,24 +3,20 @@
 import type { ReactNode } from 'react';
 import { useRef } from 'react';
 
-import { gsap, useGSAP } from '@/shared/lib/gsap';
+import { useGSAP } from '@/shared/lib/gsap';
+import { fadeUp } from '@/shared/lib/motion/presets';
+import { useReducedMotion } from '@/shared/lib/motion/reducedMotion';
 
 export function AnimatedTabPanel({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
 
   useGSAP(
     () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-      }
-
-      gsap.fromTo(
-        ref.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' }
-      );
+      if (!ref.current) return;
+      fadeUp(ref.current, { reduced, y: 16, duration: 0.45 });
     },
-    { scope: ref }
+    { scope: ref, dependencies: [reduced] }
   );
 
   return <div ref={ref}>{children}</div>;

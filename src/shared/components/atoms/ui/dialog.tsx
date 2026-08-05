@@ -145,11 +145,11 @@ function DialogContent({
       isOpen={open}
       onOpenChange={onOpenChange}
       data-slot="dialog-portal"
-      className="data-entering:animate-in data-entering:fade-in-0 data-exiting:animate-out data-exiting:fade-out-0 fixed inset-0 z-100 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-100 flex items-center justify-center bg-black/50"
     >
       <Modal.Container
         data-slot="dialog-overlay"
-        className="data-entering:animate-in data-entering:fade-in-0 data-entering:zoom-in-95 data-exiting:animate-out data-exiting:fade-out-0 data-exiting:zoom-out-95 w-full max-w-[calc(100%-2rem)] duration-200 sm:max-w-lg"
+        className="w-full max-w-[calc(100%-2rem)] sm:max-w-lg"
       >
         <Modal.Dialog
           data-slot="dialog-content"

@@ -12,13 +12,15 @@ import {
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { Badge } from '@/shared/components/atoms/ui/badge';
 import { Button } from '@/shared/components/atoms/ui/button';
-import { AnimatePresence, motion } from 'framer-motion';
+import { popoverEnter, popoverExit } from '@/shared/lib/motion';
+import { useGsapPresence } from '@/shared/lib/motion/usePresence';
 
 export default function NotificationBell() {
   const t = useTranslations('notifications');
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
+  const { ref: panelRef, rendered: panelRendered } =
+    useGsapPresence<HTMLDivElement>(open, popoverEnter, popoverExit);
 
   const {
     notifications,
@@ -56,29 +58,23 @@ export default function NotificationBell() {
         </div>
       </Button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            ref={panelRef}
-            initial={{ opacity: 0, scale: 0.95, y: -8 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -8 }}
-            transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="bg-background text-foreground absolute end-0 top-full z-50 mt-2 w-80 origin-top-right overflow-hidden rounded-2xl border shadow-lg"
-          >
-            <NotificationsPanel
-              notifications={notifications}
-              isLoading={isLoading}
-              isError={isError}
-              unreadCount={unreadCount}
-              markAllReadLoading={markAllReadLoading}
-              onClose={() => setOpen(false)}
-              onMarkRead={markRead}
-              onMarkAllRead={markAllRead}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {panelRendered && (
+        <div
+          ref={panelRef}
+          className="bg-background text-foreground absolute end-0 top-full z-50 mt-2 w-80 origin-top-right overflow-hidden rounded-2xl border shadow-lg"
+        >
+          <NotificationsPanel
+            notifications={notifications}
+            isLoading={isLoading}
+            isError={isError}
+            unreadCount={unreadCount}
+            markAllReadLoading={markAllReadLoading}
+            onClose={() => setOpen(false)}
+            onMarkRead={markRead}
+            onMarkAllRead={markAllRead}
+          />
+        </div>
+      )}
     </div>
   );
 }

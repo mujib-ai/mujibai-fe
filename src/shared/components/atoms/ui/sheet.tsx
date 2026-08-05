@@ -2,12 +2,43 @@
 
 import * as React from 'react';
 
+import { fadeIn, fadeOut, sheetEnter, sheetExit } from '@/shared/lib/motion';
+import { useGsapPresence } from '@/shared/lib/motion/usePresence';
 import { cn } from '@/shared/lib/utils';
 import * as SheetPrimitive from '@radix-ui/react-dialog';
 import { XIcon } from 'lucide-react';
 
-function Sheet({ ...props }: React.ComponentProps<typeof SheetPrimitive.Root>) {
-  return <SheetPrimitive.Root data-slot="sheet" {...props} />;
+const SheetOpenContext = React.createContext(false);
+
+function Sheet({
+  open,
+  defaultOpen,
+  onOpenChange,
+  ...props
+}: React.ComponentProps<typeof SheetPrimitive.Root>) {
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
+  const isControlled = open !== undefined;
+  const currentOpen = isControlled ? open : internalOpen;
+
+  const handleOpenChange = React.useCallback(
+    (next: boolean) => {
+      if (!isControlled) setInternalOpen(next);
+      onOpenChange?.(next);
+    },
+    [isControlled, onOpenChange]
+  );
+
+  return (
+    <SheetOpenContext value={currentOpen}>
+      <SheetPrimitive.Root
+        data-slot="sheet"
+        open={open}
+        defaultOpen={defaultOpen}
+        onOpenChange={handleOpenChange}
+        {...props}
+      />
+    </SheetOpenContext>
+  );
 }
 
 function SheetTrigger({
@@ -30,15 +61,23 @@ function SheetPortal({
 
 function SheetOverlay({
   className,
+  open,
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Overlay>) {
+}: React.ComponentProps<typeof SheetPrimitive.Overlay> & { open: boolean }) {
+  const { ref, rendered } = useGsapPresence<HTMLDivElement>(
+    open,
+    (el, ctx) => fadeIn(el, { ...ctx, duration: 0.2 }),
+    (el, ctx) => fadeOut(el, ctx)
+  );
+
+  if (!rendered) return null;
+
   return (
     <SheetPrimitive.Overlay
+      ref={ref}
+      forceMount
       data-slot="sheet-overlay"
-      className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-100 bg-black/50',
-        className
-      )}
+      className={cn('fixed inset-0 z-100 bg-black/50', className)}
       {...props}
     />
   );
@@ -52,21 +91,30 @@ function SheetContent({
 }: React.ComponentProps<typeof SheetPrimitive.Content> & {
   side?: 'top' | 'right' | 'bottom' | 'left';
 }) {
+  const open = React.useContext(SheetOpenContext);
+  const { ref, rendered } = useGsapPresence<HTMLDivElement>(
+    open,
+    sheetEnter(side),
+    sheetExit(side)
+  );
+
+  if (!rendered) return null;
+
   return (
     <SheetPortal>
-      <SheetOverlay />
+      <SheetOverlay open={open} />
       <SheetPrimitive.Content
+        ref={ref}
+        forceMount
         data-slot="sheet-content"
         className={cn(
-          'bg-popover data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-100 flex flex-col gap-4 shadow-none transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500',
+          'bg-popover fixed z-100 flex flex-col gap-4 shadow-none',
           side === 'right' &&
-            'data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
+            'inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm',
           side === 'left' &&
-            'data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
-          side === 'top' &&
-            'data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b',
-          side === 'bottom' &&
-            'data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t',
+            'inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm',
+          side === 'top' && 'inset-x-0 top-0 h-auto border-b',
+          side === 'bottom' && 'inset-x-0 bottom-0 h-auto border-t',
           className
         )}
         {...props}

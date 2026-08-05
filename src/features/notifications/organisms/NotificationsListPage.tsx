@@ -12,7 +12,9 @@ import { ErrorState } from '@/shared/components/molecules/ErrorState';
 import { LoadingState } from '@/shared/components/molecules/LoadingState';
 import DashboardHeader from '@/shared/components/organisms/dashboard/DashboardHeader';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
-import { gsap, useGSAP } from '@/shared/lib/gsap';
+import { useGSAP } from '@/shared/lib/gsap';
+import { fadeUp } from '@/shared/lib/motion';
+import { useReducedMotion } from '@/shared/lib/motion/reducedMotion';
 import { useQuery } from '@tanstack/react-query';
 
 import { useNotifications } from '../hooks/useNotifications';
@@ -28,6 +30,7 @@ export function NotificationsListPage(): ReactElement {
   const t = useTranslations('notifications');
   const locale = useLocale();
   const headerRef = useRef<HTMLDivElement>(null);
+  const reduced = useReducedMotion();
 
   const {
     notifications,
@@ -54,17 +57,10 @@ export function NotificationsListPage(): ReactElement {
 
   useGSAP(
     () => {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-      }
-      gsap.from(headerRef.current, {
-        opacity: 0,
-        y: -12,
-        duration: 0.5,
-        ease: 'power2.out',
-      });
+      if (!headerRef.current) return;
+      fadeUp(headerRef.current, { reduced, y: -12, duration: 0.5 });
     },
-    { scope: headerRef }
+    { scope: headerRef, dependencies: [reduced] }
   );
 
   const activeTab: NotificationTab =

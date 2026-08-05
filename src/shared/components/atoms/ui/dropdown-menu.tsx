@@ -2,14 +2,43 @@
 
 import * as React from 'react';
 
+import { popoverEnter, popoverExit } from '@/shared/lib/motion';
+import { useGsapPresence } from '@/shared/lib/motion/usePresence';
 import { cn } from '@/shared/lib/utils';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 
+const DropdownMenuOpenContext = React.createContext(false);
+
 function DropdownMenu({
+  open,
+  defaultOpen,
+  onOpenChange,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Root>) {
-  return <DropdownMenuPrimitive.Root data-slot="dropdown-menu" {...props} />;
+  const [internalOpen, setInternalOpen] = React.useState(defaultOpen ?? false);
+  const isControlled = open !== undefined;
+  const currentOpen = isControlled ? open : internalOpen;
+
+  const handleOpenChange = React.useCallback(
+    (next: boolean) => {
+      if (!isControlled) setInternalOpen(next);
+      onOpenChange?.(next);
+    },
+    [isControlled, onOpenChange]
+  );
+
+  return (
+    <DropdownMenuOpenContext value={currentOpen}>
+      <DropdownMenuPrimitive.Root
+        data-slot="dropdown-menu"
+        open={open}
+        defaultOpen={defaultOpen}
+        onOpenChange={handleOpenChange}
+        {...props}
+      />
+    </DropdownMenuOpenContext>
+  );
 }
 
 function DropdownMenuPortal({
@@ -36,13 +65,24 @@ function DropdownMenuContent({
   sideOffset = 4,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Content>) {
+  const open = React.useContext(DropdownMenuOpenContext);
+  const { ref, rendered } = useGsapPresence<HTMLDivElement>(
+    open,
+    popoverEnter,
+    popoverExit
+  );
+
+  if (!rendered) return null;
+
   return (
-    <DropdownMenuPrimitive.Portal>
+    <DropdownMenuPrimitive.Portal forceMount>
       <DropdownMenuPrimitive.Content
+        ref={ref}
+        forceMount
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          'bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-100 max-h-(--radix-dropdown-menu-content-available-height) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-3xl border-0 p-1 shadow-none',
+          'bg-popover text-popover-foreground z-100 max-h-(--radix-dropdown-menu-content-available-height) min-w-32 origin-(--radix-dropdown-menu-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-3xl border-0 p-1 shadow-none',
           className
         )}
         {...props}

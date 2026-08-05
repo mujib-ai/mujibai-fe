@@ -14,9 +14,6 @@ import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   metadataBase: createUrl(),
-  // Plain string, not a title.template — every route already bakes its own
-  // full "<page> - mujibai" title via src/shared/seo, so a template here
-  // would double-append the site name.
   title: SITE_NAME,
   icons: {
     icon: '/favicon.ico',

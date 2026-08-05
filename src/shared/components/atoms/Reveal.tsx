@@ -3,7 +3,9 @@
 import type { ElementType, ReactNode, Ref } from 'react';
 import { useRef } from 'react';
 
-import { gsap, useGSAP } from '@/shared/lib/gsap';
+import { ScrollTrigger, useGSAP } from '@/shared/lib/gsap';
+import { fadeUp, staggerChildren } from '@/shared/lib/motion/presets';
+import { useReducedMotion } from '@/shared/lib/motion/reducedMotion';
 import { cn } from '@/shared/lib/utils';
 
 type RevealProps = {
@@ -18,6 +20,7 @@ type RevealProps = {
   [prop: string]: unknown;
 };
 
+/** Scroll-triggered entrance used across the landing page. Plays once, on first approach. */
 export function Reveal({
   children,
   as: Tag = 'div',
@@ -29,34 +32,32 @@ export function Reveal({
   ...rest
 }: RevealProps) {
   const containerRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
 
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      const container = containerRef.current;
+      if (!container) return;
 
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        return;
-      }
+      const animation = stagger
+        ? staggerChildren(container, { reduced, y, duration, stagger, delay })
+        : fadeUp(container, { reduced, y, duration, delay });
 
-      const targets = stagger
-        ? Array.from(containerRef.current.children)
-        : containerRef.current;
-
-      gsap.from(targets, {
-        opacity: 0,
-        y,
-        duration,
-        delay,
-        stagger,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
+      // Gate the tween itself behind ScrollTrigger instead of letting the
+      // preset run immediately — keeps the single source of truth for
+      // easing/duration in the presets module.
+      animation.pause();
+      ScrollTrigger.create({
+        trigger: container,
+        start: 'top 85%',
+        once: true,
+        onEnter: () => animation.play(),
       });
     },
-    { scope: containerRef }
+    {
+      scope: containerRef,
+      dependencies: [reduced, stagger, y, duration, delay],
+    }
   );
 
   return (
