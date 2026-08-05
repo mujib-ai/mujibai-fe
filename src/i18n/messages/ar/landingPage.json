@@ -263,7 +263,8 @@
         "message": "الرسالة",
         "messageRequired": "الرسالة مطلوبة",
         "subjectRequired": "يرجى اختيار خيار",
-        "submit": "إرسال الرسالة"
+        "submit": "إرسال الرسالة",
+        "submitSuccess": "تم إرسال رسالتك بنجاح."
       }
     },
     "footer": {

@@ -263,7 +263,8 @@
         "message": "Message",
         "messageRequired": "Message is required",
         "subjectRequired": "Please select an option",
-        "submit": "Send Message"
+        "submit": "Send Message",
+        "submitSuccess": "Your message has been submitted successfully."
       }
     },
     "footer": {
