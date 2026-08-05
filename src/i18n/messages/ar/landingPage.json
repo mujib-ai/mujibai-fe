@@ -257,13 +257,18 @@
       "form": {
         "name": "الاسم",
         "nameRequired": "الاسم مطلوب",
+        "nameMinLength": "يجب ألا يقل الاسم عن حرفين",
+        "nameMaxLength": "يجب ألا يزيد الاسم عن 255 حرفًا",
         "email": "البريد الإلكتروني",
         "emailRequired": "البريد الإلكتروني مطلوب",
         "emailInvalid": "بريد إلكتروني غير صالح",
         "message": "الرسالة",
         "messageRequired": "الرسالة مطلوبة",
+        "messageMinLength": "يجب ألا تقل الرسالة عن حرفين",
+        "messageMaxLength": "يجب ألا تزيد الرسالة عن 5000 حرف",
         "subjectRequired": "يرجى اختيار خيار",
         "submit": "إرسال الرسالة",
+        "submitting": "جارٍ الإرسال...",
         "submitSuccess": "تم إرسال رسالتك بنجاح."
       }
     },

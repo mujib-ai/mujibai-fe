@@ -257,13 +257,18 @@
       "form": {
         "name": "Name",
         "nameRequired": "Name is required",
+        "nameMinLength": "Name must be at least 2 characters",
+        "nameMaxLength": "Name must be 255 characters or fewer",
         "email": "Email",
         "emailRequired": "Email is required",
         "emailInvalid": "Invalid email",
         "message": "Message",
         "messageRequired": "Message is required",
+        "messageMinLength": "Message must be at least 2 characters",
+        "messageMaxLength": "Message must be 5000 characters or fewer",
         "subjectRequired": "Please select an option",
         "submit": "Send Message",
+        "submitting": "Sending...",
         "submitSuccess": "Your message has been submitted successfully."
       }
     },

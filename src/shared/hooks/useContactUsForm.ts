@@ -13,15 +13,22 @@ export function useContactUsForm(t: ReturnType<typeof useTranslations>) {
   const { handleSubmitTicket, isSubmittingTicket } = useSupportTicket();
 
   const formSchema = z.object({
-    name: z.string().trim().min(1, t('form.nameRequired')),
+    name: z
+      .string()
+      .trim()
+      .min(2, t('form.nameMinLength'))
+      .max(255, t('form.nameMaxLength')),
     email: z
       .string()
-      .email(t('form.emailInvalid'))
-      .min(1, t('form.emailRequired')),
-    message: z.string().trim().min(1, t('form.messageRequired')),
-    subject: z.string().min(1, t('form.subjectRequired')),
+      .trim()
+      .min(1, t('form.emailRequired'))
+      .email(t('form.emailInvalid')),
+    message: z
+      .string()
+      .trim()
+      .min(2, t('form.messageMinLength'))
+      .max(5000, t('form.messageMaxLength')),
   });
-
   type FormData = z.infer<typeof formSchema>;
 
   const form = useForm<FormData>({
@@ -30,7 +37,6 @@ export function useContactUsForm(t: ReturnType<typeof useTranslations>) {
       name: '',
       email: '',
       message: '',
-      subject: 'hi',
     },
   });
 
@@ -39,18 +45,11 @@ export function useContactUsForm(t: ReturnType<typeof useTranslations>) {
     formState: { errors, touchedFields },
   } = form;
 
-  const subjectLabels: Record<string, string> = {
-    hi: t('radio.hi'),
-    quote: t('radio.quote'),
-  };
-
   const onSubmit = async (data: FormData) => {
-    const message = `[${subjectLabels[data.subject] ?? data.subject}] ${data.message}`;
-
     const result = await handleSubmitTicket({
       name: data.name,
       email: data.email,
-      message,
+      message: data.message,
     });
 
     if (result) {

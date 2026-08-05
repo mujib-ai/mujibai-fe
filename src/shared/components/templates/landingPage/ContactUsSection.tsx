@@ -56,34 +56,6 @@ export default function ContactUsSection() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex w-full flex-col gap-6"
         >
-          <div className="flex flex-col gap-4">
-            <label className="text-foreground flex cursor-pointer items-center gap-2">
-              <input
-                type="radio"
-                value="hi"
-                {...form.register('subject')}
-                className="accent-primary h-4 w-4 cursor-pointer"
-              />
-              <span className="text-sm md:text-lg">{t('radio.hi')}</span>
-            </label>
-
-            <label className="text-foreground flex cursor-pointer items-center gap-2">
-              <input
-                type="radio"
-                value="quote"
-                {...form.register('subject')}
-                className="accent-primary h-4 w-4 cursor-pointer"
-              />
-              <span className="text-sm md:text-lg">{t('radio.quote')}</span>
-            </label>
-          </div>
-
-          {touchedFields.subject && errors.subject && (
-            <span className="text-xs text-red-400">
-              {errors.subject.message}
-            </span>
-          )}
-
           <div className="flex w-full flex-col gap-2">
             <label
               htmlFor="name"
@@ -156,7 +128,7 @@ export default function ContactUsSection() {
               className="bg-primary hover:bg-primary/90 rounded-full px-8 py-3 text-base font-medium text-white shadow-md transition md:text-lg"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Sending...' : t('form.submit')}
+              {isSubmitting ? t('form.submitting') : t('form.submit')}
             </Button>
           </div>
         </Reveal>
