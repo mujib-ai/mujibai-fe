@@ -15,6 +15,7 @@ import type { LoginCredentials, ResetPasswordCredentials } from '../types';
 /** API error response */
 interface ApiErrorResponse {
   message?: string;
+  detail?: string;
 }
 
 /** Alert state */
@@ -27,7 +28,11 @@ interface AlertState {
 const getErrorMessage = (error: unknown, defaultMessage: string): string => {
   if (error instanceof AxiosError) {
     const axiosError = error as AxiosError<ApiErrorResponse>;
-    return axiosError.response?.data?.message || defaultMessage;
+    return (
+      axiosError.response?.data?.detail ||
+      axiosError.response?.data?.message ||
+      defaultMessage
+    );
   }
   if (error instanceof Error) return error.message;
   return defaultMessage;
@@ -110,22 +115,27 @@ export default function useAuth() {
       );
     },
     onError: error => {
-      const errorMessage = getErrorMessage(
-        error,
-        'Failed to send password reset email'
+      const isRateLimited =
+        error instanceof AxiosError && error.response?.status === 429;
+      showAlert(
+        'error',
+        'Request Failed',
+        isRateLimited
+          ? 'Too many requests. Please wait and try again.'
+          : getErrorMessage(error, 'Failed to send password reset email')
       );
-      showAlert('error', 'Request Failed', errorMessage);
     },
   });
 
   const resetPasswordMutation = useMutation({
     mutationFn: AuthService.resetPassword,
-    onSuccess: () => {
-      showAlert(
-        'success',
-        'Password Reset Successful',
-        'Your password has been successfully reset. You can now login with your new password.'
-      );
+    onSuccess: async () => {
+      queryClient.clear();
+      try {
+        await AuthService.clearLocalSession();
+      } catch {
+        // The reset succeeded; local cookie cleanup is best-effort.
+      }
     },
     onError: error => {
       const errorMessage = getErrorMessage(

@@ -5,40 +5,41 @@ import { useRouter } from 'next/navigation';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 import useAuth from './useAuth';
 
-const formSchema = z
-  .object({
-    newPassword: z
-      .string()
-      .min(6, 'Password must be at least 6 characters')
-      .min(1, 'Password is required'),
-    confirmPassword: z.string().min(1, 'Confirm password is required'),
-  })
-  .refine(data => data.newPassword === data.confirmPassword, {
-    message: 'Passwords must match',
-    path: ['confirmPassword'],
-  });
+const createFormSchema = (t: (key: string) => string) =>
+  z
+    .object({
+      newPassword: z
+        .string()
+        .min(1, t('passwordRequired'))
+        .min(8, t('passwordTooShort'))
+        .max(72, t('passwordTooLong'))
+        .regex(/[A-Z]/, t('passwordUppercase'))
+        .regex(/[a-z]/, t('passwordLowercase'))
+        .regex(/[0-9]/, t('passwordDigit')),
+      confirmPassword: z.string().min(1, t('confirmPasswordRequired')),
+    })
+    .refine(data => data.newPassword === data.confirmPassword, {
+      message: t('passwordsMustMatch'),
+      path: ['confirmPassword'],
+    });
 
-export type ResetPasswordFormData = z.infer<typeof formSchema>;
+export type ResetPasswordFormData = z.infer<
+  ReturnType<typeof createFormSchema>
+>;
 
-interface UseResetPasswordFormProps {
-  userId: string;
-  token: string;
-}
-
-export function useResetPasswordForm({
-  userId,
-  token,
-}: UseResetPasswordFormProps) {
+export function useResetPasswordForm({ token }: { token: string }) {
   const t = useTranslations('resetPasswordPage');
   const router = useRouter();
   const { handleResetPassword, alert } = useAuth();
+  const tokenIsValid = token.length >= 16 && token.length <= 512;
 
   const form = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(createFormSchema(t)),
     mode: 'onChange',
     defaultValues: {
       newPassword: '',
@@ -53,14 +54,16 @@ export function useResetPasswordForm({
   } = form;
 
   const onSubmit = async (values: ResetPasswordFormData) => {
-    const res = await handleResetPassword({
-      userId,
+    if (!tokenIsValid) return;
+
+    const response = await handleResetPassword({
       token,
       newPassword: values.newPassword,
     });
 
-    if (res) {
-      router.push('/');
+    if (response) {
+      toast.success(t('passwordResetSuccess'));
+      router.replace('/login');
     }
   };
 
@@ -69,23 +72,14 @@ export function useResetPasswordForm({
     error: errors[fieldName]?.message,
   });
 
-  const getTranslations = () => ({
-    title: t('title'),
-    newPassword: t('newPassword'),
-    confirmPassword: t('confirmPassword'),
-    placeholder: t('placeholder'),
-    submit: t('submit'),
-    submitting: t('submitting'),
-  });
-
   return {
-    form,
     handleSubmit,
     onSubmit,
     isSubmitting,
-    isValid,
+    isValid: isValid && tokenIsValid,
+    tokenIsValid,
     alert,
     getFieldProps,
-    getTranslations,
+    t,
   };
 }

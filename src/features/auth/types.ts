@@ -52,9 +52,13 @@ export interface LoginResponse {
 }
 
 export interface ResetPasswordCredentials {
-  userId: string;
   token: string;
   newPassword: string;
+}
+
+export interface AuthMessageResponse {
+  message: string;
+  data: null;
 }
 
 export interface ForgotPasswordPayload {

@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 
 import { useLandingAgent } from '@/features/landing-voice-agent/hooks/use-landing-agent';
 import { Card } from '@/shared/components/atoms/ui/card';
-import { cn } from '@/shared/lib/utils';
 
 import { MicButton } from './MicButton';
 
@@ -33,29 +32,6 @@ export function VoiceAgentPanel() {
 
   return (
     <Card className="relative flex w-full flex-col items-center gap-6 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
-      {agent.transcript.length > 0 && (
-        <div
-          className="border-border/70 max-h-72 w-full max-w-3xl space-y-3 overflow-y-auto rounded-xl border bg-white/60 p-4 dark:bg-black/10"
-          aria-live="polite"
-        >
-          {agent.transcript.map(entry => (
-            <div
-              key={entry.id}
-              className={cn(
-                'max-w-[85%] rounded-2xl px-4 py-2 text-sm',
-                entry.speaker === 'user'
-                  ? 'bg-primary ms-auto text-white'
-                  : 'bg-muted me-auto',
-                !entry.final && 'animate-pulse'
-              )}
-            >
-              {entry.text}
-            </div>
-          ))}
-          <div ref={transcriptEndRef} />
-        </div>
-      )}
-
       <div className="flex flex-col items-center justify-center gap-4 p-4 text-center sm:p-8">
         <MicButton
           active={active}

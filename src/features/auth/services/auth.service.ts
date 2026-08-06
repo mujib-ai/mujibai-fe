@@ -1,6 +1,7 @@
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
 
 import type {
+  AuthMessageResponse,
   AuthResponse,
   ForgotPasswordPayload,
   LoginCredentials,
@@ -90,9 +91,9 @@ export class AuthService {
 
   static async forgotPassword(
     payload: ForgotPasswordPayload
-  ): Promise<AuthResponse> {
-    const { data } = await AxiosAPI.post<AuthResponse>(
-      '/auth/forget-password',
+  ): Promise<AuthMessageResponse> {
+    const { data } = await AxiosAPI.post<AuthMessageResponse>(
+      '/tenants/forgot-password',
       payload
     );
     return data;
@@ -100,11 +101,20 @@ export class AuthService {
 
   static async resetPassword(
     credentials: ResetPasswordCredentials
-  ): Promise<AuthResponse> {
-    const { data } = await AxiosAPI.post<AuthResponse>(
-      '/auth/reset-password',
+  ): Promise<AuthMessageResponse> {
+    const { data } = await AxiosAPI.post<AuthMessageResponse>(
+      '/tenants/reset-password',
       credentials
     );
     return data;
+  }
+
+  static async clearLocalSession(): Promise<void> {
+    const origin = getAppOrigin();
+    if (!origin) return;
+    await fetch(origin + '/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include',
+    });
   }
 }

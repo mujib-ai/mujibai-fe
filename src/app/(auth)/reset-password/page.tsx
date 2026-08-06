@@ -9,13 +9,12 @@ export const metadata: Metadata = createNoIndexMetadata(
 );
 
 interface Props {
-  searchParams: Promise<{ userId?: string; token?: string }>;
+  searchParams: Promise<{ token?: string }>;
 }
 
 export default async function ResetPassword({ searchParams }: Props) {
   const params = await searchParams;
-  const userId = params.userId || '';
   const token = params.token || '';
 
-  return <ResetPasswordPage userId={userId} token={token} />;
+  return <ResetPasswordPage token={token} />;
 }

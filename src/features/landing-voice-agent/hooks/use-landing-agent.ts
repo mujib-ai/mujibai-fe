@@ -93,19 +93,6 @@ export function useLandingAgent() {
     }
   }, []);
 
-  const upsertAssistant = useCallback((text: string, final: boolean) => {
-    setTranscript(current => {
-      const last = current.at(-1);
-      if (last?.speaker === 'agent' && !last.final) {
-        return [...current.slice(0, -1), { ...last, text, final }];
-      }
-      return [
-        ...current,
-        { id: crypto.randomUUID(), speaker: 'agent', text, final },
-      ];
-    });
-  }, []);
-
   const handleServerEvent = useCallback(
     (event: LandingAgentServerEvent) => {
       switch (event.type) {
@@ -131,29 +118,6 @@ export function useLandingAgent() {
             },
           ]);
           break;
-        case 'assistant_text_delta':
-          setTranscript(current => {
-            const last = current.at(-1);
-            const text =
-              last?.speaker === 'agent' && !last.final
-                ? last.text + event.text
-                : event.text;
-            if (last?.speaker === 'agent' && !last.final)
-              return [...current.slice(0, -1), { ...last, text }];
-            return [
-              ...current,
-              {
-                id: crypto.randomUUID(),
-                speaker: 'agent',
-                text,
-                final: false,
-              },
-            ];
-          });
-          break;
-        case 'assistant_text_done':
-          upsertAssistant(event.text, true);
-          break;
         case 'assistant_audio_done':
           setState('listening');
           break;
@@ -168,7 +132,7 @@ export function useLandingAgent() {
           break;
       }
     },
-    [stopPlayback, upsertAssistant]
+    [stopPlayback]
   );
 
   const handleConnectionState = useCallback((next: 'connecting' | 'error') => {

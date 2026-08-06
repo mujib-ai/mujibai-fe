@@ -33,7 +33,7 @@ export type LandingAgentServerEvent =
 
 export interface TranscriptEntry {
   id: string;
-  speaker: 'user' | 'agent';
+  speaker: 'user';
   text: string;
   final: boolean;
 }
