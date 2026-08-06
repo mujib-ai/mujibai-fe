@@ -1,18 +1,25 @@
 import type { LandingAgentServerEvent } from '../types/landing-agent.types';
 
 const SERVER_EVENT_TYPES = new Set([
-  'session.ready',
-  'agent.state',
-  'transcript.user',
-  'transcript.agent',
-  'audio.chunk',
-  'session.limit',
+  'session_started',
+  'speech_started',
+  'speech_ended',
+  'transcript',
+  'assistant_text_delta',
+  'assistant_text_done',
+  'assistant_audio_done',
+  'assistant_interrupted',
   'error',
-  'session.ended',
 ]);
 
 export function getLandingAgentWebSocketUrl(): string {
-  const value = process.env.NEXT_PUBLIC_LANDING_AGENT_WS_URL;
+  const configured = process.env.NEXT_PUBLIC_LANDING_AGENT_WS_URL;
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const value =
+    configured ??
+    (apiUrl
+      ? `${apiUrl.replace(/^http/, 'ws').replace(/\/$/, '')}/ws/public/landing-agent`
+      : null);
   if (!value) throw new Error('configuration');
 
   const url = new URL(value);

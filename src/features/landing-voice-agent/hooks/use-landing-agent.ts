@@ -2,173 +2,192 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { base64ToArrayBuffer, pcm16ToAudioBuffer } from '../lib/audio';
+import { pcm16ToAudioBuffer } from '../lib/audio';
 import type {
   AgentState,
-  LandingAgentLanguage,
   LandingAgentServerEvent,
   TranscriptEntry,
 } from '../types/landing-agent.types';
 import { useLandingAgentSocket } from './use-landing-agent-socket';
 import { useMicrophoneStream } from './use-microphone-stream';
 
-type ErrorKind =
+export type LandingAgentError =
   | 'microphoneDenied'
   | 'unsupported'
-  | 'connection'
+  | 'configuration'
+  | 'disabled'
+  | 'origin'
   | 'rateLimit'
+  | 'connections'
   | 'sessionLimit'
+  | 'timeout'
+  | 'provider'
   | 'audio'
-  | 'unexpected'
-  | 'configuration';
+  | 'connection'
+  | 'unexpected';
 
-export function useLandingAgent(language: LandingAgentLanguage) {
+function mapError(message: string): LandingAgentError {
+  if (message === 'configuration') return 'configuration';
+  if (message === 'landing_agent_disabled') return 'disabled';
+  if (message === 'origin_not_allowed') return 'origin';
+  if (message === 'rate_limited') return 'rateLimit';
+  if (message === 'too_many_connections') return 'connections';
+  if (
+    [
+      'token_limit_exceeded',
+      'session_limit_reached',
+      'audio_limit_exceeded',
+    ].includes(message)
+  )
+    return 'sessionLimit';
+  if (['connection_timeout', 'idle_timeout'].includes(message))
+    return 'timeout';
+  if (message === 'provider_failure') return 'provider';
+  if (['bad_audio_format', 'payload_too_large'].includes(message))
+    return 'audio';
+  if (message === 'connection') return 'connection';
+  return 'unexpected';
+}
+
+export function useLandingAgent() {
   const [state, setState] = useState<AgentState>('idle');
-  const [error, setError] = useState<ErrorKind | null>(null);
+  const [error, setError] = useState<LandingAgentError | null>(null);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const playbackContextRef = useRef<AudioContext | null>(null);
-  const playbackSourceRef = useRef<AudioBufferSourceNode | null>(null);
+  const playbackSourcesRef = useRef(new Set<AudioBufferSourceNode>());
   const playbackEndRef = useRef(0);
-  const endedRef = useRef(false);
   const terminateTransportRef = useRef<() => void>(() => undefined);
 
   const stopPlayback = useCallback(() => {
-    try {
-      playbackSourceRef.current?.stop();
-    } catch {
-      // A source that already ended cannot be stopped again.
-    }
-    playbackSourceRef.current = null;
+    playbackSourcesRef.current.forEach(source => {
+      try {
+        source.stop();
+      } catch {
+        // The source may already have completed.
+      }
+    });
+    playbackSourcesRef.current.clear();
     playbackEndRef.current = 0;
   }, []);
 
-  const playAudio = useCallback(async (data: string, format: string) => {
+  const playAudio = useCallback(async (data: ArrayBuffer) => {
     try {
       const context =
-        playbackContextRef.current ??
-        new AudioContext({
-          sampleRate: format.includes('24000') ? 24_000 : 16_000,
-        });
+        playbackContextRef.current ?? new AudioContext({ sampleRate: 24_000 });
       playbackContextRef.current = context;
       if (context.state === 'suspended') await context.resume();
-      const encoded = base64ToArrayBuffer(data);
-      const buffer = format.toLowerCase().includes('pcm')
-        ? pcm16ToAudioBuffer(
-            context,
-            encoded,
-            format.includes('24000') ? 24_000 : 16_000
-          )
-        : await context.decodeAudioData(encoded.slice(0));
+
       const source = context.createBufferSource();
-      source.buffer = buffer;
+      source.buffer = pcm16ToAudioBuffer(context, data);
       source.connect(context.destination);
       const startAt = Math.max(context.currentTime, playbackEndRef.current);
       source.start(startAt);
-      playbackEndRef.current = startAt + buffer.duration;
-      playbackSourceRef.current = source;
+      playbackEndRef.current = startAt + source.buffer.duration;
+      playbackSourcesRef.current.add(source);
+      source.onended = () => playbackSourcesRef.current.delete(source);
+      setState('speaking');
     } catch {
       setError('audio');
+      setState('error');
     }
   }, []);
 
-  const appendTranscript = useCallback(
-    (speaker: 'user' | 'agent', text: string, final = true) => {
-      setTranscript(current => {
-        if (!final && speaker === 'user') {
-          const last = current.at(-1);
-          if (last?.speaker === 'user' && !last.final) {
-            return [...current.slice(0, -1), { ...last, text }];
-          }
-        }
-        return [...current, { id: crypto.randomUUID(), speaker, text, final }];
-      });
-    },
-    []
-  );
+  const upsertAssistant = useCallback((text: string, final: boolean) => {
+    setTranscript(current => {
+      const last = current.at(-1);
+      if (last?.speaker === 'agent' && !last.final) {
+        return [...current.slice(0, -1), { ...last, text, final }];
+      }
+      return [
+        ...current,
+        { id: crypto.randomUUID(), speaker: 'agent', text, final },
+      ];
+    });
+  }, []);
 
   const handleServerEvent = useCallback(
     (event: LandingAgentServerEvent) => {
-      console.log('[landing-agent] server event', event);
       switch (event.type) {
-        case 'session.ready':
+        case 'session_started':
           setSessionId(event.sessionId);
           setState('listening');
           break;
-        case 'agent.state':
-          setState(event.state);
-          if (event.state === 'listening') stopPlayback();
+        case 'speech_started':
+          if (event.bargeIn) stopPlayback();
+          setState('listening');
           break;
-        case 'transcript.user':
-          appendTranscript('user', event.text, event.final);
+        case 'speech_ended':
+          setState('thinking');
           break;
-        case 'transcript.agent':
-          appendTranscript('agent', event.text);
+        case 'transcript':
+          setTranscript(current => [
+            ...current,
+            {
+              id: crypto.randomUUID(),
+              speaker: 'user',
+              text: event.text,
+              final: true,
+            },
+          ]);
           break;
-        case 'audio.chunk':
-          setState('speaking');
-          void playAudio(event.data, event.format);
+        case 'assistant_text_delta':
+          setTranscript(current => {
+            const last = current.at(-1);
+            const text =
+              last?.speaker === 'agent' && !last.final
+                ? last.text + event.text
+                : event.text;
+            if (last?.speaker === 'agent' && !last.final)
+              return [...current.slice(0, -1), { ...last, text }];
+            return [
+              ...current,
+              {
+                id: crypto.randomUUID(),
+                speaker: 'agent',
+                text,
+                final: false,
+              },
+            ];
+          });
           break;
-        case 'session.limit':
-          endedRef.current = true;
-          setError('sessionLimit');
-          setState('ended');
+        case 'assistant_text_done':
+          upsertAssistant(event.text, true);
           break;
-        case 'error': {
-          const code = event.code.toLowerCase();
-          endedRef.current = code.includes('rate') || code.includes('limit');
-          setError(
-            code.includes('rate')
-              ? 'rateLimit'
-              : code.includes('limit')
-                ? 'sessionLimit'
-                : 'unexpected'
-          );
+        case 'assistant_audio_done':
+          setState('listening');
+          break;
+        case 'assistant_interrupted':
+          stopPlayback();
+          setState('listening');
+          break;
+        case 'error':
+          setError(mapError(event.message));
           setState('error');
-          break;
-        }
-        case 'session.ended':
-          endedRef.current = true;
-          setState('ended');
+          terminateTransportRef.current();
           break;
       }
     },
-    [appendTranscript, playAudio, stopPlayback]
+    [stopPlayback, upsertAssistant]
   );
 
-  const handleConnectionState = useCallback(
-    (next: 'connecting' | 'reconnecting' | 'error') => {
-      console.log('[landing-agent] connection state', next);
-      setState(next);
-      if (next === 'error')
-        setError(
-          process.env.NEXT_PUBLIC_LANDING_AGENT_WS_URL
-            ? 'connection'
-            : 'configuration'
-        );
-    },
-    []
-  );
+  const handleConnectionState = useCallback((next: 'connecting' | 'error') => {
+    setState(next);
+    if (next === 'error') setError(current => current ?? 'connection');
+  }, []);
 
-  const { connect, disconnect, send } = useLandingAgentSocket({
+  const { connect, disconnect, sendAudio } = useLandingAgentSocket({
     onEvent: handleServerEvent,
+    onAudio: data => void playAudio(data),
     onConnectionState: handleConnectionState,
   });
-
-  const handleMicrophoneChunk = useCallback(
-    (data: string) => {
-      send({ type: 'audio.chunk', data });
-    },
-    [send]
-  );
-  const microphone = useMicrophoneStream(handleMicrophoneChunk);
+  const microphone = useMicrophoneStream(sendAudio);
   const { start: startMicrophone, stop: stopMicrophone } = microphone;
 
   const cleanup = useCallback(
     (sendEnd = false) => {
-      console.log('[landing-agent] cleanup()', { sendEnd });
       stopMicrophone();
-      disconnect(sendEnd ? { type: 'session.end' } : undefined);
+      disconnect(sendEnd);
       stopPlayback();
       void playbackContextRef.current?.close();
       playbackContextRef.current = null;
@@ -181,11 +200,10 @@ export function useLandingAgent(language: LandingAgentLanguage) {
     setError(null);
     setTranscript([]);
     setSessionId(null);
-    endedRef.current = false;
     setState('connecting');
     try {
       await startMicrophone();
-      connect({ type: 'session.start', language });
+      connect();
     } catch (cause) {
       setError(
         microphone.permission === 'unsupported' ||
@@ -195,24 +213,15 @@ export function useLandingAgent(language: LandingAgentLanguage) {
       );
       setState('error');
     }
-  }, [connect, language, microphone.permission, startMicrophone]);
+  }, [connect, microphone.permission, startMicrophone]);
 
   const end = useCallback(() => {
-    endedRef.current = true;
     cleanup(true);
     setState('ended');
   }, [cleanup]);
 
-  const bargeIn = useCallback(() => {
-    if (state !== 'speaking') return;
-    stopPlayback();
-    send({ type: 'barge_in' });
-    send({ type: 'audio.stop' });
-    setState('listening');
-  }, [send, state, stopPlayback]);
-
   const reset = useCallback(() => {
-    cleanup(!endedRef.current);
+    cleanup(false);
     setTranscript([]);
     setError(null);
     setState('idle');
@@ -222,7 +231,7 @@ export function useLandingAgent(language: LandingAgentLanguage) {
     terminateTransportRef.current = () => cleanup(false);
   }, [cleanup]);
 
-  useEffect(() => reset, [reset]);
+  useEffect(() => () => cleanup(false), [cleanup]);
 
   return {
     state,
@@ -233,6 +242,5 @@ export function useLandingAgent(language: LandingAgentLanguage) {
     start,
     end,
     reset,
-    bargeIn,
   };
 }

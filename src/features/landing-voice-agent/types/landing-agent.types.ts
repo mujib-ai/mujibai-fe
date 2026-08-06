@@ -4,28 +4,32 @@ export type AgentState =
   | 'listening'
   | 'thinking'
   | 'speaking'
-  | 'reconnecting'
   | 'ended'
   | 'error';
 
-export type LandingAgentLanguage = 'ar' | 'en';
-
 export type LandingAgentClientEvent =
-  | { type: 'session.start'; language?: LandingAgentLanguage }
-  | { type: 'audio.chunk'; data: string }
-  | { type: 'audio.stop' }
-  | { type: 'barge_in' }
-  | { type: 'session.end' };
+  | {
+      type: 'session_start';
+      audio: {
+        codec: 'pcm16';
+        sample_rate: 16000;
+        channels: 1;
+        bit_depth: 16;
+        source: 'browser';
+      };
+    }
+  | { type: 'end_session' };
 
 export type LandingAgentServerEvent =
-  | { type: 'session.ready'; sessionId: string }
-  | { type: 'agent.state'; state: AgentState }
-  | { type: 'transcript.user'; text: string; final: boolean }
-  | { type: 'transcript.agent'; text: string }
-  | { type: 'audio.chunk'; data: string; format: string }
-  | { type: 'session.limit'; reason: string }
-  | { type: 'error'; code: string; message: string }
-  | { type: 'session.ended' };
+  | { type: 'session_started'; sessionId: string }
+  | { type: 'speech_started'; bargeIn?: boolean }
+  | { type: 'speech_ended' }
+  | { type: 'transcript'; text: string }
+  | { type: 'assistant_text_delta'; text: string }
+  | { type: 'assistant_text_done'; text: string }
+  | { type: 'assistant_audio_done' }
+  | { type: 'assistant_interrupted'; reason?: string }
+  | { type: 'error'; message: string };
 
 export interface TranscriptEntry {
   id: string;

@@ -46,8 +46,33 @@
         "divider": "or",
         "mic": {
           "idleTitle": "Tap the microphone to start talking",
-          "activeTitle": "Listening… tap to stop",
-          "description": "Get an instant call from our AI voice agent."
+          "activeTitle": "End voice session",
+          "description": "Talk naturally. You can interrupt the agent while it speaks."
+        },
+        "status": {
+          "idle": "Tap the microphone to begin",
+          "connecting": "Connecting…",
+          "listening": "Listening…",
+          "thinking": "Thinking…",
+          "speaking": "Speaking…",
+          "ended": "Session ended",
+          "error": "Unable to start the voice agent"
+        },
+        "retry": "Try again",
+        "errors": {
+          "microphoneDenied": "Allow microphone access to talk with the agent.",
+          "unsupported": "Voice conversations are not supported in this browser.",
+          "configuration": "The voice agent is not configured.",
+          "disabled": "The voice agent is temporarily unavailable.",
+          "origin": "The voice agent is unavailable from this website.",
+          "rateLimit": "Too many attempts. Please try again shortly.",
+          "connections": "Too many active conversations. Please try again later.",
+          "sessionLimit": "This session reached its limit. Start a new conversation.",
+          "timeout": "The session timed out. Start a new conversation.",
+          "provider": "The voice service had a problem. Please try again.",
+          "audio": "The audio stream could not be processed.",
+          "connection": "Could not connect to the voice agent.",
+          "unexpected": "Something went wrong. Please try again."
         }
       },
       "textToSpeech": {

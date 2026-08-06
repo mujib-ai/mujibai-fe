@@ -1,15 +1,15 @@
-﻿'use client';
+'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { floatToPcm16Base64 } from '../lib/audio';
+import { floatToPcm16 } from '../lib/audio';
 import {
   LANDING_AGENT_CHUNK_SIZE,
   LANDING_AGENT_SAMPLE_RATE,
 } from '../lib/constants';
 import type { MicrophonePermission } from '../types/landing-agent.types';
 
-export function useMicrophoneStream(onChunk: (data: string) => void) {
+export function useMicrophoneStream(onChunk: (data: ArrayBuffer) => void) {
   const [permission, setPermission] = useState<MicrophonePermission>('prompt');
   const [muted, setMuted] = useState(false);
   const [level, setLevel] = useState(0);
@@ -19,6 +19,7 @@ export function useMicrophoneStream(onChunk: (data: string) => void) {
   const processorRef = useRef<ScriptProcessorNode | null>(null);
   const mutedRef = useRef(false);
   const onChunkRef = useRef(onChunk);
+
   useEffect(() => {
     onChunkRef.current = onChunk;
   }, [onChunk]);
@@ -57,9 +58,8 @@ export function useMicrophoneStream(onChunk: (data: string) => void) {
       const context = new AudioContext({
         sampleRate: LANDING_AGENT_SAMPLE_RATE,
       });
+      await context.resume();
       const source = context.createMediaStreamSource(stream);
-      // ScriptProcessor has wider browser support than AudioWorklet and keeps this
-      // isolated feature free of a separately hosted worklet asset.
       const processor = context.createScriptProcessor(
         LANDING_AGENT_CHUNK_SIZE,
         1,
@@ -71,7 +71,7 @@ export function useMicrophoneStream(onChunk: (data: string) => void) {
         let sum = 0;
         for (const sample of input) sum += sample * sample;
         setLevel(Math.min(1, Math.sqrt(sum / input.length) * 5));
-        onChunkRef.current(floatToPcm16Base64(input));
+        onChunkRef.current(floatToPcm16(input));
       };
       source.connect(processor);
       processor.connect(context.destination);

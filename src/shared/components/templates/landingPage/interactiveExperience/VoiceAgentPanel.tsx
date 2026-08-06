@@ -1,20 +1,30 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useEffect, useRef } from 'react';
+
+import { useTranslations } from 'next-intl';
 
 import { useLandingAgent } from '@/features/landing-voice-agent/hooks/use-landing-agent';
 import { Card } from '@/shared/components/atoms/ui/card';
+import { cn } from '@/shared/lib/utils';
 
 import { MicButton } from './MicButton';
 
 export function VoiceAgentPanel() {
-  const t = useTranslations('landingPage.interactiveExperience');
-  const locale = useLocale();
-  const agent = useLandingAgent(locale === 'ar' ? 'ar' : 'en');
-  const listening = !['idle', 'ended', 'error'].includes(agent.state);
+  const t = useTranslations('landingPage.interactiveExperience.voiceAgent');
+  const agent = useLandingAgent();
+  const transcriptEndRef = useRef<HTMLDivElement | null>(null);
+  const active = !['idle', 'ended', 'error'].includes(agent.state);
+
+  useEffect(() => {
+    transcriptEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  }, [agent.transcript]);
 
   const toggleListening = () => {
-    if (listening) {
+    if (active) {
       agent.end();
       return;
     }
@@ -22,23 +32,51 @@ export function VoiceAgentPanel() {
   };
 
   return (
-    <Card className="relative flex w-full flex-col items-center gap-2 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md transition-all duration-200 sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
-      <div className="flex flex-col items-center justify-center gap-4 p-6 text-center sm:p-12">
+    <Card className="relative flex w-full flex-col items-center gap-6 rounded-2xl bg-[#FFFFFFCC] px-4 py-6 shadow-[0_0_25px_rgba(0,0,0,0.05)] backdrop-blur-md sm:px-8 sm:py-10 dark:bg-[#06B6D40F]">
+      {agent.transcript.length > 0 && (
+        <div
+          className="border-border/70 max-h-72 w-full max-w-3xl space-y-3 overflow-y-auto rounded-xl border bg-white/60 p-4 dark:bg-black/10"
+          aria-live="polite"
+        >
+          {agent.transcript.map(entry => (
+            <div
+              key={entry.id}
+              className={cn(
+                'max-w-[85%] rounded-2xl px-4 py-2 text-sm',
+                entry.speaker === 'user'
+                  ? 'bg-primary ms-auto text-white'
+                  : 'bg-muted me-auto',
+                !entry.final && 'animate-pulse'
+              )}
+            >
+              {entry.text}
+            </div>
+          ))}
+          <div ref={transcriptEndRef} />
+        </div>
+      )}
+
+      <div className="flex flex-col items-center justify-center gap-4 p-4 text-center sm:p-8">
         <MicButton
-          active={listening}
+          active={active}
           onClick={toggleListening}
-          label={t('voiceAgent.mic.idleTitle')}
+          label={t(active ? 'mic.activeTitle' : 'mic.idleTitle')}
         />
         <div>
-          <h3 className="text-lg font-bold">
-            {listening
-              ? t('voiceAgent.mic.activeTitle')
-              : t('voiceAgent.mic.idleTitle')}
-          </h3>
+          <h3 className="text-lg font-bold">{t(`status.${agent.state}`)}</h3>
           <p className="text-muted-foreground mt-1 text-sm">
-            {t('voiceAgent.mic.description')}
+            {agent.error ? t(`errors.${agent.error}`) : t('mic.description')}
           </p>
         </div>
+        {agent.error && (
+          <button
+            type="button"
+            onClick={() => void agent.start()}
+            className="text-primary text-sm font-semibold hover:underline"
+          >
+            {t('retry')}
+          </button>
+        )}
       </div>
     </Card>
   );
