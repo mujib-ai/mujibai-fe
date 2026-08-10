@@ -2,7 +2,7 @@
 
 import type { ReactElement } from 'react';
 
-import { useFormatter, useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { Badge } from '@/shared/components/atoms/ui/badge';
@@ -17,6 +17,7 @@ import { MoreHorizontal } from 'lucide-react';
 
 import { NotifIcon } from '../atoms/NotifIcon';
 import { NOTIFICATION_SEVERITY_META } from '../constants/notifTypeMeta';
+import { formatNotificationDate } from '../lib/formatNotificationDate';
 import type { NotificationPublic } from '../types';
 
 interface NotificationRowProps {
@@ -31,14 +32,11 @@ export function NotificationRow({
   onRemove,
 }: NotificationRowProps): ReactElement {
   const t = useTranslations('notifications');
-  const format = useFormatter();
+  const locale = useLocale();
   const meta = NOTIFICATION_SEVERITY_META[notification.severity];
   const isUnread = !notification.readAt;
 
-  const date = new Date(notification.createdAt);
-  const time = Number.isNaN(date.getTime())
-    ? ''
-    : format.relativeTime(date, new Date());
+  const time = formatNotificationDate(notification.createdAt, locale);
 
   return (
     <div className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm transition-colors dark:bg-[#00143473]">

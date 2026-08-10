@@ -2,7 +2,7 @@
 
 import { type ReactElement, useEffect } from 'react';
 
-import { useFormatter, useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { Badge } from '@/shared/components/atoms/ui/badge';
@@ -13,6 +13,7 @@ import { ArrowLeft } from 'lucide-react';
 import { NotifIcon } from '../atoms/NotifIcon';
 import { NOTIFICATION_SEVERITY_META } from '../constants/notifTypeMeta';
 import { useNotifications } from '../hooks/useNotifications';
+import { formatNotificationDate } from '../lib/formatNotificationDate';
 import { getNotificationHref } from '../lib/notificationLinks';
 
 export function NotificationDetail({
@@ -21,7 +22,7 @@ export function NotificationDetail({
   notificationId: string;
 }): ReactElement {
   const t = useTranslations('notifications');
-  const format = useFormatter();
+  const locale = useLocale();
   const { notifications, isLoading, markRead } = useNotifications();
 
   const notification = notifications.find(n => n.id === notificationId);
@@ -64,7 +65,6 @@ export function NotificationDetail({
 
   const meta = NOTIFICATION_SEVERITY_META[notification.severity];
   const href = getNotificationHref(notification);
-  const date = new Date(notification.createdAt);
 
   return (
     <div className="flex h-full w-full flex-col gap-4">
@@ -106,7 +106,8 @@ export function NotificationDetail({
               )}
             </div>
             <p className="text-muted-foreground mt-1 text-xs">
-              {t('detail.receivedAt')}: {format.dateTime(date, 'medium')}
+              {t('detail.receivedAt')}:{' '}
+              {formatNotificationDate(notification.createdAt, locale)}
             </p>
             <p className="mt-4 text-sm leading-relaxed">{notification.body}</p>
 

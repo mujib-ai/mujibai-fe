@@ -1,7 +1,5 @@
 'use client';
 
-import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
-import { ThemeSwitcher } from '@/shared/components/atoms/ThemeSwitcher';
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { SidebarTrigger } from '@/shared/components/atoms/ui/sidebar';
 
@@ -30,8 +28,6 @@ export default function DashboardHeader({
       </div>
       <div className="flex items-center gap-2">
         <NotificationBell />
-        <LanguageSwitcher persist />
-        <ThemeSwitcher persist />
         <TenantAvatarMenu />
       </div>
     </div>

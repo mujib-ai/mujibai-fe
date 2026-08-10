@@ -42,7 +42,7 @@ export function NotificationsPanel({
     <div
       role="dialog"
       aria-label={t('panel.ariaLabel')}
-      className="flex max-h-112 flex-col"
+      className="flex max-h-[min(36rem,calc(100vh-6rem))] flex-col"
     >
       <NotifPanelHeader
         unreadCount={unreadCount}

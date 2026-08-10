@@ -61,7 +61,7 @@ export default function NotificationBell() {
       {panelRendered && (
         <div
           ref={panelRef}
-          className="bg-background text-foreground absolute end-0 top-full z-50 mt-2 w-80 origin-top-right overflow-hidden rounded-2xl border shadow-lg"
+          className="bg-background text-foreground absolute end-0 top-full z-50 mt-2 w-[min(28rem,calc(100vw-2rem))] origin-top-right overflow-hidden rounded-2xl border shadow-lg"
         >
           <NotificationsPanel
             notifications={notifications}

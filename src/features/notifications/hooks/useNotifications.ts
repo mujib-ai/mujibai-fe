@@ -126,9 +126,6 @@ export function useNotifications() {
         getErrorMessage(error, 'Failed to mark all notifications as read')
       );
     },
-    onSuccess: () => {
-      toast.success('All notifications marked as read.');
-    },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: LIST_QUERY_KEY });
       queryClient.invalidateQueries({ queryKey: UNREAD_COUNT_QUERY_KEY });

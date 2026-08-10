@@ -2,13 +2,14 @@
 
 import { type ReactElement } from 'react';
 
-import { useFormatter, useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import { Badge } from '@/shared/components/atoms/ui/badge';
 
 import { NotifIcon } from '../atoms/NotifIcon';
 import { NOTIFICATION_SEVERITY_META } from '../constants/notifTypeMeta';
+import { formatNotificationDate } from '../lib/formatNotificationDate';
 import type { NotificationPublic } from '../types';
 
 interface NotificationListItemProps {
@@ -21,14 +22,11 @@ export function NotificationListItem({
   onRowClick,
 }: NotificationListItemProps): ReactElement {
   const t = useTranslations('notifications');
-  const format = useFormatter();
+  const locale = useLocale();
   const meta = NOTIFICATION_SEVERITY_META[notification.severity];
   const isUnread = !notification.readAt;
 
-  const date = new Date(notification.createdAt);
-  const time = Number.isNaN(date.getTime())
-    ? ''
-    : format.relativeTime(date, new Date());
+  const time = formatNotificationDate(notification.createdAt, locale);
 
   const content = (
     <div

@@ -69,7 +69,6 @@ export function useNotificationsList() {
         getErrorMessage(error, 'Failed to mark all notifications as read')
       );
     },
-    onSuccess: () => toast.success('All notifications marked as read.'),
     onSettled: invalidate,
   });
 

@@ -13,6 +13,7 @@ import {
 } from '@/shared/components/atoms/ui/card';
 
 import SettingsFormField from '../atoms/SettingsFormField';
+import { AppearancePreferences } from '../molecules/AppearancePreferences';
 import { TenantLogoUpload } from '../molecules/TenantLogoUpload';
 
 export function AccountSettings() {
@@ -20,7 +21,8 @@ export function AccountSettings() {
   const { user } = useAuth();
 
   return (
-    <div className="w-full">
+    <div className="flex w-full flex-col gap-6">
+      <AppearancePreferences />
       <Card className="border-none bg-transparent shadow-none">
         <CardHeader>
           <CardTitle className="text-xl font-semibold">{t('title')}</CardTitle>

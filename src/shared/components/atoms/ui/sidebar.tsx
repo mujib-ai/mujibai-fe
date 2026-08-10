@@ -5,6 +5,7 @@ import * as React from 'react';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Separator } from '@/shared/components/atoms/ui/separator';
+import { Skeleton } from '@/shared/components/atoms/ui/shadcn-compat';
 import {
   Sheet,
   SheetContent,
@@ -19,7 +20,6 @@ import {
 } from '@/shared/components/atoms/ui/tooltip';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
 import { cn } from '@/shared/lib/utils';
-import { Skeleton } from '@heroui/react';
 import { Slot } from '@radix-ui/react-slot';
 import { type VariantProps, cva } from 'class-variance-authority';
 import { PanelLeftIcon } from 'lucide-react';
@@ -227,7 +227,7 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          'relative w-(--sidebar-width) bg-transparent transition-[width] duration-300 ease-[cubic-bezier(0.65,0,0.35,1)]',
+          'relative w-(--sidebar-width) bg-transparent',
           'group-data-[collapsible=offcanvas]:w-0',
           'group-data-[side=right]:rotate-180',
           variant === 'floating' || variant === 'inset'
@@ -238,7 +238,7 @@ function Sidebar({
       <div
         data-slot="sidebar-container"
         className={cn(
-          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) transition-[left,right,width] duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] md:flex',
+          'fixed inset-y-0 z-10 hidden h-svh w-(--sidebar-width) md:flex',
           side === 'left'
             ? 'left-0 group-data-[collapsible=offcanvas]:left-[calc(var(--sidebar-width)*-1)]'
             : 'right-0 group-data-[collapsible=offcanvas]:right-[calc(var(--sidebar-width)*-1)]',

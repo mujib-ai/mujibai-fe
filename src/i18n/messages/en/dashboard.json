@@ -12,7 +12,6 @@
     "myAccount": "My Account",
     "logout": "Log out"
   },
-
   "notifications": {
     "title": "Notifications",
     "subTitle": "Stay up to date with everything happening on your account.",
@@ -509,7 +508,6 @@
       "confirm": "Revoke"
     }
   },
-
   "settings": {
     "title": "Settings",
     "subTitle": "Manage your account, notifications, and integrations.",
@@ -545,7 +543,28 @@
         "success": "Tenant logo updated successfully.",
         "uploadFailed": "Failed to upload the tenant logo."
       },
-      "saveChanges": "Save Changes"
+      "saveChanges": "Save Changes",
+      "preferences": {
+        "theme": {
+          "title": "Theme",
+          "description": "Choose your preferred appearance.",
+          "options": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+          }
+        },
+        "language": {
+          "title": "Language",
+          "description": "Choose the dashboard display language.",
+          "label": "Dashboard language",
+          "hint": "Used across all dashboard sections.",
+          "options": {
+            "ar": "Arabic",
+            "en": "English"
+          }
+        }
+      }
     },
     "integrationSettings": {
       "title": "Integration Settings",
@@ -669,5 +688,20 @@
       "loadFailed": "Failed to load notification settings.",
       "saveFailed": "Failed to update notification settings."
     }
+  },
+  "aiAssistant": {
+    "tooltip": "Open AI assistant",
+    "title": "AI Assistant",
+    "welcome": "Hello! How can I help you manage your dashboard today?",
+    "placeholderReply": "I am ready to help. Connect this assistant to your AI endpoint to receive live answers.",
+    "placeholder": "Ask the AI assistant...",
+    "send": "Send message",
+    "attach": "Attach a file",
+    "copy": "Copy response",
+    "like": "Helpful response",
+    "dislike": "Unhelpful response",
+    "expand": "Expand chat",
+    "collapse": "Collapse chat",
+    "close": "Close AI assistant"
   }
 }
