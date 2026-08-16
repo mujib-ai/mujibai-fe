@@ -6,15 +6,14 @@ export class STTService {
   static async transcribe(file: File | Blob): Promise<TranscribeResponseDto> {
     const formData = new FormData();
     formData.append(
-      'file',
+      'audio',
       file,
       file instanceof File ? file.name : 'audio.wav'
     );
 
     const { data } = await AxiosAPI.post<TranscribeResponseDto>(
-      '/public/landing-agent/transcribe',
-      formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      '/public/landing-agent/speech-to-text',
+      formData
     );
     return data;
   }

@@ -8,6 +8,7 @@ const SERVER_EVENT_TYPES = new Set([
   'assistant_text_delta',
   'assistant_text_done',
   'assistant_audio_done',
+  'session_ending',
   'assistant_interrupted',
   'error',
 ]);

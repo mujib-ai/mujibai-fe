@@ -1,3 +1,4 @@
+export { NotificationsRealtimeProvider } from './NotificationsRealtimeProvider';
 export * from './types';
 export { NotificationDetail } from './organisms/NotificationDetail';
 export {

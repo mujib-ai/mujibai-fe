@@ -94,13 +94,14 @@
         "description": "Try speaking naturally or upload an audio file to transcribe.",
         "textBox": {
           "label": "Text",
-          "status": "Ready",
           "placeholder": "The live or file transcript will appear here.",
           "processing": "Transcribing audio…"
         },
         "live": {
           "idleTitle": "Press the microphone to start instant transcription.",
           "activeTitle": "Listening… tap to stop",
+          "speakingTitle": "Speech detected… tap to stop",
+          "error": "Unable to stream microphone audio. Check microphone access and try again.",
           "title": "Live speech"
         },
         "divider": "or",

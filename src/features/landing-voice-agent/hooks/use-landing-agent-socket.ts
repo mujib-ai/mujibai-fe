@@ -46,6 +46,7 @@ export function useLandingAgentSocket({
 }: SocketOptions) {
   const socketRef = useRef<WebSocket | null>(null);
   const sessionReadyRef = useRef(false);
+  const sessionEndingRef = useRef(false);
   const eventRef = useRef(onEvent);
   const audioRef = useRef(onAudio);
   const stateRef = useRef(onConnectionState);
@@ -74,6 +75,7 @@ export function useLandingAgentSocket({
 
   const disconnect = useCallback((sendEnd = false) => {
     sessionReadyRef.current = false;
+    sessionEndingRef.current = false;
     const socket = socketRef.current;
     socketRef.current = null;
     if (!socket) return;
@@ -112,6 +114,7 @@ export function useLandingAgentSocket({
     socket.binaryType = 'arraybuffer';
     socketRef.current = socket;
     sessionReadyRef.current = false;
+    sessionEndingRef.current = false;
 
     socket.onmessage = message => {
       if (message.data instanceof ArrayBuffer) {
@@ -129,6 +132,10 @@ export function useLandingAgentSocket({
         socket.send(JSON.stringify(AUDIO_FORMAT));
         sessionReadyRef.current = true;
       }
+      if (event.type === 'session_ending') {
+        sessionEndingRef.current = true;
+        sessionReadyRef.current = false;
+      }
       eventRef.current(event);
     };
     socket.onerror = () => {
@@ -138,8 +145,11 @@ export function useLandingAgentSocket({
       if (socketRef.current !== socket) return;
       socketRef.current = null;
       sessionReadyRef.current = false;
-      const message = closeError(closeEvent.code, closeEvent.reason);
+      const message = sessionEndingRef.current
+        ? null
+        : closeError(closeEvent.code, closeEvent.reason);
       if (message) eventRef.current({ type: 'error', message });
+      sessionEndingRef.current = false;
     };
   }, []);
 

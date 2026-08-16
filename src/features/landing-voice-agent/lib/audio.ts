@@ -10,7 +10,7 @@ export function floatToPcm16(samples: Float32Array): ArrayBuffer {
 export function pcm16ToAudioBuffer(
   context: AudioContext,
   data: ArrayBuffer,
-  sampleRate = 24_000
+  sampleRate: number
 ): AudioBuffer {
   const samples = new Int16Array(data);
   const buffer = context.createBuffer(1, samples.length, sampleRate);

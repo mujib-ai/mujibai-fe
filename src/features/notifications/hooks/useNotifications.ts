@@ -17,7 +17,9 @@ import { useNotificationsSocket } from './useNotificationsSocket';
 const LIST_QUERY_KEY = ['notifications', 'list'];
 const UNREAD_COUNT_QUERY_KEY = ['notifications', 'unread-count'];
 
-export function useNotifications() {
+export function useNotifications({
+  realtime = false,
+}: { realtime?: boolean } = {}) {
   const queryClient = useQueryClient();
 
   const {
@@ -173,6 +175,15 @@ export function useNotifications() {
     },
   });
 
+  const removeAllMutation = useMutation({
+    mutationFn: () => NotificationService.removeAll(),
+    onError: error => {
+      toast.error(getErrorMessage(error, 'Failed to delete all notifications'));
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['notifications'] });
+    },
+  });
   const patchList = useCallback(
     (updater: (old: PaginatedNotifications) => PaginatedNotifications) => {
       queryClient.setQueryData<PaginatedNotifications | undefined>(
@@ -210,10 +221,18 @@ export function useNotifications() {
             UNREAD_COUNT_QUERY_KEY,
             event.data.unreadCount
           );
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'list'],
+          });
           break;
         case 'notification.created':
-        case 'notification.updated':
           upsertNotification(event.data);
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'list', 'all'],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'total-all'],
+          });
           break;
         case 'notification.deleted':
           patchList(old => ({
@@ -224,6 +243,30 @@ export function useNotifications() {
               total: Math.max(0, old.pagination.total - 1),
             },
           }));
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'list', 'all'],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'total-all'],
+          });
+          void queryClient.invalidateQueries({
+            queryKey: UNREAD_COUNT_QUERY_KEY,
+          });
+          break;
+        case 'notifications.deleted_all':
+          patchList(old => ({
+            ...old,
+            items: [],
+            pagination: {
+              ...old.pagination,
+              total: 0,
+              totalPages: 0,
+              hasNext: false,
+              hasPrev: false,
+            },
+          }));
+          queryClient.setQueryData(UNREAD_COUNT_QUERY_KEY, 0);
+          void queryClient.invalidateQueries({ queryKey: ['notifications'] });
           break;
         case 'notification.read':
           patchList(old => ({
@@ -238,6 +281,9 @@ export function useNotifications() {
             UNREAD_COUNT_QUERY_KEY,
             event.data.unreadCount
           );
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'list', 'all'],
+          });
           break;
         case 'notifications.read_all':
           patchList(old => ({
@@ -250,6 +296,9 @@ export function useNotifications() {
             UNREAD_COUNT_QUERY_KEY,
             event.data.unreadCount
           );
+          void queryClient.invalidateQueries({
+            queryKey: ['notifications', 'list', 'all'],
+          });
           break;
         case 'notifications.unread_count':
           queryClient.setQueryData(
@@ -264,7 +313,7 @@ export function useNotifications() {
     [queryClient, patchList, upsertNotification]
   );
 
-  useNotificationsSocket({ enabled: true, onEvent: handleSocketEvent });
+  useNotificationsSocket({ enabled: realtime, onEvent: handleSocketEvent });
 
   return {
     notifications: list?.items ?? [],
@@ -275,5 +324,7 @@ export function useNotifications() {
     markAllRead: markAllReadMutation.mutate,
     markAllReadLoading: markAllReadMutation.isPending,
     remove: removeMutation.mutate,
+    removeAll: removeAllMutation.mutate,
+    removeAllLoading: removeAllMutation.isPending,
   };
 }

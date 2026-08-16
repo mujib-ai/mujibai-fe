@@ -1,11 +1,10 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
-import { useSTT } from '@/features/stt';
-import { Badge } from '@/shared/components/atoms/ui/badge';
+import { useLandingSTT, useSTT } from '@/features/stt';
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
 import { Loader2, Upload } from 'lucide-react';
 
@@ -13,13 +12,22 @@ import { MicButton } from './MicButton';
 
 export function SpeechToTextPanel() {
   const t = useTranslations('landingPage.interactiveExperience');
-  const [listening, setListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { transcribe, isTranscribing } = useSTT();
+  const appendTranscript = useCallback((text: string) => {
+    setTranscript(previous => `${previous} ${text}`.trim());
+  }, []);
+  const { isListening, isSpeaking, error, start, stop } = useLandingSTT({
+    onTranscript: appendTranscript,
+  });
 
   const toggleListening = () => {
-    setListening(prev => !prev);
+    if (isListening) {
+      stop();
+      return;
+    }
+    void start();
   };
 
   const handleFileChange = async (
@@ -29,8 +37,14 @@ export function SpeechToTextPanel() {
     event.target.value = '';
     if (!file) return;
 
-    const result = await transcribe(file);
-    setTranscript(result.text);
+    try {
+      const result = await transcribe(file);
+      if (result.language === 'ar') {
+        setTranscript(result.text);
+      }
+    } catch {
+      // The mutation displays the API error toast.
+    }
   };
 
   return (
@@ -49,13 +63,6 @@ export function SpeechToTextPanel() {
               <span className="text-muted-foreground text-xs">
                 {t('speechToText.textBox.label')}
               </span>
-              <Badge
-                variant="outline"
-                className="border-emerald-500/40 text-emerald-600 dark:text-emerald-400"
-              >
-                <span className="size-1.5 rounded-full bg-emerald-500" />
-                {t('speechToText.textBox.status')}
-              </Badge>
             </div>
             <p className="text-foreground min-h-24 text-sm whitespace-pre-wrap">
               {isTranscribing ? (
@@ -78,15 +85,22 @@ export function SpeechToTextPanel() {
               {t('speechToText.live.title')}
             </span>
             <MicButton
-              active={listening}
+              active={isListening}
               onClick={toggleListening}
               label={t('speechToText.live.idleTitle')}
             />
             <p className="text-muted-foreground text-sm">
-              {listening
-                ? t('speechToText.live.activeTitle')
-                : t('speechToText.live.idleTitle')}
+              {isSpeaking
+                ? t('speechToText.live.speakingTitle')
+                : isListening
+                  ? t('speechToText.live.activeTitle')
+                  : t('speechToText.live.idleTitle')}
             </p>
+            {error && (
+              <p role="alert" className="text-destructive text-xs">
+                {t('speechToText.live.error')}
+              </p>
+            )}
           </div>
         </div>
 

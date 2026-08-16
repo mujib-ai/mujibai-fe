@@ -6,12 +6,12 @@ export interface NotificationPublic {
   severity: NotificationSeverity;
   title: string;
   body: string;
-  resourceType?: string;
-  resourceId?: string;
-  metadata?: Record<string, unknown>;
-  readAt?: string;
+  resourceType: string | null;
+  resourceId: string | null;
+  metadata: Record<string, unknown> | null;
+  readAt: string | null;
   createdAt: string;
-  expiresAt?: string;
+  expiresAt: string | null;
 }
 
 export interface GetNotificationsQuery {
@@ -72,11 +72,6 @@ export interface NotificationCreatedEvent {
   data: NotificationPublic;
 }
 
-export interface NotificationUpdatedEvent {
-  type: 'notification.updated';
-  data: NotificationPublic;
-}
-
 export interface NotificationDeletedEvent {
   type: 'notification.deleted';
   data: { id: string };
@@ -90,6 +85,11 @@ export interface NotificationReadEvent {
 export interface NotificationsReadAllEvent {
   type: 'notifications.read_all';
   data: { unreadCount: 0 };
+}
+
+export interface NotificationsDeletedAllEvent {
+  type: 'notifications.deleted_all';
+  data: Record<string, never>;
 }
 
 export interface NotificationsUnreadCountEvent {
@@ -115,8 +115,8 @@ export interface NotificationSocketPingEvent {
 export type NotificationSocketEvent =
   | ConnectionReadyEvent
   | NotificationCreatedEvent
-  | NotificationUpdatedEvent
   | NotificationDeletedEvent
+  | NotificationsDeletedAllEvent
   | NotificationReadEvent
   | NotificationsReadAllEvent
   | NotificationsUnreadCountEvent

@@ -81,6 +81,13 @@ export function useNotificationsList() {
     onSettled: invalidate,
   });
 
+  const removeAllMutation = useMutation({
+    mutationFn: () => NotificationService.removeAll(),
+    onError: error => {
+      toast.error(getErrorMessage(error, 'Failed to delete all notifications'));
+    },
+    onSettled: invalidate,
+  });
   return {
     notifications: data?.items ?? [],
     pagination: data?.pagination,
@@ -97,5 +104,7 @@ export function useNotificationsList() {
     markAllRead: markAllReadMutation.mutate,
     markAllReadLoading: markAllReadMutation.isPending,
     remove: removeMutation.mutate,
+    removeAll: removeAllMutation.mutate,
+    removeAllLoading: removeAllMutation.isPending,
   };
 }

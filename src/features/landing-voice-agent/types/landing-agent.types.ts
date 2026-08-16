@@ -28,6 +28,10 @@ export type LandingAgentServerEvent =
   | { type: 'assistant_text_delta'; text: string }
   | { type: 'assistant_text_done'; text: string }
   | { type: 'assistant_audio_done' }
+  | {
+      type: 'session_ending';
+      reason: 'assistant_closing' | 'user_farewell';
+    }
   | { type: 'assistant_interrupted'; reason?: string }
   | { type: 'error'; message: string };
 

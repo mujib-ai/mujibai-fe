@@ -83,4 +83,7 @@ export class NotificationService {
   static async remove(notificationId: string): Promise<void> {
     await AxiosAPI.delete(`/notifications/${notificationId}`);
   }
+  static async removeAll(): Promise<void> {
+    await AxiosAPI.delete('/notifications');
+  }
 }

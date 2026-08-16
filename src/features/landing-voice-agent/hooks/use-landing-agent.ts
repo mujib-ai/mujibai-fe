@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { pcm16ToAudioBuffer } from '../lib/audio';
+import { LANDING_AGENT_PLAYBACK_SAMPLE_RATE } from '../lib/constants';
 import type {
   AgentState,
   LandingAgentServerEvent,
@@ -57,7 +58,9 @@ export function useLandingAgent() {
   const playbackContextRef = useRef<AudioContext | null>(null);
   const playbackSourcesRef = useRef(new Set<AudioBufferSourceNode>());
   const playbackEndRef = useRef(0);
+  const sessionEndingRef = useRef(false);
   const terminateTransportRef = useRef<() => void>(() => undefined);
+  const stopMicrophoneRef = useRef<() => void>(() => undefined);
 
   const stopPlayback = useCallback(() => {
     playbackSourcesRef.current.forEach(source => {
@@ -73,19 +76,27 @@ export function useLandingAgent() {
 
   const playAudio = useCallback(async (data: ArrayBuffer) => {
     try {
-      const context =
-        playbackContextRef.current ?? new AudioContext({ sampleRate: 24_000 });
+      const context = playbackContextRef.current ?? new AudioContext();
       playbackContextRef.current = context;
       if (context.state === 'suspended') await context.resume();
 
       const source = context.createBufferSource();
-      source.buffer = pcm16ToAudioBuffer(context, data);
+      source.buffer = pcm16ToAudioBuffer(
+        context,
+        data,
+        LANDING_AGENT_PLAYBACK_SAMPLE_RATE
+      );
       source.connect(context.destination);
       const startAt = Math.max(context.currentTime, playbackEndRef.current);
       source.start(startAt);
       playbackEndRef.current = startAt + source.buffer.duration;
       playbackSourcesRef.current.add(source);
-      source.onended = () => playbackSourcesRef.current.delete(source);
+      source.onended = () => {
+        playbackSourcesRef.current.delete(source);
+        if (sessionEndingRef.current && playbackSourcesRef.current.size === 0) {
+          setState('ended');
+        }
+      };
       setState('speaking');
     } catch {
       setError('audio');
@@ -119,11 +130,16 @@ export function useLandingAgent() {
           ]);
           break;
         case 'assistant_audio_done':
-          setState('listening');
+          if (!sessionEndingRef.current) setState('listening');
+          break;
+        case 'session_ending':
+          sessionEndingRef.current = true;
+          stopMicrophoneRef.current();
+          if (playbackSourcesRef.current.size === 0) setState('ended');
           break;
         case 'assistant_interrupted':
           stopPlayback();
-          setState('listening');
+          setState(sessionEndingRef.current ? 'ended' : 'listening');
           break;
         case 'error':
           setError(mapError(event.message));
@@ -156,6 +172,7 @@ export function useLandingAgent() {
       void playbackContextRef.current?.close();
       playbackContextRef.current = null;
       setSessionId(null);
+      sessionEndingRef.current = false;
     },
     [disconnect, stopMicrophone, stopPlayback]
   );
@@ -193,7 +210,8 @@ export function useLandingAgent() {
 
   useEffect(() => {
     terminateTransportRef.current = () => cleanup(false);
-  }, [cleanup]);
+    stopMicrophoneRef.current = stopMicrophone;
+  }, [cleanup, stopMicrophone]);
 
   useEffect(() => () => cleanup(false), [cleanup]);
 

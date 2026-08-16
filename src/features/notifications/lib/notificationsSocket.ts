@@ -1,12 +1,10 @@
-import { getAccessToken } from '@/shared/lib/auth-token';
-
 import type { NotificationSocketEvent } from '../types';
 
 const SERVER_EVENT_TYPES = new Set<NotificationSocketEvent['type']>([
   'connection.ready',
   'notification.created',
-  'notification.updated',
   'notification.deleted',
+  'notifications.deleted_all',
   'notification.read',
   'notifications.read_all',
   'notifications.unread_count',
@@ -14,12 +12,6 @@ const SERVER_EVENT_TYPES = new Set<NotificationSocketEvent['type']>([
   'ping',
 ]);
 
-/**
- * A native browser WebSocket can't set an Authorization header on the
- * handshake, so the access token is passed as a query param instead. This
- * relies on the backend accepting `?token=` as a fallback auth method for
- * this endpoint — confirm with backend before relying on this in production.
- */
 export function getNotificationsWebSocketUrl(): string {
   const value = process.env.NEXT_PUBLIC_NOTIFICATIONS_WS_URL;
   if (!value) throw new Error('configuration');
@@ -29,9 +21,8 @@ export function getNotificationsWebSocketUrl(): string {
   if (window.location.protocol === 'https:' && url.protocol !== 'wss:')
     throw new Error('configuration');
 
-  const token = getAccessToken();
-  if (!token) throw new Error('unauthenticated');
-  url.searchParams.set('token', token);
+  url.search = '';
+  url.hash = '';
 
   return url.toString();
 }

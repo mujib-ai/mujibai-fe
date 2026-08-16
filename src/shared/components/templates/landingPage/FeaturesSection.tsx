@@ -3,13 +3,14 @@ import { useTranslations } from 'next-intl';
 import { Container } from '@/shared/components/atoms/Container';
 import { Reveal } from '@/shared/components/atoms/Reveal';
 import FeatureCard from '@/shared/components/molecules/FeatureCard';
-
-const featureHumanDark = '/landingPage/feature-human-dark.png';
-const featureHumanLight = '/landingPage/feature-human-light.png';
-const handSystemDark = '/landingPage/hand-system-dark.png';
-const handSystemLight = '/landingPage/hand-system-light.png';
-const phoneAnalysisDark = '/landingPage/phone-analyis-dark.png';
-const phoneAnalysisLight = '/landingPage/phone-analyis-light.png';
+import {
+  AudioLines,
+  ChartNoAxesCombined,
+  Cloud,
+  LayoutDashboard,
+  PlugZap,
+  TicketPlus,
+} from 'lucide-react';
 
 export default function FeaturesSection() {
   const t = useTranslations('landingPage.features');
@@ -19,43 +20,37 @@ export default function FeaturesSection() {
       id: 1,
       title: t('featureOne.title'),
       description: t('featureOne.description'),
-      image: featureHumanLight,
-      imageDark: featureHumanDark,
+      icon: AudioLines,
     },
     {
       id: 2,
       title: t('featureTwo.title'),
       description: t('featureTwo.description'),
-      image: handSystemLight,
-      imageDark: handSystemDark,
+      icon: ChartNoAxesCombined,
     },
     {
       id: 3,
       title: t('featureThree.title'),
       description: t('featureThree.description'),
-      image: phoneAnalysisLight,
-      imageDark: phoneAnalysisDark,
+      icon: TicketPlus,
     },
     {
       id: 4,
       title: t('featureFour.title'),
       description: t('featureFour.description'),
-      image: featureHumanLight,
-      imageDark: featureHumanDark,
+      icon: LayoutDashboard,
     },
     {
       id: 5,
       title: t('featureFive.title'),
       description: t('featureFive.description'),
-      image: featureHumanLight,
-      imageDark: featureHumanDark,
+      icon: PlugZap,
     },
     {
       id: 6,
       title: t('featureSix.title'),
       description: t('featureSix.description'),
-      image: featureHumanLight,
-      imageDark: featureHumanDark,
+      icon: Cloud,
     },
   ];
 
@@ -84,8 +79,7 @@ export default function FeaturesSection() {
                 key={feature.id}
                 title={feature.title}
                 description={feature.description}
-                image={feature.image}
-                imageDark={feature.imageDark}
+                icon={feature.icon}
               />
             ))}
           </Reveal>

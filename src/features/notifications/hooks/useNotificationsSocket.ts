@@ -2,10 +2,7 @@
 
 import { useCallback, useEffect, useRef } from 'react';
 
-import {
-  NOTIFICATIONS_MAX_RECONNECTS,
-  NOTIFICATIONS_RECONNECT_DELAY_MS,
-} from '../lib/constants';
+import { NOTIFICATIONS_RECONNECT_DELAYS_MS } from '../lib/constants';
 import {
   getNotificationsWebSocketUrl,
   parseNotificationSocketEvent,
@@ -81,13 +78,15 @@ export function useNotificationsSocket({ enabled, onEvent }: SocketOptions) {
       if (socketRef.current !== socket) return;
       socketRef.current = null;
       if (!shouldReconnectRef.current || closeEvent.code === 1000) return;
-      if (reconnectCountRef.current >= NOTIFICATIONS_MAX_RECONNECTS) return;
-
+      const delay =
+        NOTIFICATIONS_RECONNECT_DELAYS_MS[
+          Math.min(
+            reconnectCountRef.current,
+            NOTIFICATIONS_RECONNECT_DELAYS_MS.length - 1
+          )
+        ];
       reconnectCountRef.current += 1;
-      reconnectTimerRef.current = setTimeout(
-        () => connectRef.current(),
-        NOTIFICATIONS_RECONNECT_DELAY_MS * reconnectCountRef.current
-      );
+      reconnectTimerRef.current = setTimeout(() => connectRef.current(), delay);
     };
   }, []);
 
