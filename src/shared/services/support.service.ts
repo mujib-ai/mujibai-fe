@@ -1,6 +1,8 @@
+import type {
+  SupportTicketResponse,
+  SupportTicketValues,
+} from '@/shared/types/support';
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
-
-import type { SupportTicketResponse, SupportTicketValues } from '../types';
 
 export const SupportService = {
   create: async (

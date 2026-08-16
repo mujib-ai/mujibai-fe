@@ -1,11 +1,13 @@
 'use client';
 
+import { SupportService } from '@/shared/services/support.service';
+import type {
+  ApiErrorResponse,
+  SupportTicketValues,
+} from '@/shared/types/support';
 import { useMutation } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
-
-import { SupportService } from '../services/support.service';
-import type { ApiErrorResponse, SupportTicketValues } from '../types';
 
 const getErrorMessage = (error: unknown, defaultMessage: string): string => {
   if (error instanceof AxiosError) {

@@ -71,25 +71,6 @@ export const PUBLIC_SEO_ROUTES = [
     lastModified: '2026-06-27',
   },
   {
-    key: 'contactUs',
-    path: '/contact',
-    label: 'Contact',
-    title: 'Contact us - mujibai',
-    description:
-      'Contact the mujibai team for sales, support, onboarding, and partnership questions about AI customer service.',
-    keywords: [
-      'contact mujibai',
-      'mujibai sales',
-      'mujibai support',
-      'AI customer service software support',
-      'business phone AI setup',
-    ],
-    category: 'Contact',
-    priority: 0.6,
-    changeFrequency: 'monthly',
-    lastModified: '2026-06-27',
-  },
-  {
     key: 'privacyPolicy',
     path: '/privacy',
     label: 'Privacy Policy',

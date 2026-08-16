@@ -13,7 +13,7 @@ export function useFooter() {
     { href: '#about', label: t('quickLinks.aboutUs') },
     { href: '#features', label: t('quickLinks.features') },
     { href: '#why-us', label: t('quickLinks.whyUs') },
-    { href: '/contact', label: t('quickLinks.contactUs') },
+    { href: '/#contact', label: t('quickLinks.contactUs') },
     { href: '#industries', label: t('quickLinks.industries') },
     { href: '#pricing', label: t('quickLinks.pricing') },
     { href: '/help-center', label: t('quickLinks.helpCenter') },

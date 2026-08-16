@@ -2,7 +2,7 @@
 
 import type { useTranslations } from 'next-intl';
 
-import useSupportTicket from '@/features/contactUs/hooks/useSupportTicket';
+import useSupportTicket from '@/shared/hooks/useSupportTicket';
 import { cn } from '@/shared/lib/utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';

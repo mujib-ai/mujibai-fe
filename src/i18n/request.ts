@@ -22,7 +22,6 @@ export default getRequestConfig(async () => {
   ).default;
   const landingPage = (await import(`./messages/${locale}/landingPage.json`))
     .default;
-  const contact = (await import(`./messages/${locale}/contact.json`)).default;
   const legal = (await import(`./messages/${locale}/legal.json`)).default;
   const cancellationPage = (
     await import(`./messages/${locale}/cancellationPage.json`)
@@ -45,7 +44,6 @@ export default getRequestConfig(async () => {
       ...resetPasswordPage,
       ...passwordResetRequested,
       ...landingPage,
-      ...contact,
       ...legal,
       ...cancellationPage,
       ...refundPage,

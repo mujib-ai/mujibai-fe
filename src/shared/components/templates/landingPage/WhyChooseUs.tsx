@@ -82,7 +82,7 @@ export default function WhyChooseUsSection() {
 
             <div>
               <Button
-                onClick={() => router.push('/contact')}
+                onClick={() => router.push('/#contact')}
                 variant="default"
                 size="lg"
                 className="bg-primary rounded-full px-15 font-bold text-black dark:text-white"

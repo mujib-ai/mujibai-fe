@@ -3,7 +3,6 @@ import type { MetadataRoute } from 'next';
 export type SeoRouteKey =
   | 'home'
   | 'helpCenter'
-  | 'contactUs'
   | 'privacyPolicy'
   | 'termsOfService'
   | 'refundPolicy'
