@@ -1,7 +1,7 @@
 import type { StatusColor } from '../types';
 
 /**
- * HeroUI's own stylesheet (`@heroui/styles`) isn't loaded in this project —
+ * Status colors are defined locally so they remain available without an external UI stylesheet.
  * every HeroUI primitive already in the codebase (Table, Pagination,
  * Skeleton, Modal) is styled entirely via explicit Tailwind classNames
  * rather than HeroUI's `color`/`variant` props. This map follows the same

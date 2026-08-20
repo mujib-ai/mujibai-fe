@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 export default function GoogleCalendarIntegrationErrorState({
   title,
@@ -38,7 +38,7 @@ export default function GoogleCalendarIntegrationErrorState({
         >
           {isRetrying ? (
             <span className="flex items-center gap-2">
-              <Spinner size="sm" color="current" />
+              <Spinner />
               {retryLabel}
             </span>
           ) : (

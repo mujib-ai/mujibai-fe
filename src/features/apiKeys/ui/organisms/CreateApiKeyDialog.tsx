@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -181,7 +181,7 @@ export default function CreateApiKeyDialog({
             <Button type="submit" disabled={loading}>
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {t('create.submit')}
                 </span>
               ) : (

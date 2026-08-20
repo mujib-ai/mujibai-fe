@@ -13,8 +13,8 @@ import StatisticsCards from '../organisms/StatisticsCards';
 
 const chartGridFallback = (
   <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-    <div className="bg-muted h-75 animate-pulse rounded-2xl lg:col-span-2" />
-    <div className="bg-muted h-75 animate-pulse rounded-2xl" />
+    <div className="bg-primary/10 dark:bg-muted h-75 animate-pulse rounded-2xl lg:col-span-2" />
+    <div className="bg-primary/10 dark:bg-muted h-75 animate-pulse rounded-2xl" />
   </div>
 );
 

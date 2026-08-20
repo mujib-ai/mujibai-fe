@@ -75,7 +75,7 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
                       name={item.icon}
                       className="size-5! [&_path]:stroke-current [&_path]:stroke-[0.3]"
                     />
-                    <span className="text-sm font-semibold text-black dark:text-white">
+                    <span className="dark: text-sm font-semibold">
                       {item.title}
                     </span>
                   </Link>

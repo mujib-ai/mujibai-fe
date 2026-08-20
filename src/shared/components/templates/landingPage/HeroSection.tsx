@@ -15,7 +15,7 @@ export default function HeroSection() {
 
       <div className="flex flex-1 items-center justify-center px-6">
         <Container className="flex flex-col items-center gap-8 text-center">
-          <h1 className="text-3xl leading-tight font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl dark:text-white">
+          <h1 className="dark: text-3xl leading-tight font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl">
             {t('title')} <span className="text-primary">{t('subTitle')}</span>
           </h1>
 
@@ -26,11 +26,11 @@ export default function HeroSection() {
           <div className="mt-4 flex h-auto flex-col justify-center gap-4 sm:h-17.5 sm:flex-row">
             <Button
               onClick={() => router.push('/#contact')}
-              className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium text-white shadow-md transition sm:px-14 sm:text-lg"
+              className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium shadow-md transition sm:px-14 sm:text-lg"
             >
               {t('button1')}
             </Button>
-            <Button className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium text-white shadow-md transition sm:px-14 sm:text-lg">
+            <Button className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium shadow-md transition sm:px-14 sm:text-lg">
               {t('button2')}
             </Button>
           </div>

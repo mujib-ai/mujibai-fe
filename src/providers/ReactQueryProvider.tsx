@@ -16,7 +16,7 @@ export default function ReactQueryProvider({
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000, // 1 minute
+            staleTime: 5 * 60 * 1000,
             retry: 2,
           },
         },

@@ -15,8 +15,8 @@ import { Container } from '@/shared/components/atoms/Container';
 import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
 import Logo from '@/shared/components/atoms/Logo';
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
-import { Spinner } from '@heroui/react';
 import { ShieldCheck } from 'lucide-react';
 
 export default function TwoFactorVerificationPage() {
@@ -57,7 +57,7 @@ export default function TwoFactorVerificationPage() {
     const destination = pendingLogin?.destination;
     clearPendingTwoFactorLogin();
     const loginUrl =
-      destination && destination !== '/'
+      destination && destination !== '/dashboard'
         ? `/login?from=${encodeURIComponent(destination)}`
         : '/login';
     router.replace(loginUrl);
@@ -114,11 +114,11 @@ export default function TwoFactorVerificationPage() {
             <Button
               type="submit"
               disabled={loginLoading || !/^\d{6}$/.test(code)}
-              className="mt-2 h-12 w-full rounded-full text-base text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+              className="mt-2 h-12 w-full rounded-full text-base transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
             >
               {loginLoading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {t('loading')}
                 </span>
               ) : (

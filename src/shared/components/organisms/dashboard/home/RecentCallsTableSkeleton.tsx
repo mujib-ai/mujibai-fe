@@ -1,9 +1,17 @@
 'use client';
 
-import { Skeleton, Table } from '@heroui/react';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/shared/components/atoms/ui/table';
 
 const SKELETON_ROWS = 4;
-const BAR = 'rounded-md bg-black/10 dark:bg-white/10';
+const BAR = 'rounded-md bg-primary/10 dark:bg-white/10';
 
 export default function RecentCallsTableSkeleton({
   title,
@@ -15,65 +23,59 @@ export default function RecentCallsTableSkeleton({
   const rows = Array.from({ length: SKELETON_ROWS });
 
   return (
-    <Table.ScrollContainer className="overflow-x-auto">
-      <Table.Content
-        aria-label={title}
-        className="w-full min-w-160 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
-      >
-        <Table.Header>
-          <Table.Column
-            isRowHeader
+    <Table
+      aria-label={title}
+      className="min-w-160 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
+    >
+      <TableHeader>
+        <TableRow>
+          <TableHead
+            scope="row"
             className={`${alignClass} text-foreground px-4 py-3 font-medium`}
           >
-            <Skeleton animationType="none" className={`${BAR} h-4 w-16`} />
-          </Table.Column>
-          <Table.Column
+            <Skeleton className={`${BAR} h-4 w-16`} />
+          </TableHead>
+          <TableHead
             className={`${alignClass} text-foreground px-4 py-3 font-medium`}
           >
-            <Skeleton animationType="none" className={`${BAR} h-4 w-16`} />
-          </Table.Column>
-          <Table.Column
+            <Skeleton className={`${BAR} h-4 w-16`} />
+          </TableHead>
+          <TableHead
             className={`${alignClass} text-foreground px-4 py-3 font-medium`}
           >
-            <Skeleton animationType="none" className={`${BAR} h-4 w-16`} />
-          </Table.Column>
-          <Table.Column
+            <Skeleton className={`${BAR} h-4 w-16`} />
+          </TableHead>
+          <TableHead
             className={`${alignClass} text-foreground px-4 py-3 font-medium`}
           >
-            <Skeleton animationType="none" className={`${BAR} h-4 w-16`} />
-          </Table.Column>
-          <Table.Column className="text-foreground px-4 py-3 text-center font-medium">
-            <Skeleton
-              animationType="none"
-              className={`${BAR} mx-auto h-4 w-16`}
-            />
-          </Table.Column>
-        </Table.Header>
-        <Table.Body>
-          {rows.map((_, index) => (
-            <Table.Row key={index} className="border-t border-transparent">
-              <Table.Cell className="px-4 py-3">
-                <Skeleton animationType="none" className={`${BAR} h-4 w-32`} />
-              </Table.Cell>
-              <Table.Cell className="px-4 py-3">
-                <Skeleton animationType="none" className={`${BAR} h-4 w-16`} />
-              </Table.Cell>
-              <Table.Cell className="px-4 py-3">
-                <Skeleton animationType="none" className={`${BAR} h-4 w-28`} />
-              </Table.Cell>
-              <Table.Cell className="px-4 py-3">
-                <Skeleton animationType="none" className={`${BAR} h-4 w-20`} />
-              </Table.Cell>
-              <Table.Cell className="px-4 py-3 text-center">
-                <Skeleton
-                  animationType="none"
-                  className={`${BAR} mx-auto h-5 w-16 rounded-full`}
-                />
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Content>
-    </Table.ScrollContainer>
+            <Skeleton className={`${BAR} h-4 w-16`} />
+          </TableHead>
+          <TableHead className="text-foreground px-4 py-3 text-center font-medium">
+            <Skeleton className={`${BAR} mx-auto h-4 w-16`} />
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {rows.map((_, index) => (
+          <TableRow key={index} className="border-t border-transparent">
+            <TableCell className="px-4 py-3">
+              <Skeleton className={`${BAR} h-4 w-32`} />
+            </TableCell>
+            <TableCell className="px-4 py-3">
+              <Skeleton className={`${BAR} h-4 w-16`} />
+            </TableCell>
+            <TableCell className="px-4 py-3">
+              <Skeleton className={`${BAR} h-4 w-28`} />
+            </TableCell>
+            <TableCell className="px-4 py-3">
+              <Skeleton className={`${BAR} h-4 w-20`} />
+            </TableCell>
+            <TableCell className="px-4 py-3 text-center">
+              <Skeleton className={`${BAR} mx-auto h-5 w-16 rounded-full`} />
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

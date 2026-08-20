@@ -32,7 +32,7 @@ export default function ActionsButtons({
       {!isAuthenticated && (
         <div className="flex gap-1.5 lg:gap-2 xl:gap-2.5">
           <Button
-            className="h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base dark:text-white"
+            className="dark: h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base"
             variant="default"
           >
             <Link
@@ -59,7 +59,7 @@ export default function ActionsButtons({
       {isAuthenticated && (
         <div className="flex gap-1.5 lg:gap-2 xl:gap-2.5">
           <Button
-            className="h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base dark:text-white"
+            className="dark: h-9 rounded-full text-sm font-medium lg:h-10 xl:h-11 xl:text-base"
             variant="default"
           >
             <Link

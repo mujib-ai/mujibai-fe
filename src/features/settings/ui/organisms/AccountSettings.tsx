@@ -1,9 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useTranslations } from 'next-intl';
 
 import { useAuth } from '@/features/auth';
-import PasswordInput from '@/shared/components/atoms/PasswordInput';
 import { Button } from '@/shared/components/atoms/ui/button';
 import {
   Card,
@@ -15,10 +16,12 @@ import {
 import SettingsFormField from '../atoms/SettingsFormField';
 import { AppearancePreferences } from '../molecules/AppearancePreferences';
 import { TenantLogoUpload } from '../molecules/TenantLogoUpload';
+import { ResetPasswordDialog } from './ResetPasswordDialog';
 
 export function AccountSettings() {
   const t = useTranslations('settings.accountSettings');
   const { user } = useAuth();
+  const [isResetPasswordOpen, setResetPasswordOpen] = useState(false);
 
   return (
     <div className="flex w-full flex-col gap-6">
@@ -76,32 +79,23 @@ export function AccountSettings() {
                 {t('passwordManagementDescription')}
               </p>
             </div>
-            <SettingsFormField
-              id="currentPassword"
-              label={t('currentPassword')}
-            >
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <SettingsFormField id="newPassword" label={t('newPassword')}>
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <SettingsFormField
-              id="confirmPassword"
-              label={t('confirmPassword')}
-            >
-              <PasswordInput placeholder="********" />
-            </SettingsFormField>
-            <div className="col-span-full mt-6 flex justify-end">
+            <div className="col-span-full">
               <Button
-                className="rounded-full px-8 py-2 font-semibold"
                 type="button"
+                variant="outline"
+                onClick={() => setResetPasswordOpen(true)}
               >
-                {t('saveChanges')}
+                {t('resetPassword')}
               </Button>
             </div>
           </form>
         </CardContent>
       </Card>
+
+      <ResetPasswordDialog
+        open={isResetPasswordOpen}
+        onOpenChange={setResetPasswordOpen}
+      />
     </div>
   );
 }

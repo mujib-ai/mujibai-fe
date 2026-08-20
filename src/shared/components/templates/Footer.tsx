@@ -55,10 +55,10 @@ const Footer = () => {
                               rel="noopener noreferrer"
                               aria-label={label}
                             >
-                              <Icon className="size-5 text-[#3B82F6] dark:text-white" />
+                              <Icon className="dark: size-5 text-[#3B82F6]" />
                             </Link>
                           ) : (
-                            <Icon className="size-5 cursor-pointer text-[#3B82F6] dark:text-white" />
+                            <Icon className="dark: size-5 cursor-pointer text-[#3B82F6]" />
                           )}
                         </li>
                       ))}
@@ -98,7 +98,7 @@ const Footer = () => {
                         className={`flex ${index === 2 ? 'items-start' : 'items-center'} gap-3`}
                       >
                         <div className="cursor-pointer rounded-full bg-[#3B82F6]/20 p-2 transition-colors hover:bg-[#3B82F6]/40 dark:bg-white/20 dark:hover:bg-white/40">
-                          <item.Icon className="size-5 text-[#3B82F6] dark:text-white" />
+                          <item.Icon className="dark: size-5 text-[#3B82F6]" />
                         </div>
                         {index === 2 ? (
                           <p className="w-[50%]">{item.text}</p>

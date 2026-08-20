@@ -36,7 +36,7 @@ export default function AiOutboundTable({
       {isMobile ? (
         <AiOutboundCardList items={items} t={t} />
       ) : (
-        <Table className="bg-[#FFFFFF73] dark:bg-[#00143473]">
+        <Table className="bg-primary/5 dark:bg-[#00143473]">
           <TableHeader>
             <TableRow>
               <TableHead

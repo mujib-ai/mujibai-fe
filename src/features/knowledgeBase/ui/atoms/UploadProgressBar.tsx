@@ -1,4 +1,4 @@
-import { ProgressBar } from '@heroui/react';
+import { Progress } from '@/shared/components/atoms/ui/progress';
 
 interface UploadProgressBarProps {
   value: number;
@@ -14,17 +14,12 @@ export default function UploadProgressBar({
   const clamped = Math.min(100, Math.max(0, value));
 
   return (
-    <ProgressBar value={clamped} aria-label={label} className={className}>
+    <div className={className}>
       <div className="text-muted-foreground mb-1 flex items-center justify-between text-xs">
         <span>{label}</span>
         <span>{clamped}%</span>
       </div>
-      <ProgressBar.Track className="bg-primary/20 relative h-2 w-full overflow-hidden rounded-full">
-        <ProgressBar.Fill
-          className="bg-primary h-full rounded-full transition-all"
-          style={{ width: `${clamped}%` }}
-        />
-      </ProgressBar.Track>
-    </ProgressBar>
+      <Progress value={clamped} aria-label={label} className="h-2" />
+    </div>
   );
 }

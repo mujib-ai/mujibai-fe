@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import { Button } from '@/shared/components/atoms/ui/button';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 export default function GoogleCalendarConnectCard({
   title,
@@ -42,7 +42,7 @@ export default function GoogleCalendarConnectCard({
       >
         {isConnecting ? (
           <span className="flex items-center gap-2">
-            <Spinner size="sm" color="current" />
+            <Spinner />
             {connectLabel}
           </span>
         ) : (

@@ -9,7 +9,10 @@ import * as z from 'zod';
 
 import { setPendingTwoFactorLogin } from '../lib/pending-two-factor';
 import { getAllowedRedirectFrom } from '../lib/redirect';
-import { isTwoFactorRequiredError } from '../services/auth.service';
+import {
+  AuthService,
+  isTwoFactorRequiredError,
+} from '../services/auth.service';
 import useAuth from './useAuth';
 
 const loginSchema = z.object({
@@ -40,19 +43,26 @@ export function useLoginForm() {
 
   const completeLogin = async (values: LoginFormData) => {
     try {
-      const response = await handleLogin(values);
-      const destination = from ?? '/';
-      if (response.data.tenant?.isTwoFactorEnabled === true) {
-        setPendingTwoFactorLogin(values, destination);
-        reset();
-        router.push('/verify-2fa');
-        return;
+      await handleLogin(values);
+      const destination = from ?? '/dashboard';
+
+      let isTwoFactorEnabled = false;
+      try {
+        const me = await AuthService.checkAuth();
+        isTwoFactorEnabled = me.data.isTwoFactorEnabled === true;
+      } catch {
+        // Best-effort status check; fall back to nudging the user.
       }
+
       reset();
-      router.push(destination);
+      if (isTwoFactorEnabled) {
+        router.push(destination);
+      } else {
+        router.push(`/security-check?from=${encodeURIComponent(destination)}`);
+      }
     } catch (error) {
       if (isTwoFactorRequiredError(error)) {
-        setPendingTwoFactorLogin(values, from ?? '/');
+        setPendingTwoFactorLogin(values, from ?? '/dashboard');
         router.push('/verify-2fa');
       }
     }

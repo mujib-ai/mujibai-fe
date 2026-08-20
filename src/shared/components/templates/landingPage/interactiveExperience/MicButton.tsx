@@ -55,7 +55,7 @@ export function MicButton({
           active && 'scale-105'
         )}
       >
-        <Mic className="size-6 text-white" strokeWidth={1.75} />
+        <Mic className="size-6" strokeWidth={1.75} />
       </div>
     </button>
   );

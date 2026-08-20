@@ -180,7 +180,7 @@ export function NotificationPreference() {
           </CardHeader>
           <CardContent className="bg-surface rounded-2xl p-6">
             <div className="flex flex-col gap-4">
-              <Label className="text-base font-medium text-white">
+              <Label className="text-base font-medium">
                 {t('newInvoice.chooseYourPreference')}
               </Label>
 

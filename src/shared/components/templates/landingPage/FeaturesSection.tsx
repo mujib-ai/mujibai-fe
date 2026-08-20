@@ -58,7 +58,7 @@ export default function FeaturesSection() {
     <section className="relative py-10">
       <Container className="my-10 flex flex-col items-center justify-center gap-3 text-center">
         <Reveal>
-          <h1 className="text-4xl leading-tight font-bold text-gray-900 dark:text-white">
+          <h1 className="dark: text-4xl leading-tight font-bold text-gray-900">
             {t('title')}
           </h1>
           <p className="max-w-[700px] text-base text-gray-600 dark:text-gray-300">

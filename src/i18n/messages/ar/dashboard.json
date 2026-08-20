@@ -458,9 +458,7 @@
     "lastUsed": "آخر استخدام",
     "lastUsedNever": "لم يُستخدم",
     "permission": "الصلاحية",
-    "usagePage": "صفحه الاستخدام",
     "createNewSecretKey": "إنشاء مفتاح سري جديد",
-    "viewUsage": "عرض الاستخدام لكل مفتاح API على",
     "errorPrefix": "خطأ: ",
     "empty": "لا توجد مفاتيح API بعد. أنشئ مفتاحًا للبدء.",
     "environments": {
@@ -530,6 +528,23 @@
       "currentPassword": "كلمة المرور الحالية",
       "newPassword": "كلمة المرور الجديدة",
       "confirmPassword": "تأكيد كلمة المرور",
+      "resetPassword": "إعادة تعيين كلمة المرور",
+      "changePassword": {
+        "currentPasswordRequired": "كلمة المرور الحالية مطلوبة",
+        "passwordRequired": "كلمة المرور مطلوبة",
+        "passwordTooShort": "يجب أن تكون كلمة المرور ٨ أحرف على الأقل",
+        "passwordTooLong": "يجب ألا تزيد كلمة المرور عن ٧٢ حرفًا",
+        "passwordUppercase": "يجب أن تحتوي كلمة المرور على حرف إنجليزي كبير",
+        "passwordLowercase": "يجب أن تحتوي كلمة المرور على حرف إنجليزي صغير",
+        "passwordDigit": "يجب أن تحتوي كلمة المرور على رقم",
+        "confirmPasswordRequired": "يرجى تأكيد كلمة المرور الجديدة",
+        "passwordsMustMatch": "كلمتا المرور غير متطابقتين",
+        "passwordInvalid": "كلمة المرور لا تستوفي المتطلبات",
+        "currentPasswordIncorrect": "كلمة المرور الحالية غير صحيحة",
+        "tooManyAttempts": "محاولات كثيرة جدًا. يرجى الانتظار والمحاولة مرة أخرى.",
+        "changeSuccess": "تم تغيير كلمة المرور بنجاح.",
+        "changeError": "فشل تغيير كلمة المرور، حاول مرة أخرى"
+      },
       "logo": {
         "title": "شعار المنشأة",
         "description": "ارفع شعارًا بصيغة PNG أو JPG/JPEG أو WebP أو SVG بحجم لا يتجاوز 2 ميجابايت.",

@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { RefreshCw } from 'lucide-react';
 
 import type {
@@ -77,7 +77,7 @@ export default function GoogleCalendarConfiguration({
             disabled={isLoadingCalendars}
           >
             {isLoadingCalendars ? (
-              <Spinner size="sm" color="current" />
+              <Spinner />
             ) : (
               <RefreshCw className="size-4" />
             )}
@@ -93,7 +93,7 @@ export default function GoogleCalendarConfiguration({
             >
               {isLoadingMoreCalendars ? (
                 <span className="flex items-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {t('loadMoreCalendars')}
                 </span>
               ) : (
@@ -112,7 +112,7 @@ export default function GoogleCalendarConfiguration({
           >
             {isDisconnecting ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('disconnect')}
               </span>
             ) : (

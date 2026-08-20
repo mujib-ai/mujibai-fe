@@ -458,9 +458,7 @@
     "lastUsed": "Last Used",
     "lastUsedNever": "Never",
     "permission": "Permission",
-    "usagePage": "Useage Page",
     "createNewSecretKey": "Create New Secret Key",
-    "viewUsage": "View usage per API key on the",
     "errorPrefix": "Error: ",
     "empty": "No API keys yet. Create one to get started.",
     "environments": {
@@ -530,6 +528,23 @@
       "currentPassword": "Current Password",
       "newPassword": "New Password",
       "confirmPassword": "Confirm Password",
+      "resetPassword": "Reset Password",
+      "changePassword": {
+        "currentPasswordRequired": "Current password is required",
+        "passwordRequired": "Password is required",
+        "passwordTooShort": "Password must be at least 8 characters",
+        "passwordTooLong": "Password must be no more than 72 characters",
+        "passwordUppercase": "Password must contain an uppercase letter",
+        "passwordLowercase": "Password must contain a lowercase letter",
+        "passwordDigit": "Password must contain a number",
+        "confirmPasswordRequired": "Please confirm your new password",
+        "passwordsMustMatch": "Passwords must match",
+        "passwordInvalid": "Password does not meet the requirements",
+        "currentPasswordIncorrect": "Current password is incorrect",
+        "tooManyAttempts": "Too many attempts. Please wait and try again.",
+        "changeSuccess": "Your password has been changed successfully.",
+        "changeError": "Failed to change password, please try again"
+      },
       "logo": {
         "title": "Tenant Logo",
         "description": "Upload a PNG, JPG/JPEG, WebP, or SVG logo up to 2 MB.",

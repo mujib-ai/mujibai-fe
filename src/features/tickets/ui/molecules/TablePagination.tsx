@@ -3,6 +3,15 @@
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { buttonVariants } from '@/shared/components/atoms/ui/button';
 import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/shared/components/atoms/ui/pagination';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -10,7 +19,6 @@ import {
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
 import { cn } from '@/shared/lib/utils';
-import { Pagination } from '@heroui/react';
 
 const PAGE_SIZE_OPTIONS = [6, 12, 20, 24] as const;
 
@@ -102,35 +110,32 @@ export default function TablePagination({
       </div>
       {totalPages > 1 && (
         <Pagination className="mx-0 flex w-fit items-center rounded-[6px] bg-[#FFFFFFBF] py-1 dark:bg-[#001434A6]">
-          <Pagination.Content className="flex flex-row items-center gap-1">
-            <Pagination.Item>
-              <Pagination.Previous
-                aria-label="Go to previous page"
-                isDisabled={page <= 1}
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                disabled={page <= 1}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:ps-2.5'
+                  'text-foreground gap-1 px-2.5 sm:ps-2.5'
                 )}
-                onPress={() => goTo(page - 1)}
+                onClick={() => goTo(page - 1)}
               >
-                <Pagination.PreviousIcon>
-                  {locale === 'ar' ? (
-                    <ThemedIcon name="arrow-right" size={16} />
-                  ) : (
-                    <ThemedIcon name="arrow-left" size={16} />
-                  )}
-                </Pagination.PreviousIcon>
+                {locale === 'ar' ? (
+                  <ThemedIcon name="arrow-right" size={16} />
+                ) : (
+                  <ThemedIcon name="arrow-left" size={16} />
+                )}
                 <span className="hidden sm:block">{previousText}</span>
-              </Pagination.Previous>
-            </Pagination.Item>
+              </PaginationPrevious>
+            </PaginationItem>
             {buildPageList(page, totalPages).map((item, index) =>
               item === 'ellipsis' ? (
-                <Pagination.Item key={`ellipsis-${index}`}>
-                  <Pagination.Ellipsis className="text-foreground flex size-9 items-center justify-center" />
-                </Pagination.Item>
+                <PaginationItem key={`ellipsis-${index}`}>
+                  <PaginationEllipsis className="text-foreground" />
+                </PaginationItem>
               ) : (
-                <Pagination.Item key={item}>
-                  <Pagination.Link
+                <PaginationItem key={item}>
+                  <PaginationLink
                     isActive={item === page}
                     className={cn(
                       buttonVariants({
@@ -141,34 +146,31 @@ export default function TablePagination({
                         ? 'text-foreground bg-[#00d9ff] font-medium hover:bg-[#00b9e6]'
                         : 'text-foreground'
                     )}
-                    onPress={() => goTo(item)}
+                    onClick={() => goTo(item)}
                   >
                     {item}
-                  </Pagination.Link>
-                </Pagination.Item>
+                  </PaginationLink>
+                </PaginationItem>
               )
             )}
-            <Pagination.Item>
-              <Pagination.Next
-                aria-label="Go to next page"
-                isDisabled={page >= totalPages}
+            <PaginationItem>
+              <PaginationNext
+                disabled={page >= totalPages}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  'text-foreground gap-1 px-2.5 disabled:pointer-events-none disabled:opacity-50 sm:pe-2.5'
+                  'text-foreground gap-1 px-2.5 sm:pe-2.5'
                 )}
-                onPress={() => goTo(page + 1)}
+                onClick={() => goTo(page + 1)}
               >
                 <span className="hidden sm:block">{nextText}</span>
-                <Pagination.NextIcon>
-                  {locale === 'ar' ? (
-                    <ThemedIcon name="arrow-left" size={16} />
-                  ) : (
-                    <ThemedIcon name="arrow-right" size={16} />
-                  )}
-                </Pagination.NextIcon>
-              </Pagination.Next>
-            </Pagination.Item>
-          </Pagination.Content>
+                {locale === 'ar' ? (
+                  <ThemedIcon name="arrow-left" size={16} />
+                ) : (
+                  <ThemedIcon name="arrow-right" size={16} />
+                )}
+              </PaginationNext>
+            </PaginationItem>
+          </PaginationContent>
         </Pagination>
       )}
     </div>

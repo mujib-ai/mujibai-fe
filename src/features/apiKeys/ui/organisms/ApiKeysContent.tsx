@@ -19,8 +19,6 @@ interface ApiKeysContentProps {
   onRevokeKey: (apiKey: ApiKeyPublic) => void;
   locale: string;
   translations: {
-    viewUsage: string;
-    usagePage: string;
     createNewSecretKey: string;
     name: string;
     secretKey: string;
@@ -63,8 +61,6 @@ export default function ApiKeysContent({
     <div className="space-y-4">
       <ApiKeysHeader
         onCreateNewKey={onCreateNewKey}
-        viewUsageText={translations.viewUsage}
-        usagePageText={translations.usagePage}
         createNewSecretKeyText={translations.createNewSecretKey}
       />
       {error ? (

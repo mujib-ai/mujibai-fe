@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
-import { Skeleton } from '@heroui/react';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 
 import {
   useSlackChannels,
@@ -55,18 +55,9 @@ export default function SlackIntegrationPage() {
   if (isLoading) {
     return (
       <div className="flex flex-col gap-3 rounded-lg bg-white p-4 dark:bg-[#FFFFFF0F]">
-        <Skeleton
-          animationType="none"
-          className="h-10 w-10 rounded-full bg-black/10 dark:bg-white/10"
-        />
-        <Skeleton
-          animationType="none"
-          className="h-4 w-24 rounded-md bg-black/10 dark:bg-white/10"
-        />
-        <Skeleton
-          animationType="none"
-          className="h-9 w-full rounded-full bg-black/10 dark:bg-white/10"
-        />
+        <Skeleton className="bg-primary/10 h-10 w-10 rounded-full dark:bg-white/10" />
+        <Skeleton className="bg-primary/10 h-4 w-24 rounded-md dark:bg-white/10" />
+        <Skeleton className="bg-primary/10 h-9 w-full rounded-full dark:bg-white/10" />
       </div>
     );
   }

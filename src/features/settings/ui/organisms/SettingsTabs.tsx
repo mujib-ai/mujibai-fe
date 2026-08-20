@@ -36,7 +36,7 @@ export function SettingsTabs({
           <TabsTrigger
             key={tab.value}
             value={tab.value}
-            className="flex-1 rounded-full px-6 py-5 text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] data-[state=active]:text-white dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
+            className="data-[state=active]: flex-1 rounded-full px-6 py-5 text-sm font-medium text-gray-700 transition-all duration-300 ease-in-out hover:bg-[#06B6D420] data-[state=active]:bg-[#06B6D4] dark:text-gray-300 dark:data-[state=active]:bg-[#06B6D440]"
           >
             {tab.label}
           </TabsTrigger>

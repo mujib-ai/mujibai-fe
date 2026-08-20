@@ -3,6 +3,15 @@
 import { ThemedIcon } from '@/shared/components/atoms/ThemedIcon';
 import { buttonVariants } from '@/shared/components/atoms/ui/button';
 import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/shared/components/atoms/ui/pagination';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -10,7 +19,6 @@ import {
   SelectValue,
 } from '@/shared/components/atoms/ui/select';
 import { cn } from '@/shared/lib/utils';
-import { Pagination } from '@heroui/react';
 
 export default function TablePagination({
   ofText,
@@ -43,27 +51,24 @@ export default function TablePagination({
         </p>
       </div>
       <Pagination className="mx-0 flex w-fit items-center rounded-[6px] bg-[#FFFFFFBF] py-1 dark:bg-[#001434A6]">
-        <Pagination.Content className="flex flex-row items-center gap-1">
-          <Pagination.Item>
-            <Pagination.Previous
-              aria-label="Go to previous page"
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'default' }),
                 'text-foreground gap-1 px-2.5 sm:ps-2.5'
               )}
             >
-              <Pagination.PreviousIcon>
-                {locale === 'ar' ? (
-                  <ThemedIcon name="arrow-right" size={16} />
-                ) : (
-                  <ThemedIcon name="arrow-left" size={16} />
-                )}
-              </Pagination.PreviousIcon>
+              {locale === 'ar' ? (
+                <ThemedIcon name="arrow-right" size={16} />
+              ) : (
+                <ThemedIcon name="arrow-left" size={16} />
+              )}
               <span className="hidden sm:block">{previousText}</span>
-            </Pagination.Previous>
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Link
+            </PaginationPrevious>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
               isActive
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'icon' }),
@@ -71,60 +76,57 @@ export default function TablePagination({
               )}
             >
               1
-            </Pagination.Link>
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Link
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'icon' }),
                 'text-foreground'
               )}
             >
               2
-            </Pagination.Link>
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Link
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'icon' }),
                 'text-foreground'
               )}
             >
               3
-            </Pagination.Link>
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Ellipsis className="text-foreground flex size-9 items-center justify-center" />
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Link
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationEllipsis className="text-foreground" />
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationLink
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'icon' }),
                 'text-foreground'
               )}
             >
               12
-            </Pagination.Link>
-          </Pagination.Item>
-          <Pagination.Item>
-            <Pagination.Next
-              aria-label="Go to next page"
+            </PaginationLink>
+          </PaginationItem>
+          <PaginationItem>
+            <PaginationNext
               className={cn(
                 buttonVariants({ variant: 'ghost', size: 'default' }),
                 'text-foreground gap-1 px-2.5 sm:pe-2.5'
               )}
             >
               <span className="hidden sm:block">{nextText}</span>
-              <Pagination.NextIcon>
-                {locale === 'ar' ? (
-                  <ThemedIcon name="arrow-left" size={16} />
-                ) : (
-                  <ThemedIcon name="arrow-right" size={16} />
-                )}
-              </Pagination.NextIcon>
-            </Pagination.Next>
-          </Pagination.Item>
-        </Pagination.Content>
+              {locale === 'ar' ? (
+                <ThemedIcon name="arrow-left" size={16} />
+              ) : (
+                <ThemedIcon name="arrow-right" size={16} />
+              )}
+            </PaginationNext>
+          </PaginationItem>
+        </PaginationContent>
       </Pagination>
     </div>
   );

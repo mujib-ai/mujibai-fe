@@ -2,7 +2,7 @@
 
 import { useEnrollmentForm } from '@/features/enroll';
 import { Button } from '@/shared/components/atoms/ui/button';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 import { FormField, FormFieldTextarea, FormFieldWebsite } from '../atoms';
 
@@ -100,12 +100,12 @@ export default function EnrollmentForm() {
         <div className="mt-6 flex justify-end md:col-span-2">
           <Button
             type="submit"
-            className="rounded-full bg-[#00B4D8] px-8 py-2 text-white shadow-md transition hover:bg-[#0096C7] disabled:opacity-50"
+            className="rounded-full bg-[#00B4D8] px-8 py-2 shadow-md transition hover:bg-[#0096C7] disabled:opacity-50"
             disabled={isEnrollLoading}
           >
             {isEnrollLoading ? (
               <>
-                <Spinner size="md" color="current" />
+                <Spinner />
                 <span className="ml-2">{t('submitting')}</span>
               </>
             ) : (

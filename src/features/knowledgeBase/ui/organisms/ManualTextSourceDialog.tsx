@@ -3,7 +3,8 @@
 import { useTranslations } from 'next-intl';
 
 import { FormField } from '@/shared/components/atoms/FormField';
-import { Button, Spinner } from '@heroui/react';
+import { Button } from '@/shared/components/atoms/ui/button';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 import { useManualTextSourceForm } from '../../hooks/forms';
 import type { ManualTextSourceDialogProps } from '../../interfaces';
@@ -13,10 +14,6 @@ const INPUT_CLASS =
   'border-input placeholder:text-muted-foreground h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50';
 const TEXTAREA_CLASS =
   'border-input placeholder:text-muted-foreground min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50';
-const BUTTON_OUTLINE_CLASS =
-  'border-input hover:bg-accent inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md border bg-transparent px-4 py-2 text-sm shadow-xs disabled:pointer-events-none disabled:opacity-50';
-const BUTTON_PRIMARY_CLASS =
-  'bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center justify-center gap-1.5 rounded-md px-4 py-2 text-sm disabled:pointer-events-none disabled:opacity-50';
 
 export default function ManualTextSourceDialog({
   open,
@@ -71,47 +68,19 @@ export default function ManualTextSourceDialog({
           />
         </FormField>
 
-        <FormField
-          label={t('manualText.categoryLabel')}
-          htmlFor="manual-category"
-        >
-          <input
-            id="manual-category"
-            disabled={isUploading}
-            className={INPUT_CLASS}
-            {...form.register('category')}
-          />
-        </FormField>
-
-        <FormField
-          label={t('manualText.languageLabel')}
-          htmlFor="manual-language"
-        >
-          <input
-            id="manual-language"
-            disabled={isUploading}
-            className={INPUT_CLASS}
-            {...form.register('language')}
-          />
-        </FormField>
-
         <div className="flex justify-end gap-2 pt-2">
           <Button
             type="button"
-            onPress={close}
-            isDisabled={isUploading}
-            className={BUTTON_OUTLINE_CLASS}
+            variant="outline"
+            onClick={close}
+            disabled={isUploading}
           >
             {t('manualText.cancel')}
           </Button>
-          <Button
-            type="submit"
-            isDisabled={isUploading}
-            className={BUTTON_PRIMARY_CLASS}
-          >
+          <Button type="submit" disabled={isUploading}>
             {isUploading ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner className="size-4" />
                 {t('manualText.submit')}
               </span>
             ) : (

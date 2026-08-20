@@ -104,8 +104,6 @@ export default function ApiKeysPage() {
         onRevokeKey={setRevokingKey}
         locale={locale}
         translations={{
-          viewUsage: t('viewUsage'),
-          usagePage: t('usagePage'),
           createNewSecretKey: t('createNewSecretKey'),
           name: t('name'),
           secretKey: t('secretKey'),

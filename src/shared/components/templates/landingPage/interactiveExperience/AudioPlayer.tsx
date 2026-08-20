@@ -107,7 +107,7 @@ export function AudioPlayer({ src }: { src: string }) {
         type="button"
         onClick={togglePlay}
         aria-label={isPlaying ? 'Pause' : 'Play'}
-        className="bg-primary flex size-12 shrink-0 items-center justify-center rounded-full text-white shadow-md transition-transform hover:scale-105"
+        className="bg-primary flex size-12 shrink-0 items-center justify-center rounded-full shadow-md transition-transform hover:scale-105"
       >
         {isPlaying ? (
           <Pause className="size-5" fill="currentColor" />

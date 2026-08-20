@@ -85,7 +85,10 @@ export function NotificationEventSettings(): ReactElement {
           <p className="text-destructive text-sm">{t('loadFailed')}</p>
         ) : isLoading ? (
           Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="bg-muted h-16 animate-pulse rounded-xl" />
+            <div
+              key={i}
+              className="bg-primary/10 dark:bg-muted h-16 animate-pulse rounded-xl"
+            />
           ))
         ) : (
           settings.map(setting => (

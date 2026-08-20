@@ -65,7 +65,10 @@ export function NotificationsPanel({
         ) : isLoading ? (
           <div className="space-y-2 p-4">
             {Array.from({ length: 3 }).map((_, i) => (
-              <div key={i} className="bg-muted h-14 animate-pulse rounded-lg" />
+              <div
+                key={i}
+                className="bg-primary/10 dark:bg-muted h-14 animate-pulse rounded-lg"
+              />
             ))}
           </div>
         ) : filtered.length === 0 ? (

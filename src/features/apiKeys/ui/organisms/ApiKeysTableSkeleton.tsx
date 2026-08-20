@@ -1,6 +1,7 @@
 'use client';
 
 import { Card, CardContent } from '@/shared/components/atoms/ui/card';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -10,10 +11,9 @@ import {
   TableRow,
 } from '@/shared/components/atoms/ui/table';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
-import { Skeleton } from '@heroui/react';
 
 const SKELETON_ROWS = 5;
-const SKELETON_BAR_CLASS = 'h-4 rounded-md bg-black/10 dark:bg-white/10';
+const SKELETON_BAR_CLASS = 'h-4 rounded-md bg-primary/10 dark:bg-white/10';
 
 interface ApiKeysTableSkeletonProps {
   locale: string;
@@ -48,24 +48,14 @@ export default function ApiKeysTableSkeleton({
           >
             <CardContent className="flex flex-col gap-3 p-4">
               <div className="flex items-center justify-between gap-2">
-                <Skeleton
-                  animationType="none"
-                  className={`${SKELETON_BAR_CLASS} w-32`}
-                />
-                <Skeleton
-                  animationType="none"
-                  className={`${SKELETON_BAR_CLASS} w-16`}
-                />
+                <Skeleton className={`${SKELETON_BAR_CLASS} w-32`} />
+                <Skeleton className={`${SKELETON_BAR_CLASS} w-16`} />
               </div>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-40`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-40`} />
               <div className="grid grid-cols-2 gap-x-4 gap-y-3">
                 {Array.from({ length: 4 }).map((__, cellIndex) => (
                   <Skeleton
                     key={cellIndex}
-                    animationType="none"
                     className={`${SKELETON_BAR_CLASS} w-20`}
                   />
                 ))}
@@ -96,58 +86,31 @@ export default function ApiKeysTableSkeleton({
         {rows.map((_, index) => (
           <TableRow key={index}>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-24`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-24`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-28`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-28`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-16`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-16`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-16`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-16`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-20`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-20`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-20`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-20`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-20`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-20`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-20`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-20`} />
             </TableCell>
             <TableCell>
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR_CLASS} w-8`}
-              />
+              <Skeleton className={`${SKELETON_BAR_CLASS} w-8`} />
             </TableCell>
           </TableRow>
         ))}

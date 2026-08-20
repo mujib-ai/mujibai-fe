@@ -1,4 +1,5 @@
-@import '@heroui/styles';
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 body {
   margin: 0;
@@ -160,6 +161,19 @@ body {
 }
 
 @layer base {
+  html:not(.dark) .dashboard-table-scope table,
+  html:not(.dark) .dashboard-table-scope [role='grid'] {
+    background-color: #ffffff;
+    color: #000000;
+  }
+
+  html:not(.dark) .dashboard-table-scope th,
+  html:not(.dark) .dashboard-table-scope td,
+  html:not(.dark) .dashboard-table-scope [role='columnheader'],
+  html:not(.dark) .dashboard-table-scope [role='rowheader'],
+  html:not(.dark) .dashboard-table-scope [role='gridcell'] {
+    color: #000000;
+  }
   * {
     @apply border-border outline-ring/50;
   }

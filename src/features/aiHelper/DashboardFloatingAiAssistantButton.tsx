@@ -143,7 +143,7 @@ export function DashboardFloatingAiAssistantButton() {
             aria-expanded={assistantOpen}
             onClick={toggleAssistant}
             className={cn(
-              'from-primary to-primary/70 fixed bottom-[calc(88px_+_env(safe-area-inset-bottom))] left-4 z-[10000] size-14 bg-linear-to-b text-white shadow-xl sm:left-6 sm:size-14 md:bottom-10 md:left-10',
+              'from-primary to-primary/70 fixed bottom-[calc(88px_+_env(safe-area-inset-bottom))] left-4 z-[10000] size-14 bg-linear-to-b shadow-xl sm:left-6 sm:size-14 md:bottom-10 md:left-10',
               assistantOpen && 'brightness-110'
             )}
           >

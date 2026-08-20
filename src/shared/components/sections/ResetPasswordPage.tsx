@@ -67,7 +67,7 @@ export default function ResetPasswordPage({ token }: { token: string }) {
             <Button
               type="submit"
               disabled={isSubmitting || !isValid}
-              className="text-md mt-2 w-full rounded-full py-5 text-white capitalize disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-md mt-2 w-full rounded-full py-5 capitalize disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isSubmitting ? t('submitting') : t('submit')}
             </Button>

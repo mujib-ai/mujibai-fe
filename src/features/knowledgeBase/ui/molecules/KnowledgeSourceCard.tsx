@@ -2,7 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Card } from '@heroui/react';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '@/shared/components/atoms/ui/card';
 
 import type { KnowledgeSource } from '../../types';
 import { formatDate } from '../../utils/format-date';
@@ -37,7 +41,7 @@ export default function KnowledgeSourceCard({
     <Card
       className={`bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm ${!source.isEnabled ? 'opacity-60' : ''}`}
     >
-      <Card.Header className="flex flex-row items-center justify-between gap-2 px-4">
+      <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
         <div className="flex min-w-0 items-center gap-2">
           <SourceTypeIcon sourceType={source.sourceType} />
           <p className="truncate text-sm font-semibold" title={source.name}>
@@ -53,14 +57,14 @@ export default function KnowledgeSourceCard({
           onDownload={onDownload}
           onDelete={onDelete}
         />
-      </Card.Header>
-      <Card.Content className="flex flex-col gap-3 px-4">
+      </CardHeader>
+      <CardContent className="flex flex-col gap-3 px-4">
         <SourceStatusSummary
           status={source.status}
           progress={source.progress}
           errorMessage={source.errorMessage}
         />
-        <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+        <dl className="grid grid-cols-1 gap-x-4 gap-y-2 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-muted-foreground text-xs">
               {t('sources.columns.documents')}
@@ -86,7 +90,7 @@ export default function KnowledgeSourceCard({
             <dd>{formatDate(source.updatedAt, locale)}</dd>
           </div>
         </dl>
-      </Card.Content>
+      </CardContent>
     </Card>
   );
 }

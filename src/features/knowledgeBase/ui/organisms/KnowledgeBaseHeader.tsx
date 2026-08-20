@@ -2,8 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 
+import { Badge } from '@/shared/components/atoms/ui/badge';
+import { Button } from '@/shared/components/atoms/ui/button';
 import { cn } from '@/shared/lib/utils';
-import { Button, Chip } from '@heroui/react';
 import { FilePlus, Upload } from 'lucide-react';
 
 import { KNOWLEDGE_BASE_PERMISSIONS } from '../../constants/permissions';
@@ -53,33 +54,26 @@ export default function KnowledgeBaseHeader({
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="text-lg font-semibold">{t('sources.title')}</h2>
             {overallStatus && (
-              <Chip
+              <Badge
                 className={cn(
-                  'inline-flex w-fit items-center rounded-full px-2.5 py-0.5 text-xs font-medium',
                   STATUS_COLOR_CLASSES[OVERALL_STATUS_COLOR[overallStatus]]
                 )}
               >
                 {t(`overallStatus.${overallStatus}`)}
-              </Chip>
+              </Badge>
             )}
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           {canCreateSource && (
-            <Button
-              onPress={onAddManualText}
-              className="border-input hover:bg-accent inline-flex cursor-pointer items-center gap-1.5 rounded-md border bg-transparent px-3 py-1.5 text-sm shadow-xs"
-            >
+            <Button onClick={onAddManualText} variant="outline">
               <FilePlus className="size-4" />
               {t('actions.addManualText')}
             </Button>
           )}
           {canCreateSource && (
-            <Button
-              onPress={onUpload}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-sm"
-            >
+            <Button onClick={onUpload}>
               <Upload className="size-4" />
               {t('actions.upload')}
             </Button>

@@ -4,9 +4,6 @@ import createNextIntlPlugin from 'next-intl/plugin';
 import withBundleAnalyzerInit from '@next/bundle-analyzer';
 
 const nextConfig: NextConfig = {
-  experimental: {
-    optimizePackageImports: ['@heroui/react'],
-  },
   images: {
     remotePatterns: [
       {

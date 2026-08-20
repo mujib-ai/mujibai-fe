@@ -16,8 +16,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/shared/components/atoms/ui/table';
 import { formatPhoneNumber } from '@/shared/utils/formatPhoneNumber';
-import { Table } from '@heroui/react';
 import { Loader2 } from 'lucide-react';
 
 import RecentCallsTableSkeleton from './RecentCallsTableSkeleton';
@@ -73,65 +80,65 @@ export default function RecentCallsTable({ title }: { title: string }) {
         ) : calls.length === 0 ? (
           <CallsEmptyState text={t('empty')} />
         ) : (
-          <Table.ScrollContainer className="overflow-x-auto">
-            <Table.Content
-              aria-label={title}
-              className="w-full min-w-160 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
-            >
-              <Table.Header>
-                <Table.Column
-                  isRowHeader
+          <Table
+            aria-label={title}
+            className="min-w-160 rounded-xl bg-[#FFFFFFBF] dark:bg-[#001434A6]"
+          >
+            <TableHeader>
+              <TableRow>
+                <TableHead
+                  scope="row"
                   className={`${alignClass} text-foreground px-4 py-3 font-medium`}
                 >
                   {t('phone')}
-                </Table.Column>
-                <Table.Column
+                </TableHead>
+                <TableHead
                   className={`${alignClass} text-foreground px-4 py-3 font-medium`}
                 >
                   {t('duration')}
-                </Table.Column>
-                <Table.Column
+                </TableHead>
+                <TableHead
                   className={`${alignClass} text-foreground px-4 py-3 font-medium`}
                 >
                   {t('scenario')}
-                </Table.Column>
-                <Table.Column
+                </TableHead>
+                <TableHead
                   className={`${alignClass} text-foreground px-4 py-3 font-medium`}
                 >
                   {t('date')}
-                </Table.Column>
-                <Table.Column className="text-foreground px-4 py-3 text-center font-medium">
+                </TableHead>
+                <TableHead className="text-foreground px-4 py-3 text-center font-medium">
                   {t('status')}
-                </Table.Column>
-              </Table.Header>
-              <Table.Body>
-                {calls.map(call => (
-                  <Table.Row
-                    key={call.id}
-                    className="hover:bg-primary/40 border-t border-transparent transition-colors dark:hover:bg-[#00214f]/40"
-                  >
-                    <Table.Cell className="text-foreground px-4 py-3 font-medium">
-                      {formatPhoneNumber(call.phone)}
-                    </Table.Cell>
-                    <Table.Cell className="text-foreground px-4 py-3">
-                      {call.duration}
-                    </Table.Cell>
-                    <Table.Cell className="text-foreground px-4 py-3">
-                      {call.scenario}
-                    </Table.Cell>
-                    <Table.Cell className="text-foreground px-4 py-3">
-                      {call.date}
-                    </Table.Cell>
-                    <Table.Cell className="px-4 py-3 text-center">
-                      <Badge variant={CALL_STATUS_BADGE_VARIANT[call.status]}>
-                        {t(call.status)}
-                      </Badge>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Content>
-          </Table.ScrollContainer>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {calls.map(call => (
+                <TableRow
+                  key={call.id}
+                  className="hover:bg-primary/40 border-t border-transparent transition-colors dark:hover:bg-[#00214f]/40"
+                >
+                  <TableCell className="text-foreground px-4 py-3 font-medium">
+                    {formatPhoneNumber(call.phone)}
+                  </TableCell>
+                  <TableCell className="text-foreground px-4 py-3">
+                    {call.duration}
+                  </TableCell>
+                  <TableCell className="text-foreground px-4 py-3">
+                    {call.scenario}
+                  </TableCell>
+                  <TableCell className="text-foreground px-4 py-3">
+                    {call.date}
+                  </TableCell>
+                  <TableCell className="px-4 py-3 text-center">
+                    <Badge variant={CALL_STATUS_BADGE_VARIANT[call.status]}>
+                      {t(call.status)}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         )}
 
         {!isLoading && !error && calls.length > 0 && (

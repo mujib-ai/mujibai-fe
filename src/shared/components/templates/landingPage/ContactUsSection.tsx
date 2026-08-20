@@ -125,7 +125,7 @@ export default function ContactUsSection() {
           <div className="flex justify-center">
             <Button
               type="submit"
-              className="bg-primary hover:bg-primary/90 rounded-full px-8 py-3 text-base font-medium text-white shadow-md transition md:text-lg"
+              className="bg-primary hover:bg-primary/90 rounded-full px-8 py-3 text-base font-medium shadow-md transition md:text-lg"
               disabled={isSubmitting}
             >
               {isSubmitting ? t('form.submitting') : t('form.submit')}

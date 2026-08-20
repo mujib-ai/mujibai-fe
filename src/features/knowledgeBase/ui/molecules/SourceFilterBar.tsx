@@ -2,9 +2,16 @@
 
 import { useTranslations } from 'next-intl';
 
+import { Button } from '@/shared/components/atoms/ui/button';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/shared/components/atoms/ui/select';
 import { SearchInput } from '@/shared/components/molecules/SearchInput';
-import { Button, ListBox, ListBoxItem, Select } from '@heroui/react';
-import { ChevronDown, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 import { INGESTION_STATUSES } from '../../constants/ingestion-status';
 import type {
@@ -26,13 +33,6 @@ const SOURCE_TYPES: KnowledgeSourceType[] = [
 
 const ALL = 'all';
 
-const SELECT_TRIGGER_CLASS =
-  'bg-control flex h-12 w-40 cursor-pointer items-center justify-between gap-2 rounded-full border-0 px-3 py-2 text-sm whitespace-nowrap shadow-none outline-none transition-colors focus-visible:ring-0';
-const SELECT_POPOVER_CLASS =
-  'bg-popover text-popover-foreground z-50 min-w-40 overflow-hidden rounded-md border shadow-md';
-const SELECT_ITEM_CLASS =
-  'cursor-pointer rounded-sm px-2 py-1.5 text-sm outline-none data-[hovered]:bg-[#06B6D40F] data-[hovered]:text-[#06B6D4] data-[focused]:bg-[#06B6D40F] data-[focused]:text-[#06B6D4]';
-
 interface FilterSelectOption {
   value: string;
   label: string;
@@ -50,28 +50,17 @@ function FilterSelect({
   onChange: (value: string) => void;
 }) {
   return (
-    <Select
-      aria-label={ariaLabel}
-      selectedKey={selectedValue}
-      onSelectionChange={key => onChange(String(key))}
-    >
-      <Select.Trigger className={SELECT_TRIGGER_CLASS}>
-        <Select.Value className="truncate" />
-        <ChevronDown className="size-4 shrink-0 opacity-50" />
-      </Select.Trigger>
-      <Select.Popover className={SELECT_POPOVER_CLASS}>
-        <ListBox className="p-1 outline-none">
-          {options.map(option => (
-            <ListBoxItem
-              key={option.value}
-              id={option.value}
-              className={SELECT_ITEM_CLASS}
-            >
-              {option.label}
-            </ListBoxItem>
-          ))}
-        </ListBox>
-      </Select.Popover>
+    <Select value={selectedValue} onValueChange={onChange}>
+      <SelectTrigger aria-label={ariaLabel} className="w-full sm:w-40">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {options.map(option => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
     </Select>
   );
 }
@@ -159,7 +148,7 @@ export default function SourceFilterBar({
       {hasActiveFilters && (
         <Button
           variant="ghost"
-          onPress={onReset}
+          onClick={onReset}
           className="hover:bg-accent inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-sm"
         >
           <RotateCcw className="size-3.5" />

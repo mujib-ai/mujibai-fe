@@ -2,7 +2,7 @@
 
 import { useTheme } from 'next-themes';
 
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -23,7 +23,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
         info: <InfoIcon className="size-4" />,
         warning: <TriangleAlertIcon className="size-4" />,
         error: <OctagonXIcon className="size-4" />,
-        loading: <Spinner size="sm" color="current" />,
+        loading: <Spinner />,
       }}
       style={
         {

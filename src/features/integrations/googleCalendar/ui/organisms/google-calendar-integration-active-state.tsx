@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 import type { GoogleCalendarIntegration } from '../../types';
 import { GoogleCalendarConnectionInfo } from '../molecules';
@@ -56,7 +56,7 @@ export default function GoogleCalendarIntegrationActiveState({
           >
             {isSendingTestEvent ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('sendTestEvent')}
               </span>
             ) : (
@@ -80,7 +80,7 @@ export default function GoogleCalendarIntegrationActiveState({
           >
             {isDisconnecting ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('disconnect')}
               </span>
             ) : (

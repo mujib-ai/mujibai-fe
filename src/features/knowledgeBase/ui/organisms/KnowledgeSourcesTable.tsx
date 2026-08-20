@@ -3,9 +3,17 @@
 import { useTranslations } from 'next-intl';
 
 import { TablePagination } from '@/features/tickets';
+import { Button } from '@/shared/components/atoms/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/shared/components/atoms/ui/table';
 import { ErrorState } from '@/shared/components/molecules/ErrorState';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
-import { Button, Table } from '@heroui/react';
 
 import { INGESTION_STATUS_CONFIG } from '../../constants/ingestion-status';
 import type { KnowledgeSource } from '../../types';
@@ -83,7 +91,11 @@ export default function KnowledgeSourcesTable({
         <p className="text-muted-foreground text-sm">
           {t('emptyStates.noResultsTitle')}
         </p>
-        <Button onPress={onResetFilters} className={BUTTON_OUTLINE_CLASS}>
+        <Button
+          variant={'default'}
+          onClick={onResetFilters}
+          className={BUTTON_OUTLINE_CLASS}
+        >
           {t('emptyStates.noResultsAction')}
         </Button>
       </div>
@@ -95,7 +107,7 @@ export default function KnowledgeSourcesTable({
         <p className="text-muted-foreground max-w-md text-sm">
           {t('emptyStates.noSourcesDescription')}
         </p>
-        <Button onPress={onUpload} className={BUTTON_PRIMARY_CLASS}>
+        <Button onClick={onUpload} className={BUTTON_PRIMARY_CLASS}>
           {t('actions.upload')}
         </Button>
       </div>
@@ -125,92 +137,93 @@ export default function KnowledgeSourcesTable({
           ))}
         </div>
       ) : (
-        <Table>
-          <Table.ScrollContainer className="overflow-x-auto rounded-lg border">
-            <Table.Content aria-label={t('sources.title')} className="w-full">
-              <Table.Header>
-                <Table.Column
-                  isRowHeader
-                  className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap"
-                >
-                  {t('sources.columns.source')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.type')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.status')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.progress')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.documents')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.chunks')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.uploadedAt')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.updatedAt')}
-                </Table.Column>
-                <Table.Column className="text-foreground h-10 px-2 text-end align-middle font-medium whitespace-nowrap">
-                  {t('sources.columns.actions')}
-                </Table.Column>
-              </Table.Header>
-              <Table.Body>
-                {sources.map(source => (
-                  <Table.Row
-                    key={source.id}
-                    className={`hover:bg-muted/50 border-t transition-colors ${!source.isEnabled ? 'opacity-60' : ''}`}
-                  >
-                    <Table.Cell className="max-w-56 p-2 align-middle font-medium">
-                      <span className="block truncate" title={source.name}>
-                        {source.name}
-                      </span>
-                    </Table.Cell>
-                    <Table.Cell className="p-2 align-middle">
-                      <div className="flex items-center gap-1.5 whitespace-nowrap">
-                        <SourceTypeIcon sourceType={source.sourceType} />
-                        {t(`sourceTypes.${source.sourceType}`)}
-                      </div>
-                    </Table.Cell>
-                    <Table.Cell className="p-2 align-middle">
-                      <IngestionStatusBadge status={source.status} />
-                    </Table.Cell>
-                    <Table.Cell className="p-2 align-middle">
-                      {INGESTION_STATUS_CONFIG[source.status].isProcessing ? (
-                        <UploadProgressBar
-                          value={source.progress}
-                          label={t(`status.${source.status}.label`)}
-                          className="w-40"
-                        />
-                      ) : (
-                        <span className="text-muted-foreground">—</span>
-                      )}
-                    </Table.Cell>
-                    <Table.Cell className="p-2 text-center align-middle">
-                      {source.documentCount}
-                    </Table.Cell>
-                    <Table.Cell className="p-2 text-center align-middle">
-                      {source.chunkCount}
-                    </Table.Cell>
-                    <Table.Cell className="p-2 align-middle">
-                      {formatDate(source.createdAt, locale)}
-                    </Table.Cell>
-                    <Table.Cell className="p-2 align-middle">
-                      {formatDate(source.updatedAt, locale)}
-                    </Table.Cell>
-                    <Table.Cell className="p-2 text-end align-middle">
-                      <SourceActionsMenu source={source} {...rowActions} />
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table.Content>
-          </Table.ScrollContainer>
+        <Table
+          aria-label={t('sources.title')}
+          className="rounded-lg border bg-white dark:bg-[#00143473]"
+        >
+          <TableHeader>
+            <TableRow>
+              <TableHead
+                scope="row"
+                className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap"
+              >
+                {t('sources.columns.source')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.type')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.status')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.progress')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.documents')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-center align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.chunks')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.uploadedAt')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-start align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.updatedAt')}
+              </TableHead>
+              <TableHead className="text-foreground h-10 px-2 text-end align-middle font-medium whitespace-nowrap">
+                {t('sources.columns.actions')}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {sources.map(source => (
+              <TableRow
+                key={source.id}
+                className={`hover:bg-primary/5 border-t transition-colors ${!source.isEnabled ? 'opacity-60' : ''}`}
+              >
+                <TableCell className="max-w-56 p-2 align-middle font-medium">
+                  <span className="block truncate" title={source.name}>
+                    {source.name}
+                  </span>
+                </TableCell>
+                <TableCell className="p-2 align-middle">
+                  <div className="flex items-center gap-1.5 whitespace-nowrap">
+                    <SourceTypeIcon sourceType={source.sourceType} />
+                    {t(`sourceTypes.${source.sourceType}`)}
+                  </div>
+                </TableCell>
+                <TableCell className="p-2 align-middle">
+                  <IngestionStatusBadge status={source.status} />
+                </TableCell>
+                <TableCell className="p-2 align-middle">
+                  {INGESTION_STATUS_CONFIG[source.status].isProcessing ? (
+                    <UploadProgressBar
+                      value={source.progress}
+                      label={t(`status.${source.status}.label`)}
+                      className="w-40"
+                    />
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </TableCell>
+                <TableCell className="p-2 text-center align-middle">
+                  {source.documentCount}
+                </TableCell>
+                <TableCell className="p-2 text-center align-middle">
+                  {source.chunkCount}
+                </TableCell>
+                <TableCell className="p-2 align-middle">
+                  {formatDate(source.createdAt, locale)}
+                </TableCell>
+                <TableCell className="p-2 align-middle">
+                  {formatDate(source.updatedAt, locale)}
+                </TableCell>
+                <TableCell className="p-2 text-end align-middle">
+                  <SourceActionsMenu source={source} {...rowActions} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
       )}
 

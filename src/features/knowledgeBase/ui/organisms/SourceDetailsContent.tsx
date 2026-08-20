@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 
-import { Separator } from '@heroui/react';
+import { Separator } from '@/shared/components/atoms/ui/separator';
 
 import type { KnowledgeSource } from '../../types';
 import { formatDate } from '../../utils/format-date';

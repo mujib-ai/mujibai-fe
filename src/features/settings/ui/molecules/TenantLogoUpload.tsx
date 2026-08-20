@@ -10,8 +10,8 @@ import {
   AvatarImage,
 } from '@/shared/components/atoms/ui/avatar';
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { getApiAssetUrl } from '@/shared/utils/getApiAssetUrl';
-import { Spinner } from '@heroui/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ImagePlus, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -132,9 +132,7 @@ export function TenantLogoUpload({
                 onClick={() => uploadMutation.mutate(selectedFile)}
                 disabled={uploadMutation.isPending}
               >
-                {uploadMutation.isPending && (
-                  <Spinner size="sm" color="current" />
-                )}
+                {uploadMutation.isPending && <Spinner />}
                 {uploadMutation.isPending ? t('uploading') : t('upload')}
               </Button>
               <Button

@@ -2,13 +2,13 @@
 
 import { useLoginForm } from '@/features/auth';
 import { Button } from '@/shared/components/atoms/ui/button';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { EmailField } from '@/shared/components/molecules/EmailField';
 import {
   ForgotPasswordLink,
   LoginHeader,
 } from '@/shared/components/molecules/LoginComponents';
 import { LoginPasswordField } from '@/shared/components/molecules/LoginPasswordField';
-import { Spinner } from '@heroui/react';
 
 export default function LoginPage() {
   const { handleSubmit, onSubmit, isLoading, getFieldProps, getTranslations } =
@@ -59,11 +59,11 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="text-md mt-2 w-full rounded-full py-5 text-white capitalize transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+              className="text-md mt-2 w-full rounded-full py-5 capitalize transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {loading}
                 </span>
               ) : (

@@ -3,6 +3,7 @@ import { AxiosAPI } from '@/shared/utils/axiosInstance';
 import type {
   AuthMessageResponse,
   AuthResponse,
+  ChangePasswordCredentials,
   ForgotPasswordPayload,
   LoginCredentials,
   LoginResponse,
@@ -104,6 +105,16 @@ export class AuthService {
   ): Promise<AuthMessageResponse> {
     const { data } = await AxiosAPI.post<AuthMessageResponse>(
       '/tenants/reset-password',
+      credentials
+    );
+    return data;
+  }
+
+  static async changePassword(
+    credentials: ChangePasswordCredentials
+  ): Promise<AuthMessageResponse> {
+    const { data } = await AxiosAPI.post<AuthMessageResponse>(
+      '/tenants/me/change-password',
       credentials
     );
     return data;

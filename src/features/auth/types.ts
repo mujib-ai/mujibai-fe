@@ -56,6 +56,11 @@ export interface ResetPasswordCredentials {
   newPassword: string;
 }
 
+export interface ChangePasswordCredentials {
+  currentPassword: string;
+  newPassword: string;
+}
+
 export interface AuthMessageResponse {
   message: string;
   data: null;

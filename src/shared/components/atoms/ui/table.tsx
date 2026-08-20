@@ -13,7 +13,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
       <table
         data-slot="table"
         className={cn(
-          'w-full caption-bottom overflow-hidden rounded-xl text-sm',
+          'bg-primary/5 w-full caption-bottom overflow-hidden rounded-xl text-sm dark:bg-[#00143473]',
           className
         )}
         {...props}
@@ -47,7 +47,7 @@ function TableFooter({ className, ...props }: React.ComponentProps<'tfoot'>) {
     <tfoot
       data-slot="table-footer"
       className={cn(
-        'bg-muted/50 border-t font-medium [&>tr]:last:border-b-0',
+        'bg-primary/10 border-t font-medium [&>tr]:last:border-b-0',
         className
       )}
       {...props}
@@ -60,7 +60,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot="table-row"
       className={cn(
-        'hover:bg-muted/50 data-state-selected:bg-muted border-b transition-colors',
+        'hover:bg-primary/5 data-state-selected:bg-primary/10 border-b transition-colors',
         className
       )}
       {...props}

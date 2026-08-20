@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 import { cn } from '@/shared/lib/utils';
-import { Skeleton } from '@heroui/react';
 
 interface LoadingStateProps {
   label: string;
@@ -25,8 +25,7 @@ export function LoadingState({
       {Array.from({ length: rows }, (_, index) => (
         <Skeleton
           key={index}
-          animationType="none"
-          className="bg-muted h-16 w-full animate-pulse rounded-xl"
+          className="bg-primary/10 dark:bg-muted h-16 w-full animate-pulse rounded-xl"
         />
       ))}
     </div>

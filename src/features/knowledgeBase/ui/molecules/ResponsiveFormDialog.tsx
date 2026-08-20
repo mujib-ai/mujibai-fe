@@ -1,7 +1,14 @@
 'use client';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/shared/components/atoms/ui/dialog';
 import { useIsMobile } from '@/shared/hooks/use-mobile';
-import { Modal } from '@heroui/react';
+import { cn } from '@/shared/lib/utils';
 
 import type { ResponsiveFormDialogProps } from '../../interfaces';
 
@@ -15,29 +22,20 @@ export function ResponsiveFormDialog({
   const isMobile = useIsMobile();
 
   return (
-    <Modal.Backdrop
-      isOpen={open}
-      onOpenChange={isOpen => !isOpen && onClose()}
-      className="fixed inset-0 z-100 flex items-center justify-center bg-black/50"
-    >
-      <Modal.Container
-        placement={isMobile ? 'bottom' : 'center'}
-        scroll="inside"
-        className="w-full px-4 sm:max-w-lg sm:px-0"
+    <Dialog open={open} onOpenChange={isOpen => !isOpen && onClose()}>
+      <DialogContent
+        className={cn(
+          'flex max-h-[90vh] w-full flex-col p-0 sm:max-w-lg',
+          isMobile &&
+            'top-auto bottom-0 max-w-full translate-y-0 rounded-b-none'
+        )}
       >
-        <Modal.Dialog className="bg-background relative flex max-h-[90vh] w-full flex-col rounded-xl border shadow-lg outline-none">
-          <Modal.CloseTrigger />
-          <Modal.Header className="flex flex-col gap-1 px-6 pt-6">
-            <Modal.Heading className="text-lg leading-none font-semibold">
-              {title}
-            </Modal.Heading>
-            <p className="text-muted-foreground text-sm">{description}</p>
-          </Modal.Header>
-          <Modal.Body className="overflow-y-auto px-6 py-5">
-            {children}
-          </Modal.Body>
-        </Modal.Dialog>
-      </Modal.Container>
-    </Modal.Backdrop>
+        <DialogHeader className="gap-1 px-6 pt-6">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <div className="overflow-y-auto px-6 py-5">{children}</div>
+      </DialogContent>
+    </Dialog>
   );
 }

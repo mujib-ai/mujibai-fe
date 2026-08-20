@@ -10,14 +10,17 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/shared/components/atoms/ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/shared/components/atoms/ui/dropdown-menu';
 import { getApiAssetUrl } from '@/shared/utils/getApiAssetUrl';
-import { Dropdown, Separator } from '@heroui/react';
 import { LogOut, User as UserIcon } from 'lucide-react';
 
 import LogoutDailog from '../../molecules/landing/dialogs/LogoutDailog';
-
-const MENU_ITEM_CLASS =
-  'flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[hovered]:bg-[#06B6D40F] data-[hovered]:text-[#06B6D4] data-[focused]:bg-[#06B6D40F] data-[focused]:text-[#06B6D4] data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
 
 function getDisplayName(user: {
   name?: string;
@@ -40,8 +43,8 @@ export default function TenantAvatarMenu() {
 
   return (
     <>
-      <Dropdown>
-        <Dropdown.Trigger
+      <DropdownMenu>
+        <DropdownMenuTrigger
           aria-label={t('myAccount')}
           className="cursor-pointer rounded-full outline-none"
         >
@@ -54,47 +57,38 @@ export default function TenantAvatarMenu() {
               {initial}
             </AvatarFallback>
           </Avatar>
-        </Dropdown.Trigger>
-        <Dropdown.Popover
-          placement="bottom end"
-          className="bg-popover text-popover-foreground z-50 min-w-48 overflow-hidden rounded-md border p-1 shadow-md"
-        >
-          <Dropdown.Menu aria-label={t('myAccount')} className="outline-none">
-            <Dropdown.Item
-              id="account-info"
-              isDisabled
-              className="flex flex-col items-start gap-0.5 rounded-sm px-2 py-1.5 text-sm data-disabled:opacity-100"
-            >
-              <span className="truncate font-medium">{displayName}</span>
-              {user?.email && (
-                <span className="text-muted-foreground truncate text-xs">
-                  {user.email}
-                </span>
-              )}
-            </Dropdown.Item>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="min-w-48">
+          <DropdownMenuItem
+            disabled
+            className="flex flex-col items-start gap-0.5 data-disabled:opacity-100"
+          >
+            <span className="truncate font-medium">{displayName}</span>
+            {user?.email && (
+              <span className="text-muted-foreground truncate text-xs">
+                {user.email}
+              </span>
+            )}
+          </DropdownMenuItem>
 
-            <Separator className="bg-border -mx-1 my-1 h-px" />
+          <DropdownMenuSeparator />
 
-            <Dropdown.Item
-              id="my-account"
-              href="/dashboard/settings"
-              className={MENU_ITEM_CLASS}
-            >
+          <DropdownMenuItem asChild>
+            <a href="/dashboard/settings">
               <UserIcon className="size-4" />
               {t('myAccount')}
-            </Dropdown.Item>
+            </a>
+          </DropdownMenuItem>
 
-            <Dropdown.Item
-              id="logout"
-              className={`${MENU_ITEM_CLASS} text-destructive`}
-              onAction={() => setLogoutDialogOpen(true)}
-            >
-              <LogOut className="size-4" />
-              {t('logout')}
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown.Popover>
-      </Dropdown>
+          <DropdownMenuItem
+            variant="destructive"
+            onSelect={() => setLogoutDialogOpen(true)}
+          >
+            <LogOut className="size-4" />
+            {t('logout')}
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
       <LogoutDailog
         open={isLogoutDialogOpen}

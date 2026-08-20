@@ -16,7 +16,7 @@ import {
   DialogTitle,
 } from '@/shared/components/atoms/ui/dialog';
 import { Input } from '@/shared/components/atoms/ui/input';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -188,7 +188,7 @@ export default function EditApiKeyDialog({
             <Button type="submit" disabled={loading}>
               {loading ? (
                 <span className="flex items-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {t('edit.submit')}
                 </span>
               ) : (

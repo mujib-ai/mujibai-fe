@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { RefreshCw } from 'lucide-react';
 
 import type { SlackChannel, SlackIntegration } from '../../types';
@@ -69,11 +69,7 @@ export default function SlackChannelConfiguration({
             onClick={onRefreshChannels}
             disabled={isLoadingChannels}
           >
-            {isLoadingChannels ? (
-              <Spinner size="sm" color="current" />
-            ) : (
-              <RefreshCw className="size-4" />
-            )}
+            {isLoadingChannels ? <Spinner /> : <RefreshCw className="size-4" />}
             {t('refreshChannels')}
           </Button>
           {hasMoreChannels && (
@@ -86,7 +82,7 @@ export default function SlackChannelConfiguration({
             >
               {isLoadingMoreChannels ? (
                 <span className="flex items-center gap-2">
-                  <Spinner size="sm" color="current" />
+                  <Spinner />
                   {t('loadMoreChannels')}
                 </span>
               ) : (
@@ -105,7 +101,7 @@ export default function SlackChannelConfiguration({
           >
             {isDisconnecting ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('disconnect')}
               </span>
             ) : (

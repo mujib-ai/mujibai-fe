@@ -20,7 +20,7 @@ function SessionStopped({ startSession }: SessionStoppedProps) {
   return (
     <Button
       onClick={handleStartSession}
-      className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium text-white shadow-md transition sm:px-14 sm:text-lg"
+      className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium shadow-md transition sm:px-14 sm:text-lg"
     >
       <CloudLightning height={16} />
       {isActivating ? 'Listen now...' : 'Listen now'}
@@ -35,7 +35,7 @@ interface SessionActiveProps {
 function SessionActive({ stopSession }: SessionActiveProps) {
   return (
     <Button
-      className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium text-white shadow-md transition sm:px-14 sm:text-lg"
+      className="bg-primary hover:bg-primary/90 rounded-full px-10 py-6 text-base font-medium shadow-md transition sm:px-14 sm:text-lg"
       onClick={stopSession}
     >
       <CloudOff height={16} />

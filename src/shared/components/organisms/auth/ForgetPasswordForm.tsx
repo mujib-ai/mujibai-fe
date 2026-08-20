@@ -11,7 +11,7 @@ import {
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Label } from '@/shared/components/atoms/ui/label';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { AlertCircleIcon, CheckCircle2Icon } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
 
@@ -78,11 +78,11 @@ export default function ForgetPasswordForm({
         <Button
           type="submit"
           disabled={isSubmitting || !isValid}
-          className="text-md mt-4 w-full rounded-full py-5 text-white capitalize transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-50"
+          className="text-md mt-4 w-full rounded-full py-5 capitalize transition-opacity duration-200 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isSubmitting ? (
             <span className="flex items-center justify-center gap-2">
-              <Spinner size="sm" color="current" />
+              <Spinner />
               {t('sending')}
             </span>
           ) : (

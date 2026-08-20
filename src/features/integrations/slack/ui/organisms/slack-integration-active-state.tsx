@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/shared/components/atoms/ui/card';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 
 import type { SlackIntegration } from '../../types';
 import { SlackWorkspaceInfo } from '../molecules';
@@ -55,7 +55,7 @@ export default function SlackIntegrationActiveState({
           >
             {isSendingTestMessage ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('sendTestMessage')}
               </span>
             ) : (
@@ -79,7 +79,7 @@ export default function SlackIntegrationActiveState({
           >
             {isDisconnecting ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('disconnect')}
               </span>
             ) : (

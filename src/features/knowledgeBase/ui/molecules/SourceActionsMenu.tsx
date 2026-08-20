@@ -2,7 +2,12 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Dropdown } from '@heroui/react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/shared/components/atoms/ui/dropdown-menu';
 import {
   Download,
   Eye,
@@ -17,9 +22,6 @@ import type { KnowledgeSource } from '../../types';
 
 const DOWNLOADABLE_SOURCE_TYPES = ['pdf', 'txt', 'csv', 'excel'];
 const RETRYABLE_STATUSES = ['failed', 'cancelled'];
-
-const MENU_ITEM_CLASS =
-  'flex cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none data-[hovered]:bg-[#06B6D40F] data-[hovered]:text-[#06B6D4] data-[focused]:bg-[#06B6D40F] data-[focused]:text-[#06B6D4] data-[disabled]:pointer-events-none data-[disabled]:opacity-50';
 
 interface SourceActionsMenuProps {
   source: KnowledgeSource;
@@ -52,76 +54,54 @@ export default function SourceActionsMenu({
   const canDelete = can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_DELETE);
 
   return (
-    <Dropdown>
-      <Dropdown.Trigger
+    <DropdownMenu>
+      <DropdownMenuTrigger
         aria-label={t('viewDetails')}
         className="hover:bg-accent text-muted-foreground inline-flex size-8 cursor-pointer items-center justify-center rounded-md outline-none"
       >
         <MoreHorizontal className="size-4" />
-      </Dropdown.Trigger>
-      <Dropdown.Popover
-        placement="bottom end"
-        className="bg-popover text-popover-foreground z-50 min-w-40 overflow-hidden rounded-md border p-1 shadow-md"
-      >
-        <Dropdown.Menu aria-label={t('viewDetails')} className="outline-none">
-          <Dropdown.Item
-            id="view"
-            className={MENU_ITEM_CLASS}
-            onAction={() => onViewDetails(source)}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-40">
+        <DropdownMenuItem onSelect={() => onViewDetails(source)}>
+          <Eye className="size-4" />
+          {t('viewDetails')}
+        </DropdownMenuItem>
+
+        {canRetry && (
+          <DropdownMenuItem onSelect={() => onRetry(source)}>
+            <RefreshCw className="size-4" />
+            {t('retry')}
+          </DropdownMenuItem>
+        )}
+
+        {canDownload && (
+          <DropdownMenuItem onSelect={() => onDownload(source)}>
+            <Download className="size-4" />
+            {t('download')}
+          </DropdownMenuItem>
+        )}
+
+        {canUpdate && (
+          <DropdownMenuItem onSelect={() => onToggleEnabled(source)}>
+            {source.isEnabled ? (
+              <EyeOff className="size-4" />
+            ) : (
+              <Eye className="size-4" />
+            )}
+            {source.isEnabled ? t('disable') : t('enable')}
+          </DropdownMenuItem>
+        )}
+
+        {canDelete && (
+          <DropdownMenuItem
+            variant="destructive"
+            onSelect={() => onDelete(source)}
           >
-            <Eye className="size-4" />
-            {t('viewDetails')}
-          </Dropdown.Item>
-
-          {canRetry && (
-            <Dropdown.Item
-              id="retry"
-              className={MENU_ITEM_CLASS}
-              onAction={() => onRetry(source)}
-            >
-              <RefreshCw className="size-4" />
-              {t('retry')}
-            </Dropdown.Item>
-          )}
-
-          {canDownload && (
-            <Dropdown.Item
-              id="download"
-              className={MENU_ITEM_CLASS}
-              onAction={() => onDownload(source)}
-            >
-              <Download className="size-4" />
-              {t('download')}
-            </Dropdown.Item>
-          )}
-
-          {canUpdate && (
-            <Dropdown.Item
-              id="toggle"
-              className={MENU_ITEM_CLASS}
-              onAction={() => onToggleEnabled(source)}
-            >
-              {source.isEnabled ? (
-                <EyeOff className="size-4" />
-              ) : (
-                <Eye className="size-4" />
-              )}
-              {source.isEnabled ? t('disable') : t('enable')}
-            </Dropdown.Item>
-          )}
-
-          {canDelete && (
-            <Dropdown.Item
-              id="delete"
-              className={`${MENU_ITEM_CLASS} text-destructive`}
-              onAction={() => onDelete(source)}
-            >
-              <Trash2 className="size-4" />
-              {t('delete')}
-            </Dropdown.Item>
-          )}
-        </Dropdown.Menu>
-      </Dropdown.Popover>
-    </Dropdown>
+            <Trash2 className="size-4" />
+            {t('delete')}
+          </DropdownMenuItem>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

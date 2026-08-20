@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/components/atoms/ui/dialog';
-import { Spinner } from '@heroui/react';
+import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { AlertTriangle } from 'lucide-react';
 
 export default function LogoutDailog({
@@ -46,7 +46,7 @@ export default function LogoutDailog({
           <Button variant="destructive" disabled={loading} onClick={onConfirm}>
             {loading ? (
               <span className="flex items-center gap-2">
-                <Spinner size="sm" color="current" />
+                <Spinner />
                 {t('confirm')}
               </span>
             ) : (

@@ -6,7 +6,8 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import { Separator, Skeleton } from '@heroui/react';
+import { Separator } from '@/shared/components/atoms/ui/separator';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 import { ArrowLeft } from 'lucide-react';
 
 import {
@@ -19,7 +20,7 @@ import {
 import DeleteSourceDialog from '../organisms/DeleteSourceDialog';
 import SourceDetailsContent from '../organisms/SourceDetailsContent';
 
-const SKELETON_BAR = 'rounded-md bg-black/10 dark:bg-white/10';
+const SKELETON_BAR = 'rounded-md bg-primary/10 dark:bg-white/10';
 
 interface SourceDetailsPageProps {
   sourceId: string;
@@ -66,25 +67,13 @@ export default function SourceDetailsPage({
         {isLoading ? (
           <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR} size-5 rounded`}
-              />
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR} h-4.5 w-48 rounded`}
-              />
+              <Skeleton className={`${SKELETON_BAR} size-5 rounded`} />
+              <Skeleton className={`${SKELETON_BAR} h-4.5 w-48 rounded`} />
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR} h-5 w-20 rounded-full`}
-              />
-              <Skeleton
-                animationType="none"
-                className={`${SKELETON_BAR} h-3 w-40 rounded`}
-              />
+              <Skeleton className={`${SKELETON_BAR} h-5 w-20 rounded-full`} />
+              <Skeleton className={`${SKELETON_BAR} h-3 w-40 rounded`} />
             </div>
 
             <Separator className="bg-border h-px w-full shrink-0" />
@@ -93,14 +82,10 @@ export default function SourceDetailsPage({
               {Array.from({ length: 12 }).map((_, index) => (
                 <div key={index}>
                   <dt>
-                    <Skeleton
-                      animationType="none"
-                      className={`${SKELETON_BAR} h-3 w-20 rounded`}
-                    />
+                    <Skeleton className={`${SKELETON_BAR} h-3 w-20 rounded`} />
                   </dt>
                   <dd className="mt-1.5">
                     <Skeleton
-                      animationType="none"
                       className={`${SKELETON_BAR} h-3.5 rounded`}
                       style={{ width: 60 + ((index * 23) % 60) }}
                     />

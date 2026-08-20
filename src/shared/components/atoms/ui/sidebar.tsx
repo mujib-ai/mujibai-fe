@@ -5,13 +5,13 @@ import * as React from 'react';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Input } from '@/shared/components/atoms/ui/input';
 import { Separator } from '@/shared/components/atoms/ui/separator';
-import { Skeleton } from '@/shared/components/atoms/ui/shadcn-compat';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetTitle,
 } from '@/shared/components/atoms/ui/sheet';
+import { Skeleton } from '@/shared/components/atoms/ui/skeleton';
 import {
   Tooltip,
   TooltipContent,

@@ -46,7 +46,10 @@ function TabsList({
 
     const listRect = list.getBoundingClientRect();
     const activeRect = active.getBoundingClientRect();
-    const x = activeRect.left - listRect.left;
+    const isRTL = getComputedStyle(list).direction === 'rtl';
+    const x = isRTL
+      ? activeRect.right - listRect.right
+      : activeRect.left - listRect.left;
     const width = activeRect.width;
 
     if (!hasPositioned.current) {

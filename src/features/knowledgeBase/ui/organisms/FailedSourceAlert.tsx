@@ -2,16 +2,11 @@
 
 import { useTranslations } from 'next-intl';
 
-import { Button } from '@heroui/react';
+import { Button } from '@/shared/components/atoms/ui/button';
 import { AlertTriangle, RefreshCw, Trash2, Upload } from 'lucide-react';
 
 import { KNOWLEDGE_BASE_PERMISSIONS } from '../../constants/permissions';
 import type { KnowledgeSource } from '../../types';
-
-const BUTTON_PRIMARY_CLASS =
-  'bg-primary text-primary-foreground hover:bg-primary/90 inline-flex cursor-pointer items-center gap-1.5 rounded-md px-3 py-1.5 text-sm disabled:pointer-events-none disabled:opacity-50';
-const BUTTON_OUTLINE_CLASS =
-  'border-input hover:bg-accent inline-flex cursor-pointer items-center gap-1.5 rounded-md border bg-transparent px-3 py-1.5 text-sm shadow-xs disabled:pointer-events-none disabled:opacity-50';
 
 interface FailedSourceAlertProps {
   source: KnowledgeSource;
@@ -49,27 +44,20 @@ export default function FailedSourceAlert({
       </div>
       <div className="flex flex-wrap gap-2">
         {can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_RETRY) && (
-          <Button
-            isDisabled={isRetrying}
-            onPress={onRetry}
-            className={BUTTON_PRIMARY_CLASS}
-          >
+          <Button disabled={isRetrying} onClick={onRetry}>
             <RefreshCw className="size-4" />
             {t('actions.retry')}
           </Button>
         )}
         {onUploadReplacement &&
           can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_CREATE) && (
-            <Button
-              onPress={onUploadReplacement}
-              className={BUTTON_OUTLINE_CLASS}
-            >
+            <Button variant="outline" onClick={onUploadReplacement}>
               <Upload className="size-4" />
               {t('actions.upload')}
             </Button>
           )}
         {can(KNOWLEDGE_BASE_PERMISSIONS.SOURCE_DELETE) && (
-          <Button onPress={onDelete} className={BUTTON_OUTLINE_CLASS}>
+          <Button variant="outline" onClick={onDelete}>
             <Trash2 className="size-4" />
             {t('actions.delete')}
           </Button>
