@@ -1,6 +1,7 @@
 'use client';
 
-import { type ReactElement, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useState } from 'react';
 
 import { useTranslations } from 'next-intl';
 
@@ -20,8 +21,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/shared/components/atoms/ui/dialog';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { useTwoFactor, useTwoFactorStatus } from '../hooks/useTwoFactor';
+import { getTwoFactorErrorTranslationKey } from '../lib/two-factor-error';
 import { TwoFactorCodeInput } from '../molecules/TwoFactorCodeInput';
 import { TwoFactorSetupDialog } from './TwoFactorSetupDialog';
 
@@ -32,17 +37,34 @@ export function TwoFactorSettingsCard(): ReactElement {
 
   const [setupOpen, setSetupOpen] = useState(false);
   const [disableOpen, setDisableOpen] = useState(false);
-  const [disableCode, setDisableCode] = useState('');
+  const { control, handleSubmit, reset, setError } = useForm<{ code: string }>({
+    resolver: zodResolver(
+      z.object({
+        code: z.string().regex(/^\d{6}$/, t('errors.codeRequired')),
+      })
+    ),
+    defaultValues: { code: '' },
+    mode: 'onSubmit',
+  });
 
-  const handleDisable = async () => {
-    try {
-      await disable({ code: disableCode });
-      setDisableOpen(false);
-      setDisableCode('');
-    } catch {
-      setDisableCode('');
-    }
+  const handleDisableOpenChange = (nextOpen: boolean) => {
+    if (!nextOpen) reset();
+    setDisableOpen(nextOpen);
   };
+
+  const handleDisable = handleSubmit(async ({ code }) => {
+    try {
+      await disable({ code });
+      handleDisableOpenChange(false);
+    } catch (error) {
+      setError('code', {
+        type: 'server',
+        message: t(
+          getTwoFactorErrorTranslationKey(error, 'errors.disableFailed')
+        ),
+      });
+    }
+  });
 
   return (
     <Card className="border-none bg-transparent shadow-none">
@@ -80,7 +102,7 @@ export function TwoFactorSettingsCard(): ReactElement {
         onEnabled={() => setSetupOpen(false)}
       />
 
-      <Dialog open={disableOpen} onOpenChange={setDisableOpen}>
+      <Dialog open={disableOpen} onOpenChange={handleDisableOpenChange}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t('disableDialog.title')}</DialogTitle>
@@ -90,22 +112,33 @@ export function TwoFactorSettingsCard(): ReactElement {
           </DialogHeader>
 
           <div className="flex justify-center py-2">
-            <TwoFactorCodeInput
-              value={disableCode}
-              onChange={setDisableCode}
-              disabled={disableLoading}
-              autoFocus
+            <Controller
+              name="code"
+              control={control}
+              render={({ field, fieldState }) => (
+                <TwoFactorCodeInput
+                  value={field.value}
+                  onChange={field.onChange}
+                  disabled={disableLoading}
+                  autoFocus
+                  label={t('setup.codeLabel')}
+                  error={fieldState.error?.message}
+                />
+              )}
             />
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDisableOpen(false)}>
+            <Button
+              variant="outline"
+              onClick={() => handleDisableOpenChange(false)}
+            >
               {t('disableDialog.cancel')}
             </Button>
             <Button
               variant="destructive"
-              disabled={disableCode.length !== 6 || disableLoading}
-              onClick={handleDisable}
+              disabled={disableLoading}
+              onClick={() => void handleDisable()}
             >
               {t('disableDialog.confirm')}
             </Button>

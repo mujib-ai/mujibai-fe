@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import { getLocale, getMessages } from 'next-intl/server';
 import localFont from 'next/font/local';
-import Script from 'next/script';
 
 import { Providers } from '@/providers/Providers';
 import { PwaManager } from '@/shared/components/atoms/PwaManager';
 import { VisitTracker } from '@/shared/components/atoms/VisitTracker';
 import { Toaster } from '@/shared/components/atoms/ui/sonner';
 import { SITE_NAME, createUrl } from '@/shared/seo';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/globals.css';
@@ -69,26 +69,23 @@ export default async function RootLayout({
         {process.env.NEXT_PUBLIC_API_URL && (
           <link rel="preconnect" href={process.env.NEXT_PUBLIC_API_URL} />
         )}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-9CMX51PF21"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-9CMX51PF21');
-          `}
-        </Script>
       </head>
+      <GoogleTagManager gtmId="GTM-MNJLKK52" />
       <body
         suppressHydrationWarning
         style={{
           fontFamily: 'var(--font-vazirmatn)',
         }}
       >
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MNJLKK52"
+            height="0"
+            width="0"
+            title="Google Tag Manager"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <Providers locale={locale} messages={messages}>
           {children}
           <Toaster position="top-center" />

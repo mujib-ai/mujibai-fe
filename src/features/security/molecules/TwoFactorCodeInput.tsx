@@ -2,12 +2,8 @@
 
 import type { ReactElement } from 'react';
 
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from '@/shared/components/atoms/ui/input-otp';
-import { REGEXP_ONLY_DIGITS } from 'input-otp';
+import { Input } from '@/shared/components/atoms/ui/input';
+import { cn } from '@/shared/lib/utils';
 
 interface TwoFactorCodeInputProps {
   value: string;
@@ -15,6 +11,7 @@ interface TwoFactorCodeInputProps {
   disabled?: boolean;
   autoFocus?: boolean;
   label?: string;
+  error?: string;
 }
 
 export function TwoFactorCodeInput({
@@ -23,23 +20,35 @@ export function TwoFactorCodeInput({
   disabled,
   autoFocus,
   label,
+  error,
 }: TwoFactorCodeInputProps): ReactElement {
   return (
-    <InputOTP
-      maxLength={6}
-      pattern={REGEXP_ONLY_DIGITS}
-      inputMode="numeric"
-      value={value}
-      onChange={value => onChange(value.replace(/\D/g, '').slice(0, 6))}
-      disabled={disabled}
-      autoFocus={autoFocus}
-      aria-label={label}
-    >
-      <InputOTPGroup>
-        {Array.from({ length: 6 }).map((_, i) => (
-          <InputOTPSlot key={i} index={i} />
-        ))}
-      </InputOTPGroup>
-    </InputOTP>
+    <div className="w-full max-w-md">
+      <Input
+        type="text"
+        maxLength={6}
+        inputMode="numeric"
+        pattern="[0-9]*"
+        value={value}
+        onChange={event =>
+          onChange(event.target.value.replace(/\D/g, '').slice(0, 6))
+        }
+        disabled={disabled}
+        autoFocus={autoFocus}
+        aria-label={label}
+        aria-invalid={Boolean(error)}
+        autoComplete="one-time-code"
+        dir="ltr"
+        className={cn(
+          'text-center text-lg tracking-widest md:text-lg',
+          error && 'border-destructive border'
+        )}
+      />
+      {error && (
+        <p className="text-destructive mt-1.5 text-xs" role="alert">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

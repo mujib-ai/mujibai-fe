@@ -1,11 +1,13 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { AuthService } from '@/features/auth/services/auth.service';
 import type { AuthResponse } from '@/features/auth/types';
-import { getErrorMessage } from '@/shared/utils/getErrorMessage';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { getTwoFactorErrorTranslationKey } from '../lib/two-factor-error';
 import { TwoFactorService } from '../services/two-factor.service';
 
 const AUTH_QUERY_KEY = ['auth'];
@@ -32,6 +34,7 @@ export function useTwoFactorStatus() {
 
 export function useTwoFactor() {
   const queryClient = useQueryClient();
+  const t = useTranslations('security.twoFactor');
 
   const invalidate = () => {
     queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEY });
@@ -40,7 +43,9 @@ export function useTwoFactor() {
   const startSetupMutation = useMutation({
     mutationFn: TwoFactorService.startSetup,
     onError: error => {
-      toast.error(getErrorMessage(error, 'Failed to start 2FA setup'));
+      toast.error(
+        t(getTwoFactorErrorTranslationKey(error, 'errors.setupFailed'))
+      );
     },
   });
 
@@ -50,20 +55,14 @@ export function useTwoFactor() {
       setTwoFactorStatus(queryClient, result.isTwoFactorEnabled);
       invalidate();
     },
-    onError: error => {
-      toast.error(getErrorMessage(error, 'Invalid verification code'));
-    },
   });
 
   const disableMutation = useMutation({
     mutationFn: TwoFactorService.disable,
     onSuccess: result => {
       setTwoFactorStatus(queryClient, result.isTwoFactorEnabled);
-      toast.success('Two-factor authentication disabled.');
+      toast.success(t('disableDialog.success'));
       invalidate();
-    },
-    onError: error => {
-      toast.error(getErrorMessage(error, 'Failed to disable 2FA'));
     },
   });
 

@@ -7,6 +7,17 @@
       "statusDisabled": "Not enabled",
       "enableButton": "Enable 2FA",
       "disableButton": "Disable 2FA",
+      "errors": {
+        "alreadyEnabled": "Two-factor authentication is already enabled.",
+        "secretRequired": "Start the setup again before enabling two-factor authentication.",
+        "codeRequired": "Enter the 6-digit verification code.",
+        "invalidOrExpired": "The verification code is invalid or has expired. Please try again.",
+        "notEnabled": "Two-factor authentication is not enabled.",
+        "rateLimit": "Too many requests. Please try again later.",
+        "setupFailed": "Failed to start two-factor authentication setup. Please try again.",
+        "enableFailed": "Could not enable two-factor authentication. Please try again.",
+        "disableFailed": "Could not disable two-factor authentication. Please try again."
+      },
       "setup": {
         "title": "Set up authenticator app",
         "description": "A virtual MFA device is an application running on your device that you can configure by scanning a QR code.",
@@ -40,7 +51,8 @@
         "title": "Disable two-factor authentication",
         "description": "Enter a code from your authenticator app to confirm.",
         "cancel": "Cancel",
-        "confirm": "Disable"
+        "confirm": "Disable",
+        "success": "Two-factor authentication disabled."
       }
     },
     "check": {

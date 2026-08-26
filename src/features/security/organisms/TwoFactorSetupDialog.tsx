@@ -16,9 +16,13 @@ import {
 } from '@/shared/components/atoms/ui/dialog';
 import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { cn } from '@/shared/lib/utils';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Check, KeyRound, ShieldCheck } from 'lucide-react';
+import { Controller, useForm } from 'react-hook-form';
+import { z } from 'zod';
 
 import { useTwoFactor } from '../hooks/useTwoFactor';
+import { getTwoFactorErrorTranslationKey } from '../lib/two-factor-error';
 import { TwoFactorCodeInput } from '../molecules/TwoFactorCodeInput';
 import type { TwoFactorSetupResponse } from '../types';
 
@@ -100,14 +104,22 @@ export function TwoFactorSetupDialog({
     null
   );
   const [showSecret, setShowSecret] = useState(false);
-  const [code, setCode] = useState('');
+  const { control, handleSubmit, reset, setError } = useForm<{ code: string }>({
+    resolver: zodResolver(
+      z.object({
+        code: z.string().regex(/^\d{6}$/, t('errors.codeRequired')),
+      })
+    ),
+    defaultValues: { code: '' },
+    mode: 'onSubmit',
+  });
 
   const handleOpenChange = (nextOpen: boolean) => {
     if (!nextOpen) {
       setStep(1);
       setSetupData(null);
       setShowSecret(false);
-      setCode('');
+      reset();
     }
     onOpenChange(nextOpen);
   };
@@ -123,17 +135,22 @@ export function TwoFactorSetupDialog({
       });
   };
 
-  const handleVerify = async () => {
+  const handleVerify = handleSubmit(async ({ code }) => {
     try {
       const result = await verifySetup({ code });
       if (result.isTwoFactorEnabled) {
         handleOpenChange(false);
         onEnabled();
       }
-    } catch {
-      setCode('');
+    } catch (error) {
+      setError('code', {
+        type: 'server',
+        message: t(
+          getTwoFactorErrorTranslationKey(error, 'errors.enableFailed')
+        ),
+      });
     }
-  };
+  });
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -196,11 +213,18 @@ export function TwoFactorSetupDialog({
 
                 <div className="flex flex-col items-center gap-2">
                   <p className="text-sm">{t('setup.step3')}</p>
-                  <TwoFactorCodeInput
-                    value={code}
-                    onChange={setCode}
-                    disabled={!setupData || verifySetupLoading}
-                    label={t('setup.codeLabel')}
+                  <Controller
+                    name="code"
+                    control={control}
+                    render={({ field, fieldState }) => (
+                      <TwoFactorCodeInput
+                        value={field.value}
+                        onChange={field.onChange}
+                        disabled={!setupData || verifySetupLoading}
+                        label={t('setup.codeLabel')}
+                        error={fieldState.error?.message}
+                      />
+                    )}
                   />
                 </div>
               </>
@@ -224,8 +248,8 @@ export function TwoFactorSetupDialog({
                 {t('setup.previous')}
               </Button>
               <Button
-                onClick={handleVerify}
-                disabled={!setupData || code.length !== 6 || verifySetupLoading}
+                onClick={() => void handleVerify()}
+                disabled={!setupData || verifySetupLoading}
               >
                 {t('setup.verify')}
               </Button>
