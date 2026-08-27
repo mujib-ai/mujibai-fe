@@ -1,3 +1,4 @@
+import { clearAuthTokens, storeAuthTokens } from '@/shared/lib/auth-token';
 import { AxiosAPI } from '@/shared/utils/axiosInstance';
 
 import type {
@@ -35,11 +36,6 @@ export function isTwoFactorRequiredError(error: unknown): boolean {
   );
 }
 
-function getAppOrigin(): string {
-  if (typeof window !== 'undefined') return window.location.origin;
-  return process.env.NEXT_PUBLIC_APP_URL ?? '';
-}
-
 export class AuthService {
   static async checkAuth(): Promise<AuthResponse> {
     const { data } = await AxiosAPI.get<AuthResponse>('/tenants/me');
@@ -47,55 +43,26 @@ export class AuthService {
   }
 
   static async login(credentials: LoginCredentials): Promise<LoginResponse> {
-    const origin = getAppOrigin();
-    if (!origin) {
-      const { data } = await AxiosAPI.post<LoginResponse>(
-        '/tenants/login',
-        credentials
-      );
-      return data;
-    }
-    const res = await fetch(`${origin}/api/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(credentials),
-      credentials: 'include',
-    });
-    const data = await res.json();
-    if (!res.ok) {
-      throw new AuthRequestError(
-        data?.message ?? 'Login failed',
-        res.status,
-        typeof data === 'object' && data ? data : undefined
-      );
-    }
+    const { data } = await AxiosAPI.post<LoginResponse>(
+      '/tenants/login',
+      credentials
+    );
+    const accessToken = data.accessToken ?? data.data?.accessToken;
+    const refreshToken = data.refreshToken ?? data.data?.refreshToken;
+    if (accessToken) storeAuthTokens(accessToken, refreshToken);
     return data;
   }
 
   static async verifyTwoFactor(
     code: string
   ): Promise<TwoFactorVerificationResponse> {
-    const origin = getAppOrigin();
-    const response = await fetch(`${origin}/api/auth/verify-2fa`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({ code }),
-      credentials: 'include',
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      throw new AuthRequestError(
-        data?.detail ?? data?.message ?? 'Verification failed',
-        response.status,
-        typeof data === 'object' && data ? data : undefined
-      );
-    }
+    const { data } = await AxiosAPI.post<TwoFactorVerificationResponse>(
+      '/tenants/login/2fa',
+      { code }
+    );
+    const accessToken = data.accessToken ?? data.data?.accessToken;
+    const refreshToken = data.refreshToken ?? data.data?.refreshToken;
+    if (accessToken) storeAuthTokens(accessToken, refreshToken);
     return data;
   }
 
@@ -139,11 +106,6 @@ export class AuthService {
   }
 
   static async clearLocalSession(): Promise<void> {
-    const origin = getAppOrigin();
-    if (!origin) return;
-    await fetch(origin + '/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
+    clearAuthTokens();
   }
 }

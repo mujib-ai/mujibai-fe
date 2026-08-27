@@ -49,7 +49,7 @@ export default function TwoFactorVerificationPage() {
     try {
       const response = await AuthService.verifyTwoFactor(code);
       await queryClient.invalidateQueries({ queryKey: ['auth'] });
-      router.replace(response.redirectTo);
+      router.replace(response.redirectTo ?? '/dashboard');
     } catch (error) {
       const message = t(getVerificationErrorTranslationKey(error));
       if (requiresFreshLogin(error)) {

@@ -44,13 +44,22 @@ export interface Tenant {
 
 export interface LoginResponse {
   message?: string;
-  requires2FA: boolean;
+  requires2FA?: boolean;
+  accessToken?: string;
+  refreshToken?: string;
+  data?: {
+    accessToken?: string;
+    refreshToken?: string;
+    tenant?: Tenant;
+  } | null;
 }
 
 export interface TwoFactorVerificationResponse {
   message?: string;
-  data: AuthResponse | null;
-  redirectTo: string;
+  accessToken?: string;
+  refreshToken?: string;
+  data?: AuthResponse['data'] | null;
+  redirectTo?: string;
 }
 
 export interface ResetPasswordCredentials {

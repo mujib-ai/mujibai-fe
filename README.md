@@ -1,72 +1,110 @@
-# 🚀 Next.js Multilingual Starter
+# MujibAI Frontend
 
-This project is a **complete starter template** for building a production-ready Next.js application.
-It includes multilingual support, testing setup, modern UI components, and a clean architecture optimized for scaling.
+MujibAI is a multilingual AI voice-agent platform for managing calls, tickets,
+knowledge sources, outbound campaigns, analytics, API keys, and tenant settings.
+This repository contains the public website and authenticated dashboard built
+with Next.js.
 
-## ✨ Features
+## Tech stack
 
-- Multilingual support (i18n)
-- Jest + React Testing Library setup
-- TailwindCSS + shadcn/ui
-- lucide-react icons
-- React Query + Zustand + Axios
-- ESLint + Prettier
-- Clean folder structure
-- Client Management (Create, List, Search, Pagination)
+- Next.js 16 and React 19
+- TypeScript
+- Tailwind CSS 4 and shadcn/ui
+- TanStack Query, Zustand, and Axios
+- next-intl for Arabic and English localization
+- React Hook Form and Zod
+- Vitest for unit tests
+- ESLint and Prettier
 
-## 📝 Recent Updates (Tenants Feature)
+## Requirements
 
-### Backend Integration
+- Node.js 20 or later
+- pnpm
+- A running MujibAI backend API
 
-- Created `TenantsService` API layer (`/src/services/tenants.service.ts`)
-- Implemented React Query hooks in `useTenants.ts` for data fetching and mutations
-- Added TypeScript interfaces: `CreateClientPayload`, `ClientResponse`, `ClientsListResponse`
+## Getting started
 
-### UI Components (Atomic Design)
-
-- **Atoms**:
-  - Reused existing UI components (Button, Dialog, Input, Select, Textarea, Label)
-  - `FormField` - Wrapper for consistent field layout with label and error
-  - `FormError` - Error message display component
-  - `PasswordInput` - Secure password entry
-- **Molecules**:
-  - `TextFormField` - Text input with integrated label and error handling
-  - `PasswordFormField` - Password input with integrated label and error handling
-  - `SelectFormField` - Select dropdown with integrated label and error handling
-  - `TextareaFormField` - Textarea with integrated label and error handling
-- **Organisms**:
-  - `CreateTenantFormFields` - All form fields grouped and organized
-  - `CreateTenantForm` - Complete form with validation and submission logic
-  - `CreateTenantDialog` - Modal wrapper for the form
-  - `TenantListTable` - Data table with actions dropdown
-- **Templates**: `TenantsPageTemplate` - Complete page orchestration with search & pagination
-
-### Features Implemented
-
-- ✅ Create Client dialog with Zod validation
-- ✅ Client list table with status badges
-- ✅ Search functionality with debouncing (500ms)
-- ✅ Pagination controls
-- ✅ Loading states and error handling
-- ✅ Success/error messages from backend API (i18n-ready)
-- ✅ Automatic table refresh after creation
-
-## 🛠️ Installation
+Install dependencies:
 
 ```bash
-npm install
-npm run dev
+pnpm install
 ```
 
-## Authentication environment
-
-Secure tenant login requires these server environment variables:
+Create a `.env.local` file and configure the required values:
 
 ```env
-NEXT_PUBLIC_API_URL=https://api.example.com
+NEXT_PUBLIC_API_URL=https://api.mujibai.net
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 AUTH_STATE_SECRET=replace-with-a-long-random-secret
-# Optional when the backend uses a different verification route:
+
+# Optional integrations
 TENANT_2FA_VERIFY_PATH=/tenants/login/2fa
+NEXT_PUBLIC_LANDING_AGENT_WS_URL=wss://api.mujibai.net
+NEXT_PUBLIC_NOTIFICATIONS_WS_URL=wss://api.mujibai.net
 ```
 
-`AUTH_STATE_SECRET` signs the middleware-readable authentication state. Use the same secret on every application instance and never expose it with a `NEXT_PUBLIC_` prefix.
+Start the Turbopack development server:
+
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Authentication
+
+Login and two-factor verification are handled by server-side Next.js route
+handlers. Access and refresh tokens are stored in HTTP-only cookies rather than
+browser storage. A signed authentication-state cookie allows the application
+proxy to distinguish unauthenticated, pending-2FA, and authenticated sessions.
+
+Protected backend requests should use the `/api/backend/*` proxy. It attaches
+the access token on the server and clears session cookies when the backend
+returns `401 Unauthorized`.
+
+`AUTH_STATE_SECRET` is required to sign authentication state. Use a long,
+random value, keep it server-only, and configure the same value on every app
+instance. `NEXTAUTH_SECRET` is supported as a fallback. Do not prefix either
+secret with `NEXT_PUBLIC_`.
+
+## Available scripts
+
+```bash
+pnpm dev          # Start the development server with Turbopack
+pnpm build        # Create a production build
+pnpm start        # Start the production server
+pnpm test         # Run the Vitest suite once
+pnpm lint         # Run ESLint
+pnpm lint:fix     # Fix supported lint issues
+pnpm type-check   # Check TypeScript types
+pnpm format       # Format the repository
+pnpm format:check # Verify formatting
+pnpm check-all    # Run type, lint, and formatting checks
+pnpm analyze      # Build with bundle analysis enabled
+```
+
+## Project structure
+
+```text
+src/
+├── app/       # App Router pages, layouts, and server route handlers
+├── features/  # Domain modules, hooks, services, types, and tests
+├── i18n/      # Locale configuration and Arabic/English messages
+└── shared/    # Reusable components, hooks, utilities, and types
+```
+
+Feature tests live alongside their domains in `__tests__` directories. The
+Vitest configuration is defined in `vitest.config.mts`.
+
+## Production
+
+Create and run an optimized build:
+
+```bash
+pnpm build
+pnpm start
+```
+
+Configure all environment variables in the deployment platform before building
+the application. Public variables are embedded into the client bundle; secrets
+must remain server-only.

@@ -20,9 +20,10 @@ export async function proxy(request: NextRequest) {
   const signedState = await verifyAuthenticationState(
     request.cookies.get(AUTH_STATE_COOKIE)?.value
   );
-  const state =
-    signedState === 'pending_2fa' &&
-    !request.cookies.has(TWO_FACTOR_TOKEN_COOKIE)
+  const state = request.cookies.has(ACCESS_TOKEN_COOKIE)
+    ? 'authenticated'
+    : signedState === 'pending_2fa' &&
+        !request.cookies.has(TWO_FACTOR_TOKEN_COOKIE)
       ? 'unauthenticated'
       : signedState === 'authenticated' &&
           !request.cookies.has(ACCESS_TOKEN_COOKIE)
