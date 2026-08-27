@@ -1,19 +1,13 @@
 import { NextResponse } from 'next/server';
 
-const COOKIES_TO_CLEAR = [
-  'app_session',
-  'token',
-  'refresh_token',
-  'access_token',
-  'session',
-];
+import { AUTH_COOKIE_NAMES } from '@/features/auth/server/auth-cookies';
 
 export async function POST() {
-  const res = NextResponse.json({ message: 'Logged out' });
-  for (const name of COOKIES_TO_CLEAR) {
-    res.cookies.set(name, '', { path: '/', maxAge: 0 });
+  const response = NextResponse.json({ message: 'Logged out' });
+  for (const name of AUTH_COOKIE_NAMES) {
+    response.cookies.set(name, '', { path: '/', maxAge: 0 });
   }
-  return res;
+  return response;
 }
 
 export async function GET() {

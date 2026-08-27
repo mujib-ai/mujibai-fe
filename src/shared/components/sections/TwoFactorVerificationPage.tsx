@@ -1,15 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
-import useAuth from '@/features/auth/hooks/useAuth';
 import {
-  clearPendingTwoFactorLogin,
-  getPendingTwoFactorLogin,
-} from '@/features/auth/lib/pending-two-factor';
+  getVerificationErrorTranslationKey,
+  requiresFreshLogin,
+} from '@/features/auth/lib/auth-error';
+import { AuthService } from '@/features/auth/services/auth.service';
 import { TwoFactorCodeInput } from '@/features/security/molecules/TwoFactorCodeInput';
 import { Container } from '@/shared/components/atoms/Container';
 import LanguageSwitcher from '@/shared/components/atoms/LanguageSwitcher';
@@ -17,53 +15,57 @@ import Logo from '@/shared/components/atoms/Logo';
 import { Button } from '@/shared/components/atoms/ui/button';
 import { Spinner } from '@/shared/components/atoms/ui/spinner';
 import { PageBackground } from '@/shared/components/templates/PageBackground';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { ShieldCheck } from 'lucide-react';
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
+
+interface VerificationFormData {
+  code: string;
+}
 
 export default function TwoFactorVerificationPage() {
   const t = useTranslations('loginPage');
   const router = useRouter();
-  const { handleLogin, loginLoading } = useAuth();
-  const [code, setCode] = useState('');
-  const [pendingLogin, setPendingLogin] = useState<
-    ReturnType<typeof getPendingTwoFactorLogin> | undefined
-  >(undefined);
+  const queryClient = useQueryClient();
+  const {
+    control,
+    formState: { isSubmitting },
+    handleSubmit,
+    setError,
+  } = useForm<VerificationFormData>({
+    resolver: zodResolver(
+      z.object({
+        code: z.string().regex(/^\d{6}$/, t('twoFactorCodeRequired')),
+      })
+    ),
+    defaultValues: { code: '' },
+    mode: 'onSubmit',
+  });
 
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      const pending = getPendingTwoFactorLogin();
-      if (!pending) {
+  const verifyCode = handleSubmit(async ({ code }) => {
+    try {
+      const response = await AuthService.verifyTwoFactor(code);
+      await queryClient.invalidateQueries({ queryKey: ['auth'] });
+      router.replace(response.redirectTo);
+    } catch (error) {
+      const message = t(getVerificationErrorTranslationKey(error));
+      if (requiresFreshLogin(error)) {
+        toast.error(message);
         router.replace('/login');
         return;
       }
-      setPendingLogin(pending);
-    }, 0);
 
-    return () => window.clearTimeout(timeoutId);
-  }, [router]);
-
-  const verifyCode = async () => {
-    if (!pendingLogin || !/^\d{6}$/.test(code)) return;
-
-    try {
-      await handleLogin({ ...pendingLogin.credentials, code });
-      clearPendingTwoFactorLogin();
-      router.replace(pendingLogin.destination);
-    } catch {
-      setCode('');
+      setError('code', { type: 'server', message });
     }
-  };
+  });
 
-  const backToLogin = () => {
-    const destination = pendingLogin?.destination;
-    clearPendingTwoFactorLogin();
-    const loginUrl =
-      destination && destination !== '/dashboard'
-        ? `/login?from=${encodeURIComponent(destination)}`
-        : '/login';
-    router.replace(loginUrl);
+  const backToLogin = async () => {
+    await AuthService.clearLocalSession().catch(() => undefined);
+    router.replace('/login');
   };
-
-  if (!pendingLogin) return null;
 
   return (
     <PageBackground showHeader={false} className="items-stretch">
@@ -96,27 +98,31 @@ export default function TwoFactorVerificationPage() {
 
           <form
             className="mt-8 flex flex-col gap-5"
-            onSubmit={event => {
-              event.preventDefault();
-              void verifyCode();
-            }}
+            onSubmit={event => void verifyCode(event)}
           >
             <div className="flex justify-center" dir="ltr">
-              <TwoFactorCodeInput
-                value={code}
-                onChange={setCode}
-                disabled={loginLoading}
-                autoFocus
-                label={t('twoFactorCode')}
+              <Controller
+                name="code"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <TwoFactorCodeInput
+                    value={field.value}
+                    onChange={field.onChange}
+                    disabled={isSubmitting}
+                    autoFocus
+                    label={t('twoFactorCode')}
+                    error={fieldState.error?.message}
+                  />
+                )}
               />
             </div>
 
             <Button
               type="submit"
-              disabled={loginLoading || !/^\d{6}$/.test(code)}
+              disabled={isSubmitting}
               className="mt-2 h-12 w-full rounded-full text-base transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {loginLoading ? (
+              {isSubmitting ? (
                 <span className="flex items-center justify-center gap-2">
                   <Spinner />
                   {t('loading')}
@@ -129,8 +135,8 @@ export default function TwoFactorVerificationPage() {
             <Button
               type="button"
               variant="outline"
-              onClick={backToLogin}
-              disabled={loginLoading}
+              onClick={() => void backToLogin()}
+              disabled={isSubmitting}
               className="h-12 w-full rounded-full"
             >
               {t('backToLogin')}

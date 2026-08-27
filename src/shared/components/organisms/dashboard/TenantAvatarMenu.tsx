@@ -74,7 +74,7 @@ export default function TenantAvatarMenu() {
           <DropdownMenuSeparator />
 
           <DropdownMenuItem asChild>
-            <a href="/dashboard/settings">
+            <a href="/dashboard/settings?tab=account">
               <UserIcon className="size-4" />
               {t('myAccount')}
             </a>

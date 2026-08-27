@@ -57,3 +57,16 @@ It includes multilingual support, testing setup, modern UI components, and a cle
 npm install
 npm run dev
 ```
+
+## Authentication environment
+
+Secure tenant login requires these server environment variables:
+
+```env
+NEXT_PUBLIC_API_URL=https://api.example.com
+AUTH_STATE_SECRET=replace-with-a-long-random-secret
+# Optional when the backend uses a different verification route:
+TENANT_2FA_VERIFY_PATH=/tenants/login/2fa
+```
+
+`AUTH_STATE_SECRET` signs the middleware-readable authentication state. Use the same secret on every application instance and never expose it with a `NEXT_PUBLIC_` prefix.

@@ -8,6 +8,7 @@ import type {
   LoginCredentials,
   LoginResponse,
   ResetPasswordCredentials,
+  TwoFactorVerificationResponse,
 } from '../types';
 
 export class AuthRequestError extends Error {
@@ -74,20 +75,37 @@ export class AuthService {
     return data;
   }
 
-  static async logout(): Promise<AuthResponse> {
-    const { data } = await AxiosAPI.post<AuthResponse>('/tenants/logout');
+  static async verifyTwoFactor(
+    code: string
+  ): Promise<TwoFactorVerificationResponse> {
     const origin = getAppOrigin();
-    if (origin) {
-      try {
-        await fetch(`${origin}/api/auth/logout`, {
-          method: 'POST',
-          credentials: 'include',
-        });
-      } catch {
-        // ignore
-      }
+    const response = await fetch(`${origin}/api/auth/verify-2fa`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({ code }),
+      credentials: 'include',
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new AuthRequestError(
+        data?.detail ?? data?.message ?? 'Verification failed',
+        response.status,
+        typeof data === 'object' && data ? data : undefined
+      );
     }
     return data;
+  }
+
+  static async logout(): Promise<AuthResponse> {
+    try {
+      const { data } = await AxiosAPI.post<AuthResponse>('/tenants/logout');
+      return data;
+    } finally {
+      await AuthService.clearLocalSession().catch(() => undefined);
+    }
   }
 
   static async forgotPassword(

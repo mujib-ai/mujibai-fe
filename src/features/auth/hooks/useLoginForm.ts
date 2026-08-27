@@ -7,9 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { setPendingTwoFactorLogin } from '../lib/pending-two-factor';
 import { getAllowedRedirectFrom } from '../lib/redirect';
-import { isTwoFactorRequiredError } from '../services/auth.service';
 import useAuth from './useAuth';
 
 const loginSchema = z.object({
@@ -39,23 +37,14 @@ export function useLoginForm() {
   } = form;
 
   const completeLogin = async (values: LoginFormData) => {
+    const destination = from ?? '/dashboard';
     try {
       const response = await handleLogin(values);
-      const destination = from ?? '/dashboard';
 
       reset();
-      if (response.data.tenant?.isTwoFactorEnabled === true) {
-        setPendingTwoFactorLogin(values, destination);
-        router.push('/verify-2fa');
-        return;
-      }
-
-      router.push(`/security-check?from=${encodeURIComponent(destination)}`);
-    } catch (error) {
-      if (isTwoFactorRequiredError(error)) {
-        setPendingTwoFactorLogin(values, from ?? '/dashboard');
-        router.push('/verify-2fa');
-      }
+      router.push(response.requires2FA ? '/verify-2fa' : destination);
+    } catch {
+      // The auth mutation displays a safe login error.
     }
   };
 

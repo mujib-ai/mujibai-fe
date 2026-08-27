@@ -14,7 +14,6 @@ export interface AuthResponse {
 export interface LoginCredentials {
   email: string;
   password: string;
-  code?: string;
 }
 
 export type TenantTheme = 'light' | 'dark' | 'system';
@@ -44,11 +43,14 @@ export interface Tenant {
 }
 
 export interface LoginResponse {
-  message: string;
-  data: {
-    accessToken?: string;
-    tenant?: Tenant;
-  };
+  message?: string;
+  requires2FA: boolean;
+}
+
+export interface TwoFactorVerificationResponse {
+  message?: string;
+  data: AuthResponse | null;
+  redirectTo: string;
 }
 
 export interface ResetPasswordCredentials {

@@ -1,41 +1,55 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const PROTECTED_PREFIXES = ['/dashboard'] as const;
+import { getAuthRouteAction } from '@/features/auth/lib/auth-routing';
+import { isProtectedPath } from '@/features/auth/lib/redirect';
+import {
+  ACCESS_TOKEN_COOKIE,
+  AUTH_STATE_COOKIE,
+  TWO_FACTOR_TOKEN_COOKIE,
+} from '@/features/auth/server/auth-cookies';
+import { verifyAuthenticationState } from '@/features/auth/server/auth-state';
 
-const DEFAULT_AUTH_COOKIE_NAMES = [
-  'access_token',
-  'token',
-  'refresh_token',
-  'app_session',
-];
+const TWO_FACTOR_ROUTE = '/verify-2fa';
 
-const AUTH_COOKIE_NAMES = [
-  ...(process.env.AUTH_COOKIE_NAME ? [process.env.AUTH_COOKIE_NAME] : []),
-  ...DEFAULT_AUTH_COOKIE_NAMES,
-];
-
-function hasAuthCookies(request: NextRequest): boolean {
-  return AUTH_COOKIE_NAMES.some(name => request.cookies.has(name));
+function redirect(request: NextRequest, pathname: string): NextResponse {
+  return NextResponse.redirect(new URL(pathname, request.url));
 }
 
-function isProtectedPath(pathname: string): boolean {
-  return PROTECTED_PREFIXES.some(
-    prefix => pathname === prefix || pathname.startsWith(`${prefix}/`)
-  );
-}
-
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
+  const signedState = await verifyAuthenticationState(
+    request.cookies.get(AUTH_STATE_COOKIE)?.value
+  );
+  const state =
+    signedState === 'pending_2fa' &&
+    !request.cookies.has(TWO_FACTOR_TOKEN_COOKIE)
+      ? 'unauthenticated'
+      : signedState === 'authenticated' &&
+          !request.cookies.has(ACCESS_TOKEN_COOKIE)
+        ? 'unauthenticated'
+        : signedState;
 
-  if (isProtectedPath(pathname) && !hasAuthCookies(request)) {
+  const action = getAuthRouteAction(state, pathname);
+  if (action === 'redirect_login') {
     const loginUrl = new URL('/login', request.url);
-    loginUrl.searchParams.set('from', pathname);
+    if (isProtectedPath(pathname)) {
+      loginUrl.searchParams.set('from', `${pathname}${request.nextUrl.search}`);
+    }
     return NextResponse.redirect(loginUrl);
   }
-
+  if (action === 'redirect_2fa') return redirect(request, TWO_FACTOR_ROUTE);
+  if (action === 'redirect_dashboard') return redirect(request, '/dashboard');
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: [
+    '/login',
+    '/verify-2fa',
+    '/dashboard/:path*',
+    '/settings/:path*',
+    '/billing/:path*',
+    '/profile/:path*',
+    '/tenant-management/:path*',
+  ],
 };

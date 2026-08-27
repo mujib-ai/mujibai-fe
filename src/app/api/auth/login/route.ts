@@ -1,142 +1,230 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getAllowedRedirectFrom } from '@/features/auth/lib/redirect';
+import {
+  ACCESS_TOKEN_COOKIE,
+  AUTHENTICATED_MAX_AGE_SECONDS,
+  AUTH_STATE_COOKIE,
+  PENDING_TWO_FACTOR_MAX_AGE_SECONDS,
+  REFRESH_TOKEN_COOKIE,
+  TWO_FACTOR_REDIRECT_COOKIE,
+  TWO_FACTOR_TOKEN_COOKIE,
+} from '@/features/auth/server/auth-cookies';
+import { createAuthenticationState } from '@/features/auth/server/auth-state';
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-function mirrorCookieForAppDomain(setCookieValue: string): string {
-  const parts = setCookieValue.split(';').map(p => p.trim());
-  const nameValue = parts[0];
-  if (!nameValue || !nameValue.includes('=')) return '';
+interface LoginRequestBody {
+  email?: unknown;
+  password?: unknown;
+}
 
-  const safeParts = ['Path=/', 'SameSite=Lax'];
-  const hasHttpOnly = parts.some(p => p.toLowerCase() === 'httponly');
-  if (hasHttpOnly) safeParts.push('HttpOnly');
-  const maxAge = parts.find(p => p.toLowerCase().startsWith('max-age='));
-  if (maxAge) safeParts.push(maxAge);
-  const expires = parts.find(p => p.toLowerCase().startsWith('expires='));
-  if (expires) safeParts.push(expires);
+interface BackendLoginResponse {
+  message?: string;
+  detail?: string;
+  requires2FA?: boolean;
+  twoFactorToken?: string;
+  accessToken?: string;
+  refreshToken?: string;
+  data?: {
+    requires2FA?: boolean;
+    twoFactorToken?: string;
+    accessToken?: string;
+    refreshToken?: string;
+    [key: string]: unknown;
+  } | null;
+}
 
-  return [nameValue, ...safeParts].join('; ');
+const secure = process.env.NODE_ENV === 'production';
+
+function clearCookie(response: NextResponse, name: string): void {
+  response.cookies.set(name, '', { path: '/', maxAge: 0 });
 }
 
 export async function POST(request: NextRequest) {
   if (!API_URL) {
     return NextResponse.json(
-      { message: 'Server misconfiguration: API URL not set' },
-      { status: 500 }
+      { message: 'Authentication service is unavailable.' },
+      { status: 503 }
     );
   }
 
-  let body: unknown;
+  let body: LoginRequestBody;
   try {
-    body = await request.json();
+    body = (await request.json()) as LoginRequestBody;
   } catch {
-    return NextResponse.json({ message: 'Invalid JSON body' }, { status: 400 });
+    return NextResponse.json({ message: 'Invalid request.' }, { status: 400 });
   }
 
-  const backendUrl = `${API_URL.replace(/\/$/, '')}/tenants/login`;
-  let backendRes: Response;
+  if (typeof body.email !== 'string' || typeof body.password !== 'string') {
+    return NextResponse.json({ message: 'Invalid request.' }, { status: 400 });
+  }
+
+  const referer = request.headers.get('referer');
+  let redirectTo: string | null = null;
+  if (referer) {
+    try {
+      const refererUrl = new URL(referer);
+      if (refererUrl.origin === request.nextUrl.origin) {
+        redirectTo = getAllowedRedirectFrom(
+          refererUrl.searchParams.get('from')
+        );
+      }
+    } catch {
+      redirectTo = null;
+    }
+  }
+
+  let backendResponse: Response;
   try {
-    backendRes = await fetch(backendUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (err) {
-    console.error('Login proxy error:', err);
+    backendResponse = await fetch(
+      `${API_URL.replace(/\/$/, '')}/tenants/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({ email: body.email, password: body.password }),
+        cache: 'no-store',
+      }
+    );
+  } catch {
     return NextResponse.json(
-      { message: 'Unable to reach auth service' },
+      { message: 'Unable to reach authentication service.' },
       { status: 502 }
     );
   }
 
-  const responseData = await backendRes.json().catch(() => ({}));
-  const status = backendRes.status;
+  const responseData = (await backendResponse.json().catch(() => ({}))) as
+    | BackendLoginResponse
+    | undefined;
 
-  const submittedCode =
-    typeof body === 'object' && body && 'code' in body
-      ? String((body as Record<string, unknown>).code ?? '')
-      : '';
-  const isTwoFactorChallenge =
-    status >= 200 &&
-    status < 300 &&
-    responseData?.data?.tenant?.isTwoFactorEnabled === true &&
-    !/^\d{6}$/.test(submittedCode);
-
-  if (isTwoFactorChallenge && responseData?.data) {
-    delete responseData.data.accessToken;
-    delete responseData.data.refreshToken;
+  if (!backendResponse.ok) {
+    return NextResponse.json(
+      {
+        message:
+          responseData?.detail ??
+          responseData?.message ??
+          'Unable to sign in with those credentials.',
+      },
+      { status: backendResponse.status }
+    );
   }
 
-  const nextRes = NextResponse.json(responseData, { status });
+  const requiresTwoFactor =
+    responseData?.requires2FA === true ||
+    responseData?.data?.requires2FA === true;
 
-  const getSetCookie = (headers: Headers): string[] => {
-    if (
-      'getSetCookie' in headers &&
-      typeof (headers as Headers & { getSetCookie?: () => string[] })
-        .getSetCookie === 'function'
-    ) {
-      return (
-        headers as Headers & { getSetCookie: () => string[] }
-      ).getSetCookie();
+  if (requiresTwoFactor) {
+    const twoFactorToken =
+      responseData?.twoFactorToken ?? responseData?.data?.twoFactorToken;
+    if (!twoFactorToken) {
+      return NextResponse.json(
+        { message: 'Unable to start two-factor verification.' },
+        { status: 502 }
+      );
     }
-    const single = headers.get('set-cookie');
-    return single ? [single] : [];
-  };
 
-  const setCookieValues = getSetCookie(backendRes.headers);
-  const isSuccess = status >= 200 && status < 300;
-
-  if (isSuccess && !isTwoFactorChallenge) {
-    const data = responseData?.data;
-    if (data?.accessToken) {
-      nextRes.cookies.set('access_token', data.accessToken, {
-        path: '/',
-        maxAge: 60 * 60 * 24,
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
-      });
+    let signedState: string;
+    try {
+      signedState = await createAuthenticationState(
+        'pending_2fa',
+        PENDING_TWO_FACTOR_MAX_AGE_SECONDS
+      );
+    } catch {
+      return NextResponse.json(
+        { message: 'Authentication service is not configured.' },
+        { status: 500 }
+      );
     }
-    if (data?.refreshToken) {
-      nextRes.cookies.set('refresh_token', data.refreshToken, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7,
-        sameSite: 'lax',
+
+    const response = NextResponse.json({
+      requires2FA: true,
+      message: responseData?.message,
+    });
+    response.cookies.set(TWO_FACTOR_TOKEN_COOKIE, twoFactorToken, {
+      httpOnly: true,
+      secure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: PENDING_TWO_FACTOR_MAX_AGE_SECONDS,
+    });
+    response.cookies.set(
+      TWO_FACTOR_REDIRECT_COOKIE,
+      redirectTo ?? '/dashboard',
+      {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-      });
-    }
-    if (setCookieValues.length === 0 && !data?.accessToken) {
-      nextRes.cookies.set('app_session', 'authenticated', {
-        path: '/',
-        maxAge: 60 * 60 * 24,
+        secure,
         sameSite: 'lax',
-        httpOnly: true,
-      });
-    }
-    if (setCookieValues.length > 0) {
-      for (const raw of setCookieValues) {
-        const mirrored = mirrorCookieForAppDomain(raw);
-        if (mirrored) {
-          const [nameValue] = mirrored.split(';');
-          const eq = nameValue.indexOf('=');
-          const name = nameValue.slice(0, eq).trim();
-          const value = nameValue.slice(eq + 1).trim();
-          nextRes.cookies.set(name, value, {
-            path: '/',
-            sameSite: 'lax',
-            httpOnly: true,
-            maxAge: 60 * 60 * 24 * 7,
-          });
-        }
+        path: '/',
+        maxAge: PENDING_TWO_FACTOR_MAX_AGE_SECONDS,
       }
-      for (const raw of setCookieValues) {
-        nextRes.headers.append('Set-Cookie', raw);
-      }
-    }
+    );
+    response.cookies.set(AUTH_STATE_COOKIE, signedState, {
+      httpOnly: true,
+      secure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: PENDING_TWO_FACTOR_MAX_AGE_SECONDS,
+    });
+    clearCookie(response, ACCESS_TOKEN_COOKIE);
+    clearCookie(response, REFRESH_TOKEN_COOKIE);
+    return response;
   }
 
-  return nextRes;
+  const accessToken =
+    responseData?.accessToken ?? responseData?.data?.accessToken;
+  const refreshToken =
+    responseData?.refreshToken ?? responseData?.data?.refreshToken;
+  if (!accessToken) {
+    return NextResponse.json(
+      { message: 'Authentication response did not include a session.' },
+      { status: 502 }
+    );
+  }
+
+  let signedState: string;
+  try {
+    signedState = await createAuthenticationState(
+      'authenticated',
+      AUTHENTICATED_MAX_AGE_SECONDS
+    );
+  } catch {
+    return NextResponse.json(
+      { message: 'Authentication service is not configured.' },
+      { status: 500 }
+    );
+  }
+
+  const response = NextResponse.json({
+    requires2FA: false,
+    message: responseData?.message,
+  });
+  response.cookies.set(ACCESS_TOKEN_COOKIE, accessToken, {
+    httpOnly: true,
+    secure,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: AUTHENTICATED_MAX_AGE_SECONDS,
+  });
+  if (refreshToken) {
+    response.cookies.set(REFRESH_TOKEN_COOKIE, refreshToken, {
+      httpOnly: true,
+      secure,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+    });
+  }
+  response.cookies.set(AUTH_STATE_COOKIE, signedState, {
+    httpOnly: true,
+    secure,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: AUTHENTICATED_MAX_AGE_SECONDS,
+  });
+  clearCookie(response, TWO_FACTOR_TOKEN_COOKIE);
+  clearCookie(response, TWO_FACTOR_REDIRECT_COOKIE);
+  return response;
 }

@@ -19,6 +19,8 @@ export interface User {
   theme?: 'light' | 'dark' | 'system';
   language?: string;
   isTwoFactorEnabled?: boolean;
+  role?: string;
+  permissions?: string[];
 }
 
 export interface UserProfile {

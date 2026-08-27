@@ -1,14 +1,20 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import useClientSettings from '../../hooks/useClientSettings';
+import {
+  CLIENT_SETTINGS_CONSTANTS,
+  getSettingsTabFromQuery,
+  getSettingsTabQueryValue,
+} from '../../constants';
 import { SettingsOrganism } from '../organisms';
 import SettingsPageTemplate from '../templates/SettingsPageTemplate';
 
 export default function SettingsPage() {
   const t = useTranslations('settings');
+  const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
 
   const tabItems = [
@@ -20,15 +26,18 @@ export default function SettingsPage() {
     },
   ];
 
-  const requestedTab = searchParams.get('tab') ?? undefined;
-  const initialActiveTab = tabItems.some(tab => tab.value === requestedTab)
-    ? requestedTab
-    : undefined;
-
-  const { activeTab, setActiveTab } = useClientSettings(
-    tabItems,
-    initialActiveTab
+  const activeTab = getSettingsTabFromQuery(
+    searchParams.get(CLIENT_SETTINGS_CONSTANTS.TAB_QUERY_PARAM)
   );
+
+  const setActiveTab = (tabValue: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set(
+      CLIENT_SETTINGS_CONSTANTS.TAB_QUERY_PARAM,
+      getSettingsTabQueryValue(tabValue)
+    );
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
 
   return (
     <SettingsPageTemplate title={t('title')} subtitle={t('subTitle')}>

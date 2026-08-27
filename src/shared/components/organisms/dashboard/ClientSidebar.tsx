@@ -42,7 +42,11 @@ export default function ClientSidebar({ dir }: { dir: 'left' | 'right' }) {
       href: '/dashboard/api-keys',
     },
 
-    { title: t('settings'), icon: 'settings', href: '/dashboard/settings' },
+    {
+      title: t('settings'),
+      icon: 'settings',
+      href: '/dashboard/settings?tab=account',
+    },
     { title: t('docs'), icon: 'docs', href: '/docs' },
   ];
 

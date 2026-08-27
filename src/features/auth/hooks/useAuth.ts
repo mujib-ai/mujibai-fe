@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 
+import { useTranslations } from 'next-intl';
+
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import { toast } from 'sonner';
 
-import {
-  AuthService,
-  isTwoFactorRequiredError,
-} from '../services/auth.service';
+import { getLoginErrorTranslationKey } from '../lib/auth-error';
+import { AuthService } from '../services/auth.service';
 import type { LoginCredentials, ResetPasswordCredentials } from '../types';
 
 /** API error response */
@@ -40,6 +40,7 @@ const getErrorMessage = (error: unknown, defaultMessage: string): string => {
 
 export default function useAuth() {
   const queryClient = useQueryClient();
+  const t = useTranslations('loginPage');
   const [alert, setAlert] = useState<AlertState>({
     type: null,
     title: '',
@@ -69,19 +70,13 @@ export default function useAuth() {
 
   const loginMutation = useMutation({
     mutationFn: AuthService.login,
-    onSuccess: (data, credentials) => {
-      if (data.data.tenant?.isTwoFactorEnabled === true && !credentials.code)
-        return;
+    onSuccess: data => {
+      if (data.requires2FA) return;
       queryClient.invalidateQueries({ queryKey: ['auth'] });
-      toast.success(data.message || 'Logged in successfully.');
+      toast.success(t('loginSuccess'));
     },
     onError: error => {
-      if (isTwoFactorRequiredError(error)) return;
-      const errorMessage = getErrorMessage(
-        error,
-        'Login failed - please try again'
-      );
-      toast.error(errorMessage);
+      toast.error(t(getLoginErrorTranslationKey(error)));
     },
   });
 
