@@ -15,7 +15,7 @@ export default function HeroSection() {
 
       <div className="flex flex-1 items-center justify-center px-6">
         <Container className="flex flex-col items-center gap-8 text-center">
-          <h1 className="dark: text-3xl leading-tight font-bold text-gray-900 sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl">
             {t('title')} <span className="text-primary">{t('subTitle')}</span>
           </h1>
 
