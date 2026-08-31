@@ -15,8 +15,36 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: '/enroll', destination: '/register', permanent: true },
-      { source: '/terms-of-services', destination: '/terms', permanent: true },
-      { source: '/privacy-policy', destination: '/privacy', permanent: true },
+      {
+        source: '/terms-of-services',
+        destination: '/terms-policies',
+        permanent: true,
+      },
+      {
+        source: '/terms',
+        destination: '/terms-policies',
+        permanent: true,
+      },
+      {
+        source: '/privacy-policy',
+        destination: '/privacy-policies',
+        permanent: true,
+      },
+      {
+        source: '/privacy',
+        destination: '/privacy-policies',
+        permanent: true,
+      },
+      {
+        source: '/refund-policy',
+        destination: '/refund-policies',
+        permanent: true,
+      },
+      {
+        source: '/cancellation-policy',
+        destination: '/cancellation-policies',
+        permanent: true,
+      },
       {
         source: '/forget-password',
         destination: '/forgot-password',

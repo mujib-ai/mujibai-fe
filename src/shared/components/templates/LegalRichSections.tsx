@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 
 import { Reveal } from '@/shared/components/atoms/Reveal';
+import { CheckCircle2 } from 'lucide-react';
 
 type LegalListItem = {
   term: string;
@@ -48,9 +49,12 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
   const sections = t.raw('sections') as Record<string, LegalRichSection>;
 
   return (
-    <Reveal stagger={0.08} className="mt-10 flex flex-col gap-8">
+    <Reveal
+      stagger={0.08}
+      className="divide-border/70 flex flex-col gap-8 divide-y"
+    >
       {Object.entries(sections).map(([key, section]) => (
-        <section key={key}>
+        <section key={key} className="pt-8 first:pt-0">
           <h2 className="text-xl font-semibold md:text-2xl">{section.title}</h2>
 
           {section.body && (
@@ -70,13 +74,14 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
           )}
 
           {section.lead && (
-            <p className="text-muted-foreground mt-3 leading-relaxed">
-              {section.lead}
+            <p className="mt-4 flex items-start gap-2 leading-relaxed font-semibold">
+              <CheckCircle2 className="text-primary mt-0.5 size-5 shrink-0" />
+              <span>{section.lead}</span>
             </p>
           )}
 
           {section.items && (
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="ms-7 mt-3 flex list-disc flex-col gap-3 ps-1">
               {section.items.map(item => (
                 <li key={item.term}>
                   <span className="font-semibold">{item.term}: </span>
@@ -87,8 +92,9 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
           )}
 
           {section.note && (
-            <p className="text-muted-foreground mt-3 text-sm italic">
-              {section.note}
+            <p className="text-muted-foreground mt-3 flex items-start gap-2 text-sm italic">
+              <CheckCircle2 className="text-primary mt-0.5 size-4 shrink-0" />
+              <span>{section.note}</span>
             </p>
           )}
 
@@ -96,7 +102,10 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
             groupBlocks(section.blocks).map((group, i) => {
               if (group.type === 'item-group') {
                 return (
-                  <ul key={i} className="mt-4 flex flex-col gap-3">
+                  <ul
+                    key={i}
+                    className="ms-7 mt-3 flex list-disc flex-col gap-3 ps-1"
+                  >
                     {group.items.map(item => (
                       <li key={item.term}>
                         <span className="font-semibold">{item.term}: </span>
@@ -110,7 +119,11 @@ export function LegalRichSections({ namespace }: { namespace: string }) {
               }
               if (group.type === 'h3') {
                 return (
-                  <h3 key={i} className="mt-5 text-lg font-semibold">
+                  <h3
+                    key={i}
+                    className="mt-5 flex items-center gap-2 text-lg font-semibold"
+                  >
+                    <CheckCircle2 className="text-primary size-5 shrink-0" />
                     {group.text}
                   </h3>
                 );

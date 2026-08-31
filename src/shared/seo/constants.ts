@@ -72,7 +72,7 @@ export const PUBLIC_SEO_ROUTES = [
   },
   {
     key: 'privacyPolicy',
-    path: '/privacy',
+    path: '/privacy-policies',
     label: 'Privacy Policy',
     title: 'Privacy Policy - mujibai',
     description:
@@ -91,7 +91,7 @@ export const PUBLIC_SEO_ROUTES = [
   },
   {
     key: 'termsOfService',
-    path: '/terms',
+    path: '/terms-policies',
     label: 'Terms of Service',
     title: 'Terms of Service - mujibai',
     description:
@@ -110,7 +110,7 @@ export const PUBLIC_SEO_ROUTES = [
   },
   {
     key: 'refundPolicy',
-    path: '/refund-policy',
+    path: '/refund-policies',
     label: 'Refund Policy',
     title: 'Refund Policy - mujibai',
     description:
@@ -129,7 +129,7 @@ export const PUBLIC_SEO_ROUTES = [
   },
   {
     key: 'cancellationPolicy',
-    path: '/cancellation-policy',
+    path: '/cancellation-policies',
     label: 'Cancellation Policy',
     title: 'Cancellation Policy - mujibai',
     description:

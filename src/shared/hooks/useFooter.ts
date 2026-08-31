@@ -20,9 +20,10 @@ export function useFooter() {
   ];
 
   const legalLinks = [
-    { href: '/terms', label: t('termsOfUse') },
-    { href: '/privacy', label: t('privacyPolicy') },
-    { href: '/cancellation-policy', label: t('cancellationPolicy') },
+    { href: '/terms-policies', label: t('termsOfUse') },
+    { href: '/privacy-policies', label: t('privacyPolicy') },
+    { href: '/cancellation-policies', label: t('cancellationPolicy') },
+    { href: '/refund-policies', label: t('refundPolicy') },
   ];
 
   const socialIcons = [
